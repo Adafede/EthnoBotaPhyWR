@@ -1,0 +1,60 @@
+---
+title: EthnoBotaPhyWR
+format:
+  jss-html: default
+author:
+  - name: Adriano Rutz
+    orcid: 0000-0003-0443-9902
+    number: 1
+    email: rutz@imsb.biol.ethz.ch
+    affiliations:
+      - ref: imsb
+    correspondence: true
+abstract: |
+  This short article illustrates the concept of EthnoBotaPhyWR (pronounced "Ethnobota Fever").
+citation:
+  url: https://adafede.github.io/EthnoBotaPhyWR/index.html
+comments:
+  giscus:
+    repo: adafede/EthnoBotaPhyWR
+  hypothesis:
+    showHighlights: always
+creative_commons: CC BY
+google-scholar: true
+keywords:
+  - Ethnobotany
+  - Phytochemistry
+  - Taxonomy
+  - Wikidata
+  - R
+keywords-formatted:
+  - Ethnobotany
+  - Phytochemistry
+  - Taxonomy
+  - Wikidata
+  - R
+license: CC BY
+bibliography: bibliography.bib
+---
+
+```{r import, include=FALSE}
+message("foo")
+```
+
+## Introduction {#sec-intro}
+
+Bar
+
+## Results {#sec-results}
+
+Bim
+
+```{r tidy, include=FALSE}
+message("foo")
+```
+
+```{r strings, include=FALSE}
+message("foo")
+```
+
+ipsum

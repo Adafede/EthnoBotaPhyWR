@@ -118,14 +118,13 @@ example_family_names <- list(      # The scientific name(s) of family(ies) you w
 
 ## Thresholds
 n_multiple_genera <- 10L           # The minimal number of genera where a compound was found in to consider the latter relatively widespread
-n_ethnobotanical_count_min <- 10L  # The minimal number of ethnobotanical uses reported to consider the taxon relatively widely used
+n_ethnobotanical_count_min <- 10L  # The minimal number of species within the genus for which an ethnobotanical use has been reported to consider the genus relatively widely used
 n_compounds_count_min <- 50L       # The minimal number of compounds reported in a taxon to consider the latter relatively widely investigated
 
 ## File paths
-# TODO
-path_molecules <- NULL
+path_molecules <- "~/Documents/papers/orchids/orchids_table_unique_connectivity_classified.tsv"
 path_classes <- "~/Documents/papers/orchids/orchids_compounds_classes.tsv"
-path_ethnobotanical <- "~/Documents/papers/orchids/Species_medicinal_output_with_ott_id.xlsx"
+path_ethnobotanical <- "~/Documents/papers/orchids/Species_medicinal_output_with_ott_id.tsv"
 
 export_tree_full <- "man/figures/tree_orchids_full.pdf"
 export_tree_phyto <- "man/figures/tree_orchids_phyto.pdf"

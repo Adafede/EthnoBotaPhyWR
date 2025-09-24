@@ -15,10 +15,9 @@ example_family_names <- list(
   "Solanaceae" = "Solanaceae"
 )
 
-## TODO
-path_molecules <- NULL
+path_molecules <- "~/Documents/papers/orchids/orchids_table_unique_connectivity_classified.tsv"
 path_classes <- "~/Documents/papers/orchids/orchids_compounds_classes.tsv"
-path_ethnobotanical <- "~/Documents/papers/orchids/Species_medicinal_output_with_ott_id.xlsx"
+path_ethnobotanical <- "~/Documents/papers/orchids/Species_medicinal_output_with_ott_id.tsv"
 
 export_tree_full <- "~/Documents/papers/orchids/tree_orchids_full.pdf"
 export_tree_phyto <- "~/Documents/papers/orchids/tree_orchids_phyto.pdf"

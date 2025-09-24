@@ -23,26 +23,63 @@ ethnobotafever_tree <- function(
     )
   )
 
-  ## TODO Ideally, this should also live on WD
-  # table_ethnobotanical <- taxon_qid |>
-  #   get_uses_wd()
-  ## For now:
-  table_ethnobotanical <- path_ethnobotanical |>
-    readxl::read_xlsx() |>
-    tidytable::select(taxon = Qcode, taxon_id_ott = taxon.ott_id) |>
-    tidytable::mutate(
-      taxon_id_ott = taxon_id_ott |>
-        as.character(),
-      ethnobotanical = TRUE
-    ) |>
-    tidytable::distinct()
+  table_ethnobotanical_wd <- taxon_qid |>
+    get_uses_wd() |>
+    tidytable::distinct(taxon, taxon_id_ott) |>
+    tidytable::mutate(ethnobotanical = TRUE)
   logger::log_info(
     "We found ",
-    table_ethnobotanical |>
+    table_ethnobotanical_wd |>
       tidytable::distinct(taxon) |>
       nrow(),
-    paste0(" ", taxon_name, " subtaxa with ethnobotanical use reported")
+    paste0(" ", taxon_name, " subtaxa with ethnobotanical use reported on Wikidata")
   )
+
+  if (!is.null(path_ethnobotanical)) {
+    table_ethnobotanical_local <- path_ethnobotanical |>
+      tidytable::fread() |>
+      tidytable::mutate(
+        taxon_id_ott = taxon_id_ott |>
+          as.character(),
+        ethnobotanical = TRUE
+      ) |>
+      tidytable::distinct()
+    logger::log_info(
+      "We found ",
+      table_ethnobotanical_local |>
+        tidytable::distinct(taxon) |>
+        nrow(),
+      paste0(" ", taxon_name, " subtaxa with ethnobotanical use reported locally")
+    )
+    table_ethnobotanical_to_upload <- table_ethnobotanical_local |>
+      tidytable::anti_join(table_ethnobotanical_wd)
+    ethnobotanical_non_wd <- table_ethnobotanical_to_upload |>
+      tidytable::distinct(taxon) |>
+      nrow()
+    logger::log_info(
+      "... of which ",
+      ethnobotanical_non_wd,
+      paste0(
+        " are not on Wikidata yet. ",
+        ifelse(
+          test = ethnobotanical_non_wd > 0,
+          yes = "These should definitely be shared!",
+          no = "Good job!"
+        )
+      )
+    )
+    table_ethnobotanical <- table_ethnobotanical_wd |>
+      tidytable::bind_rows(table_ethnobotanical_to_upload)
+    logger::log_info(
+      "We found ",
+      table_ethnobotanical |>
+        tidytable::distinct(taxon) |>
+        nrow(),
+      paste0(" ", taxon_name, " subtaxa with ethnobotanical use reported in total")
+    )
+  } else {
+    table_ethnobotanical <- table_ethnobotanical_wd
+  }
 
   taxon_qid <- taxon_name |>
     taxon_name_to_qid()
@@ -149,12 +186,11 @@ ethnobotafever_tree <- function(
     " unique varieties"
   )
 
-  ## TODO add own mol pairs
-  taxa_compounds_wd <- taxon_qid |>
-    get_compounds_wd()
-
   example_family_taxa_compounds_wd <- example_family_qids |>
     purrr::map(.f = get_compounds_wd)
+
+  taxa_compounds_wd <- taxon_qid |>
+    get_compounds_wd()
 
   logger::log_info(
     "We found ",
@@ -167,22 +203,65 @@ ethnobotafever_tree <- function(
       " subtaxa with at least one chemical compound reported in Wikidata"
     )
   )
+  if (!is.null(path_molecules)) {
+    taxa_compounds_local <- path_molecules |>
+      tidytable::fread() |>
+      tidytable::distinct(compound, compound_smiles_canonical, compound_inchikey, taxon)
+    logger::log_info(
+      "We found ",
+      taxa_compounds_local |>
+        tidytable::distinct(taxon) |>
+        nrow(),
+      paste0(
+        " ",
+        taxon_name,
+        " subtaxa with at least one chemical compound reported locally"
+      )
+    )
+    taxa_compounds_to_upload <- taxa_compounds_local |>
+      tidytable::anti_join(taxa_compounds_wd)
+    compounds_non_wd <- taxa_compounds_to_upload |>
+      tidytable::distinct(taxon) |>
+      nrow()
+    logger::log_info(
+      "... of which ",
+      compounds_non_wd,
+      paste0(
+        " are not on Wikidata yet. ",
+        ifelse(
+          test = compounds_non_wd > 0,
+          yes = "These should definitely be shared!",
+          no = "Good job!"
+        )
+      )
+    )
+    taxa_compounds_tot <- taxa_compounds_wd |>
+      tidytable::bind_rows(taxa_compounds_to_upload)
+    logger::log_info(
+      "We found ",
+      taxa_compounds_tot |>
+        tidytable::distinct(taxon) |>
+        nrow(),
+      paste0(" ", taxon_name, " subtaxa with ethnobotanical use reported in total")
+    )
+  }
+
   logger::log_info(
     "... ",
-    taxa_compounds_wd |>
+    taxa_compounds_tot |>
       tidytable::distinct(taxon, compound_inchikey) |>
       nrow(),
     " unique chemical compound-taxon pairs"
   )
   logger::log_info(
     "... ",
-    taxa_compounds_wd |>
+    taxa_compounds_tot |>
       tidytable::distinct(compound_inchikey) |>
       nrow(),
     " unique chemical compounds"
   )
 
-  taxa_compounds <- taxa_compounds_wd |>
+  taxa_compounds <- taxa_compounds_tot |>
     tidytable::mutate(
       connectivity_layer = compound_inchikey |>
         gsub(pattern = "-.*", replacement = "")
@@ -421,7 +500,8 @@ ethnobotafever_tree <- function(
       by = c("taxon_name" = "generic_epithet")
     ) |>
     tidytable::left_join(
-      table_ethnobotanical,
+      table_ethnobotanical |>
+        tidytable::select(-taxon_name),
       by = c("taxon_id_ott.y" = "taxon_id_ott")
     )
   logger::log_info(
@@ -433,7 +513,7 @@ ethnobotafever_tree <- function(
       paste(collapse = ", "),
     " had at least ",
     n_ethnobotanical_count_min,
-    " reported ethnobotanical uses or ",
+    " ethnobotanical uses or ",
     n_compounds_count_min,
     " compounds reported"
   )

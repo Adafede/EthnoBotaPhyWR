@@ -1,7 +1,5 @@
 ---
 title: EthnoBotaPhyWR
-format:
-  jss-html: default
 author:
   - name: Adriano Rutz
     orcid: 0000-0003-0443-9902
@@ -10,8 +8,19 @@ author:
     affiliations:
       - ref: imsb
     correspondence: true
+affiliations:
+  - id: imsb
+    number: 1
+    name: ETH Zürich
+    department: Institute for Molecular Systems Biology
+    group: Zamboni
+    address: Otto-Stern-Weg, 3
+    city: Zürich
+    country: Switzerland
+    postal-code: 8093
+    ror: https://ror.org/03j5gm982
 abstract: |
-  This short article illustrates the concept of EthnoBotaPhyWR (pronounced "Ethnobota Fever").
+  This short article illustrates the use of EthnoBotaPhyWR (pronounced "Ethnobota Fever").
 citation:
   url: https://adafede.github.io/EthnoBotaPhyWR/index.html
 comments:
@@ -20,6 +29,9 @@ comments:
   hypothesis:
     showHighlights: always
 creative_commons: CC BY
+format:
+  html:
+    embed-resources: true
 google-scholar: true
 keywords:
   - Ethnobotany
@@ -34,27 +46,181 @@ keywords-formatted:
   - Wikidata
   - R
 license: CC BY
-bibliography: bibliography.bib
 ---
 
-```{r import, include=FALSE}
-message("foo")
+**EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and *R*. 
+It should be pronounced "Ethnobota Fever".
+
+```{r imports, include=FALSE}
+## External functions
+source(
+  file = "https://raw.githubusercontent.com/adafede/cascade/main/R/colors.R"
+)
+source(
+  file = "https://raw.githubusercontent.com/adafede/cascade/main/R/prepare_hierarchy.R"
+)
+source(
+  file = "https://raw.githubusercontent.com/adafede/cascade/main/R/prepare_plot.R"
+)
+source(
+  file = "https://raw.githubusercontent.com/adafede/cascade/main/R/taxon_name_to_qid.R"
+)
+
+## Internal functions
+source(
+  file = "R/get_npclassifier_taxonomy.R"
+)
+source(
+  file = "R/query_wdqs.R"
+)
+source(
+  file = "R/calculate_branches_values.R"
+)
+source(
+  file = "R/get_results_wd.R"
+)
+source(
+  file = "R/get_trees.R"
+)
+source(
+  file = "R/plot_trees.R"
+)
+source(
+  file = "R/ethnobotafever_tree.R"
+)
 ```
 
-## Introduction {#sec-intro}
+## Introduction
 
-Bar
+This vignette illustrates how to collect data on the *ethnobotanical uses*, and the *phytochemistry* of a given taxonomic family.
+The data collected originate from [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page), the free knowledge base that anyone can edit.
+
+At the moment, this vignette supports adding your own data and combine them with the ones available on Wikidata to see the results.
+Ideally, you should share these precious data.
+
+### tl;dr
+
+The function you are looking for is `ethnobotafever_tree()`, whose parameters are described below:
+
+```{r parameters}
+## Taxonomy-related parameters
+taxon_name <- "Orchidaceae"        # The scientific name of the family you are interested in
+
+example_family_names <- list(      # The scientific name(s) of family(ies) you want to compare to
+  "Poaceae" = "Poaceae",
+  "Fabaceae" = "Fabaceae",
+  "Asteraceae" = "Asteraceae",
+  "Orchidaceae" = "Orchidaceae",
+  "Rosaceae" = "Rosaceae",
+  "Solanaceae" = "Solanaceae"
+)
+
+## Thresholds
+n_multiple_genera <- 10L           # The minimal number of genera where a compound was found in to consider the latter relatively widespread
+n_ethnobotanical_count_min <- 10L  # The minimal number of ethnobotanical uses reported to consider the taxon relatively widely used
+n_compounds_count_min <- 50L       # The minimal number of compounds reported in a taxon to consider the latter relatively widely investigated
+
+## File paths
+# TODO
+path_molecules <- NULL
+path_classes <- "~/Documents/papers/orchids/orchids_compounds_classes.tsv"
+path_ethnobotanical <- "~/Documents/papers/orchids/Species_medicinal_output_with_ott_id.xlsx"
+
+export_tree_full <- "man/figures/tree_orchids_full.pdf"
+export_tree_phyto <- "man/figures/tree_orchids_phyto.pdf"
+export_tree_phyto_sub <- "man/figures/tree_orchids_phyto_sub.pdf"
+export_table_classified <- "~/Documents/papers/orchids/orchids_table_unique_connectivity_classified.tsv"
+export_table_counts <- "~/Documents/papers/orchids/orchids_table_counts.tsv"
+export_table_counts_sub <- "~/Documents/papers/orchids/orchids_table_counts_sub.tsv"
+
+local_cache <- ".cache/"
+log_dir <- "~/Documents/papers/orchids/"
+```
+
+Change these parameters as required and you are ready for the fever!
+
+```{r ethnobotafever_tree, message=FALSE, warning=FALSE}
+results <- ethnobotafever_tree(
+  taxon_name = taxon_name,
+  n_multiple_genera = n_multiple_genera,
+  n_ethnobotanical_count_min = n_ethnobotanical_count_min,
+  n_compounds_count_min = n_compounds_count_min,
+  example_family_names = example_family_names,
+  path_molecules = path_molecules,
+  path_classes = path_classes,
+  path_ethnobotanical = path_ethnobotanical,
+  export_tree_full = export_tree_full,
+  export_tree_phyto = export_tree_phyto,
+  export_tree_phyto_sub = export_tree_phyto_sub,
+  export_table_classified = export_table_classified,
+  export_table_counts = export_table_counts,
+  export_table_counts_sub = export_table_counts_sub,
+  local_cache = local_cache,
+  log_dir = log_dir
+)
+```
 
 ## Results {#sec-results}
 
-Bim
+This will give you different objets
 
-```{r tidy, include=FALSE}
-message("foo")
+First, tables containing different information:
+
+- An overview of the phytochemistry of the family in @tbl-1
+- An overview of the number of reported uses, compounds, and species per genus within the family in @tbl-2
+- An overview of the species within the family for which a decent number of compounds or uses have been reported in @tbl-3
+
+```{r echo=FALSE}
+#| label: tbl-1
+#| tbl-cap: "Overview of the phytochemistry of the family"
+results$df_taxa_full |>
+  data.frame() |>
+  gt::gt()  |>
+  gt::opt_interactive()
 ```
 
-```{r strings, include=FALSE}
-message("foo")
+```{r echo=FALSE}
+#| label: tbl-2
+#| tbl-cap: "Overview of the number of reported uses, compounds, and species per genus within the family"
+results$df_taxa_ethno_counted |>
+  data.frame() |>
+  gt::gt()  |>
+  gt::opt_interactive()
 ```
 
-ipsum
+```{r echo=FALSE}
+#| label: tbl-3
+#| tbl-cap: "Overview of the species within the family for which a decent number of compounds or uses have been reported"
+results$df_taxa_known_sub |>
+  data.frame() |>
+  gt::gt()  |>
+  gt::opt_interactive()
+```
+
+### Plots
+
+#### Genera
+
+TODO
+
+![Fig caption TODO](man/figures/tree_orchids_full.pdf){width=100%}
+
+TODO
+
+![Fig caption TODO](man/figures/tree_orchids_phyto.pdf){width=100%}
+
+TODO
+
+#### Sub
+
+TODO
+
+![Fig caption TODO](man/figures/tree_orchids_phyto_sub.pdf){width=100%}
+
+TODO
+
+## Logs
+
+```{r logs, echo=FALSE}
+readLines(con = file.path(paste0(log_dir, taxon_name, "_log.txt")))
+```

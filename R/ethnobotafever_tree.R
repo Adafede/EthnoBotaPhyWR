@@ -15,10 +15,11 @@ ethnobotafever_tree <- function(
     export_table_counts_sub,
     local_cache,
     log_dir) {
+  log_file <- paste0(log_dir, taxon_name, "_log.txt")
+  file.remove(log_file)
   logger::log_appender(
     appender = logger::appender_tee(
-      file = paste0(log_dir, taxon_name, "_log.txt"),
-      append = FALSE
+      file = log_file
     )
   )
 
@@ -148,6 +149,7 @@ ethnobotafever_tree <- function(
     " unique varieties"
   )
 
+  ## TODO add own mol pairs
   taxa_compounds_wd <- taxon_qid |>
     get_compounds_wd()
 
@@ -473,19 +475,30 @@ ethnobotafever_tree <- function(
   )
 
   logger::log_trace("Retrieving compounds classification ...")
-  ## TODO change this
+  smiles <- taxa_compounds |>
+    tidytable::distinct(compound_smiles_canonical) |>
+    tidytable::pull()
   if (file.exists(path_classes)) {
-    classes <- path_classes |>
-      tidytable::fread(na.strings = "")
+    classes_known <- path_classes |>
+      tidytable::fread(na.strings = "") |>
+      # tidytable::filter(!is.na(glycoside)) |>
+      tidytable::distinct()
+    smiles_unknown <- smiles[!smiles %in% classes_known$query]
+    if (smiles_unknown |> length() > 0L) {
+      classes <- smiles_unknown |>
+        get_npclassifier_taxonomy() |>
+        tidytable::bind_rows() |>
+        tidytable::bind_rows(classes_known)
+    } else {
+      classes <- classes_known
+    }
   } else {
-    classes <- taxa_compounds |>
-      tidytable::distinct(compound_smiles_canonical) |>
-      tidytable::pull() |>
+    classes <- smiles |>
       get_npclassifier_taxonomy() |>
       tidytable::bind_rows()
-    classes |>
-      tidytable::fwrite(file = path_classes, sep = "\t")
   }
+  classes |>
+    tidytable::fwrite(file = path_classes, sep = "\t")
 
   taxa_compounds_classes <- taxa_gen_ott_cpd |>
     tidytable::bind_rows(
@@ -708,7 +721,8 @@ ethnobotafever_tree <- function(
       plots_sub = plots_sub,
       df_taxa_full = taxa_full,
       df_taxa_ethno_counted = taxa_ethno_counted,
-      df_taxa_known_sub = taxa_known_sub
+      df_taxa_known_sub = taxa_known_sub,
+      log_file = log_file
     )
   )
 }

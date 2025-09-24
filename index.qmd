@@ -48,7 +48,8 @@ keywords-formatted:
 license: CC BY
 ---
 
-**EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and *R*. 
+**EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and *R*
+[(maybe you can also find the *bot* of *robot*)]{.smallcaps}
 It should be pronounced "Ethnobota Fever".
 
 ```{r imports, include=FALSE}
@@ -197,30 +198,20 @@ results$df_taxa_known_sub |>
   gt::opt_interactive()
 ```
 
-### Plots
+Second, some tree-based visualizations: 
 
-#### Genera
+- A tree with genera as tips, displaying the taxa of the family, and if compounds or uses have been reported in @fig-1 (mainly to show the majority remains non-investigated)
+- A tree with genera as tips, displaying the taxa of the family for which compounds or uses have been reported in @fig-2 (mainly to make them easier to read)
+- A tree with species as tips, displaying the taxa of the family for which a decent number of compounds or uses have been reported in the corresponding genus in @fig-3 (mainly to show that even in the most investigated genera, the coverage is far from ideal)
 
-TODO
+![A tree with genera as tips, displaying the taxa of the family, and if compounds or uses have been reported](man/figures/tree_orchids_full.pdf){#fig-1 width=100%}
 
-![Fig caption TODO](man/figures/tree_orchids_full.pdf){width=100%}
+![A tree with genera as tips, displaying the taxa of the family for which compounds or uses have been reported](man/figures/tree_orchids_phyto.pdf){#fig-2 width=100%}
 
-TODO
-
-![Fig caption TODO](man/figures/tree_orchids_phyto.pdf){width=100%}
-
-TODO
-
-#### Sub
-
-TODO
-
-![Fig caption TODO](man/figures/tree_orchids_phyto_sub.pdf){width=100%}
-
-TODO
+![A tree with species as tips, displaying the taxa of the family for which a decent number of compounds or uses have been reported in the corresponding genus](man/figures/tree_orchids_phyto_sub.pdf){#fig-3 width=100%}
 
 ## Logs
 
 ```{r logs, echo=FALSE}
-readLines(con = file.path(paste0(log_dir, taxon_name, "_log.txt")))
+readLines(con = results$log_file)
 ```

@@ -1,3 +1,14 @@
+#' @title Get trees
+#'
+#' @description This function gets trees.
+#'
+#' @param ott_ids ott_ids
+#' @param df_counted df_counted
+#' @param taxon_name taxon_name
+#'
+#' @return Trees
+#'
+#' @examples NULL
 get_trees <- function(ott_ids, df_counted, taxon_name) {
   ott_in_tree <- ott_ids[rotl::is_in_tree(ott_ids)] |>
     as.integer()
@@ -42,6 +53,15 @@ get_trees <- function(ott_ids, df_counted, taxon_name) {
   ))
 }
 
+#' @title Get trees mem
+#'
+#' @description This function gets trees with cache.
+#'
+#' @param ... ...
+#'
+#' @return Trees
+#'
+#' @examples NULL
 get_trees_mem <- function(...) {
   memoise::memoise(get_trees, ...)
 }

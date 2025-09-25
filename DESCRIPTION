@@ -1,0 +1,72 @@
+Package: EthnoBotaPhyWR
+Title: **EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and *R*. It should be pronounced "Ethnobota Fever".
+Version: 0.0.0.9000
+Authors@R: c(
+    person(given = "Adriano",
+           family = "Rutz",
+           email = "adafede@gmail.com",
+           role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-0443-9902"))
+  )
+Maintainer: Adriano Rutz <adafede@gmail.com>
+Description: This package provides the infrastructure to perform
+    ethnobotanical and phytochemical data collection.
+License: AGPL (>= 3)
+URL: https://github.com/adafede/EthnoBotaPhyWR, https://adafede.github.io/EthnoBotaPhyWR
+BugReports: https://github.com/adafede/EthnoBotaPhyWR/issues
+Depends:
+    R (>= 4.4.0)
+Imports:
+    ape (>= 5.8-1),
+    ggplot2 (>= 3.5.2),
+    ggtext (>= 0.1.2),
+    ggtree (>= 3.14.0),
+    ggtreeExtra (>= 1.16.0),
+    gt (>= 1.0.0),
+    httr2 (>= 1.2.1),
+    jsonlite (>= 2.0.0),
+    khroma (>= 1.16.0),
+    logger (>= 0.4.0),
+    memoise (>= 2.0.1),
+    phangorn (>= 2.12.1),
+    purrr (>= 1.1.0),
+    R.utils (>= 2.13.0),
+    rotl (>= 3.1.0),
+    rvest (>= 1.0.5),
+    scales (>= 1.4.0),
+    stringi (>= 1.8.7),
+    tibble (>= 3.3.0),
+    tidytable (>= 0.11.2),
+    utils,
+    WikidataQueryServiceR (>= 1.0.0)
+Remotes:
+    adafede/cascade
+Suggests:
+    altdoc (>= 0.5.0),
+    BiocManager (>= 1.30.25),
+    grateful (>= 0.2.12),
+    knitr (>= 1.50),
+    quarto (>= 1.4.4),
+    lifecycle (>= 1.0.4),
+    spelling (>= 2.3.1),
+    svglite (>= 2.2.1),
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Encoding: UTF-8
+LazyData: true
+ByteCompile: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Collate:
+    'calculate_branches_values.R'
+    'plot_trees.R'
+    'get_trees.R'
+    'query_wdqs.R'
+    'get_results_wd.R'
+    'get_npclassifier_taxonomy.R'
+    'ethnobotafever_tree.R'
+VignetteBuilder: 
+    quarto
+biocViews: Ethnobotany, Phytochemistry, Taxonomy, Wikidata
+X-schema.org-keywords: Ethnobotany, Phytochemistry, Taxonomy, Wikidata
+Language: en-US

@@ -29,42 +29,11 @@ export_table_counts_sub <- "~/Documents/papers/orchids/orchids_table_counts_sub.
 local_cache <- ".cache/"
 log_dir <- "~/Documents/papers/orchids/"
 
-## External functions
+## External sources
 source(
   file = "https://raw.githubusercontent.com/adafede/cascade/main/R/colors.R"
 )
-source(
-  file = "https://raw.githubusercontent.com/adafede/cascade/main/R/prepare_hierarchy.R"
-)
-source(
-  file = "https://raw.githubusercontent.com/adafede/cascade/main/R/prepare_plot.R"
-)
-source(
-  file = "https://raw.githubusercontent.com/adafede/cascade/main/R/taxon_name_to_qid.R"
-)
-
-## Internal functions
-source(
-  file = "R/get_npclassifier_taxonomy.R"
-)
-source(
-  file = "R/query_wdqs.R"
-)
-source(
-  file = "R/calculate_branches_values.R"
-)
-source(
-  file = "R/get_results_wd.R"
-)
-source(
-  file = "R/get_trees.R"
-)
-source(
-  file = "R/plot_trees.R"
-)
-source(
-  file = "R/ethnobotafever_tree.R"
-)
+library(EthnoBotaPhyWR)
 
 results <- ethnobotafever_tree(
   taxon_name = taxon_name,

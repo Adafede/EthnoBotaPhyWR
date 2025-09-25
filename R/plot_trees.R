@@ -1,3 +1,22 @@
+#' @title Plot trees
+#'
+#' @description This function plots trees.
+#'
+#' @param taxa_not_in_tree taxa_not_in_tree
+#' @param tree_taxa_full tree_taxa_full
+#' @param tree_taxa_phyto tree_taxa_phyto
+#' @param df_counted df_counted
+#' @param df_classes df_classes
+#' @param offset offset
+#' @param adjust_point adjust_point
+#' @param adjust_text adjust_text
+#' @param adjust_margin adjust_margin
+#' @param genus genus
+#' @param drop drop
+#'
+#' @return Trees
+#'
+#' @examples NULL
 plot_trees <- function(
     taxa_not_in_tree,
     tree_taxa_full,

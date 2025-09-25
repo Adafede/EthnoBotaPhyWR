@@ -1,3 +1,34 @@
+#' @title Ethnobota fever
+#'
+#' @description This function collects and plots ethnobotanical and
+#' phytochemical data.
+#'
+#' @include calculate_branches_values.R
+#' @include get_npclassifier_taxonomy.R
+#' @include get_results_wd.R
+#' @include get_trees.R
+#' @include plot_trees.R
+#'
+#' @param taxon_name taxon_name
+#' @param n_multiple_genera n_multiple_genera
+#' @param n_ethnobotanical_count_min n_ethnobotanical_count_min
+#' @param n_compounds_count_min n_compounds_count_min
+#' @param example_family_names example_family_names
+#' @param path_molecules path_molecules
+#' @param path_classes path_classes
+#' @param path_ethnobotanical path_ethnobotanical
+#' @param export_tree_full export_tree_full
+#' @param export_tree_phyto export_tree_phyto
+#' @param export_tree_phyto_sub export_tree_phyto_sub
+#' @param export_table_classified export_table_classified
+#' @param export_table_counts export_table_counts
+#' @param export_table_counts_sub export_table_counts_sub
+#' @param local_cache local_cache
+#' @param log_dir log_dir
+#'
+#' @return Plenty of cool objects
+#'
+#' @examples NULL
 ethnobotafever_tree <- function(
     taxon_name,
     n_multiple_genera,
@@ -82,11 +113,11 @@ ethnobotafever_tree <- function(
   }
 
   taxon_qid <- taxon_name |>
-    taxon_name_to_qid()
+    cascade::taxon_name_to_qid()
 
   example_family_qids <- example_family_names |>
     purrr::map(
-      .f = taxon_name_to_qid
+      .f = cascade::taxon_name_to_qid
     )
 
   taxa_wd <- taxon_qid |>
@@ -661,12 +692,12 @@ ethnobotafever_tree <- function(
     )
 
   compounds_hierarchy <- taxa_compounds_classes |>
-    prepare_hierarchy(type = "literature") |>
-    prepare_plot() |>
+    cascade::prepare_hierarchy(type = "literature") |>
+    cascade::prepare_plot() |>
     tidytable::rename(taxon_name = species)
   compounds_hierarchy_sub <- taxa_compounds_classes_sub |>
-    prepare_hierarchy(type = "literature") |>
-    prepare_plot() |>
+    cascade::prepare_hierarchy(type = "literature") |>
+    cascade::prepare_plot() |>
     tidytable::rename(taxon_name = species)
 
   taxa_classes <- taxa_gen_ott_cpd |>

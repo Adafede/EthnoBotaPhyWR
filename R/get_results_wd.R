@@ -1,3 +1,14 @@
+#' @title Get subtaxa WD
+#'
+#' @description This function gets subtaxa from Wikidata.
+#'
+#' @include query_wdqs.R
+#'
+#' @param taxon_qid A taxon QID
+#'
+#' @return A dataframe containing the results of the query
+#'
+#' @examples NULL
 get_subtaxa_wd <- function(taxon_qid) {
   query_wdqs(
     endpoint = "https://qlever.cs.uni-freiburg.de/api/wikidata",
@@ -17,6 +28,17 @@ get_subtaxa_wd <- function(taxon_qid) {
   )
 }
 
+#' @title Get OTT IDs WD
+#'
+#' @description This function gets OTT IDs from Wikidata.
+#'
+#' @include query_wdqs.R
+#'
+#' @param taxon_qid A taxon QID
+#'
+#' @return A dataframe containing the results of the query
+#'
+#' @examples NULL
 get_ott_ids_wd <- function(taxon_qid) {
   query_wdqs(
     endpoint = "https://qlever.cs.uni-freiburg.de/api/wikidata",
@@ -35,6 +57,17 @@ get_ott_ids_wd <- function(taxon_qid) {
   )
 }
 
+#' @title Get compounds WD
+#'
+#' @description This function gets compounds from Wikidata.
+#'
+#' @include query_wdqs.R
+#'
+#' @param taxon_qid A taxon QID
+#'
+#' @return A dataframe containing the results of the query
+#'
+#' @examples NULL
 get_compounds_wd <- function(taxon_qid) {
   query_wdqs(
     endpoint = "https://qlever.cs.uni-freiburg.de/api/wikidata",
@@ -55,6 +88,17 @@ get_compounds_wd <- function(taxon_qid) {
   )
 }
 
+#' @title Get uses WD
+#'
+#' @description This function gets uses from Wikidata.
+#'
+#' @include query_wdqs.R
+#'
+#' @param taxon_qid A taxon QID
+#'
+#' @return A dataframe containing the results of the query
+#'
+#' @examples NULL
 get_uses_wd <- function(taxon_qid) {
   query_wdqs(
     endpoint = "https://qlever.cs.uni-freiburg.de/api/wikidata",
@@ -78,6 +122,15 @@ get_uses_wd <- function(taxon_qid) {
   )
 }
 
+#' @title Get LOTUS WD
+#'
+#' @description This function gets LOTUS from Wikidata.
+#'
+#' @include query_wdqs.R
+#'
+#' @return A dataframe containing the results of the query
+#'
+#' @examples NULL
 get_lotus_wd <- function() {
   query_wdqs(
     endpoint = "https://qlever.cs.uni-freiburg.de/api/wikidata",

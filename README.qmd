@@ -1,0 +1,80 @@
+---
+format: 
+  gfm: default
+  html: default
+bibliography: grateful-refs.bib
+---
+
+<!-- README.md is generated from README.qmd. Please edit that file -->
+
+# EthnoBotaPhyWR
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+[![CRAN status](https://www.r-pkg.org/badges/version/tima)](https://CRAN.R-project.org/package=EthnoBotaPhyWR)
+<!-- badges: end -->
+
+**EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and *R*
+[(maybe you can also find the *bot* of *robot*)]{.smallcaps}
+It should be pronounced "Ethnobota Fever".
+
+## Requirements
+
+Here is what you *minimally* need:
+
+- The scientific name of the taxonomic family you are interested in
+
+Additionally, you can provide:
+
+- Your own list of chemical compounds found in subtaxa of the family
+- Your own list of ethnobotanical uses of subtaxa of the family
+
+## Installation
+
+As the package is not (yet) available on CRAN, you will need to install with:
+
+``` r
+install.packages(
+  "EthnoBotaPhyWR",
+  repos = c(
+    "https://adafede.r-universe.dev",
+    "https://bioc.r-universe.dev",
+    "https://cloud.r-project.org"
+  )
+)
+```
+
+Once installed, you are ready to go through our [documentation](https://adafede.github.io/EthnoBotaPhyWR/articles), with the major steps detailed.
+
+## Main Citations
+
+### LOTUS
+
+<https://doi.org/10.7554/eLife.70780>
+
+### Open Tree Taxonomy
+
+<https://doi.org/10.3897/BDJ.5.e12581>
+
+### NPClassifier
+
+<https://doi.org/10.1021/acs.jnatprod.1c00399>
+
+## Additional software credits
+
+```{r, echo = FALSE, message = FALSE}
+# Check if DESCRIPTION is in current dir
+# Else `altdoc` will not find the dependencies
+desc_path <- if (file.exists("DESCRIPTION")) {
+  "."
+} else {
+  ".."
+}
+grateful::cite_packages(
+  output = "table",
+  out.dir = getwd(),
+  path = desc_path
+) |> 
+  knitr::kable()
+```

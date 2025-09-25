@@ -1,3 +1,15 @@
+#' @title Calculate branches values
+#'
+#' @description This function calculates branches values.
+#'
+#' @param tree A tree
+#' @param df df
+#' @param variable Variable
+#' @param name Name
+#'
+#' @return A dataframe containing the results of the calculation
+#'
+#' @examples NULL
 calculate_branches_values <- function(tree, df, variable, name) {
   # Assign tip values
   node_values <- data.frame(

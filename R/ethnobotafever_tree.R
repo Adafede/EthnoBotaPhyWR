@@ -467,7 +467,7 @@ ethnobotafever_tree <- function(
     tidytable::left_join(taxa_ethno) |>
     tidytable::mutate(
       tidytable::across(
-        .cols = tidyselect::matches("ethnobotanical_count"),
+        .cols = tidytable::matches("ethnobotanical_count"),
         .fns = function(x) {
           tidytable::replace_na(x, 0L)
         }

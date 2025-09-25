@@ -62,6 +62,19 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "BiocVersion",
+      "name": "BiocVersion",
+      "version": ">= 3.20.0",
+      "provider": {
+        "@id": "https://www.bioconductor.org",
+        "@type": "Organization",
+        "name": "Bioconductor",
+        "url": "https://www.bioconductor.org"
+      },
+      "sameAs": "https://bioconductor.org/packages/release/bioc/html/BiocVersion.html"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "grateful",
       "name": "grateful",
       "version": ">= 0.2.12",
@@ -174,6 +187,19 @@
     },
     "3": {
       "@type": "SoftwareApplication",
+      "identifier": "cachem",
+      "name": "cachem",
+      "version": ">= 1.1.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=cachem"
+    },
+    "4": {
+      "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
       "version": ">= 3.5.2",
@@ -185,7 +211,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
     },
-    "4": {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "ggtext",
       "name": "ggtext",
@@ -198,7 +224,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggtext"
     },
-    "5": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "ggtree",
       "name": "ggtree",
@@ -211,7 +237,7 @@
       },
       "sameAs": "https://bioconductor.org/packages/release/bioc/html/ggtree.html"
     },
-    "6": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "ggtreeExtra",
       "name": "ggtreeExtra",
@@ -224,7 +250,7 @@
       },
       "sameAs": "https://bioconductor.org/packages/release/bioc/html/ggtreeExtra.html"
     },
-    "7": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "gt",
       "name": "gt",
@@ -237,7 +263,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=gt"
     },
-    "8": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "httr2",
       "name": "httr2",
@@ -250,7 +276,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=httr2"
     },
-    "9": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "jsonlite",
       "name": "jsonlite",
@@ -263,7 +289,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=jsonlite"
     },
-    "10": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "khroma",
       "name": "khroma",
@@ -276,7 +302,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=khroma"
     },
-    "11": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "logger",
       "name": "logger",
@@ -289,7 +315,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=logger"
     },
-    "12": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "memoise",
       "name": "memoise",
@@ -302,7 +328,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=memoise"
     },
-    "13": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "phangorn",
       "name": "phangorn",
@@ -315,7 +341,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=phangorn"
     },
-    "14": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
@@ -328,7 +354,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=purrr"
     },
-    "15": {
+    "16": {
       "@type": "SoftwareApplication",
       "identifier": "R.utils",
       "name": "R.utils",
@@ -341,7 +367,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=R.utils"
     },
-    "16": {
+    "17": {
       "@type": "SoftwareApplication",
       "identifier": "rotl",
       "name": "rotl",
@@ -354,7 +380,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rotl"
     },
-    "17": {
+    "18": {
       "@type": "SoftwareApplication",
       "identifier": "rvest",
       "name": "rvest",
@@ -367,7 +393,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rvest"
     },
-    "18": {
+    "19": {
       "@type": "SoftwareApplication",
       "identifier": "scales",
       "name": "scales",
@@ -380,7 +406,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=scales"
     },
-    "19": {
+    "20": {
       "@type": "SoftwareApplication",
       "identifier": "stringi",
       "name": "stringi",
@@ -393,7 +419,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=stringi"
     },
-    "20": {
+    "21": {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
@@ -406,7 +432,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
-    "21": {
+    "22": {
       "@type": "SoftwareApplication",
       "identifier": "tidytable",
       "name": "tidytable",
@@ -419,12 +445,12 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidytable"
     },
-    "22": {
+    "23": {
       "@type": "SoftwareApplication",
       "identifier": "utils",
       "name": "utils"
     },
-    "23": {
+    "24": {
       "@type": "SoftwareApplication",
       "identifier": "WikidataQueryServiceR",
       "name": "WikidataQueryServiceR",
@@ -440,5 +466,7 @@
     "SystemRequirements": null
   },
   "keywords": ["Ethnobotany", "Phytochemistry", "Taxonomy", "Wikidata", "ethnobotany", "phytochemistry", "r", "wikidata"],
-  "fileSize": "0KB"
+  "fileSize": "0KB",
+  "readme": "https://github.com/Adafede/EthnoBotaPhyWR/blob/main/README.md",
+  "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental"
 }

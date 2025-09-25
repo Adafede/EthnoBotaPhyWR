@@ -90,7 +90,6 @@ the major steps detailed.
 | rotl | 3.1.0 | Michonneau, Brown, and Winter (2016); OpenTreeOfLife et al. (2019) |
 | scales | 1.4.0 | Wickham, Pedersen, and Seidel (2025) |
 | stringi | 1.8.7 | Gagolewski (2022) |
-| tidyselect | 1.2.1 | Henry and Wickham (2024) |
 | tidytable | 0.11.2 | Fairbanks (2024) |
 | tidyverse | 2.0.0 | Wickham et al. (2019) |
 | WikidataQueryServiceR | 1.0.0 | Popov (2020) |
@@ -151,14 +150,6 @@ Bordeaux Montaigne. <https://doi.org/10.5281/zenodo.1472077>.
 Gagolewski, Marek. 2022. “<span class="nocase">stringi</span>: Fast and
 Portable Character String Processing in R.” *Journal of Statistical
 Software* 103 (2): 1–59. <https://doi.org/10.18637/jss.v103.i02>.
-
-</div>
-
-<div id="ref-tidyselect" class="csl-entry">
-
-Henry, Lionel, and Hadley Wickham. 2024.
-*<span class="nocase">tidyselect</span>: Select from a Set of Strings*.
-<https://doi.org/10.32614/CRAN.package.tidyselect>.
 
 </div>
 

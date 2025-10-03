@@ -2,19 +2,19 @@
 % Please edit documentation in R/get_results_wd.R
 \name{get_subtaxa_wd}
 \alias{get_subtaxa_wd}
-\title{Get subtaxa WD}
+\title{Get subtaxa from Wikidata}
 \usage{
 get_subtaxa_wd(taxon_qid)
 }
 \arguments{
-\item{taxon_qid}{A taxon QID}
+\item{taxon_qid}{Character. Wikidata QID of the taxon.}
 }
 \value{
-A dataframe containing the results of the query
+A data.frame with columns: taxon, taxon_name, taxon_rank.
 }
 \description{
-This function gets subtaxa from Wikidata.
+Retrieves all subtaxa for a given taxon QID from Wikidata using a SPARQL query.
 }
 \examples{
-NULL
+# get_subtaxa_wd("Q25308")
 }

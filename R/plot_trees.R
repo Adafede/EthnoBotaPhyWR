@@ -1,122 +1,103 @@
 #' @title Plot trees
 #'
-#' @description This function plots trees.
+#' @description
+#' Plots phylogenetic trees with overlays for ethnobotanical and phytochemical data. Handles label formatting, tip dropping, and custom color/size mappings.
 #'
-#' @param taxa_not_in_tree taxa_not_in_tree
-#' @param tree_taxa_full tree_taxa_full
-#' @param tree_taxa_phyto tree_taxa_phyto
-#' @param df_counted df_counted
-#' @param df_classes df_classes
-#' @param offset offset
-#' @param adjust_point adjust_point
-#' @param adjust_text adjust_text
-#' @param adjust_margin adjust_margin
-#' @param genus genus
-#' @param drop drop
+#' @param taxa_not_in_tree Data.frame. Taxa not present in the tree.
+#' @param tree_taxa_full phylo. Full tree object.
+#' @param tree_taxa_phyto phylo. Tree for taxa with compounds.
+#' @param df_counted Data.frame. Must contain 'taxon_name', 'species_count', 'ethnobotanical_count', etc.
+#' @param df_classes Data.frame. Class/color information for taxa.
+#' @param offset Numeric. Offset for tip labels.
+#' @param adjust_point, adjust_text, adjust_margin Numeric. Plot adjustments.
+#' @param genus Logical. If TRUE, format tip labels as genus only.
+#' @param drop Logical. If TRUE, drop tips not in df_counted.
 #'
-#' @return Trees
+#' @return List of ggplot2/ggtree plot objects and data used for plotting.
 #'
-#' @examples NULL
+#' @examples
+#' # plot_trees(...)
 plot_trees <- function(
-    taxa_not_in_tree,
-    tree_taxa_full,
-    tree_taxa_phyto,
-    df_counted,
-    df_classes,
-    offset,
-    adjust_point,
-    adjust_text,
-    adjust_margin,
-    genus = TRUE,
-    drop = FALSE) {
-  if (genus == TRUE) {
-    tree_taxa_full$tip.label <-
-      gsub(
-        pattern = "_.*",
-        replacement = "",
-        x = tree_taxa_full$tip.label
-      )
-    tree_taxa_phyto$tip.label <-
-      gsub(
-        pattern = "_.*",
-        replacement = "",
-        x = tree_taxa_phyto$tip.label
-      )
-  } else {
-    tree_taxa_full$tip.label <-
-      gsub(
-        pattern = "_ott.*",
-        replacement = "",
-        x = tree_taxa_full$tip.label
-      ) |>
-      gsub(
-        pattern = "_",
-        replacement = " ",
-      )
-    tree_taxa_phyto$tip.label <-
-      gsub(
-        pattern = "_ott.*",
-        replacement = "",
-        x = tree_taxa_phyto$tip.label
-      ) |>
-      gsub(
-        pattern = "_",
-        replacement = " ",
-      )
+  taxa_not_in_tree,
+  tree_taxa_full,
+  tree_taxa_phyto,
+  df_counted,
+  df_classes,
+  offset,
+  adjust_point,
+  adjust_text,
+  adjust_margin,
+  genus = TRUE,
+  drop = FALSE
+) {
+  # Input validation
+  stopifnot(is.data.frame(taxa_not_in_tree))
+  stopifnot(inherits(tree_taxa_full, "phylo"))
+  stopifnot(inherits(tree_taxa_phyto, "phylo"))
+  stopifnot(is.data.frame(df_counted))
+  stopifnot(is.data.frame(df_classes))
+
+  # Helper: format tip labels
+  format_tip_labels <- function(labels, genus_mode) {
+    if (genus_mode) {
+      gsub(pattern = "_.*", replacement = "", x = labels)
+    } else {
+      gsub(pattern = "_ott.*", replacement = "", x = labels) |>
+        gsub(pattern = "_", replacement = " ")
+    }
   }
 
-  if (drop == TRUE) {
-    labelz <- tree_taxa_full$tip.label[
-      !tree_taxa_full$tip.label %in% df_counted$taxon_name
-    ]
-    labelz_phyto <- tree_taxa_phyto$tip.label[
-      !tree_taxa_phyto$tip.label %in% df_counted$taxon_name
-    ]
+  tree_taxa_full$tip.label <- format_tip_labels(tree_taxa_full$tip.label, genus)
+  tree_taxa_phyto$tip.label <- format_tip_labels(
+    tree_taxa_phyto$tip.label,
+    genus
+  )
 
-    tree_taxa_full <- tree_taxa_full |>
-      ape::drop.tip(tip = labelz)
-
-    tree_taxa_phyto <- tree_taxa_phyto |>
-      ape::drop.tip(tip = labelz_phyto)
+  # Optionally drop tips not in df_counted
+  if (drop) {
+    labelz <- setdiff(tree_taxa_full$tip.label, df_counted$taxon_name)
+    labelz_phyto <- setdiff(tree_taxa_phyto$tip.label, df_counted$taxon_name)
+    tree_taxa_full <- ape::drop.tip(tree_taxa_full, tip = labelz)
+    tree_taxa_phyto <- ape::drop.tip(tree_taxa_phyto, tip = labelz_phyto)
   }
 
   logger::log_trace(
     "Calculating ethnobotanical use at different levels of the tree..."
   )
-  tree_data <- tree_taxa_full |>
-    calculate_branches_values(
-      df = df_counted,
-      variable = "ethnobotanical_count",
-      name = "ethnobotanical_species_average"
-    )
-  tree_data_phyto <- tree_taxa_phyto |>
-    calculate_branches_values(
-      df = df_counted,
-      variable = "ethnobotanical_count",
-      name = "ethnobotanical_species_average"
-    )
-  tree_data <- tree_data |>
-    tidytable::left_join(
-      df_counted |>
-        tidytable::distinct(label = taxon_name, species_count)
-    ) |>
+  tree_data <- calculate_branches_values(
+    tree = tree_taxa_full,
+    df = df_counted,
+    variable = "ethnobotanical_count",
+    name = "ethnobotanical_species_average"
+  )
+  tree_data_phyto <- calculate_branches_values(
+    tree = tree_taxa_phyto,
+    df = df_counted,
+    variable = "ethnobotanical_count",
+    name = "ethnobotanical_species_average"
+  )
+
+  # Join species count for plotting
+  tree_data <- tidytable::left_join(
+    tree_data,
+    df_counted |> tidytable::distinct(label = taxon_name, species_count)
+  ) |>
     tidytable::distinct(node, .keep_all = TRUE)
-  tree_data_phyto <- tree_data_phyto |>
-    tidytable::left_join(
-      df_counted |>
-        tidytable::distinct(label = taxon_name, species_count)
-    ) |>
+  tree_data_phyto <- tidytable::left_join(
+    tree_data_phyto,
+    df_counted |> tidytable::distinct(label = taxon_name, species_count)
+  ) |>
     tidytable::distinct(node, .keep_all = TRUE)
 
   logger::log_trace("Plotting ...")
   library(ggtree)
   library(ggplot2)
+  # Use explicit namespace for ggtree/ggplot2
   plot_tree_taxa <- ggtree::ggtree(
     tree_taxa_full,
     layout = "rectangular",
     mapping = ggplot2::aes(
-      color = ethnobotanical_species_average |>
-        log10()
+      color = log10(ethnobotanical_species_average)
     )
   ) %<+%
     df_counted %<+%
@@ -129,8 +110,7 @@ plot_trees <- function(
     ggtree::geom_tiplab(size = ggplot2::rel(1), offset = ggplot2::rel(0.6)) +
     ggtree::geom_tippoint(
       mapping = ggplot2::aes(
-        size = tree_data$species_count |>
-          log10()
+        size = log10(tree_data$species_count)
       )
     ) +
     ggplot2::scale_size(name = "Known species", labels = scales::label_math()) +

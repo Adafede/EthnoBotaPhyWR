@@ -2,18 +2,18 @@
 % Please edit documentation in R/get_trees.R
 \name{get_trees_mem}
 \alias{get_trees_mem}
-\title{Get trees mem}
+\title{Get trees (memoised)}
 \usage{
 get_trees_mem(...)
 }
 \arguments{
-\item{...}{...}
+\item{...}{Arguments passed to get_trees.}
 }
 \value{
-Trees
+Memoised function.
 }
 \description{
-This function gets trees with cache.
+Returns a memoised version of get_trees for caching repeated calls.
 }
 \examples{
 NULL

@@ -1,27 +1,41 @@
 #' @title Get NPClassifier taxonomy
 #'
-#' @description This function classifies (list of) SMILES using NPClassifier API
+#' @description
+#' Classifies a vector or list of SMILES strings using the NPClassifier API. Returns a tibble with classification results for each SMILES.
 #'
-#' @param smiles A (list of) SMILES
+#' @param smiles Character vector or list. SMILES strings to classify.
 #'
-#' @return A tibble of npclassified SMILES
+#' @return A tibble with columns: query, pathway, superclass, class, glycoside.
 #'
-#' @examples NULL
+#' @details
+#' For each SMILES, this function queries the NPClassifier API and parses the result. If the API call fails, NA values are returned for that entry.
+#'
+#' @examples
+#' # get_npclassifier_taxonomy(c("CCO", "CCN"))
 get_npclassifier_taxonomy <- function(smiles) {
+  # Input validation
+  if (!is.character(smiles) && !is.list(smiles)) {
+    stop("smiles must be a character vector or list")
+  }
+
   purrr::map(
     .progress = TRUE,
     .x = smiles,
-    .f = function(x,
-                  url = "https://npclassifier.gnps2.org",
-                  order = "/classify?smiles=") {
+    .f = function(
+      x,
+      url = "https://npclassifier.gnps2.org",
+      order = "/classify?smiles="
+    ) {
       tryCatch(
         {
+          # Query NPClassifier API for each SMILES string
           url_id <- paste0(url, order, x)
           result <- rvest::read_html(url_id) |>
             rvest::html_text() |>
             jsonlite::fromJSON()
 
-          df <- tibble::tibble(
+          # Parse result into tibble
+          tibble::tibble(
             query = x,
             pathway = if (!purrr::is_empty(result$pathway_results)) {
               result$pathway_results
@@ -44,18 +58,16 @@ get_npclassifier_taxonomy <- function(smiles) {
               NA
             }
           )
-
-          return(df)
         },
         error = function(e) {
-          df <- tibble::tibble(
+          # On error, return NA for all fields
+          tibble::tibble(
             query = x,
             pathway = NA,
             superclass = NA,
             class = NA,
             glycoside = NA
           )
-          return(df)
         }
       )
     }

@@ -1,7 +1,7 @@
 #' @title Ethnobota fever
 #'
-#' @description This function collects and plots ethnobotanical and
-#' phytochemical data.
+#' @description
+#' Collects and plots ethnobotanical and phytochemical data for a given taxon. This function performs data retrieval, merging, and logging, and produces summary statistics and outputs for downstream analysis and visualization.
 #'
 #' @include calculate_branches_values.R
 #' @include get_npclassifier_taxonomy.R
@@ -9,78 +9,87 @@
 #' @include get_trees.R
 #' @include plot_trees.R
 #'
-#' @param taxon_name taxon_name
-#' @param n_multiple_genera n_multiple_genera
-#' @param n_ethnobotanical_count_min n_ethnobotanical_count_min
-#' @param n_compounds_count_min n_compounds_count_min
-#' @param example_family_names example_family_names
-#' @param path_molecules path_molecules
-#' @param path_classes path_classes
-#' @param path_ethnobotanical path_ethnobotanical
-#' @param export_tree_full export_tree_full
-#' @param export_tree_phyto export_tree_phyto
-#' @param export_tree_phyto_sub export_tree_phyto_sub
-#' @param export_table_classified export_table_classified
-#' @param export_table_counts export_table_counts
-#' @param export_table_counts_sub export_table_counts_sub
-#' @param local_cache local_cache
-#' @param log_dir log_dir
+#' @param taxon_name Character. Name of the taxon of interest.
+#' @param n_multiple_genera Integer. Minimum number of genera for filtering.
+#' @param n_ethnobotanical_count_min Integer. Minimum ethnobotanical count for filtering.
+#' @param n_compounds_count_min Integer. Minimum compound count for filtering.
+#' @param example_family_names Character vector. Example family names for comparison.
+#' @param path_molecules Character or NULL. Path to local molecules file.
+#' @param path_classes Character or NULL. Path to local classes file.
+#' @param path_ethnobotanical Character or NULL. Path to local ethnobotanical file.
+#' @param export_tree_full, export_tree_phyto, export_tree_phyto_sub, export_table_classified, export_table_counts, export_table_counts_sub Character or NULL. Paths for exporting results.
+#' @param local_cache Logical. Whether to use local cache.
+#' @param log_dir Character. Directory for log files.
 #'
-#' @return Plenty of cool objects
+#' @return List of summary objects and/or writes output files as side effects. See code for details.
 #'
-#' @examples NULL
+#' @details
+#' This function is a pipeline for data collection, merging, and reporting. It logs progress and statistics throughout. All side effects (file writes, logs) are documented inline.
+#'
+#' @examples
+#' NULL
 ethnobotafever_tree <- function(
-    taxon_name,
-    n_multiple_genera,
-    n_ethnobotanical_count_min,
-    n_compounds_count_min,
-    example_family_names,
-    path_molecules,
-    path_classes,
-    path_ethnobotanical,
-    export_tree_full,
-    export_tree_phyto,
-    export_tree_phyto_sub,
-    export_table_classified,
-    export_table_counts,
-    export_table_counts_sub,
-    local_cache,
-    log_dir) {
+  taxon_name,
+  n_multiple_genera,
+  n_ethnobotanical_count_min,
+  n_compounds_count_min,
+  example_family_names,
+  path_molecules,
+  path_classes,
+  path_ethnobotanical,
+  export_tree_full,
+  export_tree_phyto,
+  export_tree_phyto_sub,
+  export_table_classified,
+  export_table_counts,
+  export_table_counts_sub,
+  local_cache,
+  log_dir
+) {
+  # Set up logging
   log_file <- paste0(log_dir, taxon_name, "_log.txt")
-  file.remove(log_file)
-  logger::log_appender(
-    appender = logger::appender_tee(
-      file = log_file
-    )
-  )
+  if (file.exists(log_file)) {
+    file.remove(log_file)
+  }
+  logger::log_appender(appender = logger::appender_tee(file = log_file))
 
+  # Helper: log and count unique taxa
+  log_unique_taxa <- function(df, label) {
+    logger::log_info(
+      "We found ",
+      df |> tidytable::distinct(taxon) |> nrow(),
+      paste0(" ", taxon_name, " ", label)
+    )
+  }
+
+  # Retrieve ethnobotanical data from Wikidata
   table_ethnobotanical_wd <- taxon_qid |>
     get_uses_wd() |>
     tidytable::distinct(taxon, taxon_id_ott) |>
     tidytable::mutate(ethnobotanical = TRUE)
-  logger::log_info(
-    "We found ",
-    table_ethnobotanical_wd |>
-      tidytable::distinct(taxon) |>
-      nrow(),
-    paste0(" ", taxon_name, " subtaxa with ethnobotanical use reported on Wikidata")
+  log_unique_taxa(
+    table_ethnobotanical_wd,
+    "subtaxa with ethnobotanical use reported on Wikidata"
   )
 
+  # Optionally merge with local ethnobotanical data
   if (!is.null(path_ethnobotanical)) {
-    table_ethnobotanical_local <- path_ethnobotanical |>
-      tidytable::fread() |>
-      tidytable::mutate(
-        taxon_id_ott = taxon_id_ott |>
-          as.character(),
-        ethnobotanical = TRUE
-      ) |>
-      tidytable::distinct()
-    logger::log_info(
-      "We found ",
-      table_ethnobotanical_local |>
-        tidytable::distinct(taxon) |>
-        nrow(),
-      paste0(" ", taxon_name, " subtaxa with ethnobotanical use reported locally")
+    table_ethnobotanical_local <- tryCatch(
+      {
+        tidytable::fread(path_ethnobotanical) |>
+          tidytable::mutate(
+            taxon_id_ott = as.character(taxon_id_ott),
+            ethnobotanical = TRUE
+          ) |>
+          tidytable::distinct()
+      },
+      error = function(e) {
+        stop("Failed to read local ethnobotanical file: ", e$message)
+      }
+    )
+    log_unique_taxa(
+      table_ethnobotanical_local,
+      "subtaxa with ethnobotanical use reported locally"
     )
     table_ethnobotanical_to_upload <- table_ethnobotanical_local |>
       tidytable::anti_join(table_ethnobotanical_wd)
@@ -101,12 +110,9 @@ ethnobotafever_tree <- function(
     )
     table_ethnobotanical <- table_ethnobotanical_wd |>
       tidytable::bind_rows(table_ethnobotanical_to_upload)
-    logger::log_info(
-      "We found ",
-      table_ethnobotanical |>
-        tidytable::distinct(taxon) |>
-        nrow(),
-      paste0(" ", taxon_name, " subtaxa with ethnobotanical use reported in total")
+    log_unique_taxa(
+      table_ethnobotanical,
+      "subtaxa with ethnobotanical use reported in total"
     )
   } else {
     table_ethnobotanical <- table_ethnobotanical_wd
@@ -237,7 +243,12 @@ ethnobotafever_tree <- function(
   if (!is.null(path_molecules)) {
     taxa_compounds_local <- path_molecules |>
       tidytable::fread() |>
-      tidytable::distinct(compound, compound_smiles_canonical, compound_inchikey, taxon)
+      tidytable::distinct(
+        compound,
+        compound_smiles_canonical,
+        compound_inchikey,
+        taxon
+      )
     logger::log_info(
       "We found ",
       taxa_compounds_local |>
@@ -273,7 +284,11 @@ ethnobotafever_tree <- function(
       taxa_compounds_tot |>
         tidytable::distinct(taxon) |>
         nrow(),
-      paste0(" ", taxon_name, " subtaxa with ethnobotanical use reported in total")
+      paste0(
+        " ",
+        taxon_name,
+        " subtaxa with ethnobotanical use reported in total"
+      )
     )
   }
 
@@ -512,8 +527,10 @@ ethnobotafever_tree <- function(
   )
 
   taxa_known <- taxa_ethno_counted |>
-    tidytable::filter(ethnobotanical_count >= n_ethnobotanical_count_min |
-      compounds_count >= n_compounds_count_min) |>
+    tidytable::filter(
+      ethnobotanical_count >= n_ethnobotanical_count_min |
+        compounds_count >= n_compounds_count_min
+    ) |>
     tidytable::select(-compounds_count) |>
     tidytable::inner_join(
       taxa_spe_ott_cpd |>

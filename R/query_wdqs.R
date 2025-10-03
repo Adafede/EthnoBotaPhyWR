@@ -1,23 +1,42 @@
-#' @title Query WDQS
+#' @title Query WDQS (Wikidata Query Service)
 #'
-#' @description This function performs a SPARQL query against WDQS (Wikidata
-#'              Query Service) or another endpoint.
+#' @description
+#' Performs a SPARQL query against the Wikidata Query Service (WDQS) or another compatible endpoint, returning results as a tidytable. Handles datetime conversion and optional URL prefix removal.
 #'
-#' @param query A SPARQL query
-#' @param remove_url Remove URL? Boolean
-#' @param endpoint The endpoint used. Is prefixes are given, can use Qlever.
-#' @param agent Agent to be polite
-#' @param headers Call headers
+#' @param query Character. SPARQL query string.
+#' @param remove_url Logical. If TRUE, removes 'http://www.wikidata.org/entity/' prefix from character columns.
+#' @param endpoint Character. SPARQL endpoint URL.
+#' @param agent Character. User agent string for polite querying.
+#' @param headers Character. HTTP Accept header for the request.
 #'
-#' @return A dataframe containing the results of the query
+#' @return A tidytable::tidytable data frame containing the results of the query.
 #'
-#' @examples NULL
+#' @examples
+#' NULL
 query_wdqs <- function(
     query,
     remove_url = TRUE,
     endpoint = "https://query.wikidata.org/sparql",
     agent = "https://github.com/bearloga/WikidataQueryServiceR",
     headers = "application/sparql-results+json") {
+  # Input validation
+  if (!is.character(query) || length(query) != 1) {
+    stop("query must be a single character string (SPARQL query)")
+  }
+  if (!is.logical(remove_url) || length(remove_url) != 1) {
+    stop("remove_url must be a single logical value")
+  }
+  if (!is.character(endpoint) || length(endpoint) != 1) {
+    stop("endpoint must be a single character string (URL)")
+  }
+  if (!is.character(agent) || length(agent) != 1) {
+    stop("agent must be a single character string")
+  }
+  if (!is.character(headers) || length(headers) != 1) {
+    stop("headers must be a single character string")
+  }
+
+  # Perform HTTP request and parse JSON response
   temp <- httr2::request(endpoint) |>
     httr2::req_url_query(query = query) |>
     httr2::req_user_agent(string = agent) |>
@@ -25,6 +44,7 @@ query_wdqs <- function(
     httr2::req_perform() |>
     httr2::resp_body_json()
 
+  # Handle empty result set
   if (length(temp$results$bindings) == 0) {
     return(tidytable::tidytable(matrix(
       character(),
@@ -34,18 +54,17 @@ query_wdqs <- function(
     )))
   }
 
+  # Parse bindings into a character matrix
   bindings <- temp$results$bindings
   n_rows <- length(bindings)
   col_names <- temp$head$vars
   n_cols <- length(col_names)
-
   result_matrix <- matrix(
     character(n_rows * n_cols),
     nrow = n_rows,
     ncol = n_cols,
     dimnames = list(NULL, col_names)
   )
-
   for (j in seq_len(n_cols)) {
     col_name <- col_names[[j]]
     for (i in seq_len(n_rows)) {
@@ -55,23 +74,23 @@ query_wdqs <- function(
       }
     }
   }
-
   df <- result_matrix |>
     tidytable::as_tidytable()
 
+  # Convert datetime columns if present
   if (n_rows > 0) {
     first_binding <- bindings[[1]]
     datetime_cols <- character(0)
-
     for (col_name in col_names) {
       binding <- first_binding[[col_name]]
-      if (!is.null(binding) && !is.null(binding$datatype) &&
-        binding$datatype == "http://www.w3.org/2001/XMLSchema#dateTime") {
+      if (
+        !is.null(binding) &&
+          !is.null(binding$datatype) &&
+          binding$datatype == "http://www.w3.org/2001/XMLSchema#dateTime"
+      ) {
         datetime_cols <- c(datetime_cols, col_name)
       }
     }
-
-    # Convert datetime columns if any exist
     if (length(datetime_cols) > 0) {
       df <- df |>
         tidytable::mutate(
@@ -84,6 +103,7 @@ query_wdqs <- function(
         )
     }
   }
+  # Optionally remove Wikidata entity URL prefix
   if (remove_url) {
     char_cols <- sapply(df, is.character)
     if (any(char_cols)) {

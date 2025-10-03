@@ -2,7 +2,7 @@
 % Please edit documentation in R/query_wdqs.R
 \name{query_wdqs}
 \alias{query_wdqs}
-\title{Query WDQS}
+\title{Query WDQS (Wikidata Query Service)}
 \usage{
 query_wdqs(
   query,
@@ -13,22 +13,21 @@ query_wdqs(
 )
 }
 \arguments{
-\item{query}{A SPARQL query}
+\item{query}{Character. SPARQL query string.}
 
-\item{remove_url}{Remove URL? Boolean}
+\item{remove_url}{Logical. If TRUE, removes 'http://www.wikidata.org/entity/' prefix from character columns.}
 
-\item{endpoint}{The endpoint used. Is prefixes are given, can use Qlever.}
+\item{endpoint}{Character. SPARQL endpoint URL.}
 
-\item{agent}{Agent to be polite}
+\item{agent}{Character. User agent string for polite querying.}
 
-\item{headers}{Call headers}
+\item{headers}{Character. HTTP Accept header for the request.}
 }
 \value{
-A dataframe containing the results of the query
+A tidytable::tidytable data frame containing the results of the query.
 }
 \description{
-This function performs a SPARQL query against WDQS (Wikidata
-Query Service) or another endpoint.
+Performs a SPARQL query against the Wikidata Query Service (WDQS) or another compatible endpoint, returning results as a tidytable. Handles datetime conversion and optional URL prefix removal.
 }
 \examples{
 NULL

@@ -2,19 +2,19 @@
 % Please edit documentation in R/get_results_wd.R
 \name{get_ott_ids_wd}
 \alias{get_ott_ids_wd}
-\title{Get OTT IDs WD}
+\title{Get OTT IDs from Wikidata}
 \usage{
 get_ott_ids_wd(taxon_qid)
 }
 \arguments{
-\item{taxon_qid}{A taxon QID}
+\item{taxon_qid}{Character. Wikidata QID of the taxon.}
 }
 \value{
-A dataframe containing the results of the query
+A data.frame with columns: taxon, taxon_id_ott.
 }
 \description{
-This function gets OTT IDs from Wikidata.
+Retrieves Open Tree of Life (OTT) IDs for all subtaxa of a given taxon QID from Wikidata.
 }
 \examples{
-NULL
+# get_ott_ids_wd("Q25308")
 }

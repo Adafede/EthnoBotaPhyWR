@@ -7,17 +7,17 @@
 get_trees(ott_ids, df_counted, taxon_name)
 }
 \arguments{
-\item{ott_ids}{ott_ids}
+\item{ott_ids}{Integer vector. OTT IDs to include in the tree.}
 
-\item{df_counted}{df_counted}
+\item{df_counted}{Data.frame. Must contain columns 'taxon_id_ott', 'compounds_count', and 'ethnobotanical_count'.}
 
-\item{taxon_name}{taxon_name}
+\item{taxon_name}{Character. Name of the taxon for filtering.}
 }
 \value{
-Trees
+List with elements: taxa_not_in_tree (data.frame), tree_taxa_full (phylo), tree_taxa_phyto (phylo).
 }
 \description{
-This function gets trees.
+Builds phylogenetic trees for a set of Open Tree of Life (OTT) IDs, using rotl and tidytable. Returns a list with taxa not in the tree, the full tree, and a tree for taxa with compounds.
 }
 \examples{
 NULL

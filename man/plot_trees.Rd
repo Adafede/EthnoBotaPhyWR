@@ -19,34 +19,30 @@ plot_trees(
 )
 }
 \arguments{
-\item{taxa_not_in_tree}{taxa_not_in_tree}
+\item{taxa_not_in_tree}{Data.frame. Taxa not present in the tree.}
 
-\item{tree_taxa_full}{tree_taxa_full}
+\item{tree_taxa_full}{phylo. Full tree object.}
 
-\item{tree_taxa_phyto}{tree_taxa_phyto}
+\item{tree_taxa_phyto}{phylo. Tree for taxa with compounds.}
 
-\item{df_counted}{df_counted}
+\item{df_counted}{Data.frame. Must contain 'taxon_name', 'species_count', 'ethnobotanical_count', etc.}
 
-\item{df_classes}{df_classes}
+\item{df_classes}{Data.frame. Class/color information for taxa.}
 
-\item{offset}{offset}
+\item{offset}{Numeric. Offset for tip labels.}
 
-\item{adjust_point}{adjust_point}
+\item{adjust_point, }{adjust_text, adjust_margin Numeric. Plot adjustments.}
 
-\item{adjust_text}{adjust_text}
+\item{genus}{Logical. If TRUE, format tip labels as genus only.}
 
-\item{adjust_margin}{adjust_margin}
-
-\item{genus}{genus}
-
-\item{drop}{drop}
+\item{drop}{Logical. If TRUE, drop tips not in df_counted.}
 }
 \value{
-Trees
+List of ggplot2/ggtree plot objects and data used for plotting.
 }
 \description{
-This function plots trees.
+Plots phylogenetic trees with overlays for ethnobotanical and phytochemical data. Handles label formatting, tip dropping, and custom color/size mappings.
 }
 \examples{
-NULL
+# plot_trees(...)
 }

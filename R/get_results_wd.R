@@ -1,15 +1,19 @@
-#' @title Get subtaxa WD
+#' @title Get subtaxa from Wikidata
 #'
-#' @description This function gets subtaxa from Wikidata.
+#' @description
+#' Retrieves all subtaxa for a given taxon QID from Wikidata using a SPARQL query.
 #'
-#' @include query_wdqs.R
+#' @param taxon_qid Character. Wikidata QID of the taxon.
 #'
-#' @param taxon_qid A taxon QID
+#' @return A data.frame with columns: taxon, taxon_name, taxon_rank.
 #'
-#' @return A dataframe containing the results of the query
-#'
-#' @examples NULL
+#' @examples
+#' # get_subtaxa_wd("Q25308")
 get_subtaxa_wd <- function(taxon_qid) {
+  if (!is.character(taxon_qid) || length(taxon_qid) != 1) {
+    stop("taxon_qid must be a single character string (Wikidata QID)")
+  }
+  # SPARQL query to get all subtaxa, their names, and ranks
   query_wdqs(
     endpoint = "https://qlever.cs.uni-freiburg.de/api/wikidata",
     query = paste0(
@@ -28,18 +32,22 @@ get_subtaxa_wd <- function(taxon_qid) {
   )
 }
 
-#' @title Get OTT IDs WD
+#' @title Get OTT IDs from Wikidata
 #'
-#' @description This function gets OTT IDs from Wikidata.
+#' @description
+#' Retrieves Open Tree of Life (OTT) IDs for all subtaxa of a given taxon QID from Wikidata.
 #'
-#' @include query_wdqs.R
+#' @param taxon_qid Character. Wikidata QID of the taxon.
 #'
-#' @param taxon_qid A taxon QID
+#' @return A data.frame with columns: taxon, taxon_id_ott.
 #'
-#' @return A dataframe containing the results of the query
-#'
-#' @examples NULL
+#' @examples
+#' # get_ott_ids_wd("Q25308")
 get_ott_ids_wd <- function(taxon_qid) {
+  if (!is.character(taxon_qid) || length(taxon_qid) != 1) {
+    stop("taxon_qid must be a single character string (Wikidata QID)")
+  }
+  # SPARQL query to get all subtaxa and their OTT IDs
   query_wdqs(
     endpoint = "https://qlever.cs.uni-freiburg.de/api/wikidata",
     query = paste0(
@@ -57,18 +65,22 @@ get_ott_ids_wd <- function(taxon_qid) {
   )
 }
 
-#' @title Get compounds WD
+#' @title Get compounds from Wikidata
 #'
-#' @description This function gets compounds from Wikidata.
+#' @description
+#' Retrieves all compounds associated with a given taxon QID from Wikidata.
 #'
-#' @include query_wdqs.R
+#' @param taxon_qid Character. Wikidata QID of the taxon.
 #'
-#' @param taxon_qid A taxon QID
+#' @return A data.frame with columns: compound, compound_smiles_canonical, compound_inchikey, taxon.
 #'
-#' @return A dataframe containing the results of the query
-#'
-#' @examples NULL
+#' @examples
+#' # get_compounds_wd("Q25308")
 get_compounds_wd <- function(taxon_qid) {
+  if (!is.character(taxon_qid) || length(taxon_qid) != 1) {
+    stop("taxon_qid must be a single character string (Wikidata QID)")
+  }
+  # SPARQL query to get all compounds, their SMILES, and InChIKey for the taxon
   query_wdqs(
     endpoint = "https://qlever.cs.uni-freiburg.de/api/wikidata",
     query = paste0(

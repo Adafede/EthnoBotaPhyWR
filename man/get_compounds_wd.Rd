@@ -2,19 +2,19 @@
 % Please edit documentation in R/get_results_wd.R
 \name{get_compounds_wd}
 \alias{get_compounds_wd}
-\title{Get compounds WD}
+\title{Get compounds from Wikidata}
 \usage{
 get_compounds_wd(taxon_qid)
 }
 \arguments{
-\item{taxon_qid}{A taxon QID}
+\item{taxon_qid}{Character. Wikidata QID of the taxon.}
 }
 \value{
-A dataframe containing the results of the query
+A data.frame with columns: compound, compound_smiles_canonical, compound_inchikey, taxon.
 }
 \description{
-This function gets compounds from Wikidata.
+Retrieves all compounds associated with a given taxon QID from Wikidata.
 }
 \examples{
-NULL
+# get_compounds_wd("Q25308")
 }

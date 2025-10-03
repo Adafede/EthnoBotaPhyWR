@@ -7,14 +7,17 @@
 get_npclassifier_taxonomy(smiles)
 }
 \arguments{
-\item{smiles}{A (list of) SMILES}
+\item{smiles}{Character vector or list. SMILES strings to classify.}
 }
 \value{
-A tibble of npclassified SMILES
+A tibble with columns: query, pathway, superclass, class, glycoside.
 }
 \description{
-This function classifies (list of) SMILES using NPClassifier API
+Classifies a vector or list of SMILES strings using the NPClassifier API. Returns a tibble with classification results for each SMILES.
+}
+\details{
+For each SMILES, this function queries the NPClassifier API and parses the result. If the API call fails, NA values are returned for that entry.
 }
 \examples{
-NULL
+# get_npclassifier_taxonomy(c("CCO", "CCN"))
 }

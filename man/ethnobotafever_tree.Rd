@@ -24,44 +24,36 @@ ethnobotafever_tree(
 )
 }
 \arguments{
-\item{taxon_name}{taxon_name}
+\item{taxon_name}{Character. Name of the taxon of interest.}
 
-\item{n_multiple_genera}{n_multiple_genera}
+\item{n_multiple_genera}{Integer. Minimum number of genera for filtering.}
 
-\item{n_ethnobotanical_count_min}{n_ethnobotanical_count_min}
+\item{n_ethnobotanical_count_min}{Integer. Minimum ethnobotanical count for filtering.}
 
-\item{n_compounds_count_min}{n_compounds_count_min}
+\item{n_compounds_count_min}{Integer. Minimum compound count for filtering.}
 
-\item{example_family_names}{example_family_names}
+\item{example_family_names}{Character vector. Example family names for comparison.}
 
-\item{path_molecules}{path_molecules}
+\item{path_molecules}{Character or NULL. Path to local molecules file.}
 
-\item{path_classes}{path_classes}
+\item{path_classes}{Character or NULL. Path to local classes file.}
 
-\item{path_ethnobotanical}{path_ethnobotanical}
+\item{path_ethnobotanical}{Character or NULL. Path to local ethnobotanical file.}
 
-\item{export_tree_full}{export_tree_full}
+\item{export_tree_full, }{export_tree_phyto, export_tree_phyto_sub, export_table_classified, export_table_counts, export_table_counts_sub Character or NULL. Paths for exporting results.}
 
-\item{export_tree_phyto}{export_tree_phyto}
+\item{local_cache}{Logical. Whether to use local cache.}
 
-\item{export_tree_phyto_sub}{export_tree_phyto_sub}
-
-\item{export_table_classified}{export_table_classified}
-
-\item{export_table_counts}{export_table_counts}
-
-\item{export_table_counts_sub}{export_table_counts_sub}
-
-\item{local_cache}{local_cache}
-
-\item{log_dir}{log_dir}
+\item{log_dir}{Character. Directory for log files.}
 }
 \value{
-Plenty of cool objects
+List of summary objects and/or writes output files as side effects. See code for details.
 }
 \description{
-This function collects and plots ethnobotanical and
-phytochemical data.
+Collects and plots ethnobotanical and phytochemical data for a given taxon. This function performs data retrieval, merging, and logging, and produces summary statistics and outputs for downstream analysis and visualization.
+}
+\details{
+This function is a pipeline for data collection, merging, and reporting. It logs progress and statistics throughout. All side effects (file writes, logs) are documented inline.
 }
 \examples{
 NULL

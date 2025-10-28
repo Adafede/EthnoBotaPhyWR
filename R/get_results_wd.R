@@ -15,7 +15,7 @@ get_subtaxa_wd <- function(taxon_qid) {
   }
   # SPARQL query to get all subtaxa, their names, and ranks
   query_wdqs(
-    endpoint = "https://qlever.cs.uni-freiburg.de/api/wikidata",
+    endpoint = "https://qlever.dev/api/wikidata",
     query = paste0(
       "
   PREFIX wd: <http://www.wikidata.org/entity/>
@@ -49,7 +49,7 @@ get_ott_ids_wd <- function(taxon_qid) {
   }
   # SPARQL query to get all subtaxa and their OTT IDs
   query_wdqs(
-    endpoint = "https://qlever.cs.uni-freiburg.de/api/wikidata",
+    endpoint = "https://qlever.dev/api/wikidata",
     query = paste0(
       "
   PREFIX wd: <http://www.wikidata.org/entity/>
@@ -82,7 +82,7 @@ get_compounds_wd <- function(taxon_qid) {
   }
   # SPARQL query to get all compounds, their SMILES, and InChIKey for the taxon
   query_wdqs(
-    endpoint = "https://qlever.cs.uni-freiburg.de/api/wikidata",
+    endpoint = "https://qlever.dev/api/wikidata",
     query = paste0(
       "
   PREFIX wd: <http://www.wikidata.org/entity/>
@@ -113,7 +113,7 @@ get_compounds_wd <- function(taxon_qid) {
 #' @examples NULL
 get_uses_wd <- function(taxon_qid) {
   query_wdqs(
-    endpoint = "https://qlever.cs.uni-freiburg.de/api/wikidata",
+    endpoint = "https://qlever.dev/api/wikidata",
     query = paste0(
       "
   PREFIX p: <http://www.wikidata.org/prop/>
@@ -145,7 +145,7 @@ get_uses_wd <- function(taxon_qid) {
 #' @examples NULL
 get_lotus_wd <- function() {
   query_wdqs(
-    endpoint = "https://qlever.cs.uni-freiburg.de/api/wikidata",
+    endpoint = "https://qlever.dev/api/wikidata",
     query = paste0(
       "
   PREFIX wdt: <http://www.wikidata.org/prop/direct/>

@@ -9,7 +9,8 @@ query_wdqs(
   remove_url = TRUE,
   endpoint = "https://query.wikidata.org/sparql",
   agent = "https://github.com/bearloga/WikidataQueryServiceR",
-  headers = "application/sparql-results+json"
+  headers = "application/sparql-results+json",
+  fallback = TRUE
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ query_wdqs(
 \item{agent}{Character. User agent string for polite querying.}
 
 \item{headers}{Character. HTTP Accept header for the request.}
+
+\item{fallback}{Logical. If TRUE, retries with qlever.dev endpoint on failure.}
 }
 \value{
 A tidytable::tidytable data frame containing the results of the query.

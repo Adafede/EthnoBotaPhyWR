@@ -14,7 +14,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.5.1 (2025-06-13)",
+  "runtimePlatform": "R version 4.5.2 (2025-10-31)",
   "author": [
     {
       "@type": "Person",
@@ -64,7 +64,7 @@
       "@type": "SoftwareApplication",
       "identifier": "BiocVersion",
       "name": "BiocVersion",
-      "version": ">= 3.20.0",
+      "version": ">= 3.21.1",
       "provider": {
         "@id": "https://www.bioconductor.org",
         "@type": "Organization",
@@ -241,7 +241,7 @@
       "@type": "SoftwareApplication",
       "identifier": "ggtree",
       "name": "ggtree",
-      "version": ">= 3.14.0",
+      "version": ">= 3.16.3",
       "provider": {
         "@id": "https://www.bioconductor.org",
         "@type": "Organization",
@@ -254,7 +254,7 @@
       "@type": "SoftwareApplication",
       "identifier": "ggtreeExtra",
       "name": "ggtreeExtra",
-      "version": ">= 1.16.0",
+      "version": ">= 1.18.1",
       "provider": {
         "@id": "https://www.bioconductor.org",
         "@type": "Organization",

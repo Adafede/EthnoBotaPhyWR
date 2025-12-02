@@ -1,1 +1,4 @@
 ^codemeta\.json$
+^[.]?air[.]toml$
+^\.vscode$
+^\.github$

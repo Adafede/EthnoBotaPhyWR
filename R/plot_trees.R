@@ -104,7 +104,7 @@ plot_trees <- function(
     tree_data +
     khroma::scale_color_batlow(
       name = "Known ethnobotanical species",
-      na.value = "grey80",
+      na.value = "#767676",
       labels = scales::label_math()
     ) +
     ggtree::geom_tiplab(size = ggplot2::rel(1), offset = ggplot2::rel(0.6)) +
@@ -115,10 +115,10 @@ plot_trees <- function(
     ) +
     ggplot2::scale_size(name = "Known species", labels = scales::label_math()) +
     ggplot2::theme(
-      legend.text = ggplot2::element_text(colour = "grey30"),
+      legend.text = ggplot2::element_text(colour = "#767676"),
       legend.position = "left",
-      plot.caption = ggtext::element_markdown(color = "grey30"),
-      text = ggplot2::element_text(face = "bold", color = "grey30")
+      plot.caption = ggtext::element_markdown(color = "#767676"),
+      text = ggplot2::element_text(face = "bold", color = "#767676")
     )
   zzz <- tree_taxa_full$tip.label |>
     unique()
@@ -167,7 +167,7 @@ plot_trees <- function(
     tree_data_phyto +
     khroma::scale_color_batlow(
       name = "Known ethnobotanical species",
-      na.value = "grey80",
+      na.value = "#767676",
       labels = scales::label_math()
     ) +
     ggtree::geom_tiplab(offset = ggplot2::rel(offset)) +
@@ -183,9 +183,9 @@ plot_trees <- function(
     ) +
     ggplot2::theme(
       legend.position = "left",
-      legend.text = ggplot2::element_text(colour = "grey30"),
-      plot.caption = ggtext::element_markdown(color = "grey30"),
-      text = ggplot2::element_text(face = "bold", color = "grey30")
+      legend.text = ggplot2::element_text(colour = "#767676"),
+      plot.caption = ggtext::element_markdown(color = "#767676"),
+      text = ggplot2::element_text(face = "bold", color = "#767676")
     )
   taxa_classes_phyto <- df_classes |>
     tidytable::filter(!is.na(ids)) |>
@@ -263,7 +263,7 @@ plot_trees <- function(
       ) +
       khroma::scale_color_batlow(
         name = "Known ethnobotanical species",
-        na.value = "grey80",
+        na.value = "#767676",
         labels = scales::label_math()
       ) +
       ggplot2::scale_x_continuous(n.breaks = 4L) +
@@ -276,15 +276,15 @@ plot_trees <- function(
         axis.text.y = ggplot2::element_blank(),
         axis.title = ggplot2::element_blank(),
         legend.position = "left",
-        legend.text = ggplot2::element_text(colour = "grey30"),
-        plot.caption = ggtext::element_markdown(color = "grey30"),
+        legend.text = ggplot2::element_text(colour = "#767676"),
+        plot.caption = ggtext::element_markdown(color = "#767676"),
         plot.margin = ggplot2::margin(
           t = 0,
           r = 10,
           b = 10,
           l = adjust_margin
         ),
-        text = ggplot2::element_text(face = "bold", color = "grey30")
+        text = ggplot2::element_text(face = "bold", color = "#767676")
       )
   } else {
     plot_orphan_taxa <- ggplot2::ggplot() +

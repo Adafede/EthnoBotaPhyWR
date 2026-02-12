@@ -14,9 +14,9 @@ get_subtaxa_wd <- function(taxon_qid) {
     stop("taxon_qid must be a single character string (Wikidata QID)")
   }
   # SPARQL query to get all subtaxa, their names, and ranks
-  query_wdqs(
+  cascade::query_wikidata(
     endpoint = "https://qlever.dev/api/wikidata",
-    query = paste0(
+    sparql_query = paste0(
       "
   PREFIX wd: <http://www.wikidata.org/entity/>
   PREFIX wdt: <http://www.wikidata.org/prop/direct/>
@@ -48,9 +48,9 @@ get_ott_ids_wd <- function(taxon_qid) {
     stop("taxon_qid must be a single character string (Wikidata QID)")
   }
   # SPARQL query to get all subtaxa and their OTT IDs
-  query_wdqs(
+  cascade::query_wikidata(
     endpoint = "https://qlever.dev/api/wikidata",
-    query = paste0(
+    sparql_query = paste0(
       "
   PREFIX wd: <http://www.wikidata.org/entity/>
   PREFIX wdt: <http://www.wikidata.org/prop/direct/>
@@ -81,9 +81,9 @@ get_compounds_wd <- function(taxon_qid) {
     stop("taxon_qid must be a single character string (Wikidata QID)")
   }
   # SPARQL query to get all compounds, their SMILES, and InChIKey for the taxon
-  query_wdqs(
+  cascade::query_wikidata(
     endpoint = "https://qlever.dev/api/wikidata",
-    query = paste0(
+    sparql_query = paste0(
       "
   PREFIX wd: <http://www.wikidata.org/entity/>
   PREFIX wdt: <http://www.wikidata.org/prop/direct/>
@@ -104,17 +104,15 @@ get_compounds_wd <- function(taxon_qid) {
 #'
 #' @description This function gets uses from Wikidata.
 #'
-#' @include query_wdqs.R
-#'
 #' @param taxon_qid A taxon QID
 #'
 #' @return A dataframe containing the results of the query
 #'
 #' @examples NULL
 get_uses_wd <- function(taxon_qid) {
-  query_wdqs(
+  cascade::query_wikidata(
     endpoint = "https://qlever.dev/api/wikidata",
-    query = paste0(
+    sparql_query = paste0(
       "
   PREFIX p: <http://www.wikidata.org/prop/>
   PREFIX ps: <http://www.wikidata.org/prop/statement/>
@@ -137,16 +135,14 @@ get_uses_wd <- function(taxon_qid) {
 #' @title Get LOTUS WD
 #'
 #' @description This function gets LOTUS from Wikidata.
-#'
-#' @include query_wdqs.R
-#'
+#' 
 #' @return A dataframe containing the results of the query
 #'
 #' @examples NULL
 get_lotus_wd <- function() {
-  query_wdqs(
+  cascade::query_wikidata(
     endpoint = "https://qlever.dev/api/wikidata",
-    query = paste0(
+    sparql_query = paste0(
       "
   PREFIX wdt: <http://www.wikidata.org/prop/direct/>
   SELECT DISTINCT ?compound ?compound_smiles_canonical ?compound_inchikey ?taxon WHERE {

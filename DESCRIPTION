@@ -39,8 +39,7 @@ Imports:
     stringi (>= 1.8.7),
     tibble (>= 3.3.0),
     tidytable (>= 0.11.2),
-    utils,
-    WikidataQueryServiceR (>= 1.0.0)
+    utils
 Remotes:
     adafede/cascade
 Suggests:
@@ -64,7 +63,6 @@ Collate:
     'calculate_branches_values.R'
     'plot_trees.R'
     'get_trees.R'
-    'query_wdqs.R'
     'get_results_wd.R'
     'get_npclassifier_taxonomy.R'
     'ethnobotafever_tree.R'

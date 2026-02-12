@@ -68,39 +68,38 @@ the major steps detailed.
 | Package | Version | Citation |
 |:---|:---|:---|
 | ape | 5.8.1 | Paradis and Schliep (2019) |
-| base | 4.5.1 | R Core Team (2025) |
-| BiocManager | 1.30.26 | Morgan and Ramos (2025) |
+| base | 4.5.2 | R Core Team (2025) |
+| BiocManager | 1.30.27 | Morgan and Ramos (2025) |
 | BiocVersion | 3.22.0 | Morgan (2025) |
 | cachem | 1.1.0 | Chang (2024) |
 | cascade | 0.0.0.9001 | Rutz and Wolfender (2023); Rutz (2025a) |
 | EthnoBotaPhyWR | 0.0.0.9000 | Rutz (2025b) |
-| ggpubr | 0.6.1 | Kassambara (2025) |
+| ggpubr | 0.6.2 | Kassambara (2025) |
 | ggtext | 0.1.2 | Wilke and Wiernik (2022) |
-| ggtree | 3.17.1 | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022) |
-| ggtreeExtra | 1.19.0 | Xu et al. (2021); Yu (2022b) |
-| gt | 1.1.0 | Iannone et al. (2025) |
-| httr2 | 1.2.1 | Wickham (2025) |
-| khroma | 1.16.0 | Frerebeau (2025) |
-| knitr | 1.50 | Xie (2014); Xie (2015); Xie (2025) |
+| ggtree | 4.0.3 | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022) |
+| ggtreeExtra | 1.20.0 | Xu et al. (2021); Yu (2022b) |
+| gt | 1.3.0 | Iannone et al. (2026) |
+| httr2 | 1.2.2 | Wickham (2025) |
+| khroma | 1.17.0 | Frerebeau (2025) |
+| knitr | 1.51 | Xie (2014); Xie (2015); Xie (2025) |
 | logger | 0.4.1 | Daróczi and Wickham (2025) |
 | memoise | 2.0.1 | Wickham et al. (2021) |
 | phangorn | 2.12.1 | Schliep (2011); Schliep et al. (2017) |
 | R.utils | 2.13.0 | Bengtsson (2025) |
-| rmarkdown | 2.29 | Xie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2024) |
-| rotl | 3.1.0 | Michonneau, Brown, and Winter (2016); OpenTreeOfLife et al. (2019) |
+| rmarkdown | 2.30 | Xie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2025) |
+| rotl | 3.1.1 | Michonneau, Brown, and Winter (2016); OpenTreeOfLife et al. (2019) |
 | scales | 1.4.0 | Wickham, Pedersen, and Seidel (2025) |
 | stringi | 1.8.7 | Gagolewski (2022) |
 | tidytable | 0.11.2 | Fairbanks (2024) |
 | tidyverse | 2.0.0 | Wickham et al. (2019) |
-| WikidataQueryServiceR | 1.0.0 | Popov (2020) |
 
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0">
 
-<div id="ref-rmarkdown2024" class="csl-entry">
+<div id="ref-rmarkdown2025" class="csl-entry">
 
 Allaire, JJ, Yihui Xie, Christophe Dervieux, Jonathan McPherson, Javier
-Luraschi, Kevin Ushey, Aron Atkins, et al. 2024.
+Luraschi, Kevin Ushey, Aron Atkins, et al. 2025.
 *<span class="nocase">rmarkdown</span>: Dynamic Documents for r*.
 <https://github.com/rstudio/rmarkdown>.
 
@@ -155,10 +154,11 @@ Software* 103 (2): 1–59. <https://doi.org/10.18637/jss.v103.i02>.
 
 <div id="ref-gt" class="csl-entry">
 
-Iannone, Richard, Joe Cheng, Barret Schloerke, Ellis Hughes, Alexandra
-Lauer, JooYoung Seo, Ken Brevoort, and Olivier Roy. 2025.
-*<span class="nocase">gt</span>: Easily Create Presentation-Ready
-Display Tables*. <https://doi.org/10.32614/CRAN.package.gt>.
+Iannone, Richard, Joe Cheng, Barret Schloerke, Shannon Haughton, Ellis
+Hughes, Alexandra Lauer, Romain François, JooYoung Seo, Ken Brevoort,
+and Olivier Roy. 2026. *<span class="nocase">gt</span>: Easily Create
+Presentation-Ready Display Tables*.
+<https://doi.org/10.32614/CRAN.package.gt>.
 
 </div>
 
@@ -208,14 +208,6 @@ Cranston, Jim Allman, Mark T. Holder, and Emily Jane McTavish. 2019.
 Paradis, Emmanuel, and Klaus Schliep. 2019. “Ape 5.0: An Environment for
 Modern Phylogenetics and Evolutionary Analyses in R.” *Bioinformatics*
 35: 526–28. <https://doi.org/10.1093/bioinformatics/bty633>.
-
-</div>
-
-<div id="ref-WikidataQueryServiceR" class="csl-entry">
-
-Popov, Mikhail. 2020. *WikidataQueryServiceR: API Client Library for
-“Wikidata Query Service”*.
-<https://doi.org/10.32614/CRAN.package.WikidataQueryServiceR>.
 
 </div>
 

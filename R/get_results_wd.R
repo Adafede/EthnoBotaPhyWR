@@ -135,7 +135,7 @@ get_uses_wd <- function(taxon_qid) {
 #' @title Get LOTUS WD
 #'
 #' @description This function gets LOTUS from Wikidata.
-#' 
+#'
 #' @return A dataframe containing the results of the query
 #'
 #' @examples NULL

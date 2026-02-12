@@ -38,7 +38,7 @@
       "@type": "SoftwareApplication",
       "identifier": "altdoc",
       "name": "altdoc",
-      "version": ">= 0.5.0",
+      "version": ">= 0.7.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -51,7 +51,7 @@
       "@type": "SoftwareApplication",
       "identifier": "BiocManager",
       "name": "BiocManager",
-      "version": ">= 1.30.25",
+      "version": ">= 1.30.26",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -64,7 +64,7 @@
       "@type": "SoftwareApplication",
       "identifier": "BiocVersion",
       "name": "BiocVersion",
-      "version": ">= 3.21.1",
+      "version": ">= 3.20.0",
       "provider": {
         "@id": "https://www.bioconductor.org",
         "@type": "Organization",
@@ -77,7 +77,7 @@
       "@type": "SoftwareApplication",
       "identifier": "grateful",
       "name": "grateful",
-      "version": ">= 0.2.12",
+      "version": ">= 0.3.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -103,7 +103,7 @@
       "@type": "SoftwareApplication",
       "identifier": "quarto",
       "name": "quarto",
-      "version": ">= 1.4.4",
+      "version": ">= 1.5.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -129,7 +129,7 @@
       "@type": "SoftwareApplication",
       "identifier": "spelling",
       "name": "spelling",
-      "version": ">= 2.3.1",
+      "version": ">= 2.3.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -267,7 +267,7 @@
       "@type": "SoftwareApplication",
       "identifier": "gt",
       "name": "gt",
-      "version": ">= 1.0.0",
+      "version": ">= 1.1.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -319,7 +319,7 @@
       "@type": "SoftwareApplication",
       "identifier": "logger",
       "name": "logger",
-      "version": ">= 0.4.0",
+      "version": ">= 0.4.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -358,7 +358,7 @@
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
-      "version": ">= 1.1.0",
+      "version": ">= 1.2.0",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -463,23 +463,10 @@
       "identifier": "utils",
       "name": "utils"
     },
-    "25": {
-      "@type": "SoftwareApplication",
-      "identifier": "WikidataQueryServiceR",
-      "name": "WikidataQueryServiceR",
-      "version": ">= 1.0.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=WikidataQueryServiceR"
-    },
     "SystemRequirements": null
   },
   "keywords": ["Ethnobotany", "Phytochemistry", "Taxonomy", "Wikidata", "ethnobotany", "phytochemistry", "r", "wikidata"],
-  "fileSize": "0KB",
+  "fileSize": "2791.365KB",
   "readme": "https://github.com/Adafede/EthnoBotaPhyWR/blob/main/README.md",
   "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental"
 }

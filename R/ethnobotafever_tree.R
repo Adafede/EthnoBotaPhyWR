@@ -577,7 +577,7 @@ ethnobotafever_tree <- function(
     tidytable::filter(
       !compound_inchikey |>
         is.na() |
-        ethnobotanical == TRUE
+        ethnobotanical
     ) |>
     tidytable::select(
       taxon = taxon.y,

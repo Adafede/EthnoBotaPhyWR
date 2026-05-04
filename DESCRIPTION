@@ -53,12 +53,7 @@ Suggests:
     spelling (>= 2.3.2),
     svglite (>= 2.2.2),
     testthat (>= 3.3.2)
-Config/testthat/edition: 3
-Encoding: UTF-8
-LazyData: true
-ByteCompile: true
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
+ByteCompile: TRUE
 Collate:
     'calculate_branches_values.R'
     'plot_trees.R'
@@ -66,8 +61,13 @@ Collate:
     'get_results_wd.R'
     'get_npclassifier_taxonomy.R'
     'ethnobotafever_tree.R'
+Config/roxygen2/markdown: TRUE
+Config/roxygen2/version: 8.0.0
+Config/testthat/edition: 3
+Encoding: UTF-8
+Language: en-US
+LazyData: TRUE
 VignetteBuilder: 
     quarto
 biocViews: Ethnobotany, Phytochemistry, Taxonomy, Wikidata
 X-schema.org-keywords: Ethnobotany, Phytochemistry, Taxonomy, Wikidata
-Language: en-US

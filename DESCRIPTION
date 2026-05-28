@@ -17,7 +17,7 @@ BugReports: https://github.com/adafede/EthnoBotaPhyWR/issues
 Depends:
     R (>= 4.5.0)
 Imports:
-    ape (>= 5.8-1),
+    ape (>= 5.8.1),
     cachem (>= 1.1.0),
     ggplot2 (>= 4.0.3),
     ggpubr (>= 0.6.3),
@@ -28,7 +28,7 @@ Imports:
     httr2 (>= 1.2.2),
     jsonlite (>= 2.0.0),
     khroma (>= 1.17.0),
-    logger (>= 0.4.1),
+    logger (>= 0.4.2),
     memoise (>= 2.0.1),
     phangorn (>= 2.12.1),
     purrr (>= 1.2.2),
@@ -50,7 +50,7 @@ Suggests:
     knitr (>= 1.51),
     quarto (>= 1.5.1),
     lifecycle (>= 1.0.5),
-    spelling (>= 2.3.2),
+    spelling,
     svglite (>= 2.2.2),
     testthat (>= 3.3.2)
 ByteCompile: TRUE

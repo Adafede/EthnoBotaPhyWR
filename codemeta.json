@@ -129,7 +129,6 @@
       "@type": "SoftwareApplication",
       "identifier": "spelling",
       "name": "spelling",
-      "version": ">= 2.3.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -176,7 +175,7 @@
       "@type": "SoftwareApplication",
       "identifier": "ape",
       "name": "ape",
-      "version": ">= 5.8-1",
+      "version": ">= 5.8.1",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -319,7 +318,7 @@
       "@type": "SoftwareApplication",
       "identifier": "logger",
       "name": "logger",
-      "version": ">= 0.4.1",
+      "version": ">= 0.4.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -465,8 +464,8 @@
     },
     "SystemRequirements": null
   },
-  "keywords": ["Ethnobotany", "Phytochemistry", "Taxonomy", "Wikidata", "ethnobotany", "phytochemistry", "r", "wikidata"],
-  "fileSize": "2790.844KB",
+  "keywords": ["Ethnobotany", "Phytochemistry", "Taxonomy", "Wikidata"],
+  "fileSize": "2792.153KB",
   "readme": "https://github.com/Adafede/EthnoBotaPhyWR/blob/main/README.md",
   "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental"
 }

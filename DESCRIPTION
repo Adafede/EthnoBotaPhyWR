@@ -19,6 +19,7 @@ Depends:
 Imports:
     ape (>= 5.8.1),
     cachem (>= 1.1.0),
+    cascade,
     ggplot2 (>= 4.0.3),
     ggpubr (>= 0.6.3),
     ggtext (>= 0.1.2),

@@ -67,29 +67,29 @@ calculate_branches_values <- function(tree, df, variable, name) {
   return(tree_data)
 }
 
-calculate_branches_values_optimized <- function(tree, df, variable, name) {
-  n_tips <- ape::Ntip(tree)
-  n_nodes <- ape::Nnode(tree)
-
-  node_values <- numeric(n_tips + n_nodes)
-
-  tip_indices <- match(df$taxon_name, tree$tip.label)
-  valid_tips <- !is.na(tip_indices)
-  node_values[tip_indices[valid_tips]] <- df[[variable]][valid_tips]
-
-  edge_matrix <- tree$edge
-  internal_nodes <- (n_tips + 1):(n_tips + n_nodes)
-
-  descendant_means <- internal_nodes |>
-    purrr::map(.f = function(node) {
-      descendants <- phangorn::Descendants(tree, node, type = "tips")[[1]]
-      mean(node_values[descendants], na.rm = TRUE)
-    })
-
-  node_values[internal_nodes] <- descendant_means
-
-  data.table(
-    node = seq_along(node_values),
-    !!name := node_values
-  )
-}
+# calculate_branches_values_optimized <- function(tree, df, variable, name) {
+#   n_tips <- ape::Ntip(tree)
+#   n_nodes <- ape::Nnode(tree)
+#
+#   node_values <- numeric(n_tips + n_nodes)
+#
+#   tip_indices <- match(df$taxon_name, tree$tip.label)
+#   valid_tips <- !is.na(tip_indices)
+#   node_values[tip_indices[valid_tips]] <- df[[variable]][valid_tips]
+#
+#   edge_matrix <- tree$edge
+#   internal_nodes <- (n_tips + 1):(n_tips + n_nodes)
+#
+#   descendant_means <- internal_nodes |>
+#     purrr::map(.f = function(node) {
+#       descendants <- phangorn::Descendants(tree, node, type = "tips")[[1]]
+#       mean(node_values[descendants], na.rm = TRUE)
+#     })
+#
+#   node_values[internal_nodes] <- descendant_means
+#
+#   data.table(
+#     node = seq_along(node_values),
+#     !!name := node_values
+#   )
+# }

@@ -26,6 +26,8 @@
 #' @details
 #' This function is a pipeline for data collection, merging, and reporting. It logs progress and statistics throughout. All side effects (file writes, logs) are documented inline.
 #'
+#' @export
+#'
 #' @examples
 #' NULL
 ethnobotafever_tree <- function(

@@ -166,7 +166,7 @@ results$df_taxa_known_sub |>
   gt::opt_interactive()
 ```
 
-Second, some tree-based visualizations: 
+Second, some tree-based visualizations:
 
 - A tree with genera as tips, displaying the taxa of the family, and if compounds or uses have been reported in @fig-1 (mainly to show the majority remains non-investigated)
 - A tree with genera as tips, displaying the taxa of the family for which compounds or uses have been reported in @fig-2 (mainly to make them easier to read)

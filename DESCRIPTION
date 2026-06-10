@@ -67,7 +67,7 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 LazyData: TRUE
-VignetteBuilder: 
+VignetteBuilder:
     quarto
 biocViews: Ethnobotany, Phytochemistry, Taxonomy, Wikidata
 X-schema.org-keywords: Ethnobotany, Phytochemistry, Taxonomy, Wikidata

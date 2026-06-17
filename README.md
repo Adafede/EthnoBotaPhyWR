@@ -1,5 +1,3 @@
-
-
 <!-- README.md is generated from README.qmd. Please edit that file -->
 
 # EthnoBotaPhyWR
@@ -14,9 +12,11 @@ Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 status](https://www.r-pkg.org/badges/version/tima.png)](https://CRAN.R-project.org/package=EthnoBotaPhyWR)
 <!-- badges: end -->
 
-**EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*,
-*Wikidata* and *R* <span class="smallcaps">(maybe you can also find the
-*bot* of *robot*)</span> It should be pronounced “Ethnobota Fever”.
+**EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and
+*R*
+<span class="smallcaps">(maybe you can also find the
+*bot* of *robot*)</span> It
+should be pronounced "Ethnobota Fever".
 
 ## Requirements
 
@@ -31,10 +31,9 @@ Additionally, you can provide:
 
 ## Installation
 
-As the package is not (yet) available on CRAN, you will need to install
-with:
+As the package is not (yet) available on CRAN, you will need to install with:
 
-``` r
+```r
 install.packages(
   "EthnoBotaPhyWR",
   repos = c(
@@ -46,8 +45,8 @@ install.packages(
 ```
 
 Once installed, you are ready to go through our
-[documentation](https://adafede.github.io/EthnoBotaPhyWR/articles), with
-the major steps detailed.
+[documentation](https://adafede.github.io/EthnoBotaPhyWR/articles), with the
+major steps detailed.
 
 ## Main Citations
 
@@ -65,33 +64,33 @@ the major steps detailed.
 
 ## Additional software credits
 
-| Package | Version | Citation |
-|:---|:---|:---|
-| ape | 5.8.1 | Paradis and Schliep (2019) |
-| base | 4.5.2 | R Core Team (2025) |
-| BiocManager | 1.30.27 | Morgan and Ramos (2025) |
-| BiocVersion | 3.22.0 | Morgan (2025) |
-| cachem | 1.1.0 | Chang (2024) |
-| cascade | 0.0.0.9001 | Rutz and Wolfender (2023); Rutz (2025a) |
-| EthnoBotaPhyWR | 0.0.0.9000 | Rutz (2025b) |
-| ggpubr | 0.6.2 | Kassambara (2025) |
-| ggtext | 0.1.2 | Wilke and Wiernik (2022) |
-| ggtree | 4.0.3 | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022) |
-| ggtreeExtra | 1.20.0 | Xu et al. (2021); Yu (2022b) |
-| gt | 1.3.0 | Iannone et al. (2026) |
-| httr2 | 1.2.2 | Wickham (2025) |
-| khroma | 1.17.0 | Frerebeau (2025) |
-| knitr | 1.51 | Xie (2014); Xie (2015); Xie (2025) |
-| logger | 0.4.1 | Daróczi and Wickham (2025) |
-| memoise | 2.0.1 | Wickham et al. (2021) |
-| phangorn | 2.12.1 | Schliep (2011); Schliep et al. (2017) |
-| R.utils | 2.13.0 | Bengtsson (2025) |
-| rmarkdown | 2.30 | Xie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2025) |
-| rotl | 3.1.1 | Michonneau, Brown, and Winter (2016); OpenTreeOfLife et al. (2019) |
-| scales | 1.4.0 | Wickham, Pedersen, and Seidel (2025) |
-| stringi | 1.8.7 | Gagolewski (2022) |
-| tidytable | 0.11.2 | Fairbanks (2024) |
-| tidyverse | 2.0.0 | Wickham et al. (2019) |
+  | Package        | Version    | Citation                                                                                      |
+  | :------------- | :--------- | :-------------------------------------------------------------------------------------------- |
+  | ape            | 5.8.1      | Paradis and Schliep (2019)                                                                    |
+  | base           | 4.5.2      | R Core Team (2025)                                                                            |
+  | BiocManager    | 1.30.27    | Morgan and Ramos (2025)                                                                       |
+  | BiocVersion    | 3.22.0     | Morgan (2025)                                                                                 |
+  | cachem         | 1.1.0      | Chang (2024)                                                                                  |
+  | cascade        | 0.0.0.9001 | Rutz and Wolfender (2023); Rutz (2025a)                                                       |
+  | EthnoBotaPhyWR | 0.0.0.9000 | Rutz (2025b)                                                                                  |
+  | ggpubr         | 0.6.2      | Kassambara (2025)                                                                             |
+  | ggtext         | 0.1.2      | Wilke and Wiernik (2022)                                                                      |
+  | ggtree         | 4.0.3      | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022)                   |
+  | ggtreeExtra    | 1.20.0     | Xu et al. (2021); Yu (2022b)                                                                  |
+  | gt             | 1.3.0      | Iannone et al. (2026)                                                                         |
+  | httr2          | 1.2.2      | Wickham (2025)                                                                                |
+  | khroma         | 1.17.0     | Frerebeau (2025)                                                                              |
+  | knitr          | 1.51       | Xie (2014); Xie (2015); Xie (2025)                                                            |
+  | logger         | 0.4.1      | Daróczi and Wickham (2025)                                                                    |
+  | memoise        | 2.0.1      | Wickham et al. (2021)                                                                         |
+  | phangorn       | 2.12.1     | Schliep (2011); Schliep et al. (2017)                                                         |
+  | R.utils        | 2.13.0     | Bengtsson (2025)                                                                              |
+  | rmarkdown      | 2.30       | Xie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2025) |
+  | rotl           | 3.1.1      | Michonneau, Brown, and Winter (2016); OpenTreeOfLife et al. (2019)                            |
+  | scales         | 1.4.0      | Wickham, Pedersen, and Seidel (2025)                                                          |
+  | stringi        | 1.8.7      | Gagolewski (2022)                                                                             |
+  | tidytable      | 0.11.2     | Fairbanks (2024)                                                                              |
+  | tidyverse      | 2.0.0      | Wickham et al. (2019)                                                                         |
 
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0">

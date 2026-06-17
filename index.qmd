@@ -48,11 +48,14 @@ keywords-formatted:
 license: CC BY
 ---
 
-**EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and *R*
-[(maybe you can also find the *bot* of *robot*)]{.smallcaps}
-It should be pronounced "Ethnobota Fever".
+**EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and
+*R* [(maybe you can also find the *bot* of *robot*)]{.smallcaps} It should be
+pronounced "Ethnobota Fever".
 
-```{r imports, include=FALSE}
+```{r}
+#| label: imports
+#| include: false
+
 ## External sources
 source(
   file = "https://raw.githubusercontent.com/adafede/cascade/main/R/colors.R"
@@ -62,17 +65,23 @@ library(EthnoBotaPhyWR)
 
 ## Introduction
 
-This vignette illustrates how to collect data on the *ethnobotanical uses*, and the *phytochemistry* of a given taxonomic family.
-The data collected originate from [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page), the free knowledge base that anyone can edit.
+This vignette illustrates how to collect data on the *ethnobotanical uses*, and
+the *phytochemistry* of a given taxonomic family. The data collected originate
+from [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page), the free
+knowledge base that anyone can edit.
 
-At the moment, this vignette supports adding your own data and combine them with the ones available on Wikidata to see the results.
-Ideally, you should share these precious data.
+At the moment, this vignette supports adding your own data and combine them with
+the ones available on Wikidata to see the results. Ideally, you should share
+these precious data.
 
 ### tl;dr
 
-The function you are looking for is `ethnobotafever_tree()`, whose parameters are described below:
+The function you are looking for is `ethnobotafever_tree()`, whose parameters
+are described below:
 
-```{r parameters}
+```{r}
+#| label: parameters
+
 ## Taxonomy-related parameters
 taxon_name <- "Orchidaceae"        # The scientific name of the family you are interested in
 
@@ -108,7 +117,11 @@ log_dir <- "~/Documents/papers/orchids/"
 
 Change these parameters as required and you are ready for the fever!
 
-```{r ethnobotafever_tree, message=FALSE, warning=FALSE}
+```{r}
+#| label: ethnobotafever_tree
+#| message: false
+#| warning: false
+
 results <- ethnobotafever_tree(
   taxon_name = taxon_name,
   n_multiple_genera = n_multiple_genera,
@@ -136,30 +149,38 @@ This will give you different objets
 First, tables containing different information:
 
 - An overview of the phytochemistry of the family in @tbl-1
-- An overview of the number of reported uses, compounds, and species per genus within the family in @tbl-2
-- An overview of the species within the family for which a decent number of compounds or uses have been reported in @tbl-3
+- An overview of the number of reported uses, compounds, and species per genus
+  within the family in @tbl-2
+- An overview of the species within the family for which a decent number of
+  compounds or uses have been reported in @tbl-3
 
-```{r echo=FALSE}
+```{r}
+#| echo: false
 #| label: tbl-1
 #| tbl-cap: "Overview of the phytochemistry of the family"
+
 results$df_taxa_full |>
   data.frame() |>
   gt::gt()  |>
   gt::opt_interactive()
 ```
 
-```{r echo=FALSE}
+```{r}
+#| echo: false
 #| label: tbl-2
 #| tbl-cap: "Overview of the number of reported uses, compounds, and species per genus within the family"
+
 results$df_taxa_ethno_counted |>
   data.frame() |>
   gt::gt()  |>
   gt::opt_interactive()
 ```
 
-```{r echo=FALSE}
+```{r}
+#| echo: false
 #| label: tbl-3
 #| tbl-cap: "Overview of the species within the family for which a decent number of compounds or uses have been reported"
+
 results$df_taxa_known_sub |>
   data.frame() |>
   gt::gt()  |>
@@ -168,9 +189,16 @@ results$df_taxa_known_sub |>
 
 Second, some tree-based visualizations:
 
-- A tree with genera as tips, displaying the taxa of the family, and if compounds or uses have been reported in @fig-1 (mainly to show the majority remains non-investigated)
-- A tree with genera as tips, displaying the taxa of the family for which compounds or uses have been reported in @fig-2 (mainly to make them easier to read)
-- A tree with species as tips, displaying the taxa of the family for which a decent number of compounds or uses have been reported in the corresponding genus in @fig-3 (mainly to show that even in the most investigated genera, the coverage is far from ideal)
+- A tree with genera as tips, displaying the taxa of the family, and if
+  compounds or uses have been reported in @fig-1 (mainly to show the majority
+  remains non-investigated)
+- A tree with genera as tips, displaying the taxa of the family for which
+  compounds or uses have been reported in @fig-2 (mainly to make them easier to
+  read)
+- A tree with species as tips, displaying the taxa of the family for which a
+  decent number of compounds or uses have been reported in the corresponding
+  genus in @fig-3 (mainly to show that even in the most investigated genera, the
+  coverage is far from ideal)
 
 ![A tree with genera as tips, displaying the taxa of the family, and if compounds or uses have been reported](man/figures/tree_orchids_full.pdf){#fig-1 width=100%}
 
@@ -180,6 +208,9 @@ Second, some tree-based visualizations:
 
 ## Logs
 
-```{r logs, echo=FALSE}
+```{r}
+#| label: logs
+#| echo: false
+
 readLines(con = results$log_file)
 ```

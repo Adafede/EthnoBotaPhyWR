@@ -10,14 +10,17 @@ bibliography: grateful-refs.bib
 # EthnoBotaPhyWR
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
-[![CRAN status](https://www.r-pkg.org/badges/version/tima)](https://CRAN.R-project.org/package=EthnoBotaPhyWR)
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![No Maintenance
+Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/tima)](https://CRAN.R-project.org/package=EthnoBotaPhyWR)
 <!-- badges: end -->
 
-**EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and *R*
-[(maybe you can also find the *bot* of *robot*)]{.smallcaps}
-It should be pronounced "Ethnobota Fever".
+**EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and
+*R* [(maybe you can also find the *bot* of *robot*)]{.smallcaps} It should be
+pronounced "Ethnobota Fever".
 
 ## Requirements
 
@@ -34,7 +37,7 @@ Additionally, you can provide:
 
 As the package is not (yet) available on CRAN, you will need to install with:
 
-``` r
+```r
 install.packages(
   "EthnoBotaPhyWR",
   repos = c(
@@ -45,7 +48,9 @@ install.packages(
 )
 ```
 
-Once installed, you are ready to go through our [documentation](https://adafede.github.io/EthnoBotaPhyWR/articles), with the major steps detailed.
+Once installed, you are ready to go through our
+[documentation](https://adafede.github.io/EthnoBotaPhyWR/articles), with the
+major steps detailed.
 
 ## Main Citations
 
@@ -63,7 +68,10 @@ Once installed, you are ready to go through our [documentation](https://adafede.
 
 ## Additional software credits
 
-```{r, echo = FALSE, message = FALSE}
+```{r}
+#| echo: false
+#| message: false
+
 # Check if DESCRIPTION is in current dir
 # Else `altdoc` will not find the dependencies
 desc_path <- if (file.exists("DESCRIPTION")) {

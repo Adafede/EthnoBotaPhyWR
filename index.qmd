@@ -83,9 +83,9 @@ are described below:
 #| label: parameters
 
 ## Taxonomy-related parameters
-taxon_name <- "Orchidaceae"        # The scientific name of the family you are interested in
+taxon_name <- "Orchidaceae" # The scientific name of the family you are interested in
 
-example_family_names <- list(      # The scientific name(s) of family(ies) you want to compare to
+example_family_names <- list( # The scientific name(s) of family(ies) you want to compare to
   "Poaceae" = "Poaceae",
   "Fabaceae" = "Fabaceae",
   "Asteraceae" = "Asteraceae",
@@ -95,9 +95,9 @@ example_family_names <- list(      # The scientific name(s) of family(ies) you w
 )
 
 ## Thresholds
-n_multiple_genera <- 10L           # The minimal number of genera where a compound was found in to consider the latter relatively widespread
-n_ethnobotanical_count_min <- 10L  # The minimal number of species within the genus for which an ethnobotanical use has been reported to consider the genus relatively widely used
-n_compounds_count_min <- 50L       # The minimal number of compounds reported in a taxon to consider the latter relatively widely investigated
+n_multiple_genera <- 10L # The minimal number of genera where a compound was found in to consider the latter relatively widespread
+n_ethnobotanical_count_min <- 10L # The minimal number of species within the genus for which an ethnobotanical use has been reported to consider the genus relatively widely used
+n_compounds_count_min <- 50L # The minimal number of compounds reported in a taxon to consider the latter relatively widely investigated
 
 ## File paths
 path_molecules <- "~/Documents/papers/orchids/orchids_table_unique_connectivity_classified.tsv"
@@ -161,7 +161,7 @@ First, tables containing different information:
 
 results$df_taxa_full |>
   data.frame() |>
-  gt::gt()  |>
+  gt::gt() |>
   gt::opt_interactive()
 ```
 
@@ -172,7 +172,7 @@ results$df_taxa_full |>
 
 results$df_taxa_ethno_counted |>
   data.frame() |>
-  gt::gt()  |>
+  gt::gt() |>
   gt::opt_interactive()
 ```
 
@@ -183,7 +183,7 @@ results$df_taxa_ethno_counted |>
 
 results$df_taxa_known_sub |>
   data.frame() |>
-  gt::gt()  |>
+  gt::gt() |>
   gt::opt_interactive()
 ```
 

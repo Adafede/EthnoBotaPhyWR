@@ -64,26 +64,32 @@ ethnobotafever_tree <- function(
     )
   }
 
+  normalize_ott_ids <- function(x) {
+    x <- suppressWarnings(as.integer(x))
+    ifelse(is.na(x), NA_character_, as.character(x))
+  }
+
   # Retrieve ethnobotanical data from Wikidata
   table_ethnobotanical_wd <- taxon_qid |>
     get_uses_wd() |>
     tidytable::distinct(taxon, taxon_id_ott) |>
-    tidytable::mutate(ethnobotanical = TRUE)
+    tidytable::mutate(
+      taxon_id_ott = normalize_ott_ids(taxon_id_ott),
+      ethnobotanical = TRUE
+    )
   log_unique_taxa(
     table_ethnobotanical_wd,
     "subtaxa with ethnobotanical use reported on Wikidata"
   )
 
   # Optionally merge with local ethnobotanical data
-  if (!is.null(path_ethnobotanical)) {
+  if (!is.null(path_ethnobotanical) && file.exists(path_ethnobotanical)) {
     table_ethnobotanical_local <- tryCatch(
       {
-        tidytable::fread(path_ethnobotanical) |>
-          tidytable::mutate(
-            taxon_id_ott = as.character(taxon_id_ott),
-            ethnobotanical = TRUE
-          ) |>
-          tidytable::distinct()
+        local_dt <- tidytable::fread(path_ethnobotanical)
+        local_dt$taxon_id_ott <- normalize_ott_ids(local_dt$taxon_id_ott)
+        local_dt$ethnobotanical <- TRUE
+        tidytable::distinct(local_dt)
       },
       error = function(e) {
         stop("Failed to read local ethnobotanical file: ", e$message)
@@ -201,7 +207,8 @@ ethnobotafever_tree <- function(
     paste0(" ", taxon_name, " subtaxa with an Open Tree of Life ID in Wikidata")
   )
   taxa_gen_ott <- taxa_gen |>
-    tidytable::inner_join(taxa_ott_wd)
+    tidytable::inner_join(taxa_ott_wd) |>
+    tidytable::mutate(taxon_id_ott = normalize_ott_ids(taxon_id_ott))
   logger::log_info(
     "... ",
     taxa_gen_ott |>
@@ -209,7 +216,8 @@ ethnobotafever_tree <- function(
     " unique genera"
   )
   taxa_spe_ott <- taxa_spe |>
-    tidytable::inner_join(taxa_ott_wd)
+    tidytable::inner_join(taxa_ott_wd) |>
+    tidytable::mutate(taxon_id_ott = normalize_ott_ids(taxon_id_ott))
   logger::log_info(
     "... ",
     taxa_spe_ott |>
@@ -217,7 +225,8 @@ ethnobotafever_tree <- function(
     " unique species"
   )
   taxa_var_ott <- taxa_var |>
-    tidytable::inner_join(taxa_ott_wd)
+    tidytable::inner_join(taxa_ott_wd) |>
+    tidytable::mutate(taxon_id_ott = normalize_ott_ids(taxon_id_ott))
   logger::log_info(
     "... ",
     taxa_var_ott |>
@@ -242,7 +251,7 @@ ethnobotafever_tree <- function(
       " subtaxa with at least one chemical compound reported in Wikidata"
     )
   )
-  if (!is.null(path_molecules)) {
+  if (!is.null(path_molecules) && file.exists(path_molecules)) {
     taxa_compounds_local <- path_molecules |>
       tidytable::fread() |>
       tidytable::distinct(
@@ -292,6 +301,13 @@ ethnobotafever_tree <- function(
         " subtaxa with ethnobotanical use reported in total"
       )
     )
+  } else {
+    if (!is.null(path_molecules)) {
+      logger::log_warn(
+        "Local molecules file not found; using Wikidata-only compounds."
+      )
+    }
+    taxa_compounds_tot <- taxa_compounds_wd
   }
 
   logger::log_info(
@@ -433,15 +449,18 @@ ethnobotafever_tree <- function(
 
   taxa_gen_ott_cpd <- taxa_gen |>
     tidytable::inner_join(taxa_gen_ott) |>
-    tidytable::left_join(taxa_compounds)
+    tidytable::left_join(taxa_compounds) |>
+    tidytable::mutate(taxon_id_ott = normalize_ott_ids(taxon_id_ott))
 
   taxa_spe_ott_cpd <- taxa_spe |>
     tidytable::inner_join(taxa_spe_ott) |>
-    tidytable::left_join(taxa_compounds)
+    tidytable::left_join(taxa_compounds) |>
+    tidytable::mutate(taxon_id_ott = normalize_ott_ids(taxon_id_ott))
 
   taxa_var_ott_cpd <- taxa_var |>
     tidytable::inner_join(taxa_var_ott) |>
-    tidytable::inner_join(taxa_compounds)
+    tidytable::inner_join(taxa_compounds) |>
+    tidytable::mutate(taxon_id_ott = normalize_ott_ids(taxon_id_ott))
 
   taxa_counted <- taxa_gen_ott_cpd |>
     tidytable::left_join(

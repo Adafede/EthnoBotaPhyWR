@@ -1,3 +1,37 @@
+query_wikidata_with_retry <- function(..., max_retries = 5L, base_delay = 2) {
+  attempt <- 1L
+  while (attempt <= max_retries) {
+    result <- tryCatch(
+      cascade::query_wikidata(...),
+      error = function(e) {
+        if (
+          grepl(
+            "429|Too Many Requests|rate limit|HTTP",
+            e$message,
+            ignore.case = TRUE
+          ) &&
+            attempt < max_retries
+        ) {
+          logger::log_warn(
+            "Wikidata request failed with a transient error; retrying in ",
+            base_delay * attempt,
+            " seconds"
+          )
+          Sys.sleep(base_delay * attempt)
+          NULL
+        } else {
+          stop(e)
+        }
+      }
+    )
+    if (!is.null(result)) {
+      return(result)
+    }
+    attempt <- attempt + 1L
+  }
+  stop("Wikidata query failed after retries")
+}
+
 #' @title Get subtaxa from Wikidata
 #'
 #' @description
@@ -14,7 +48,7 @@ get_subtaxa_wd <- function(taxon_qid) {
     stop("taxon_qid must be a single character string (Wikidata QID)")
   }
   # SPARQL query to get all subtaxa, their names, and ranks
-  cascade::query_wikidata(
+  query_wikidata_with_retry(
     endpoint = "https://qlever.dev/api/wikidata",
     sparql_query = paste0(
       "
@@ -48,7 +82,7 @@ get_ott_ids_wd <- function(taxon_qid) {
     stop("taxon_qid must be a single character string (Wikidata QID)")
   }
   # SPARQL query to get all subtaxa and their OTT IDs
-  cascade::query_wikidata(
+  query_wikidata_with_retry(
     endpoint = "https://qlever.dev/api/wikidata",
     sparql_query = paste0(
       "
@@ -81,7 +115,7 @@ get_compounds_wd <- function(taxon_qid) {
     stop("taxon_qid must be a single character string (Wikidata QID)")
   }
   # SPARQL query to get all compounds, their SMILES, and InChIKey for the taxon
-  cascade::query_wikidata(
+  query_wikidata_with_retry(
     endpoint = "https://qlever.dev/api/wikidata",
     sparql_query = paste0(
       "
@@ -110,7 +144,7 @@ get_compounds_wd <- function(taxon_qid) {
 #'
 #' @examples NULL
 get_uses_wd <- function(taxon_qid) {
-  cascade::query_wikidata(
+  query_wikidata_with_retry(
     endpoint = "https://qlever.dev/api/wikidata",
     sparql_query = paste0(
       "
@@ -140,7 +174,7 @@ get_uses_wd <- function(taxon_qid) {
 #'
 #' @examples NULL
 get_lotus_wd <- function() {
-  cascade::query_wikidata(
+  query_wikidata_with_retry(
     endpoint = "https://qlever.dev/api/wikidata",
     sparql_query = paste0(
       "

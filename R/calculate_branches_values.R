@@ -53,16 +53,17 @@ calculate_branches_values <- function(tree, df, variable, name) {
   # Combine with tree structure
   library(ggtree)
   tree_data <- tibble::as_tibble(tree) |>
-    tidytable::left_join(node_values, by = "node") |>
-    tidytable::mutate(
-      is_tip = node <= n_tips,
-      parent_count = count[match(parent, node)],
-      !!as.name(name) := tidytable::if_else(
-        is_tip,
-        count, # For tips: just use tip value
-        (count + parent_count) / 2 # For internal: average with parent
-      )
-    )
+    tidytable::left_join(node_values, by = "node")
+  tree_data$is_tip <- tree_data$node <= n_tips
+  tree_data$parent_count <- tree_data$count[match(
+    tree_data$parent,
+    tree_data$node
+  )]
+  tree_data[[name]] <- ifelse(
+    test = tree_data$is_tip,
+    yes = tree_data$count,
+    no = (tree_data$count + tree_data$parent_count) / 2
+  )
 
   return(tree_data)
 }

@@ -729,13 +729,21 @@ ethnobotafever_tree <- function(
       .keep_all = TRUE
     )
 
+  cascade_prepare_hierarchy <- get(
+    "prepare_hierarchy",
+    envir = asNamespace("cascade")
+  )
+  cascade_prepare_plot <- get(
+    "prepare_plot",
+    envir = asNamespace("cascade")
+  )
   compounds_hierarchy <- taxa_compounds_classes |>
-    cascade:::prepare_hierarchy(type = "literature") |>
-    cascade:::prepare_plot() |>
+    cascade_prepare_hierarchy(type = "literature") |>
+    cascade_prepare_plot() |>
     tidytable::rename(taxon_name = species)
   compounds_hierarchy_sub <- taxa_compounds_classes_sub |>
-    cascade:::prepare_hierarchy(type = "literature") |>
-    cascade:::prepare_plot() |>
+    cascade_prepare_hierarchy(type = "literature") |>
+    cascade_prepare_plot() |>
     tidytable::rename(taxon_name = species)
 
   taxa_classes <- taxa_gen_ott_cpd |>

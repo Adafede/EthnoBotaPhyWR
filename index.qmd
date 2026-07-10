@@ -168,7 +168,9 @@ results$df_taxa_full |>
 ```{r}
 #| echo: false
 #| label: tbl-2
-#| tbl-cap: "Overview of the number of reported uses, compounds, and species per genus within the family"
+#| tbl-cap: >-
+#|   Overview of the number of reported uses, compounds, and species per genus
+#|   within the family
 
 results$df_taxa_ethno_counted |>
   data.frame() |>
@@ -179,7 +181,9 @@ results$df_taxa_ethno_counted |>
 ```{r}
 #| echo: false
 #| label: tbl-3
-#| tbl-cap: "Overview of the species within the family for which a decent number of compounds or uses have been reported"
+#| tbl-cap: >-
+#|   Overview of the species within the family for which a decent number of
+#|   compounds or uses have been reported
 
 results$df_taxa_known_sub |>
   data.frame() |>

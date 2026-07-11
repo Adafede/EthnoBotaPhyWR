@@ -11,10 +11,45 @@
 #'
 #' @examples
 #' NULL
+get_trees_cache_key <- function(ott_ids, df_counted, taxon_name) {
+  ott_ids <- normalize_ott_ids(ott_ids)
+  df_frame <- as.data.frame(df_counted)
+  key_parts <- c(
+    taxon_name,
+    paste(ott_ids[!is.na(ott_ids) & nzchar(ott_ids)], collapse = ","),
+    as.character(nrow(df_frame)),
+    paste(normalize_ott_ids(df_frame$taxon_id_ott), collapse = ","),
+    paste(df_frame$compounds_count, collapse = ","),
+    paste(df_frame$ethnobotanical_count, collapse = ",")
+  )
+  paste(key_parts, collapse = "::")
+}
+
+get_trees_cached <- function(ott_ids, df_counted, taxon_name, cache_dir) {
+  dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
+  cache_key <- get_trees_cache_key(ott_ids, df_counted, taxon_name)
+  cache_file <- file.path(
+    cache_dir,
+    paste0("trees_", openssl::md5(cache_key), ".rds")
+  )
+
+  if (file.exists(cache_file)) {
+    return(readRDS(cache_file))
+  }
+
+  result <- get_trees(
+    ott_ids = ott_ids,
+    df_counted = df_counted,
+    taxon_name = taxon_name
+  )
+  saveRDS(result, cache_file)
+  result
+}
+
 get_trees <- function(ott_ids, df_counted, taxon_name) {
   # Input validation
-  if (!is.numeric(ott_ids)) {
-    stop("ott_ids must be numeric (integer vector of OTT IDs)")
+  if (!(is.numeric(ott_ids) || is.character(ott_ids))) {
+    stop("ott_ids must be numeric or character (integer vector of OTT IDs)")
   }
   if (!is.data.frame(df_counted)) {
     stop("df_counted must be a data.frame")
@@ -30,58 +65,244 @@ get_trees <- function(ott_ids, df_counted, taxon_name) {
     )
   }
 
-  ott_in_tree_tax <- ott_in_tree |>
-    rotl::taxonomy_taxon_info(
-      include_lineage = TRUE,
-      include_terminal_descendants = TRUE
-    ) |>
-    rotl::tax_lineage() |>
-    tidytable::bind_rows(.id = "id") |>
-    tidytable::group_by(id) |>
-    tidytable::filter(grep(pattern = taxon_name, x = name, fixed = TRUE)) |>
-    tidytable::ungroup() |>
-    tidytable::pull(id) |>
-    as.integer()
+  build_placeholder_tree <- function(ott_ids_subset, df_frame = df_counted) {
+    ott_ids_subset <- normalize_ott_ids(ott_ids_subset)
+    ott_ids_subset <- unique(
+      ott_ids_subset[!is.na(ott_ids_subset) & nzchar(ott_ids_subset)]
+    )
+    if (length(ott_ids_subset) == 0L) {
+      return(ape::read.tree(text = "(A);"))
+    }
+    tip_labels <- df_frame$taxon_name[
+      match(ott_ids_subset, normalize_ott_ids(df_frame$taxon_id_ott))
+    ]
+    tip_labels[is.na(tip_labels)] <- ott_ids_subset[is.na(tip_labels)]
+    if (length(ott_ids_subset) == 1L) {
+      tree <- ape::read.tree(text = paste0("(", tip_labels[1], ");"))
+    } else {
+      tree <- ape::stree(length(ott_ids_subset), "star")
+      tree$tip.label <- tip_labels
+    }
+    tree$tip_id_ott <- ott_ids_subset
+    tree
+  }
 
-  # Identify taxa not in the tree but with relevant data
+  ott_ids_normalized <- normalize_ott_ids(ott_ids)
+  ott_ids_integer <- suppressWarnings(as.integer(ott_ids_normalized))
+  ott_ids_integer <- ott_ids_integer[!is.na(ott_ids_integer)]
+
+  validate_ott_ids <- function(ott_ids_subset) {
+    ott_ids_subset <- normalize_ott_ids(ott_ids_subset)
+    ott_ids_subset <- unique(
+      ott_ids_subset[!is.na(ott_ids_subset) & nzchar(ott_ids_subset)]
+    )
+    if (length(ott_ids_subset) == 0L) {
+      return(list(valid = character(), invalid = character()))
+    }
+
+    ott_ids_integer <- suppressWarnings(as.integer(ott_ids_subset))
+    valid_flags <- !is.na(ott_ids_integer) & rotl::is_in_tree(ott_ids_integer)
+
+    list(
+      valid = as.character(ott_ids_integer[valid_flags]),
+      invalid = as.character(ott_ids_integer[!valid_flags])
+    )
+  }
+
+  if (length(ott_ids_integer) == 0L) {
+    tree_taxa_full <- build_placeholder_tree(character(), df_counted)
+    tree_taxa_phyto <- build_placeholder_tree(character(), df_counted)
+    taxa_not_in_tree <- df_counted[
+      df_counted$compounds_count > 0L |
+        df_counted$ethnobotanical_count > 0L,
+      ,
+      drop = FALSE
+    ]
+    names(taxa_not_in_tree)[
+      names(taxa_not_in_tree) == "ethnobotanical_count"
+    ] <- "ethnobotanical_species_count"
+    return(list(
+      taxa_not_in_tree = taxa_not_in_tree,
+      tree_taxa_full = tree_taxa_full,
+      tree_taxa_phyto = tree_taxa_phyto
+    ))
+  }
+
+  validated_ids <- validate_ott_ids(ott_ids_normalized)
+
+  ott_in_tree_tax <- tryCatch(
+    {
+      if (length(validated_ids$valid) == 0L) {
+        character()
+      } else {
+        as.character(validated_ids$valid)
+      }
+    },
+    error = function(e) {
+      logger::log_warn(
+        "Failed to resolve tree lineage for OTT IDs; keeping the original OTT IDs for tree construction."
+      )
+      ott_ids_normalized
+    }
+  )
+
+  tree_query_ids <- unique(c(
+    ott_ids_normalized,
+    normalize_ott_ids(ott_in_tree_tax)
+  ))
+  tree_query_ids_validated <- validate_ott_ids(tree_query_ids)
+
+  relabel_tree_with_names <- function(
+    tree,
+    ott_ids_subset,
+    df_frame = df_counted
+  ) {
+    if (!inherits(tree, "phylo")) {
+      return(tree)
+    }
+
+    ott_ids_subset <- normalize_ott_ids(ott_ids_subset)
+    ott_ids_subset <- unique(
+      ott_ids_subset[!is.na(ott_ids_subset) & nzchar(ott_ids_subset)]
+    )
+
+    if (length(ott_ids_subset) == 0L) {
+      return(tree)
+    }
+
+    matched_names <- df_frame$taxon_name[
+      match(ott_ids_subset, normalize_ott_ids(df_frame$taxon_id_ott))
+    ]
+    matched_names[is.na(matched_names)] <- ott_ids_subset[is.na(matched_names)]
+
+    if (length(matched_names) >= length(tree$tip.label)) {
+      tree$tip.label <- matched_names[seq_len(length(tree$tip.label))]
+    } else {
+      tree$tip.label <- c(
+        matched_names,
+        tree$tip.label[(length(matched_names) + 1L):length(tree$tip.label)]
+      )
+    }
+
+    tree$tip_id_ott <- ott_ids_subset
+    tree
+  }
+
+  build_tree <- function(ott_ids_subset, validated_ids_subset = NULL) {
+    ott_ids_subset <- normalize_ott_ids(ott_ids_subset)
+    ott_ids_subset <- unique(
+      ott_ids_subset[!is.na(ott_ids_subset) & nzchar(ott_ids_subset)]
+    )
+    if (length(ott_ids_subset) == 0L) {
+      return(build_placeholder_tree(character(), df_counted))
+    }
+
+    if (is.null(validated_ids_subset)) {
+      validated_ids_subset <- validate_ott_ids(ott_ids_subset)
+    }
+
+    if (length(validated_ids_subset$valid) < 2L) {
+      return(relabel_tree_with_names(
+        build_placeholder_tree(ott_ids_subset, df_counted),
+        ott_ids_subset,
+        df_counted
+      ))
+    }
+
+    tree_result <- tryCatch(
+      rotl::tol_induced_subtree(as.integer(validated_ids_subset$valid)),
+      error = function(e) {
+        NULL
+      }
+    )
+
+    if (!inherits(tree_result, "phylo")) {
+      chunk_size <- 80L
+      batch_ids <- split(
+        validated_ids_subset$valid,
+        ceiling(seq_along(validated_ids_subset$valid) / chunk_size)
+      )
+
+      tree_result <- NULL
+      for (batch in batch_ids) {
+        Sys.sleep(0.2)
+        batch_tree <- tryCatch(
+          rotl::tol_induced_subtree(as.integer(batch)),
+          error = function(e) {
+            NULL
+          }
+        )
+
+        if (!inherits(batch_tree, "phylo")) {
+          next
+        }
+
+        if (is.null(tree_result)) {
+          tree_result <- batch_tree
+        } else {
+          tree_result <- ape::bind.tree(tree_result, batch_tree, where = "root")
+        }
+      }
+    }
+
+    if (!inherits(tree_result, "phylo")) {
+      logger::log_warn(
+        "Failed to build tree from OTT IDs; falling back to a star tree containing all requested IDs."
+      )
+      relabel_tree_with_names(
+        build_placeholder_tree(ott_ids_subset, df_counted),
+        ott_ids_subset,
+        df_counted
+      )
+    } else {
+      relabel_tree_with_names(
+        tree_result,
+        validated_ids_subset$valid,
+        df_counted
+      )
+    }
+  }
+
+  tree_taxa_full <- build_tree(
+    tree_query_ids,
+    tree_query_ids_validated
+  )
+  tree_taxa_phyto <- build_tree(
+    tree_query_ids[
+      tree_query_ids %in%
+        normalize_ott_ids(df_counted$taxon_id_ott[
+          df_counted$compounds_count >= 1
+        ])
+    ],
+    list(
+      valid = tree_query_ids_validated$valid[
+        tree_query_ids_validated$valid %in%
+          normalize_ott_ids(df_counted$taxon_id_ott[
+            df_counted$compounds_count >= 1
+          ])
+      ],
+      invalid = character()
+    )
+  )
+
+  tree_tip_ids_full <- normalize_ott_ids(tree_taxa_full$tip_id_ott)
+  tree_tip_ids_full <- tree_tip_ids_full[
+    !is.na(tree_tip_ids_full) & nzchar(tree_tip_ids_full)
+  ]
+
   taxa_not_in_tree <- df_counted[
-    !df_counted$taxon_id_ott %in% ott_in_tree
-  ] |>
-    tidytable::filter(
-      compounds_count > 0L |
-        ethnobotanical_count > 0L
-    ) |>
-    tidytable::rename(ethnobotanical_species_count = ethnobotanical_count)
-
-  # Build full tree and tree for taxa with compounds
-  tree_taxa_full <- ott_in_tree_tax |>
-    rotl::tol_induced_subtree()
-  tree_taxa_phyto <- ott_in_tree_tax[
-    ott_in_tree_tax %in%
-      df_counted$taxon_id_ott[
-        df_counted$compounds_count >= 1
-      ]
-  ] |>
-    rotl::tol_induced_subtree()
+    !normalize_ott_ids(df_counted$taxon_id_ott) %in% tree_tip_ids_full &
+      (df_counted$compounds_count > 0L | df_counted$ethnobotanical_count > 0L),
+    ,
+    drop = FALSE
+  ]
+  names(taxa_not_in_tree)[
+    names(taxa_not_in_tree) == "ethnobotanical_count"
+  ] <- "ethnobotanical_species_count"
 
   return(list(
     taxa_not_in_tree = taxa_not_in_tree,
     tree_taxa_full = tree_taxa_full,
     tree_taxa_phyto = tree_taxa_phyto
   ))
-}
-
-#' @title Get trees (memoised)
-#'
-#' @description
-#' Returns a memoised version of get_trees for caching repeated calls.
-#'
-#' @param ... Arguments passed to get_trees.
-#'
-#' @return Memoised function.
-#'
-#' @examples
-#' NULL
-get_trees_mem <- function(...) {
-  memoise::memoise(get_trees, ...)
 }

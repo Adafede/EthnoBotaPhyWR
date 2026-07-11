@@ -42,7 +42,7 @@ ethnobotafever_tree(
 
 \item{export_tree_full, }{export_tree_phyto, export_tree_phyto_sub, export_table_classified, export_table_counts, export_table_counts_sub Character or NULL. Paths for exporting results.}
 
-\item{local_cache}{Logical. Whether to use local cache.}
+\item{local_cache}{Character. Directory for the persistent tree cache.}
 
 \item{log_dir}{Character. Directory for log files.}
 }

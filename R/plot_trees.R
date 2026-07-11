@@ -39,8 +39,10 @@ plot_trees <- function(
 
   # Helper: format tip labels
   format_tip_labels <- function(labels, genus_mode) {
+    labels <- as.character(labels)
     if (genus_mode) {
-      gsub(pattern = "_.*", replacement = "", x = labels)
+      labels <- gsub(pattern = "_.*", replacement = "", x = labels)
+      gsub(pattern = " .*", replacement = "", x = labels)
     } else {
       gsub(pattern = "_ott.*", replacement = "", x = labels) |>
         gsub(pattern = "_", replacement = " ")
@@ -80,18 +82,21 @@ plot_trees <- function(
   # Join species count for plotting
   tree_data <- tidytable::left_join(
     tree_data,
-    df_counted |> tidytable::distinct(label = taxon_name, species_count)
+    df_counted |>
+      tidytable::distinct(label = taxon_name, species_count)
   ) |>
     tidytable::distinct(node, .keep_all = TRUE)
   tree_data_phyto <- tidytable::left_join(
     tree_data_phyto,
-    df_counted |> tidytable::distinct(label = taxon_name, species_count)
+    df_counted |>
+      tidytable::distinct(label = taxon_name, species_count)
   ) |>
     tidytable::distinct(node, .keep_all = TRUE)
 
   logger::log_trace("Plotting ...")
   library(ggtree)
   library(ggplot2)
+  assign("geom_col", ggplot2::geom_col, envir = .GlobalEnv)
   # Use explicit namespace for ggtree/ggplot2
   plot_tree_taxa <- ggtree::ggtree(
     tree_taxa_full,

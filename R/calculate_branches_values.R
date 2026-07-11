@@ -22,10 +22,21 @@ calculate_branches_values <- function(tree, df, variable, name) {
   }
 
   # Assign tip values
-  node_values <- data.frame(
-    node = match(df$taxon_name, tree$tip.label),
-    count = tidytable::pull(df, !!as.name(variable))
-  )
+  if (!is.null(tree$tip_id_ott) && "taxon_id_ott" %in% names(df)) {
+    tip_ids <- normalize_ott_ids(tree$tip_id_ott)
+    df_ids <- normalize_ott_ids(df$taxon_id_ott)
+    matched_nodes <- match(df_ids, tip_ids)
+    valid_match <- !is.na(matched_nodes)
+    node_values <- data.frame(
+      node = matched_nodes[valid_match],
+      count = tidytable::pull(df, !!as.name(variable))[valid_match]
+    )
+  } else {
+    node_values <- data.frame(
+      node = match(df$taxon_name, tree$tip.label),
+      count = tidytable::pull(df, !!as.name(variable))
+    )
+  }
 
   # Internal nodes
   n_tips <- ape::Ntip(tree)

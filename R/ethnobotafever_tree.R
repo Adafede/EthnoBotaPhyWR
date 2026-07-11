@@ -17,8 +17,13 @@
 #' @param path_molecules Character or NULL. Path to local molecules file.
 #' @param path_classes Character or NULL. Path to local classes file.
 #' @param path_ethnobotanical Character or NULL. Path to local ethnobotanical file.
-#' @param export_tree_full, export_tree_phyto, export_tree_phyto_sub, export_table_classified, export_table_counts, export_table_counts_sub Character or NULL. Paths for exporting results.
-#' @param local_cache Logical. Whether to use local cache.
+#' @param export_tree_full
+#' @param export_tree_phyto
+#' @param export_tree_phyto_sub
+#' @param export_table_classified
+#' @param export_table_counts
+#' @param export_table_counts_sub Character or NULL. Paths for exporting results.
+#' @param local_cache Character. Directory for the persistent tree cache.
 #' @param log_dir Character. Directory for log files.
 #'
 #' @return List of summary objects and/or writes output files as side effects. See code for details.
@@ -761,19 +766,19 @@ ethnobotafever_tree <- function(
     unique()
 
   logger::log_trace("Retrieving Open Tree Taxonomy now... taking some time!")
-  cache <- cachem::cache_disk(dir = local_cache)
-  get_trees_mem_local <- get_trees_mem(
-    cache = cache
-  )
-  trees_gen <- get_trees_mem_local(
+  cache_dir <- resolve_cache_dir(local_cache)
+  dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
+  trees_gen <- get_trees_cached(
     ott_ids = taxa_ott_wd_ids,
     df_counted = taxa_ethno_counted,
-    taxon_name = taxon_name
+    taxon_name = taxon_name,
+    cache_dir = cache_dir
   )
-  trees_sub <- get_trees_mem_local(
+  trees_sub <- get_trees_cached(
     ott_ids = taxa_ott_wd_ids_sub,
     df_counted = taxa_known_sub,
-    taxon_name = taxon_name
+    taxon_name = taxon_name,
+    cache_dir = cache_dir
   )
 
   plots_gen <- plot_trees(

@@ -18,7 +18,6 @@ Depends:
     R (>= 4.5.0)
 Imports:
     ape (>= 5.8.1),
-    cachem (>= 1.1.0),
     cascade,
     ggplot2 (>= 4.0.3),
     ggpubr (>= 0.6.3),
@@ -30,7 +29,7 @@ Imports:
     jsonlite (>= 2.0.0),
     khroma (>= 1.17.0),
     logger (>= 0.4.2),
-    memoise (>= 2.0.1),
+    openssl (>= 1.4.0),
     phangorn (>= 2.12.1),
     purrr (>= 1.2.2),
     R.utils (>= 2.13.0),

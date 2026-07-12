@@ -37,7 +37,11 @@ get_trees_cache_key <- function(ott_ids, df_counted, taxon_name) {
   ]
   if (nrow(df_frame) > 0L) {
     df_frame <- unique(df_frame)
-    df_frame <- df_frame[order(df_frame$taxon_id_ott, df_frame$taxon_name), , drop = FALSE]
+    df_frame <- df_frame[
+      order(df_frame$taxon_id_ott, df_frame$taxon_name),
+      ,
+      drop = FALSE
+    ]
   }
 
   key_parts <- c(

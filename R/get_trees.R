@@ -13,12 +13,38 @@
 #' NULL
 get_trees_cache_key <- function(ott_ids, df_counted, taxon_name) {
   ott_ids <- normalize_ott_ids(ott_ids)
-  df_frame <- as.data.frame(df_counted)
+  ott_ids <- unique(ott_ids[!is.na(ott_ids) & nzchar(ott_ids)])
+  ott_ids <- sort(ott_ids)
+
+  df_frame <- as.data.frame(df_counted, stringsAsFactors = FALSE)
+  if ("taxon_id_ott" %in% names(df_frame)) {
+    df_frame$taxon_id_ott <- normalize_ott_ids(df_frame$taxon_id_ott)
+  }
+  if ("taxon_name" %in% names(df_frame)) {
+    df_frame$taxon_name <- as.character(df_frame$taxon_name)
+  }
+  if ("compounds_count" %in% names(df_frame)) {
+    df_frame$compounds_count <- as.character(df_frame$compounds_count)
+  }
+  if ("ethnobotanical_count" %in% names(df_frame)) {
+    df_frame$ethnobotanical_count <- as.character(df_frame$ethnobotanical_count)
+  }
+
+  df_frame <- df_frame[
+    !is.na(df_frame$taxon_id_ott) & nzchar(df_frame$taxon_id_ott),
+    ,
+    drop = FALSE
+  ]
+  if (nrow(df_frame) > 0L) {
+    df_frame <- unique(df_frame)
+    df_frame <- df_frame[order(df_frame$taxon_id_ott, df_frame$taxon_name), , drop = FALSE]
+  }
+
   key_parts <- c(
-    taxon_name,
-    paste(ott_ids[!is.na(ott_ids) & nzchar(ott_ids)], collapse = ","),
-    as.character(nrow(df_frame)),
-    paste(normalize_ott_ids(df_frame$taxon_id_ott), collapse = ","),
+    as.character(taxon_name),
+    paste(ott_ids, collapse = ","),
+    paste(df_frame$taxon_id_ott, collapse = ","),
+    paste(df_frame$taxon_name, collapse = "|"),
     paste(df_frame$compounds_count, collapse = ","),
     paste(df_frame$ethnobotanical_count, collapse = ",")
   )

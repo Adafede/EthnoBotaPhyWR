@@ -10,38 +10,42 @@ plot_trees(
   tree_taxa_phyto,
   df_counted,
   df_classes,
-  offset,
-  adjust_point,
-  adjust_text,
-  adjust_margin,
+  offset = NULL,
+  adjust_point = NULL,
+  adjust_text = NULL,
+  adjust_margin = NULL,
   genus = TRUE,
   drop = FALSE
 )
 }
 \arguments{
-\item{taxa_not_in_tree}{Data.frame. Taxa not present in the tree.}
+\item{taxa_not_in_tree}{Data.frame. Taxa that are absent from the tree and should be shown in the orphan panel.}
 
-\item{tree_taxa_full}{phylo. Full tree object.}
+\item{tree_taxa_full}{phylo. Full tree object used for the overview plot.}
 
-\item{tree_taxa_phyto}{phylo. Tree for taxa with compounds.}
+\item{tree_taxa_phyto}{phylo. Tree object restricted to taxa with reported compounds or uses.}
 
-\item{df_counted}{Data.frame. Must contain 'taxon_name', 'species_count', 'ethnobotanical_count', etc.}
+\item{df_counted}{Data.frame. Count table containing tip labels and summary counts such as \code{species_count} and \code{ethnobotanical_count}.}
 
-\item{df_classes}{Data.frame. Class/color information for taxa.}
+\item{df_classes}{Data.frame. Classification table providing the compound superclass values, colours, and per-taxon annotations.}
 
-\item{offset}{Numeric. Offset for tip labels.}
+\item{offset}{Numeric. Optional override for the tip-label offset used by the tree plots.}
 
-\item{adjust_point, }{adjust_text, adjust_margin Numeric. Plot adjustments.}
+\item{adjust_point}{Numeric. Optional override for the x-position of orphan-panel points.}
 
-\item{genus}{Logical. If TRUE, format tip labels as genus only.}
+\item{adjust_text}{Numeric. Optional override for the x-position of orphan-panel labels.}
 
-\item{drop}{Logical. If TRUE, drop tips not in df_counted.}
+\item{adjust_margin}{Numeric. Optional override for the orphan-panel left margin.}
+
+\item{genus}{Logical. If \code{TRUE}, tip labels are reduced to genus-level names.}
+
+\item{drop}{Logical. If \code{TRUE}, tips not present in \code{df_counted} are dropped before plotting.}
 }
 \value{
-List of ggplot2/ggtree plot objects and data used for plotting.
+A list containing the main tree plots, the orphan-taxon plot, the orphan data frame, and the derived layout settings.
 }
 \description{
-Plots phylogenetic trees with overlays for ethnobotanical and phytochemical data. Handles label formatting, tip dropping, and custom color/size mappings.
+Plots phylogenetic trees with ethnobotanical and phytochemical overlays. The helper formats tip labels consistently, derives spacing from the tree geometry, and returns the main tree plots plus the orphan-taxon panel.
 }
 \examples{
 # plot_trees(...)

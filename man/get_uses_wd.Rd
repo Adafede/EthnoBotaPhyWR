@@ -2,19 +2,17 @@
 % Please edit documentation in R/get_results_wd.R
 \name{get_uses_wd}
 \alias{get_uses_wd}
-\title{Get uses WD}
+\title{Get ethnobotanical uses from Wikidata}
 \usage{
 get_uses_wd(taxon_qid)
 }
 \arguments{
-\item{taxon_qid}{A taxon QID}
+\item{taxon_qid}{Character. Wikidata QID of the focal taxon.}
 }
 \value{
-A dataframe containing the results of the query
+A data frame with the retrieved use information.
 }
 \description{
-This function gets uses from Wikidata.
+Retrieves ethnobotanical-use annotations for a given Wikidata taxon QID.
 }
-\examples{
-NULL
-}
+\keyword{internal}

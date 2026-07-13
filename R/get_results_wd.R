@@ -1,3 +1,14 @@
+#' @title Query Wikidata with retries
+#'
+#' @description
+#' Runs a Wikidata query and retries transient failures such as rate limits.
+#'
+#' @param ... Arguments passed to `cascade::query_wikidata()`.
+#' @param max_retries Integer. Maximum number of attempts before failing.
+#' @param base_delay Numeric. Base delay for retry backoff.
+#'
+#' @return The query result returned by `cascade::query_wikidata()`.
+#' @keywords internal
 query_wikidata_with_retry <- function(..., max_retries = 5L, base_delay = 2) {
   attempt <- 1L
   while (attempt <= max_retries) {
@@ -35,14 +46,12 @@ query_wikidata_with_retry <- function(..., max_retries = 5L, base_delay = 2) {
 #' @title Get subtaxa from Wikidata
 #'
 #' @description
-#' Retrieves all subtaxa for a given taxon QID from Wikidata using a SPARQL query.
+#' Retrieves all subtaxa and their ranks for a given Wikidata taxon QID.
 #'
-#' @param taxon_qid Character. Wikidata QID of the taxon.
+#' @param taxon_qid Character. Wikidata QID of the focal taxon.
 #'
-#' @return A data.frame with columns: taxon, taxon_name, taxon_rank.
-#'
-#' @examples
-#' # get_subtaxa_wd("Q25308")
+#' @return A data frame with the retrieved taxon names and ranks.
+#' @keywords internal
 get_subtaxa_wd <- function(taxon_qid) {
   if (!is.character(taxon_qid) || length(taxon_qid) != 1) {
     stop("taxon_qid must be a single character string (Wikidata QID)")
@@ -69,14 +78,12 @@ get_subtaxa_wd <- function(taxon_qid) {
 #' @title Get OTT IDs from Wikidata
 #'
 #' @description
-#' Retrieves Open Tree of Life (OTT) IDs for all subtaxa of a given taxon QID from Wikidata.
+#' Retrieves the Open Tree of Life identifiers for all subtaxa of the given Wikidata taxon.
 #'
-#' @param taxon_qid Character. Wikidata QID of the taxon.
+#' @param taxon_qid Character. Wikidata QID of the focal taxon.
 #'
-#' @return A data.frame with columns: taxon, taxon_id_ott.
-#'
-#' @examples
-#' # get_ott_ids_wd("Q25308")
+#' @return A data frame with the retrieved taxon identifiers and OTT IDs.
+#' @keywords internal
 get_ott_ids_wd <- function(taxon_qid) {
   if (!is.character(taxon_qid) || length(taxon_qid) != 1) {
     stop("taxon_qid must be a single character string (Wikidata QID)")
@@ -102,14 +109,12 @@ get_ott_ids_wd <- function(taxon_qid) {
 #' @title Get compounds from Wikidata
 #'
 #' @description
-#' Retrieves all compounds associated with a given taxon QID from Wikidata.
+#' Retrieves compound annotations for a given Wikidata taxon QID.
 #'
-#' @param taxon_qid Character. Wikidata QID of the taxon.
+#' @param taxon_qid Character. Wikidata QID of the focal taxon.
 #'
-#' @return A data.frame with columns: compound, compound_smiles_canonical, compound_inchikey, taxon.
-#'
-#' @examples
-#' # get_compounds_wd("Q25308")
+#' @return A data frame with compound, SMILES, InChIKey, and taxon identifiers.
+#' @keywords internal
 get_compounds_wd <- function(taxon_qid) {
   if (!is.character(taxon_qid) || length(taxon_qid) != 1) {
     stop("taxon_qid must be a single character string (Wikidata QID)")
@@ -134,15 +139,15 @@ get_compounds_wd <- function(taxon_qid) {
   )
 }
 
-#' @title Get uses WD
+#' @title Get ethnobotanical uses from Wikidata
 #'
-#' @description This function gets uses from Wikidata.
+#' @description
+#' Retrieves ethnobotanical-use annotations for a given Wikidata taxon QID.
 #'
-#' @param taxon_qid A taxon QID
+#' @param taxon_qid Character. Wikidata QID of the focal taxon.
 #'
-#' @return A dataframe containing the results of the query
-#'
-#' @examples NULL
+#' @return A data frame with the retrieved use information.
+#' @keywords internal
 get_uses_wd <- function(taxon_qid) {
   query_wikidata_with_retry(
     endpoint = "https://qlever.dev/api/wikidata",
@@ -166,13 +171,13 @@ get_uses_wd <- function(taxon_qid) {
   )
 }
 
-#' @title Get LOTUS WD
+#' @title Get LOTUS data from Wikidata
 #'
-#' @description This function gets LOTUS from Wikidata.
+#' @description
+#' Retrieves LOTUS compound annotations from Wikidata.
 #'
-#' @return A dataframe containing the results of the query
-#'
-#' @examples NULL
+#' @return A data frame with compound, SMILES, InChIKey, and taxon identifiers.
+#' @keywords internal
 get_lotus_wd <- function() {
   query_wikidata_with_retry(
     endpoint = "https://qlever.dev/api/wikidata",

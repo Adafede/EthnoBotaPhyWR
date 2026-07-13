@@ -2,23 +2,20 @@
 % Please edit documentation in R/get_trees.R
 \name{get_trees}
 \alias{get_trees}
-\title{Get trees}
+\title{Build trees from OTT IDs}
 \usage{
 get_trees(ott_ids, df_counted, taxon_name)
 }
 \arguments{
 \item{ott_ids}{Integer vector. OTT IDs to include in the tree.}
 
-\item{df_counted}{Data.frame. Must contain columns 'taxon_id_ott', 'compounds_count', and 'ethnobotanical_count'.}
+\item{df_counted}{Data.frame. Data frame containing at least \code{taxon_id_ott}, \code{compounds_count}, and \code{ethnobotanical_count} columns.}
 
-\item{taxon_name}{Character. Name of the taxon for filtering.}
+\item{taxon_name}{Character. Name of the focal taxon used for logging and fallback naming.}
 }
 \value{
-List with elements: taxa_not_in_tree (data.frame), tree_taxa_full (phylo), tree_taxa_phyto (phylo).
+A list with the taxa missing from the full tree, the full tree object, and the phytochemical tree object.
 }
 \description{
-Builds phylogenetic trees for a set of Open Tree of Life (OTT) IDs, using rotl and tidytable. Returns a list with taxa not in the tree, the full tree, and a tree for taxa with compounds.
-}
-\examples{
-NULL
+Builds the full and phytochemical trees for a collection of OTT IDs, falling back to placeholder trees if Open Tree requests fail or return incomplete data.
 }

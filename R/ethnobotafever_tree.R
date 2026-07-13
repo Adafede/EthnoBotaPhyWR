@@ -17,16 +17,16 @@
 #' @param path_molecules Character or NULL. Path to local molecules file.
 #' @param path_classes Character or NULL. Path to local classes file.
 #' @param path_ethnobotanical Character or NULL. Path to local ethnobotanical file.
-#' @param export_tree_full
-#' @param export_tree_phyto
-#' @param export_tree_phyto_sub
-#' @param export_table_classified
-#' @param export_table_counts
-#' @param export_table_counts_sub Character or NULL. Paths for exporting results.
+#' @param export_tree_full Character. Path for the main full-tree PDF figure.
+#' @param export_tree_phyto Character. Path for the phytochemical overview PDF figure.
+#' @param export_tree_phyto_sub Character. Path for the species-level phytochemical PDF figure.
+#' @param export_table_classified Character. Path for the classified compounds export.
+#' @param export_table_counts Character. Path for the genus-level summary table export.
+#' @param export_table_counts_sub Character or NULL. Path for the filtered species-level counts export.
 #' @param local_cache Character. Directory for the persistent tree cache.
 #' @param log_dir Character. Directory for log files.
 #'
-#' @return List of summary objects and/or writes output files as side effects. See code for details.
+#' @return A list containing the rendered plots, exported tables, and the log-file path.
 #'
 #' @details
 #' This function is a pipeline for data collection, merging, and reporting. It logs progress and statistics throughout. All side effects (file writes, logs) are documented inline.
@@ -786,11 +786,7 @@ ethnobotafever_tree <- function(
     tree_taxa_full = trees_gen$tree_taxa_full,
     tree_taxa_phyto = trees_gen$tree_taxa_phyto,
     df_counted = taxa_ethno_counted,
-    df_classes = taxa_classes,
-    offset = 0.6,
-    adjust_point = -132,
-    adjust_text = -114,
-    adjust_margin = 350
+    df_classes = taxa_classes
   )
 
   plots_sub <- plot_trees(
@@ -799,10 +795,6 @@ ethnobotafever_tree <- function(
     tree_taxa_phyto = trees_sub$tree_taxa_phyto,
     df_counted = taxa_known_sub,
     df_classes = taxa_classes_sub,
-    offset = 1.2,
-    adjust_point = 0,
-    adjust_text = 0,
-    adjust_margin = 0,
     genus = FALSE,
     drop = TRUE
   )
@@ -817,17 +809,7 @@ ethnobotafever_tree <- function(
       create.dir = TRUE
     )
 
-  ggpubr::ggarrange(
-    plots_gen$plot_tree_taxa_phyto_bars,
-    plots_gen$plot_orphan_taxa,
-    nrow = 2L,
-    common.legend = TRUE,
-    legend = "left",
-    heights = c(
-      1.0,
-      nrow(taxa_ethno) / nrow(plots_gen$taxa_orphan)
-    )
-  ) |>
+  plots_gen$plot_tree_taxa_phyto_bars |>
     ggplot2::ggsave(
       file = export_tree_phyto,
       width = 18,
@@ -872,6 +854,10 @@ ethnobotafever_tree <- function(
       file = export_table_counts_sub,
       sep = "\t"
     )
+  taxa_ethno_counted <- data.frame(taxa_ethno_counted)
+  taxa_known_sub <- data.frame(taxa_known_sub)
+  taxa_full <- data.frame(taxa_full)
+
   return(
     list(
       plots_gen = plots_gen,

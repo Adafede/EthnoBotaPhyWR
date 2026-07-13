@@ -2,16 +2,14 @@
 % Please edit documentation in R/get_results_wd.R
 \name{get_lotus_wd}
 \alias{get_lotus_wd}
-\title{Get LOTUS WD}
+\title{Get LOTUS data from Wikidata}
 \usage{
 get_lotus_wd()
 }
 \value{
-A dataframe containing the results of the query
+A data frame with compound, SMILES, InChIKey, and taxon identifiers.
 }
 \description{
-This function gets LOTUS from Wikidata.
+Retrieves LOTUS compound annotations from Wikidata.
 }
-\examples{
-NULL
-}
+\keyword{internal}

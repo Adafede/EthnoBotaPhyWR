@@ -7,14 +7,12 @@
 get_subtaxa_wd(taxon_qid)
 }
 \arguments{
-\item{taxon_qid}{Character. Wikidata QID of the taxon.}
+\item{taxon_qid}{Character. Wikidata QID of the focal taxon.}
 }
 \value{
-A data.frame with columns: taxon, taxon_name, taxon_rank.
+A data frame with the retrieved taxon names and ranks.
 }
 \description{
-Retrieves all subtaxa for a given taxon QID from Wikidata using a SPARQL query.
+Retrieves all subtaxa and their ranks for a given Wikidata taxon QID.
 }
-\examples{
-# get_subtaxa_wd("Q25308")
-}
+\keyword{internal}

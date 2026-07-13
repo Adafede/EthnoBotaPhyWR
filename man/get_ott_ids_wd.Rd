@@ -7,14 +7,12 @@
 get_ott_ids_wd(taxon_qid)
 }
 \arguments{
-\item{taxon_qid}{Character. Wikidata QID of the taxon.}
+\item{taxon_qid}{Character. Wikidata QID of the focal taxon.}
 }
 \value{
-A data.frame with columns: taxon, taxon_id_ott.
+A data frame with the retrieved taxon identifiers and OTT IDs.
 }
 \description{
-Retrieves Open Tree of Life (OTT) IDs for all subtaxa of a given taxon QID from Wikidata.
+Retrieves the Open Tree of Life identifiers for all subtaxa of the given Wikidata taxon.
 }
-\examples{
-# get_ott_ids_wd("Q25308")
-}
+\keyword{internal}

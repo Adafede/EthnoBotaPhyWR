@@ -7,14 +7,12 @@
 get_compounds_wd(taxon_qid)
 }
 \arguments{
-\item{taxon_qid}{Character. Wikidata QID of the taxon.}
+\item{taxon_qid}{Character. Wikidata QID of the focal taxon.}
 }
 \value{
-A data.frame with columns: compound, compound_smiles_canonical, compound_inchikey, taxon.
+A data frame with compound, SMILES, InChIKey, and taxon identifiers.
 }
 \description{
-Retrieves all compounds associated with a given taxon QID from Wikidata.
+Retrieves compound annotations for a given Wikidata taxon QID.
 }
-\examples{
-# get_compounds_wd("Q25308")
-}
+\keyword{internal}

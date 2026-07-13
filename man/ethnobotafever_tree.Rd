@@ -40,14 +40,24 @@ ethnobotafever_tree(
 
 \item{path_ethnobotanical}{Character or NULL. Path to local ethnobotanical file.}
 
-\item{export_tree_full, }{export_tree_phyto, export_tree_phyto_sub, export_table_classified, export_table_counts, export_table_counts_sub Character or NULL. Paths for exporting results.}
+\item{export_tree_full}{Character. Path for the main full-tree PDF figure.}
+
+\item{export_tree_phyto}{Character. Path for the phytochemical overview PDF figure.}
+
+\item{export_tree_phyto_sub}{Character. Path for the species-level phytochemical PDF figure.}
+
+\item{export_table_classified}{Character. Path for the classified compounds export.}
+
+\item{export_table_counts}{Character. Path for the genus-level summary table export.}
+
+\item{export_table_counts_sub}{Character or NULL. Path for the filtered species-level counts export.}
 
 \item{local_cache}{Character. Directory for the persistent tree cache.}
 
 \item{log_dir}{Character. Directory for log files.}
 }
 \value{
-List of summary objects and/or writes output files as side effects. See code for details.
+A list containing the rendered plots, exported tables, and the log-file path.
 }
 \description{
 Collects and plots ethnobotanical and phytochemical data for a given taxon. This function performs data retrieval, merging, and logging, and produces summary statistics and outputs for downstream analysis and visualization.

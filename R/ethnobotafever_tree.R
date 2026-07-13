@@ -812,7 +812,7 @@ ethnobotafever_tree <- function(
   plots_gen$plot_tree_taxa_phyto_bars |>
     ggplot2::ggsave(
       file = export_tree_phyto,
-      width = 18,
+      width = 36,
       height = 18,
       create.dir = TRUE
     )
@@ -820,8 +820,8 @@ ethnobotafever_tree <- function(
   plots_sub$plot_tree_taxa_phyto_bars |>
     ggplot2::ggsave(
       file = export_tree_phyto_sub,
-      width = 18,
-      height = 29.7 * 1.7,
+      width = 45,
+      height = 45,
       limitsize = FALSE,
       create.dir = TRUE
     )

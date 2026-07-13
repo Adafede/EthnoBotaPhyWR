@@ -29,7 +29,7 @@ calculate_branches_values <- function(tree, df, variable, name) {
   if (
     !is.null(tree$tip_id_ott) &&
       "taxon_id_ott" %in% names(df) &&
-      any(!is.na(normalize_ott_ids(df$taxon_id_ott)))
+      !all(is.na(normalize_ott_ids(df$taxon_id_ott)))
   ) {
     tip_ids <- normalize_ott_ids(tree$tip_id_ott)
     df_ids <- normalize_ott_ids(df$taxon_id_ott)

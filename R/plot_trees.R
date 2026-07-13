@@ -132,14 +132,10 @@ plot_trees <- function(
     max_label_width <- max(nchar(tip_labels), na.rm = TRUE)
     tree_span <- max(1, max(ape::node.depth.edgelength(tree), na.rm = TRUE))
 
-    fruit_offset <- if (is.null(preferred_offset)) {
-      max(
+    fruit_offset <- preferred_offset %||% max(
         0.04,
         min(0.10, 0.04 + 0.0018 * log1p(n_tips) + 0.0016 * max_label_width)
       )
-    } else {
-      preferred_offset
-    }
 
     fruit_width <- if (genus_mode) {
       max(0.24, min(0.34, 0.24 + 0.0018 * log1p(n_tips)))
@@ -153,8 +149,8 @@ plot_trees <- function(
     )
     tree_xlim <- max(1, tree_span * 0.72)
 
-    orphan_point_x <- if (is.null(adjust_point)) -0.2 else adjust_point
-    orphan_text_x <- if (is.null(adjust_text)) -0.05 else adjust_text
+    orphan_point_x <- adjust_point %||% -0.2
+    orphan_text_x <- adjust_text %||% -0.05
     export_width <- max(
       12,
       min(30, 10 + 0.04 * n_tips + 0.03 * max_label_width)

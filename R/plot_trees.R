@@ -132,7 +132,8 @@ plot_trees <- function(
     max_label_width <- max(nchar(tip_labels), na.rm = TRUE)
     tree_span <- max(1, max(ape::node.depth.edgelength(tree), na.rm = TRUE))
 
-    fruit_offset <- preferred_offset %||% max(
+    fruit_offset <- preferred_offset %||%
+      max(
         0.04,
         min(0.10, 0.04 + 0.0018 * log1p(n_tips) + 0.0016 * max_label_width)
       )

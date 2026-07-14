@@ -65,41 +65,41 @@ major steps detailed.
 
 ## Additional software credits
 
-  | Package        | Version    | Citation                                                                                      |
-  | :------------- | :--------- | :-------------------------------------------------------------------------------------------- |
-  | ape            | 5.8.1      | Paradis and Schliep (2019)                                                                    |
-  | base           | 4.5.2      | R Core Team (2025)                                                                            |
-  | BiocManager    | 1.30.27    | Morgan and Ramos (2025)                                                                       |
-  | BiocVersion    | 3.22.0     | Morgan (2025)                                                                                 |
-  | cachem         | 1.1.0      | Chang (2024)                                                                                  |
-  | cascade        | 0.0.0.9001 | Rutz and Wolfender (2023); Rutz (2025a)                                                       |
-  | EthnoBotaPhyWR | 0.0.0.9000 | Rutz (2025b)                                                                                  |
-  | ggpubr         | 0.6.2      | Kassambara (2025)                                                                             |
-  | ggtext         | 0.1.2      | Wilke and Wiernik (2022)                                                                      |
-  | ggtree         | 4.0.3      | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022)                   |
-  | ggtreeExtra    | 1.20.0     | Xu et al. (2021); Yu (2022b)                                                                  |
-  | gt             | 1.3.0      | Iannone et al. (2026)                                                                         |
-  | httr2          | 1.2.2      | Wickham (2025)                                                                                |
-  | khroma         | 1.17.0     | Frerebeau (2025)                                                                              |
-  | knitr          | 1.51       | Xie (2014); Xie (2015); Xie (2025)                                                            |
-  | logger         | 0.4.1      | Daróczi and Wickham (2025)                                                                    |
-  | memoise        | 2.0.1      | Wickham et al. (2021)                                                                         |
-  | phangorn       | 2.12.1     | Schliep (2011); Schliep et al. (2017)                                                         |
-  | R.utils        | 2.13.0     | Bengtsson (2025)                                                                              |
-  | rmarkdown      | 2.30       | Xie, Allaire, and Grolemund (2018); Xie, Dervieux, and Riederer (2020); Allaire et al. (2025) |
-  | rotl           | 3.1.1      | Michonneau, Brown, and Winter (2016); OpenTreeOfLife et al. (2019)                            |
-  | scales         | 1.4.0      | Wickham, Pedersen, and Seidel (2025)                                                          |
-  | stringi        | 1.8.7      | Gagolewski (2022)                                                                             |
-  | tidytable      | 0.11.2     | Fairbanks (2024)                                                                              |
-  | tidyverse      | 2.0.0      | Wickham et al. (2019)                                                                         |
+  | Package        | Version    | Citation                                                                    |
+  | :------------- | :--------- | :-------------------------------------------------------------------------- |
+  | ape            | 5.8.1      | Paradis and Schliep (2019)                                                  |
+  | base           | 4.6.1      | R Core Team (2026a)                                                         |
+  | BiocManager    | 1.30.27    | Morgan and Ramos (2025)                                                     |
+  | BiocVersion    | 3.23.1     | Morgan (2025)                                                               |
+  | cascade        | 0.0.0.9002 | Rutz and Wolfender (2023); Rutz (2026a)                                     |
+  | EthnoBotaPhyWR | 0.0.0.9001 | Rutz (2026b)                                                                |
+  | ggpubr         | 1.0.0      | Kassambara (2026)                                                           |
+  | ggtext         | 0.1.2      | Wilke and Wiernik (2022)                                                    |
+  | ggtree         | 4.2.0      | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022) |
+  | ggtreeExtra    | 1.22.1     | Xu et al. (2021); Yu (2022b)                                                |
+  | grid           | 4.6.1      | R Core Team (2026b)                                                         |
+  | gt             | 1.3.0      | Iannone et al. (2026)                                                       |
+  | httr2          | 1.2.3      | Wickham (2026)                                                              |
+  | khroma         | 1.17.0     | Frerebeau (2025)                                                            |
+  | knitr          | 1.51       | Xie (2014); Xie (2015); Xie (2025)                                          |
+  | logger         | 0.4.2      | Daróczi and Wickham (2026)                                                  |
+  | openssl        | 2.4.2      | Ooms (2026)                                                                 |
+  | phangorn       | 2.12.1     | Schliep (2011); Schliep et al. (2017)                                       |
+  | R.utils        | 2.13.0     | Bengtsson (2025)                                                            |
+  | rmarkdown      | 2.31       | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026)                 |
+  | rotl           | 3.1.1      | Michonneau et al. (2016); OpenTreeOfLife et al. (2019)                      |
+  | scales         | 1.4.0      | Wickham et al. (2025)                                                       |
+  | spelling       | 2.3.2      | Ooms and Hester (2025)                                                      |
+  | stringi        | 1.8.7      | Gagolewski (2022)                                                           |
+  | tidytable      | 0.11.2     | Fairbanks (2024)                                                            |
+  | tidyverse      | 2.0.0      | Wickham et al. (2019)                                                       |
+  | tools          | 4.6.1      | R Core Team (2026c)                                                         |
 
-<div id="refs" class="references csl-bib-body hanging-indent"
-entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 
-<div id="ref-rmarkdown2025" class="csl-entry">
+<div id="ref-rmarkdown2026" class="csl-entry">
 
-Allaire, JJ, Yihui Xie, Christophe Dervieux, Jonathan McPherson, Javier
-Luraschi, Kevin Ushey, Aron Atkins, et al. 2025.
+Allaire, JJ, Yihui Xie, Christophe Dervieux, et al. 2026.
 *<span class="nocase">rmarkdown</span>: Dynamic Documents for r*.
 <https://github.com/rstudio/rmarkdown>.
 
@@ -112,17 +112,9 @@ Programming Utilities*. <https://doi.org/10.32614/CRAN.package.R.utils>.
 
 </div>
 
-<div id="ref-cachem" class="csl-entry">
-
-Chang, Winston. 2024. *<span class="nocase">cachem</span>: Cache r
-Objects with Automatic Pruning*.
-<https://doi.org/10.32614/CRAN.package.cachem>.
-
-</div>
-
 <div id="ref-logger" class="csl-entry">
 
-Daróczi, Gergely, and Hadley Wickham. 2025.
+Daróczi, Gergely, and Hadley Wickham. 2026.
 *<span class="nocase">logger</span>: A Lightweight, Modern and Flexible
 Logging Utility*. <https://doi.org/10.32614/CRAN.package.logger>.
 
@@ -139,8 +131,8 @@ Interface to “<span class="nocase">data.table</span>”*.
 <div id="ref-khroma" class="csl-entry">
 
 Frerebeau, Nicolas. 2025. *<span class="nocase">khroma: Colour Schemes
-for Scientific Data Visualization</span>*. Pessac, France: Université
-Bordeaux Montaigne. <https://doi.org/10.5281/zenodo.1472077>.
+for Scientific Data Visualization</span>*. Université Bordeaux
+Montaigne. <https://doi.org/10.5281/zenodo.1472077>.
 
 </div>
 
@@ -154,19 +146,17 @@ Software* 103 (2): 1–59. <https://doi.org/10.18637/jss.v103.i02>.
 
 <div id="ref-gt" class="csl-entry">
 
-Iannone, Richard, Joe Cheng, Barret Schloerke, Shannon Haughton, Ellis
-Hughes, Alexandra Lauer, Romain François, JooYoung Seo, Ken Brevoort,
-and Olivier Roy. 2026. *<span class="nocase">gt</span>: Easily Create
-Presentation-Ready Display Tables*.
-<https://doi.org/10.32614/CRAN.package.gt>.
+Iannone, Richard, Joe Cheng, Barret Schloerke, et al. 2026.
+*<span class="nocase">gt</span>: Easily Create Presentation-Ready
+Display Tables*. <https://doi.org/10.32614/CRAN.package.gt>.
 
 </div>
 
 <div id="ref-ggpubr" class="csl-entry">
 
-Kassambara, Alboukadel. 2025. *<span class="nocase">ggpubr</span>:
+Kassambara, Alboukadel. 2026. *<span class="nocase">ggpubr</span>:
 “<span class="nocase">ggplot2</span>” Based Publication Ready Plots*.
-<https://doi.org/10.32614/CRAN.package.ggpubr>.
+<https://CRAN.R-project.org/package=ggpubr>.
 
 </div>
 
@@ -182,7 +172,7 @@ Open Tree of Life Data.” *Methods in Ecology and Evolution* 7 (12):
 <div id="ref-BiocVersion" class="csl-entry">
 
 Morgan, Martin. 2025. *BiocVersion: Set the Appropriate Version of
-Bioconductor Packages*. <https://doi.org/10.18129/B9.bioc.BiocVersion>.
+Bioconductor Packages*.
 
 </div>
 
@@ -194,11 +184,26 @@ Bioconductor Project Package Repository*.
 
 </div>
 
+<div id="ref-openssl" class="csl-entry">
+
+Ooms, Jeroen. 2026. *<span class="nocase">openssl</span>: Toolkit for
+Encryption, Signatures and Certificates Based on OpenSSL*.
+<https://doi.org/10.32614/CRAN.package.openssl>.
+
+</div>
+
+<div id="ref-spelling" class="csl-entry">
+
+Ooms, Jeroen, and Jim Hester. 2025.
+*<span class="nocase">spelling</span>: Tools for Spell Checking in r*.
+<https://doi.org/10.32614/CRAN.package.spelling>.
+
+</div>
+
 <div id="ref-rotl2019" class="csl-entry">
 
-OpenTreeOfLife, Benjamin Redelings, Luna Luisa Sanchez Reyes, Karen A.
-Cranston, Jim Allman, Mark T. Holder, and Emily Jane McTavish. 2019.
-“Open Tree of Life Synthetic Tree.” Zenodo.
+OpenTreeOfLife, Benjamin Redelings, Luna Luisa Sanchez Reyes, et al.
+2019. *Open Tree of Life Synthetic Tree*. Version 12.3. Zenodo.
 <https://doi.org/10.5281/zenodo.3937741>.
 
 </div>
@@ -213,15 +218,31 @@ Modern Phylogenetics and Evolutionary Analyses in R.” *Bioinformatics*
 
 <div id="ref-base" class="csl-entry">
 
-R Core Team. 2025. *R: A Language and Environment for Statistical
-Computing*. Vienna, Austria: R Foundation for Statistical Computing.
-<https://www.R-project.org/>.
+R Core Team. 2026a. *R: A Language and Environment for Statistical
+Computing*. R Foundation for Statistical Computing.
+<https://doi.org/10.32614/R.manuals>.
 
 </div>
 
-<div id="ref-cascade2025" class="csl-entry">
+<div id="ref-grid" class="csl-entry">
 
-Rutz, Adriano. 2025a. *<span class="nocase">cascade</span>:
+R Core Team. 2026b. *R: A Language and Environment for Statistical
+Computing*. R Foundation for Statistical Computing.
+<https://doi.org/10.32614/R.manuals>.
+
+</div>
+
+<div id="ref-tools" class="csl-entry">
+
+R Core Team. 2026c. *R: A Language and Environment for Statistical
+Computing*. R Foundation for Statistical Computing.
+<https://doi.org/10.32614/R.manuals>.
+
+</div>
+
+<div id="ref-cascade2026" class="csl-entry">
+
+Rutz, Adriano. 2026a. *<span class="nocase">cascade</span>:
 Contextualizing Untargeted Annotation with Semi-Quantitative Charged
 Aerosol Detection for Pertinent Characterization of Natural Extracts*.
 
@@ -229,7 +250,7 @@ Aerosol Detection for Pertinent Characterization of Natural Extracts*.
 
 <div id="ref-EthnoBotaPhyWR" class="csl-entry">
 
-———. 2025b. *EthnoBotaPhyWR: \*\*EthnoBotaPhyWR\*\* Stands for
+Rutz, Adriano. 2026b. *EthnoBotaPhyWR: \*\*EthnoBotaPhyWR\*\* Stands for
 \*Ethnobotany\*, \*Phytochemistry\*, \*Wikidata\* and \*r\*. It Should
 Be Pronounced “Ethnobota Fever.”*
 <https://github.com/adafede/EthnoBotaPhyWR>.
@@ -264,25 +285,16 @@ Ecology and Evolution* 8 (10): 1212–20.
 
 <div id="ref-httr2" class="csl-entry">
 
-Wickham, Hadley. 2025. *Httr2: Perform HTTP Requests and Process the
+Wickham, Hadley. 2026. *Httr2: Perform HTTP Requests and Process the
 Responses*. <https://doi.org/10.32614/CRAN.package.httr2>.
 
 </div>
 
 <div id="ref-tidyverse" class="csl-entry">
 
-Wickham, Hadley, Mara Averick, Jennifer Bryan, Winston Chang, Lucy
-D’Agostino McGowan, Romain François, Garrett Grolemund, et al. 2019.
-“Welcome to the <span class="nocase">tidyverse</span>.” *Journal of Open
-Source Software* 4 (43): 1686. <https://doi.org/10.21105/joss.01686>.
-
-</div>
-
-<div id="ref-memoise" class="csl-entry">
-
-Wickham, Hadley, Jim Hester, Winston Chang, Kirill Müller, and Daniel
-Cook. 2021. *<span class="nocase">memoise</span>: “Memoisation” of
-Functions*. <https://doi.org/10.32614/CRAN.package.memoise>.
+Wickham, Hadley, Mara Averick, Jennifer Bryan, et al. 2019. “Welcome to
+the <span class="nocase">tidyverse</span>.” *Journal of Open Source
+Software* 4 (43): 1686. <https://doi.org/10.21105/joss.01686>.
 
 </div>
 
@@ -314,50 +326,46 @@ and Roger D. Peng. Chapman; Hall/CRC.
 
 <div id="ref-knitr2015" class="csl-entry">
 
-———. 2015. *Dynamic Documents with R and Knitr*. 2nd ed. Boca Raton,
-Florida: Chapman; Hall/CRC. <https://yihui.org/knitr/>.
+Xie, Yihui. 2015. *Dynamic Documents with R and Knitr*. 2nd ed. Chapman;
+Hall/CRC. <https://yihui.org/knitr/>.
 
 </div>
 
 <div id="ref-knitr2025" class="csl-entry">
 
-———. 2025. *<span class="nocase">knitr</span>: A General-Purpose Package
-for Dynamic Report Generation in R*. <https://yihui.org/knitr/>.
+Xie, Yihui. 2025. *<span class="nocase">knitr</span>: A General-Purpose
+Package for Dynamic Report Generation in R*. <https://yihui.org/knitr/>.
 
 </div>
 
 <div id="ref-rmarkdown2018" class="csl-entry">
 
 Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. *R Markdown: The
-Definitive Guide*. Boca Raton, Florida: Chapman; Hall/CRC.
-<https://bookdown.org/yihui/rmarkdown>.
+Definitive Guide*. Chapman; Hall/CRC. <https://yihui.org/rmarkdown/>.
 
 </div>
 
 <div id="ref-rmarkdown2020" class="csl-entry">
 
 Xie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. *R Markdown
-Cookbook*. Boca Raton, Florida: Chapman; Hall/CRC.
-<https://bookdown.org/yihui/rmarkdown-cookbook>.
+Cookbook*. Chapman; Hall/CRC. <https://yihui.org/rmarkdown-cookbook>.
 
 </div>
 
 <div id="ref-ggtreeExtra2021" class="csl-entry">
 
-Xu, Shuangbin, Zehan Dai, Pingfan Guo, Xiaocong Fu, Shanshan Liu, Lang
-Zhou, Wenli Tang, et al. 2021. “<span class="nocase">ggtreeExtra</span>:
-Compact Visualization of Richly Annotated Phylogenetic Data.” *Molecular
-Biology and Evolution* 38 (June): 4039–42.
-<https://doi.org/10.1093/molbev/msab166>.
+Xu, Shuangbin, Zehan Dai, Pingfan Guo, et al. 2021.
+“<span class="nocase">ggtreeExtra</span>: Compact Visualization of
+Richly Annotated Phylogenetic Data.” *Molecular Biology and Evolution*
+38 (June): 4039–42. <https://doi.org/10.1093/molbev/msab166>.
 
 </div>
 
 <div id="ref-ggtree2022b" class="csl-entry">
 
-Xu, Shuangbin, Lin Li, Xiao Luo, Meijun Chen, Wenli Tang, Li Zhan, Zehan
-Dai, Tommy T. Lam, Yi Guan, and Guangchuang Yu. 2022. “Ggtree: A
-Serialized Data Object for Visualization of a Phylogenetic Tree and
-Annotation Data.” *iMeta* 1 (4): e56. <https://doi.org/10.1002/imt2.56>.
+Xu, Shuangbin, Lin Li, Xiao Luo, et al. 2022. “Ggtree: A Serialized Data
+Object for Visualization of a Phylogenetic Tree and Annotation Data.”
+*iMeta* 1 (4): e56. <https://doi.org/10.1002/imt2.56>.
 
 </div>
 
@@ -371,16 +379,16 @@ Structures.” *Current Protocols in Bioinformatics* 69 (1): e96.
 
 <div id="ref-ggtree2022a" class="csl-entry">
 
-———. 2022a. *Data Integration, Manipulation and Visualization of
-Phylogenetic Treess*. 1st edition. Chapman; Hall/CRC.
+Yu, Guangchuang. 2022a. *Data Integration, Manipulation and
+Visualization of Phylogenetic Treess*. 1st edition. Chapman; Hall/CRC.
 <https://doi.org/10.1201/9781003279242>.
 
 </div>
 
 <div id="ref-ggtreeExtra2022" class="csl-entry">
 
-———. 2022b. *Data Integration, Manipulation and Visualization of
-Phylogenetic Treess*. 1st edition. Chapman; Hall/CRC.
+Yu, Guangchuang. 2022b. *Data Integration, Manipulation and
+Visualization of Phylogenetic Treess*. 1st edition. Chapman; Hall/CRC.
 <https://www.amazon.com/Integration-Manipulation-Visualization-Phylogenetic-Computational-ebook/dp/B0B5NLZR1Z/>.
 
 </div>

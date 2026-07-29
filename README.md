@@ -29,6 +29,18 @@ Additionally, you can provide:
 - Your own list of chemical compounds found in subtaxa of the family
 - Your own list of ethnobotanical uses of subtaxa of the family
 
+Or simply use the included orchids datasets for analysis.
+
+## Features
+
+**EthnoBotaPhyWR** provides:
+
+- **Built-in datasets** for *Orchidaceae* (3,055 compounds + 419 ethnobotanical
+  uses)
+- **Phylogenetic integration** via Open Tree of Life
+- **Phytochemical analysis** with NPClassifier taxonomy
+- **Data federation** from Wikidata, LOTUS, and external sources
+
 ## Installation
 
 As the package is not (yet) available on CRAN, you will need to install with:
@@ -47,6 +59,50 @@ install.packages(
 Once installed, you are ready to go through our
 [documentation](https://adafede.github.io/EthnoBotaPhyWR/articles), with the
 major steps detailed.
+
+## Quick Start
+
+### Load included datasets
+
+```r
+library(EthnoBotaPhyWR)
+
+# Phytochemical data with SMILES and classification
+data(orchids_compounds)
+head(orchids_compounds)
+
+# NPClassifier taxonomy lookup
+data(orchids_compound_classes)
+head(orchids_compound_classes)
+
+# Ethnobotanical uses linked to phylogenetics
+data(orchids_ethnobotanical)
+head(orchids_ethnobotanical)
+```
+
+### Analyze your own family
+
+```r
+# Get data for any plant family (requires Wikidata)
+result <- ethnobotafever_tree(
+  taxon_name = "Orchidaceae",
+  n_multiple_genera = 1,
+  n_ethnobotanical_count_min = 0,
+  n_compounds_count_min = 0,
+  example_family_names = c("Solanaceae", "Fabaceae"),
+  path_molecules = NULL,  # or path to your own
+  path_classes = NULL,
+  path_ethnobotanical = NULL,
+  export_tree_full = "~/orchids_tree_full.pdf",
+  export_tree_phyto = "~/orchids_tree_phyto.pdf",
+  export_tree_phyto_sub = "~/orchids_tree_phyto_sub.pdf",
+  export_table_classified = "~/orchids_classified.tsv",
+  export_table_counts = "~/orchids_counts.tsv",
+  export_table_counts_sub = "~/orchids_counts_sub.tsv",
+  local_cache = "~/.ethnobotaphy_cache",
+  log_dir = "~/"
+)
+```
 
 ## Main Citations
 
@@ -72,18 +128,20 @@ major steps detailed.
   | BiocVersion    | 3.23.1     | Morgan (2025)                                                               |
   | cascade        | 0.0.0.9002 | Rutz and Wolfender (2023); Rutz (2026a)                                     |
   | EthnoBotaPhyWR | 0.0.0.9001 | Rutz (2026b)                                                                |
+  | fastmatch      | 1.1.8      | Urbanek (2026)                                                              |
   | ggpubr         | 1.0.0      | Kassambara (2026)                                                           |
   | ggtext         | 0.1.2      | Wilke and Wiernik (2022)                                                    |
   | ggtree         | 4.2.0      | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022) |
   | ggtreeExtra    | 1.22.1     | Xu et al. (2021); Yu (2022b)                                                |
   | grid           | 4.6.1      | R Core Team (2026b)                                                         |
   | gt             | 1.3.0      | Iannone et al. (2026)                                                       |
-  | httr2          | 1.2.3      | Wickham (2026)                                                              |
+  | httr2          | 1.3.0      | Wickham (2026)                                                              |
   | khroma         | 1.17.0     | Frerebeau (2025)                                                            |
   | knitr          | 1.51       | Xie (2014); Xie (2015); Xie (2025)                                          |
   | logger         | 0.4.2      | Daróczi and Wickham (2026)                                                  |
   | openssl        | 2.4.2      | Ooms (2026)                                                                 |
   | phangorn       | 2.12.1     | Schliep (2011); Schliep et al. (2017)                                       |
+  | quarto         | 1.5.1      | Allaire and Dervieux (2025)                                                 |
   | R.utils        | 2.13.0     | Bengtsson (2025)                                                            |
   | rmarkdown      | 2.31       | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026)                 |
   | rotl           | 3.1.1      | Michonneau et al. (2016); OpenTreeOfLife et al. (2019)                      |
@@ -95,6 +153,14 @@ major steps detailed.
   | tools          | 4.6.1      | R Core Team (2026c)                                                         |
 
 <div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-quarto" class="csl-entry">
+
+Allaire, JJ, and Christophe Dervieux. 2025.
+*<span class="nocase">quarto</span>: R Interface to “Quarto” Markdown
+Publishing System*. <https://doi.org/10.32614/CRAN.package.quarto>.
+
+</div>
 
 <div id="ref-rmarkdown2026" class="csl-entry">
 
@@ -279,6 +345,14 @@ Phylogenetic Analysis in r.” *Bioinformatics* 27 (4): 592–93.
 Schliep, Klaus, Alastair J. Potts, David A. Morrison, and Guido W.
 Grimm. 2017. “Intertwining Phylogenetic Trees and Networks.” *Methods in
 Ecology and Evolution* 8 (10): 1212–20.
+
+</div>
+
+<div id="ref-fastmatch" class="csl-entry">
+
+Urbanek, Simon. 2026. *<span class="nocase">fastmatch</span>: Fast
+“<span class="nocase">match()</span>” Function*.
+<https://doi.org/10.32614/CRAN.package.fastmatch>.
 
 </div>
 

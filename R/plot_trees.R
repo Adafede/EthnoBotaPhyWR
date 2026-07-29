@@ -41,11 +41,11 @@ plot_trees <- function(
   format_tip_labels <- function(labels, genus_mode) {
     labels <- as.character(labels)
     if (genus_mode) {
-      labels <- gsub(pattern = "_.*", replacement = "", x = labels)
-      gsub(pattern = " .*", replacement = "", x = labels)
+      labels <- stringi::stri_replace_all_regex(labels, "_.*", "")
+      stringi::stri_replace_all_regex(labels, " .*", "")
     } else {
-      gsub(pattern = "_ott.*", replacement = "", x = labels) |>
-        gsub(pattern = "_", replacement = " ")
+      stringi::stri_replace_all_regex(labels, "_ott.*", "") |>
+        stringi::stri_replace_all_regex("_", " ")
     }
   }
 
@@ -234,8 +234,8 @@ plot_trees <- function(
   layout_phyto <- estimate_layout(tree_taxa_phyto, offset, genus_mode = genus)
 
   logger::log_trace("Plotting ...")
-  library(ggtree)
-  library(ggplot2)
+  requireNamespace(ggtree)
+  requireNamespace(ggplot2)
   geom_col <- ggplot2::geom_col
 
   plot_tree_taxa <- ggtree::ggtree(

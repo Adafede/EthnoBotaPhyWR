@@ -1,0 +1,242 @@
+---
+title: "Working with Orchids Datasets"
+description: |
+  Guide to using the built-in orchids ethnobotanical and phytochemical datasets
+  included with EthnoBotaPhyWR.
+output:
+  quarto::html:
+    toc: true
+    number-sections: true
+editor_options:
+  chunk_output_type: console
+vignette: >
+  %\VignetteIndexEntry{Working with Orchids Datasets}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Working with Orchids Datasets
+
+EthnoBotaPhyWR includes three curated datasets for *Orchidaceae* (*Orchids*):
+phytochemical compounds, their classifications, and ethnobotanical uses.
+
+## Loading the Datasets
+
+Load the package and available datasets:
+
+```{r}
+#| label: datasets_all
+
+library(EthnoBotaPhyWR)
+library(tidytable)
+
+# Load all three datasets
+data(orchids_compounds)
+data(orchids_compound_classes)
+data(orchids_ethnobotanical)
+
+cat("Loaded:\n")
+cat("  orchids_compounds:", nrow(orchids_compounds), "rows\n")
+cat("  orchids_compound_classes:", nrow(orchids_compound_classes), "rows\n")
+cat("  orchids_ethnobotanical:", nrow(orchids_ethnobotanical), "rows\n")
+```
+
+## orchids_compounds
+
+The **orchids_compounds** dataset links taxa to their reported chemical
+compounds, with SMILES strings and chemical classifiers.
+
+```{r}
+#| label: datasets_compounds
+
+head(orchids_compounds, 3)
+```
+
+### Structure
+
+- **taxon**: Wikidata QID for the species
+- **taxon_name**: Scientific name
+- **compound**: Wikidata QID for the compound
+- **compound_smiles_canonical**: Canonical SMILES representation
+- **compound_inchikey**: InChIKey identifier
+- **connectivity_layer**: InChIKey connectivity skeleton
+- **pathway**, **superclass**, **class**: NPClassifier taxonomy
+- **glycoside**: Logical flag for glycoside compounds
+
+### Analysis Examples
+
+**Count compounds per taxon:**
+
+```{r}
+#| label: datasets_compounds_stats
+
+orchids_compounds |>
+  tidytable::summarize(
+    n_compounds = tidytable::n_distinct(compound),
+    .by = taxon_name
+  ) |>
+  tidytable::arrange(-n_compounds) |>
+  head(10)
+```
+
+**Find glycosides:**
+
+```{r}
+#| label: datasets_glycosides
+
+glycosides <- orchids_compounds |>
+  tidytable::filter(glycoside) |>
+  tidytable::distinct(compound, pathway, superclass, class)
+
+cat("Found", nrow(glycosides), "unique glycoside compounds\n")
+head(glycosides)
+```
+
+**Explore chemical diversity:**
+
+```{r}
+#| label: datasets_chemical_diversity
+
+orchids_compounds |>
+  tidytable::summarize(
+    n_unique_compounds = tidytable::n_distinct(compound),
+    n_unique_pathways = tidytable::n_distinct(pathway),
+    n_unique_classes = tidytable::n_distinct(class),
+    .by = taxon_name
+  ) |>
+  tidytable::slice_max(n_unique_compounds, n = 10)
+```
+
+## orchids_compound_classes
+
+The **orchids_compound_classes** dataset is a reference lookup for SMILES
+strings to their NPClassifier taxonomy.
+
+```{r}
+#| label: datasets_compound_classes
+
+head(orchids_compound_classes, 3)
+```
+
+### Structure
+
+- **query**: Canonical SMILES string
+- **pathway**, **superclass**, **class**: NPClassifier taxonomy
+- **glycoside**: Logical flag
+
+### Lookup Example
+
+```{r}
+#| label: datasets_terpenoids
+
+# Find all classes of terpenoids
+terpenoids <- orchids_compound_classes |>
+  tidytable::filter(pathway == "Terpenoids")
+
+cat("Found", nrow(terpenoids), "SMILES matching terpenoids\n")
+
+terpenoids |>
+  tidytable::summarize(
+    n = tidytable::n(),
+    .by = superclass
+  ) |>
+  tidytable::arrange(-n)
+```
+
+## orchids_ethnobotanical
+
+The **orchids_ethnobotanical** dataset links species with documented
+ethnobotanical uses to their Open Tree of Life taxonomy identifiers.
+
+```{r}
+#| label: datasets_ethnobotanical
+
+head(orchids_ethnobotanical, 3)
+```
+
+### Structure
+
+- **taxon_name**: Scientific name
+- **taxon**: Wikidata QID
+- **taxon_id_ott**: Open Tree of Life identifier (for phylogenetic integration)
+
+### Integration with Phylogenetics
+
+Use `taxon_id_ott` to build phylogenetic trees:
+
+```{r}
+#| label: datasets_tree
+
+# Prepare data for tree building
+tree_data <- orchids_ethnobotanical |>
+  tidytable::mutate(
+    compounds_count = 0,  # or merge with orchids_compounds
+    ethnobotanical_count = 1
+  ) |>
+  tidytable::distinct(taxon_id_ott, taxon_name, .keep_all = TRUE)
+
+cat("Ready to use", nrow(tree_data), "OTT IDs for phylogenetics\n")
+head(tree_data)
+```
+
+## Integration: Compounds × Ethnobotany
+
+Combine datasets to analyze which species have both compounds and uses:
+
+```{r}
+#| label: datasets_both
+
+# Species with compounds
+spp_compounds <- orchids_compounds |>
+  tidytable::distinct(taxon, taxon_name)
+
+# Species with ethnobotanical uses
+spp_ethnobotany <- orchids_ethnobotanical |>
+  tidytable::distinct(taxon, taxon_name)
+
+# Find intersection
+both <- tidytable::inner_join(
+  spp_compounds,
+  spp_ethnobotany,
+  by = c("taxon", "taxon_name")
+)
+
+cat("Species with both compounds AND ethnobotanical uses:",
+    nrow(both), "/", nrow(spp_ethnobotany), "\n")
+```
+
+## R-Universe Multi-Format Export
+
+Because these datasets are flat `data.frame` objects, they qualify for
+r-universe multi-format export:
+
+- CSV, XLSX, JSON, NDJSON downloads
+- Machine-readable metadata
+- API access for downstream tools
+
+See https://adafede.r-universe.dev/EthnoBotaPhyWR for format options.
+
+## Data Sources
+
+All datasets are curated from:
+
+- **Wikidata** (https://www.wikidata.org/) --- Taxonomic data and relationships
+- **LOTUS** (https://lotus.naturalproducts.net/) --- Natural products database
+- **NPClassifier** (https://npclassifier.gnps2.org/) --- Compound classification
+- **Open Tree of Life** (https://tree.opentreeoflife.org/) --- Phylogenetic IDs
+
+## Reproducibility
+
+The `data-raw/` scripts document how these datasets were prepared:
+
+```r
+# View processing script
+file.show(system.file("data-raw", "orchids_compounds.R", package = "EthnoBotaPhyWR"))
+```
+
+## Further Reading
+
+- Main vignette: See `help(ethnobotafever_tree)` for the complete pipeline
+- Tree building: `help(get_trees_cached)`
+- Plotting: `help(plot_trees)`
+- Compound classification: `help(get_npclassifier_taxonomy)`

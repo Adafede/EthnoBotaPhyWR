@@ -1,5 +1,5 @@
 Package: EthnoBotaPhyWR
-Title: **EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and *R*. It should be pronounced "Ethnobota Fever".
+Title: **EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and *R*. It should be pronounced "Ethnobota Fever"
 Version: 0.0.0.9001
 Authors@R: c(
     person(given = "Adriano",
@@ -9,8 +9,9 @@ Authors@R: c(
            comment = c(ORCID = "0000-0003-0443-9902"))
   )
 Maintainer: Adriano Rutz <adafede@gmail.com>
-Description: This package provides the infrastructure to perform
-    ethnobotanical and phytochemical data collection.
+Description: This package provides infrastructure and curated ethnobotanical
+    and phytochemical datasets for analyzing plant families, including
+    phylogenetic integration and visualization tools.
 License: AGPL (>= 3)
 URL: https://github.com/adafede/EthnoBotaPhyWR, https://adafede.github.io/EthnoBotaPhyWR
 BugReports: https://github.com/adafede/EthnoBotaPhyWR/issues
@@ -19,13 +20,11 @@ Depends:
 Imports:
     ape (>= 5.8.1),
     cascade,
+    fastmatch (>= 1.1.0),
     ggplot2 (>= 4.0.3),
-    ggpubr (>= 0.6.3),
     ggtext (>= 0.1.2),
     ggtree (>= 4.0.5),
     ggtreeExtra (>= 1.20.1),
-    gt (>= 1.3.0),
-    httr2 (>= 1.2.2),
     jsonlite (>= 2.0.0),
     khroma (>= 1.17.0),
     logger (>= 0.4.2),
@@ -43,13 +42,8 @@ Imports:
 Remotes:
     adafede/cascade
 Suggests:
-    altdoc (>= 0.7.2),
-    BiocManager (>= 1.30.27),
-    BiocVersion (>= 3.22.0),
-    grateful (>= 0.3.0),
-    knitr (>= 1.51),
+    gt (>= 1.3.0),
     quarto (>= 1.5.1),
-    lifecycle (>= 1.0.5),
     spelling,
     svglite (>= 2.2.2),
     testthat (>= 3.3.2)
@@ -57,11 +51,14 @@ ByteCompile: TRUE
 Collate:
     'EthnoBotaPhyWR-package.R'
     'calculate_branches_values.R'
+    'data.R'
     'plot_trees.R'
     'get_trees.R'
     'get_results_wd.R'
     'get_npclassifier_taxonomy.R'
     'ethnobotafever_tree.R'
+    'normalize_ott_ids.R'
+    'resolve_cache_dir.R'
 Config/roxygen2/markdown: TRUE
 Config/roxygen2/version: 8.0.0
 Config/testthat/edition: 3

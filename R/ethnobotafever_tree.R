@@ -161,7 +161,7 @@ ethnobotafever_tree <- function(
     tidytable::filter(taxon_rank == "Q7432") |>
     tidytable::mutate(
       generic_epithet = taxon_name |>
-        gsub(pattern = " .*", replacement = "")
+        stringi::stri_replace_all_regex(" .*", "")
     ) |>
     tidytable::distinct(taxon, generic_epithet)
   logger::log_info(
@@ -174,7 +174,7 @@ ethnobotafever_tree <- function(
     tidytable::filter(taxon_rank == "Q767728") |>
     tidytable::mutate(
       generic_epithet = taxon_name |>
-        gsub(pattern = " .*", replacement = "")
+        stringi::stri_replace_all_regex(" .*", "")
     ) |>
     tidytable::distinct(taxon, generic_epithet)
   logger::log_info(
@@ -328,7 +328,7 @@ ethnobotafever_tree <- function(
   taxa_compounds <- taxa_compounds_tot |>
     tidytable::mutate(
       connectivity_layer = compound_inchikey |>
-        gsub(pattern = "-.*", replacement = "")
+        stringi::stri_replace_all_regex("-.*", "")
     ) |>
     tidytable::distinct(taxon, connectivity_layer, .keep_all = TRUE)
 
@@ -337,7 +337,7 @@ ethnobotafever_tree <- function(
       df |>
         tidytable::mutate(
           connectivity_layer = compound_inchikey |>
-            gsub(pattern = "-.*", replacement = "")
+            stringi::stri_replace_all_regex("-.*", "")
         ) |>
         tidytable::distinct(taxon, connectivity_layer, .keep_all = TRUE)
     })
@@ -367,7 +367,7 @@ ethnobotafever_tree <- function(
   lotus_compounds <- lotus |>
     tidytable::mutate(
       connectivity_layer = compound_inchikey |>
-        gsub(pattern = "-.*", replacement = "")
+        stringi::stri_replace_all_regex("-.*", "")
     ) |>
     tidytable::distinct(taxon, connectivity_layer, .keep_all = TRUE)
   logger::log_info(
@@ -847,7 +847,7 @@ ethnobotafever_tree <- function(
     tidytable::select(taxon_name, compounds_count) |>
     tidytable::arrange(
       taxon_name |>
-        gsub(pattern = " .*", replacement = ""),
+        stringi::stri_replace_all_regex(" .*", ""),
       -compounds_count
     ) |>
     tidytable::fwrite(

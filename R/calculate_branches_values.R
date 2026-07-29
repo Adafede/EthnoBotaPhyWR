@@ -37,8 +37,16 @@ calculate_branches_values <- function(tree, df, variable, name) {
     matched_nodes[] <- NA_integer_
 
     for (i in seq_len(nrow(df))) {
-      if (!is.na(df_ids[[i]]) && df_ids[[i]] %in% tip_ids) {
-        matched_nodes[[i]] <- match(df_ids[[i]], tip_ids)
+      if (!is.na(df_ids[[i]])) {
+        match_idx <- fastmatch::fmatch(df_ids[[i]], tip_ids)
+        if (!is.na(match_idx)) {
+          matched_nodes[[i]] <- match_idx
+        } else if ("taxon_name" %in% names(df) && !is.na(df$taxon_name[[i]])) {
+          label_match <- match(df$taxon_name[[i]], tree$tip.label)
+          if (!is.na(label_match)) {
+            matched_nodes[[i]] <- label_match
+          }
+        }
       } else if ("taxon_name" %in% names(df) && !is.na(df$taxon_name[[i]])) {
         label_match <- match(df$taxon_name[[i]], tree$tip.label)
         if (!is.na(label_match)) {
@@ -90,7 +98,7 @@ calculate_branches_values <- function(tree, df, variable, name) {
   node_values <- tidytable::bind_rows(node_values, internal_node_values)
 
   # Combine with tree structure
-  library(ggtree)
+  requireNamespace(ggtree)
   tree_data <- tibble::as_tibble(tree) |>
     tidytable::left_join(node_values, by = "node")
   tree_data$is_tip <- tree_data$node <= n_tips

@@ -1,0 +1,88 @@
+#' Orchids Compound Data
+#'
+#' A dataset containing phytochemical information from *Orchidaceae* species.
+#' This is a curated subset linking taxonomic data, chemical structures (SMILES),
+#' and NPClassifier taxonomy.
+#'
+#' @format A data.frame with 3055 rows and 10 columns:
+#' \describe{
+#'   \item{taxon}{Wikidata QID (Q-identifier) for the species}
+#'   \item{taxon_name}{Scientific name of the species}
+#'   \item{compound}{Wikidata QID for the chemical compound}
+#'   \item{compound_smiles_canonical}{Canonical SMILES representation}
+#'   \item{compound_inchikey}{InChIKey chemical identifier}
+#'   \item{connectivity_layer}{First block of InChIKey (connectivity skeleton)}
+#'   \item{pathway}{NPClassifier pathway classification}
+#'   \item{superclass}{NPClassifier superclass classification}
+#'   \item{class}{NPClassifier class classification}
+#'   \item{glycoside}{Logical: whether compound is a glycoside}
+#' }
+#'
+#' @source
+#' Curated from:
+#' - Wikidata (https://www.wikidata.org/)
+#' - LOTUS database (https://lotus.naturalproducts.net/)
+#' - NPClassifier (https://npclassifier.gnps2.org/)
+#'
+#' @examples
+#' data(orchids_compounds)
+#' head(orchids_compounds)
+#' table(orchids_compounds$superclass)
+#'
+"orchids_compounds"
+
+#' Orchids Compound Classifications
+#'
+#' NPClassifier taxonomy results for SMILES strings found in *Orchidaceae*.
+#' Maps each unique SMILES to its pathway, superclass, class, and glycoside status.
+#'
+#' @format A data.frame with 1574 rows and 5 columns:
+#' \describe{
+#'   \item{query}{Canonical SMILES string}
+#'   \item{pathway}{NPClassifier pathway classification}
+#'   \item{superclass}{NPClassifier superclass classification}
+#'   \item{class}{NPClassifier class classification}
+#'   \item{glycoside}{Logical: whether compound is a glycoside}
+#' }
+#'
+#' @details
+#' This dataset is a deduplicated lookup table for compound classifications.
+#' Use it to quickly retrieve NPClassifier results for a given SMILES string
+#' without querying the live API.
+#'
+#' @source
+#' NPClassifier Web Service (https://npclassifier.gnps2.org/)
+#'
+#' @examples
+#' data(orchids_compound_classes)
+#' head(orchids_compound_classes)
+#' nrow(orchids_compound_classes)
+#'
+"orchids_compound_classes"
+
+#' Orchids Ethnobotanical Uses
+#'
+#' A dataset of ethnobotanical uses reported for *Orchidaceae* species,
+#' linked to their Open Tree of Life (OTT) taxonomy identifiers.
+#'
+#' @format A data.frame with 419 rows and 3 columns:
+#' \describe{
+#'   \item{taxon_name}{Scientific name of the species}
+#'   \item{taxon}{Wikidata QID (Q-identifier) for the species}
+#'   \item{taxon_id_ott}{Open Tree of Life taxonomy identifier}
+#' }
+#'
+#' @details
+#' Each row represents a species with documented ethnobotanical uses.
+#' The \code{taxon_id_ott} field enables integration with phylogenetic analyses
+#' via the Open Tree of Life API.
+#'
+#' @source
+#' Wikidata (https://www.wikidata.org/) and Open Tree of Life (https://tree.opentreeoflife.org/)
+#'
+#' @examples
+#' data(orchids_ethnobotanical)
+#' head(orchids_ethnobotanical)
+#' nrow(orchids_ethnobotanical)
+#'
+"orchids_ethnobotanical"

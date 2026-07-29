@@ -4,9 +4,9 @@
 \name{EthnoBotaPhyWR-package}
 \alias{EthnoBotaPhyWR}
 \alias{EthnoBotaPhyWR-package}
-\title{EthnoBotaPhyWR: **EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and *R*. It should be pronounced "Ethnobota Fever".}
+\title{EthnoBotaPhyWR: **EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and *R*. It should be pronounced "Ethnobota Fever"}
 \description{
-This package provides the infrastructure to perform ethnobotanical and phytochemical data collection.
+This package provides infrastructure and curated ethnobotanical and phytochemical datasets for analyzing plant families, including phylogenetic integration and visualization tools.
 }
 \seealso{
 Useful links:

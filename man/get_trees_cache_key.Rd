@@ -20,6 +20,14 @@ A list with \code{taxa_not_in_tree}, \code{tree_taxa_full}, and \code{tree_taxa_
 Builds phylogenetic trees for a set of Open Tree of Life (OTT) IDs using the rotl service. The function returns the taxa that are absent from the requested tree, the full induced subtree, and a second tree restricted to taxa with reported compounds or ethnobotanical uses.
 }
 \examples{
-# get_trees_cache_key(c(1234, 5678), data.frame(taxon_id_ott = c(1234, 5678), compounds_count = c(1, 0), ethnobotanical_count = c(0, 1)), "Orchidaceae")
+# get_trees_cache_key(
+#   c(1234, 5678),
+#   data.frame(
+#     taxon_id_ott = c(1234, 5678),
+#     compounds_count = c(1, 0),
+#     ethnobotanical_count = c(0, 1)
+#   ),
+#   "Orchidaceae"
+# )
 }
 \keyword{internal}

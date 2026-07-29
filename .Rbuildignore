@@ -1,6 +1,12 @@
+^EthnoBotaPhyWR\.iml$
+^README\.qmd$
 ^[.]?air[.]toml$
 ^\.github$
+^\.idea$
 ^\.vscode$
 ^codemeta\.json$
 ^data-raw$
+^grateful-refs\.bib$
+^index\.html$
+^index\.qmd$
 ^prek[.]toml$

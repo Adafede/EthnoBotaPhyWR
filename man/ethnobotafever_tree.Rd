@@ -52,7 +52,7 @@ ethnobotafever_tree(
 
 \item{export_table_counts_sub}{Character or NULL. Path for the filtered species-level counts export.}
 
-\item{local_cache}{Character. Directory for the persistent tree cache.}
+\item{local_cache}{Character. Directory containing \code{.rda} tree cache datasets (for example \code{data-raw}).}
 
 \item{log_dir}{Character. Directory for log files.}
 }

@@ -13,11 +13,11 @@ get_trees_cached(ott_ids, df_counted, taxon_name, cache_dir)
 
 \item{taxon_name}{Character. Name of the focal taxon used to derive the cache key.}
 
-\item{cache_dir}{Character. Directory used for persistent on-disk caching.}
+\item{cache_dir}{Character. Directory used for persistent on-disk \code{.rda} caching (for example \code{data-raw}).}
 }
 \value{
 The cached or newly built tree result list.
 }
 \description{
-Returns a cached tree result when available, otherwise builds and serializes the tree result to disk.
+Returns a cached tree result when available, otherwise builds and serializes the tree result to an \code{.rda} dataset file on disk.
 }

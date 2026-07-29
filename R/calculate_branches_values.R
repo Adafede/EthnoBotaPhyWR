@@ -3,6 +3,8 @@
 #' @description
 #' Calculates values for each branch (node) in a phylogenetic tree, assigning tip values from a data frame and computing internal node values as the mean of descendant tips. Returns a data frame with node-level results for downstream analysis or plotting.
 #'
+#' @include normalize_ott_ids.R
+#'
 #' @param tree A phylo object (from ape package)
 #' @param df A data.frame containing at least a 'taxon_name' column and a column for the variable of interest
 #' @param variable Character. Name of the column in df to use for tip values
@@ -98,8 +100,7 @@ calculate_branches_values <- function(tree, df, variable, name) {
   node_values <- tidytable::bind_rows(node_values, internal_node_values)
 
   # Combine with tree structure
-  requireNamespace(ggtree)
-  tree_data <- tibble::as_tibble(tree) |>
+  tree_data <- tidytree::as_tibble(tree) |>
     tidytable::left_join(node_values, by = "node")
   tree_data$is_tip <- tree_data$node <= n_tips
   tree_data$parent_count <- tree_data$count[match(

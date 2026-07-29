@@ -234,16 +234,13 @@ plot_trees <- function(
   layout_phyto <- estimate_layout(tree_taxa_phyto, offset, genus_mode = genus)
 
   logger::log_trace("Plotting ...")
-  requireNamespace(ggtree)
-  requireNamespace(ggplot2)
-  geom_col <- ggplot2::geom_col
 
   plot_tree_taxa <- ggtree::ggtree(
     tree_taxa_full,
     layout = "rectangular",
     mapping = ggplot2::aes(color = log10(ethnobotanical_species_average))
-  ) %<+%
-    tree_data +
+  ) |>
+    ggtree::`%<+%`(tree_data) +
     ggtree::xlim_tree(layout_full$tree_xlim) +
     khroma::scale_color_batlow(
       name = "Known ethnobotanical species",
@@ -306,8 +303,8 @@ plot_trees <- function(
     tree_taxa_phyto,
     layout = "rectangular",
     mapping = ggplot2::aes(color = log10(ethnobotanical_species_average))
-  ) %<+%
-    tree_data_phyto +
+  ) |>
+    ggtree::`%<+%`(tree_data_phyto) +
     ggtree::xlim_tree(layout_phyto$tree_xlim) +
     khroma::scale_color_batlow(
       name = "Known ethnobotanical species",

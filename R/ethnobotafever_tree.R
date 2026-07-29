@@ -7,6 +7,7 @@
 #' @include get_npclassifier_taxonomy.R
 #' @include get_results_wd.R
 #' @include get_trees.R
+#' @include normalize_ott_ids.R
 #' @include plot_trees.R
 #'
 #' @param taxon_name Character. Name of the taxon of interest.
@@ -23,7 +24,7 @@
 #' @param export_table_classified Character. Path for the classified compounds export.
 #' @param export_table_counts Character. Path for the genus-level summary table export.
 #' @param export_table_counts_sub Character or NULL. Path for the filtered species-level counts export.
-#' @param local_cache Character. Directory for the persistent tree cache.
+#' @param local_cache Character. Directory containing `.rda` tree cache datasets (for example `data-raw`).
 #' @param log_dir Character. Directory for log files.
 #'
 #' @return A list containing the rendered plots, exported tables, and the log-file path.
@@ -82,6 +83,22 @@ ethnobotafever_tree <- function(
     )
   }
 
+  taxon_qid <- taxon_name |>
+    cascade::taxon_name_to_qid()
+
+  example_family_qids <- example_family_names |>
+    purrr::map(
+      .f = cascade::taxon_name_to_qid
+    )
+
+  taxa_wd <- taxon_qid |>
+    get_subtaxa_wd()
+
+  example_family_taxa_wd <- example_family_qids |>
+    purrr::map(
+      .f = get_subtaxa_wd
+    )
+
   # Retrieve ethnobotanical data from Wikidata
   table_ethnobotanical_wd <- taxon_qid |>
     get_uses_wd() |>
@@ -138,22 +155,6 @@ ethnobotafever_tree <- function(
   } else {
     table_ethnobotanical <- table_ethnobotanical_wd
   }
-
-  taxon_qid <- taxon_name |>
-    cascade::taxon_name_to_qid()
-
-  example_family_qids <- example_family_names |>
-    purrr::map(
-      .f = cascade::taxon_name_to_qid
-    )
-
-  taxa_wd <- taxon_qid |>
-    get_subtaxa_wd()
-
-  example_family_taxa_wd <- example_family_qids |>
-    purrr::map(
-      .f = get_subtaxa_wd
-    )
 
   logger::log_info(
     "We found ",
@@ -782,7 +783,10 @@ ethnobotafever_tree <- function(
     unique()
 
   logger::log_trace("Retrieving Open Tree Taxonomy now... taking some time!")
-  cache_dir <- resolve_cache_dir(local_cache)
+  cache_dir <- local_cache
+  if (is.null(cache_dir) || length(cache_dir) != 1L || !nzchar(cache_dir)) {
+    cache_dir <- file.path("data")
+  }
   dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
   trees_gen <- get_trees_cached(
     ott_ids = taxa_ott_wd_ids,

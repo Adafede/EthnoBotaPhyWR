@@ -1,6 +1,7 @@
 start <- Sys.time()
 
 library(EthnoBotaPhyWR)
+library(ggplot2) # required because of `geom_col`
 
 taxon_name <- "Orchidaceae"
 
@@ -18,14 +19,14 @@ example_family_names <- list(
 )
 
 pkg_root <- normalizePath(file.path("data-raw", ".."), mustWork = TRUE)
-cache_dir <- EthnoBotaPhyWR:::resolve_cache_dir()
-log_dir <- file.path(pkg_root, "logs")
+cache_dir <- file.path(pkg_root, "data")
+log_dir <- file.path(pkg_root, "data-raw/")
 figures_dir <- file.path(pkg_root, "man", "figures")
 dir.create(figures_dir, recursive = TRUE, showWarnings = FALSE)
 
-path_molecules <- EthnoBotaPhyWR::orchids_compounds
-path_classes <- EthnoBotaPhyWR::orchids_compound_classes
-path_ethnobotanical <- EthnoBotaPhyWR::orchids_ethnobotanical
+path_molecules <- orchids_compounds
+path_classes <- orchids_compound_classes
+path_ethnobotanical <- orchids_ethnobotanical
 
 export_tree_full <- file.path(figures_dir, "tree_orchids_full.pdf")
 export_tree_phyto <- file.path(figures_dir, "tree_orchids_phyto.pdf")
@@ -42,10 +43,11 @@ export_table_counts <- file.path(
 )
 export_table_counts_sub <- file.path(
   pkg_root,
+  "data-raw",
   "orchids_table_counts_sub.tsv"
 )
 
-local_cache <- cache_dir
+local_cache <- file.path(pkg_root, "data")
 dir.create(log_dir, recursive = TRUE, showWarnings = FALSE)
 
 ## External sources

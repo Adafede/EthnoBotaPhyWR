@@ -3,6 +3,8 @@
 #' @description
 #' Builds phylogenetic trees for a set of Open Tree of Life (OTT) IDs using the rotl service. The function returns the taxa that are absent from the requested tree, the full induced subtree, and a second tree restricted to taxa with reported compounds or ethnobotanical uses.
 #'
+#' @include normalize_ott_ids.R
+#'
 #' @param ott_ids Integer vector. OTT IDs to include in the tree.
 #' @param df_counted Data.frame. Data frame containing at least `taxon_id_ott`, `compounds_count`, and `ethnobotanical_count` columns.
 #' @param taxon_name Character. Name of the focal taxon used to build the cache key and log context.
@@ -10,7 +12,15 @@
 #' @return A list with `taxa_not_in_tree`, `tree_taxa_full`, and `tree_taxa_phyto` elements.
 #'
 #' @examples
-#' # get_trees_cache_key(c(1234, 5678), data.frame(taxon_id_ott = c(1234, 5678), compounds_count = c(1, 0), ethnobotanical_count = c(0, 1)), "Orchidaceae")
+#' # get_trees_cache_key(
+#' #   c(1234, 5678),
+#' #   data.frame(
+#' #     taxon_id_ott = c(1234, 5678),
+#' #     compounds_count = c(1, 0),
+#' #     ethnobotanical_count = c(0, 1)
+#' #   ),
+#' #   "Orchidaceae"
+#' # )
 #' @keywords internal
 get_trees_cache_key <- function(ott_ids, df_counted, taxon_name) {
   cache_version <- "tree-v1"
@@ -61,24 +71,33 @@ get_trees_cache_key <- function(ott_ids, df_counted, taxon_name) {
 #' @title Get cached trees
 #'
 #' @description
-#' Returns a cached tree result when available, otherwise builds and serializes the tree result to disk.
+#' Returns a cached tree result when available, otherwise builds and serializes the tree result to an `.rda` dataset file on disk.
 #'
 #' @param ott_ids Integer vector. OTT IDs to include in the tree.
 #' @param df_counted Data.frame. Data frame containing at least `taxon_id_ott`, `compounds_count`, and `ethnobotanical_count` columns.
 #' @param taxon_name Character. Name of the focal taxon used to derive the cache key.
-#' @param cache_dir Character. Directory used for persistent on-disk caching.
+#' @param cache_dir Character. Directory used for persistent on-disk `.rda` caching (for example `data-raw`).
 #'
 #' @return The cached or newly built tree result list.
 get_trees_cached <- function(ott_ids, df_counted, taxon_name, cache_dir) {
   dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
   cache_key <- get_trees_cache_key(ott_ids, df_counted, taxon_name)
+  cache_object_name <- paste0("trees_", openssl::md5(cache_key))
   cache_file <- file.path(
     cache_dir,
-    paste0("trees_", openssl::md5(cache_key), ".rda")
+    paste0(cache_object_name, ".rda")
   )
 
   if (file.exists(cache_file)) {
-    return(load(cache_file))
+    cache_env <- new.env(parent = emptyenv())
+    load(cache_file, envir = cache_env)
+    if (exists(cache_object_name, envir = cache_env, inherits = FALSE)) {
+      return(get(cache_object_name, envir = cache_env, inherits = FALSE))
+    }
+    if (exists("result", envir = cache_env, inherits = FALSE)) {
+      return(get("result", envir = cache_env, inherits = FALSE))
+    }
+    stop("Cached tree file does not contain an expected object name")
   }
 
   result <- get_trees(
@@ -86,7 +105,9 @@ get_trees_cached <- function(ott_ids, df_counted, taxon_name, cache_dir) {
     df_counted = df_counted,
     taxon_name = taxon_name
   )
-  save(result, file = cache_file)
+  cache_env <- list2env(list(), parent = emptyenv())
+  assign(cache_object_name, result, envir = cache_env)
+  save(list = cache_object_name, file = cache_file, envir = cache_env)
   result
 }
 

@@ -62,18 +62,6 @@
     },
     {
       "@type": "SoftwareApplication",
-      "identifier": "spelling",
-      "name": "spelling",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=spelling"
-    },
-    {
-      "@type": "SoftwareApplication",
       "identifier": "svglite",
       "name": "svglite",
       "version": ">= 2.2.2",
@@ -84,19 +72,6 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=svglite"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "identifier": "testthat",
-      "name": "testthat",
-      "version": ">= 3.3.2",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=testthat"
     }
   ],
   "softwareRequirements": {
@@ -361,13 +336,26 @@
     },
     "22": {
       "@type": "SoftwareApplication",
+      "identifier": "tidytree",
+      "name": "tidytree",
+      "version": ">= 0.4.6",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=tidytree"
+    },
+    "23": {
+      "@type": "SoftwareApplication",
       "identifier": "utils",
       "name": "utils"
     },
     "SystemRequirements": null
   },
   "keywords": ["Ethnobotany", "Phytochemistry", "Taxonomy", "Wikidata", "ethnobotany", "phytochemistry", "r", "wikidata"],
-  "fileSize": "3100.346KB",
+  "fileSize": "445.663KB",
   "readme": "https://github.com/Adafede/EthnoBotaPhyWR/blob/main/README.md",
   "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental"
 }

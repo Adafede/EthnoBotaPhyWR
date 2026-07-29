@@ -129,13 +129,11 @@ result <- ethnobotafever_tree(
   | cascade        | 0.0.0.9002 | Rutz and Wolfender (2023); Rutz (2026a)                                     |
   | EthnoBotaPhyWR | 0.0.0.9001 | Rutz (2026b)                                                                |
   | fastmatch      | 1.1.8      | Urbanek (2026)                                                              |
-  | ggpubr         | 1.0.0      | Kassambara (2026)                                                           |
   | ggtext         | 0.1.2      | Wilke and Wiernik (2022)                                                    |
   | ggtree         | 4.2.0      | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022) |
   | ggtreeExtra    | 1.22.1     | Xu et al. (2021); Yu (2022b)                                                |
   | grid           | 4.6.1      | R Core Team (2026b)                                                         |
   | gt             | 1.3.0      | Iannone et al. (2026)                                                       |
-  | httr2          | 1.3.0      | Wickham (2026)                                                              |
   | khroma         | 1.17.0     | Frerebeau (2025)                                                            |
   | knitr          | 1.51       | Xie (2014); Xie (2015); Xie (2025)                                          |
   | logger         | 0.4.2      | Daróczi and Wickham (2026)                                                  |
@@ -146,11 +144,10 @@ result <- ethnobotafever_tree(
   | rmarkdown      | 2.31       | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026)                 |
   | rotl           | 3.1.1      | Michonneau et al. (2016); OpenTreeOfLife et al. (2019)                      |
   | scales         | 1.4.0      | Wickham et al. (2025)                                                       |
-  | spelling       | 2.3.2      | Ooms and Hester (2025)                                                      |
   | stringi        | 1.8.7      | Gagolewski (2022)                                                           |
   | tidytable      | 0.11.2     | Fairbanks (2024)                                                            |
+  | tidytree       | 0.4.8      | Yu (2022c)                                                                  |
   | tidyverse      | 2.0.0      | Wickham et al. (2019)                                                       |
-  | tools          | 4.6.1      | R Core Team (2026c)                                                         |
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 
@@ -217,14 +214,6 @@ Display Tables*. <https://doi.org/10.32614/CRAN.package.gt>.
 
 </div>
 
-<div id="ref-ggpubr" class="csl-entry">
-
-Kassambara, Alboukadel. 2026. *<span class="nocase">ggpubr</span>:
-“<span class="nocase">ggplot2</span>” Based Publication Ready Plots*.
-<https://CRAN.R-project.org/package=ggpubr>.
-
-</div>
-
 <div id="ref-rotl2016" class="csl-entry">
 
 Michonneau, Francois, Joseph W. Brown, and David J. Winter. 2016.
@@ -254,14 +243,6 @@ Bioconductor Project Package Repository*.
 Ooms, Jeroen. 2026. *<span class="nocase">openssl</span>: Toolkit for
 Encryption, Signatures and Certificates Based on OpenSSL*.
 <https://doi.org/10.32614/CRAN.package.openssl>.
-
-</div>
-
-<div id="ref-spelling" class="csl-entry">
-
-Ooms, Jeroen, and Jim Hester. 2025.
-*<span class="nocase">spelling</span>: Tools for Spell Checking in r*.
-<https://doi.org/10.32614/CRAN.package.spelling>.
 
 </div>
 
@@ -297,14 +278,6 @@ Computing*. R Foundation for Statistical Computing.
 
 </div>
 
-<div id="ref-tools" class="csl-entry">
-
-R Core Team. 2026c. *R: A Language and Environment for Statistical
-Computing*. R Foundation for Statistical Computing.
-<https://doi.org/10.32614/R.manuals>.
-
-</div>
-
 <div id="ref-cascade2026" class="csl-entry">
 
 Rutz, Adriano. 2026a. *<span class="nocase">cascade</span>:
@@ -317,7 +290,7 @@ Aerosol Detection for Pertinent Characterization of Natural Extracts*.
 
 Rutz, Adriano. 2026b. *EthnoBotaPhyWR: \*\*EthnoBotaPhyWR\*\* Stands for
 \*Ethnobotany\*, \*Phytochemistry\*, \*Wikidata\* and \*r\*. It Should
-Be Pronounced “Ethnobota Fever.”*
+Be Pronounced “Ethnobota Fever”*.
 <https://github.com/adafede/EthnoBotaPhyWR>.
 
 </div>
@@ -353,13 +326,6 @@ Ecology and Evolution* 8 (10): 1212–20.
 Urbanek, Simon. 2026. *<span class="nocase">fastmatch</span>: Fast
 “<span class="nocase">match()</span>” Function*.
 <https://doi.org/10.32614/CRAN.package.fastmatch>.
-
-</div>
-
-<div id="ref-httr2" class="csl-entry">
-
-Wickham, Hadley. 2026. *Httr2: Perform HTTP Requests and Process the
-Responses*. <https://doi.org/10.32614/CRAN.package.httr2>.
 
 </div>
 
@@ -463,6 +429,14 @@ Visualization of Phylogenetic Treess*. 1st edition. Chapman; Hall/CRC.
 Yu, Guangchuang. 2022b. *Data Integration, Manipulation and
 Visualization of Phylogenetic Treess*. 1st edition. Chapman; Hall/CRC.
 <https://www.amazon.com/Integration-Manipulation-Visualization-Phylogenetic-Computational-ebook/dp/B0B5NLZR1Z/>.
+
+</div>
+
+<div id="ref-tidytree" class="csl-entry">
+
+Yu, Guangchuang. 2022c. *Data Integration, Manipulation and
+Visualization of Phylogenetic Treess*. 1st edition. Chapman; Hall/CRC.
+<https://doi.org/10.1201/9781003279242>.
 
 </div>
 

@@ -97,6 +97,7 @@ ethnobotanical
 ethnobotany
 fastmatch
 fastverse
+geoms
 ggplot
 ggpubr
 ggtext
@@ -128,6 +129,7 @@ smallcaps
 stringi
 subtaxa
 tidytable
+tidytree
 tidyverse
 tl
 usethis

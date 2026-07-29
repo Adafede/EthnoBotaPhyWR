@@ -18,36 +18,35 @@ example_family_names <- list(
 )
 
 pkg_root <- normalizePath(file.path("data-raw", ".."), mustWork = TRUE)
-cache_dir <- resolve_cache_dir()
+cache_dir <- EthnoBotaPhyWR:::resolve_cache_dir()
+log_dir <- file.path(pkg_root, "logs")
+figures_dir <- file.path(pkg_root, "man", "figures")
+dir.create(figures_dir, recursive = TRUE, showWarnings = FALSE)
 
-path_molecules <- file.path(
-  pkg_root,
-  "data-raw/orchids_table_unique_connectivity_classified.tsv"
-)
-path_classes <- file.path(
-  pkg_root,
-  "data-raw/orchids_compounds_classes.tsv"
-)
-path_ethnobotanical <- file.path(
-  pkg_root,
-  "data-raw/Species_medicinal_output_with_ott_id.tsv"
-)
+path_molecules <- EthnoBotaPhyWR::orchids_compounds
+path_classes <- EthnoBotaPhyWR::orchids_compound_classes
+path_ethnobotanical <- EthnoBotaPhyWR::orchids_ethnobotanical
 
-output_dir <- file.path(cache_dir, "scripts")
-dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
-
-export_tree_full <- file.path(output_dir, "tree_orchids_full.pdf")
-export_tree_phyto <- file.path(output_dir, "tree_orchids_phyto.pdf")
-export_tree_phyto_sub <- file.path(output_dir, "tree_orchids_phyto_sub.pdf")
+export_tree_full <- file.path(figures_dir, "tree_orchids_full.pdf")
+export_tree_phyto <- file.path(figures_dir, "tree_orchids_phyto.pdf")
+export_tree_phyto_sub <- file.path(figures_dir, "tree_orchids_phyto_sub.pdf")
 export_table_classified <- file.path(
-  output_dir,
+  pkg_root,
+  "data-raw",
   "orchids_table_unique_connectivity_classified.tsv"
 )
-export_table_counts <- file.path(output_dir, "orchids_table_counts.tsv")
-export_table_counts_sub <- file.path(output_dir, "orchids_table_counts_sub.tsv")
+export_table_counts <- file.path(
+  pkg_root,
+  "data-raw",
+  "orchids_table_counts.tsv"
+)
+export_table_counts_sub <- file.path(
+  pkg_root,
+  "orchids_table_counts_sub.tsv"
+)
 
 local_cache <- cache_dir
-log_dir <- file.path(output_dir, "logs")
+dir.create(log_dir, recursive = TRUE, showWarnings = FALSE)
 
 ## External sources
 source(

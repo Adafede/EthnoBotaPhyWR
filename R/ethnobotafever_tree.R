@@ -14,9 +14,9 @@
 #' @param n_ethnobotanical_count_min Integer. Minimum ethnobotanical count for filtering.
 #' @param n_compounds_count_min Integer. Minimum compound count for filtering.
 #' @param example_family_names Character vector. Example family names for comparison.
-#' @param path_molecules Character or NULL. Path to local molecules file.
-#' @param path_classes Character or NULL. Path to local classes file.
-#' @param path_ethnobotanical Character or NULL. Path to local ethnobotanical file.
+#' @param path_molecules Character, data.frame, or NULL. Local molecules file or table.
+#' @param path_classes Character, data.frame, or NULL. Local classes file or seed data.
+#' @param path_ethnobotanical Character, data.frame, or NULL. Local ethnobotanical file or table.
 #' @param export_tree_full Character. Path for the main full-tree PDF figure.
 #' @param export_tree_phyto Character. Path for the phytochemical overview PDF figure.
 #' @param export_tree_phyto_sub Character. Path for the species-level phytochemical PDF figure.
@@ -60,6 +60,19 @@ ethnobotafever_tree <- function(
   }
   logger::log_appender(appender = logger::appender_tee(file = log_file))
 
+  resolve_input_table <- function(x, label) {
+    if (is.null(x)) {
+      return(NULL)
+    }
+    if (is.data.frame(x)) {
+      return(as.data.frame(x, stringsAsFactors = FALSE))
+    }
+    if (is.character(x) && length(x) == 1L && file.exists(x)) {
+      return(tidytable::fread(x))
+    }
+    stop(label, " must be a data.frame, an existing file path, or NULL")
+  }
+
   # Helper: log and count unique taxa
   log_unique_taxa <- function(df, label) {
     logger::log_info(
@@ -83,17 +96,17 @@ ethnobotafever_tree <- function(
   )
 
   # Optionally merge with local ethnobotanical data
-  if (!is.null(path_ethnobotanical) && file.exists(path_ethnobotanical)) {
-    table_ethnobotanical_local <- tryCatch(
-      {
-        local_dt <- tidytable::fread(path_ethnobotanical)
-        local_dt$taxon_id_ott <- normalize_ott_ids(local_dt$taxon_id_ott)
-        local_dt$ethnobotanical <- TRUE
-        tidytable::distinct(local_dt)
-      },
-      error = function(e) {
-        stop("Failed to read local ethnobotanical file: ", e$message)
-      }
+  table_ethnobotanical_local <- resolve_input_table(
+    path_ethnobotanical,
+    "path_ethnobotanical"
+  )
+  if (!is.null(table_ethnobotanical_local)) {
+    table_ethnobotanical_local$taxon_id_ott <- normalize_ott_ids(
+      table_ethnobotanical_local$taxon_id_ott
+    )
+    table_ethnobotanical_local$ethnobotanical <- TRUE
+    table_ethnobotanical_local <- tidytable::distinct(
+      table_ethnobotanical_local
     )
     log_unique_taxa(
       table_ethnobotanical_local,
@@ -251,15 +264,18 @@ ethnobotafever_tree <- function(
       " subtaxa with at least one chemical compound reported in Wikidata"
     )
   )
-  if (!is.null(path_molecules) && file.exists(path_molecules)) {
-    taxa_compounds_local <- path_molecules |>
-      tidytable::fread() |>
-      tidytable::distinct(
-        compound,
-        compound_smiles_canonical,
-        compound_inchikey,
-        taxon
-      )
+  taxa_compounds_local <- resolve_input_table(
+    path_molecules,
+    "path_molecules"
+  )
+  if (!is.null(taxa_compounds_local)) {
+    taxa_compounds_local <- tidytable::distinct(
+      taxa_compounds_local,
+      compound,
+      compound_smiles_canonical,
+      compound_inchikey,
+      taxon
+    )
     logger::log_info(
       "We found ",
       taxa_compounds_local |>
@@ -304,7 +320,7 @@ ethnobotafever_tree <- function(
   } else {
     if (!is.null(path_molecules)) {
       logger::log_warn(
-        "Local molecules file not found; using Wikidata-only compounds."
+        "Local molecules table not available; using Wikidata-only compounds."
       )
     }
     taxa_compounds_tot <- taxa_compounds_wd
@@ -473,7 +489,7 @@ ethnobotafever_tree <- function(
     ) |>
     tidytable::group_by(taxon.x, taxon_id_ott.x, taxon_name) |>
     tidytable::summarize(
-      compounds_count = length(unique(na.omit(
+      compounds_count = length(unique(stats::na.omit(
         c(compound, compound.x, compound.y)
       ))),
       species_count = sum(!is.na(unique(taxon.y)))
@@ -627,11 +643,9 @@ ethnobotafever_tree <- function(
   smiles <- taxa_compounds |>
     tidytable::distinct(compound_smiles_canonical) |>
     tidytable::pull()
-  if (file.exists(path_classes)) {
-    classes_known <- path_classes |>
-      tidytable::fread(na.strings = "") |>
-      # tidytable::filter(!is.na(glycoside)) |>
-      tidytable::distinct()
+  classes_known <- resolve_input_table(path_classes, "path_classes")
+  if (!is.null(classes_known)) {
+    classes_known <- tidytable::distinct(classes_known)
     smiles_unknown <- smiles[!smiles %in% classes_known$query]
     if (smiles_unknown |> length() > 0L) {
       classes <- smiles_unknown |>
@@ -646,8 +660,10 @@ ethnobotafever_tree <- function(
       get_npclassifier_taxonomy() |>
       tidytable::bind_rows()
   }
-  classes |>
-    tidytable::fwrite(file = path_classes, sep = "\t")
+  if (is.character(path_classes) && length(path_classes) == 1L) {
+    classes |>
+      tidytable::fwrite(file = path_classes, sep = "\t")
+  }
 
   taxa_compounds_classes <- taxa_gen_ott_cpd |>
     tidytable::bind_rows(

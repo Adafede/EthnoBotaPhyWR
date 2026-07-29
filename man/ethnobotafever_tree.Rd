@@ -34,11 +34,11 @@ ethnobotafever_tree(
 
 \item{example_family_names}{Character vector. Example family names for comparison.}
 
-\item{path_molecules}{Character or NULL. Path to local molecules file.}
+\item{path_molecules}{Character, data.frame, or NULL. Local molecules file or table.}
 
-\item{path_classes}{Character or NULL. Path to local classes file.}
+\item{path_classes}{Character, data.frame, or NULL. Local classes file or seed data.}
 
-\item{path_ethnobotanical}{Character or NULL. Path to local ethnobotanical file.}
+\item{path_ethnobotanical}{Character, data.frame, or NULL. Local ethnobotanical file or table.}
 
 \item{export_tree_full}{Character. Path for the main full-tree PDF figure.}
 

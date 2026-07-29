@@ -13,7 +13,7 @@
 #' # get_trees_cache_key(c(1234, 5678), data.frame(taxon_id_ott = c(1234, 5678), compounds_count = c(1, 0), ethnobotanical_count = c(0, 1)), "Orchidaceae")
 #' @keywords internal
 get_trees_cache_key <- function(ott_ids, df_counted, taxon_name) {
-  cache_version <- "tree-v3"
+  cache_version <- "tree-v1"
   ott_ids <- normalize_ott_ids(ott_ids)
   ott_ids <- unique(ott_ids[!is.na(ott_ids) & nzchar(ott_ids)])
   ott_ids <- sort(ott_ids)
@@ -74,11 +74,11 @@ get_trees_cached <- function(ott_ids, df_counted, taxon_name, cache_dir) {
   cache_key <- get_trees_cache_key(ott_ids, df_counted, taxon_name)
   cache_file <- file.path(
     cache_dir,
-    paste0("trees_", openssl::md5(cache_key), ".rds")
+    paste0("trees_", openssl::md5(cache_key), ".rda")
   )
 
   if (file.exists(cache_file)) {
-    return(readRDS(cache_file))
+    return(load(cache_file))
   }
 
   result <- get_trees(
@@ -86,7 +86,7 @@ get_trees_cached <- function(ott_ids, df_counted, taxon_name, cache_dir) {
     df_counted = df_counted,
     taxon_name = taxon_name
   )
-  saveRDS(result, cache_file)
+  save(result, file = cache_file)
   result
 }
 

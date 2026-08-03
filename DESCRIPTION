@@ -1,6 +1,7 @@
 Package: EthnoBotaPhyWR
 Title: **EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and *R*. It should be pronounced "Ethnobota Fever"
 Version: 0.0.0.9001
+Author: Adriano Rutz
 Authors@R: c(
     person(
         given = "Adriano",

@@ -1,4 +1,5 @@
 ^.*\.Rproj$
+^.*\.iml$
 ^.*\.log$
 ^CITATION\.cff$
 ^CRAN-SUBMISSION$
@@ -31,6 +32,8 @@
 ^dev$
 ^docs$
 ^grateful-refs\.bib$
+^index\.html$
+^index\.qmd$
 ^inst/_targets$
 ^pkgdown$
 ^prek[.]toml$

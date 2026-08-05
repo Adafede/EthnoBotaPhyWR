@@ -18,7 +18,7 @@ A data.frame with 1574 rows and 5 columns:
 NPClassifier Web Service (https://npclassifier.gnps2.org/)
 }
 \usage{
-data(orchids_compound_classes)
+orchids_compound_classes
 }
 \description{
 NPClassifier taxonomy results for SMILES strings found in \emph{Orchidaceae}.

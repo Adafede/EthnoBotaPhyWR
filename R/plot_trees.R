@@ -41,11 +41,10 @@ plot_trees <- function(
   format_tip_labels <- function(labels, genus_mode) {
     labels <- as.character(labels)
     if (genus_mode) {
-      labels <- stringi::stri_replace_all_regex(labels, "_.*", "")
-      stringi::stri_replace_all_regex(labels, " .*", "")
+      labels <- sub("_.*", "", labels)
     } else {
-      stringi::stri_replace_all_regex(labels, "_ott.*", "") |>
-        stringi::stri_replace_all_regex("_", " ")
+      labels <- sub("_ott.*", "", labels)
+      labels <- gsub("_", " ", labels, fixed = TRUE)
     }
   }
 

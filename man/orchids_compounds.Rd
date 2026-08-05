@@ -28,7 +28,7 @@ Curated from:
 }
 }
 \usage{
-data(orchids_compounds)
+orchids_compounds
 }
 \description{
 A dataset containing phytochemical information from \emph{Orchidaceae} species.

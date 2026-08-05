@@ -174,8 +174,7 @@ ethnobotafever_tree <- function(
   taxa_spe <- taxa_wd |>
     tidytable::filter(taxon_rank == "Q7432") |>
     tidytable::mutate(
-      generic_epithet = taxon_name |>
-        stringi::stri_replace_all_regex(" .*", "")
+      generic_epithet = sub(" .*", "", taxon_name)
     ) |>
     tidytable::distinct(taxon, generic_epithet)
   logger::log_info(
@@ -187,8 +186,7 @@ ethnobotafever_tree <- function(
   taxa_var <- taxa_wd |>
     tidytable::filter(taxon_rank == "Q767728") |>
     tidytable::mutate(
-      generic_epithet = taxon_name |>
-        stringi::stri_replace_all_regex(" .*", "")
+      generic_epithet = sub(" .*", "", taxon_name)
     ) |>
     tidytable::distinct(taxon, generic_epithet)
   logger::log_info(
@@ -344,8 +342,7 @@ ethnobotafever_tree <- function(
 
   taxa_compounds <- taxa_compounds_tot |>
     tidytable::mutate(
-      connectivity_layer = compound_inchikey |>
-        stringi::stri_replace_all_regex("-.*", "")
+      connectivity_layer = sub("-.*", "", compound_inchikey)
     ) |>
     tidytable::distinct(taxon, connectivity_layer, .keep_all = TRUE)
 
@@ -353,8 +350,7 @@ ethnobotafever_tree <- function(
     purrr::map(.f = function(df) {
       df |>
         tidytable::mutate(
-          connectivity_layer = compound_inchikey |>
-            stringi::stri_replace_all_regex("-.*", "")
+          connectivity_layer = sub("-.*", "", compound_inchikey)
         ) |>
         tidytable::distinct(taxon, connectivity_layer, .keep_all = TRUE)
     })
@@ -383,8 +379,7 @@ ethnobotafever_tree <- function(
   lotus <- get_lotus_wd()
   lotus_compounds <- lotus |>
     tidytable::mutate(
-      connectivity_layer = compound_inchikey |>
-        stringi::stri_replace_all_regex("-.*", "")
+      connectivity_layer = sub("-.*", "", compound_inchikey)
     ) |>
     tidytable::distinct(taxon, connectivity_layer, .keep_all = TRUE)
   logger::log_info(
@@ -866,8 +861,7 @@ ethnobotafever_tree <- function(
   taxa_known_sub |>
     tidytable::select(taxon_name, compounds_count) |>
     tidytable::arrange(
-      taxon_name |>
-        stringi::stri_replace_all_regex(" .*", ""),
+      sub(" .*", "", taxon_name),
       -compounds_count
     ) |>
     tidytable::fwrite(

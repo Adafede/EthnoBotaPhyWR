@@ -128,7 +128,6 @@ result <- ethnobotafever_tree(
   | BiocVersion    | 3.23.1     | Morgan (2025)                                                               |
   | cascade        | 0.0.0.9002 | Rutz and Wolfender (2023); Rutz (2026a)                                     |
   | EthnoBotaPhyWR | 0.0.0.9001 | Rutz (2026b)                                                                |
-  | fastmatch      | 1.1.8      | Urbanek (2026)                                                              |
   | ggtext         | 0.1.2      | Wilke and Wiernik (2022)                                                    |
   | ggtree         | 4.2.0      | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022) |
   | ggtreeExtra    | 1.22.1     | Xu et al. (2021); Yu (2022b)                                                |
@@ -140,11 +139,9 @@ result <- ethnobotafever_tree(
   | openssl        | 2.4.2      | Ooms (2026)                                                                 |
   | phangorn       | 2.12.1     | Schliep (2011); Schliep et al. (2017)                                       |
   | quarto         | 1.5.1      | Allaire and Dervieux (2025)                                                 |
-  | R.utils        | 2.13.0     | Bengtsson (2025)                                                            |
   | rmarkdown      | 2.31       | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026)                 |
   | rotl           | 3.1.1      | Michonneau et al. (2016); OpenTreeOfLife et al. (2019)                      |
   | scales         | 1.4.0      | Wickham et al. (2025)                                                       |
-  | stringi        | 1.8.7      | Gagolewski (2022)                                                           |
   | tidytable      | 0.11.2     | Fairbanks (2024)                                                            |
   | tidytree       | 0.4.8      | Yu (2022c)                                                                  |
   | tidyverse      | 2.0.0      | Wickham et al. (2019)                                                       |
@@ -164,13 +161,6 @@ Publishing System*. <https://doi.org/10.32614/CRAN.package.quarto>.
 Allaire, JJ, Yihui Xie, Christophe Dervieux, et al. 2026.
 *<span class="nocase">rmarkdown</span>: Dynamic Documents for r*.
 <https://github.com/rstudio/rmarkdown>.
-
-</div>
-
-<div id="ref-Rutils" class="csl-entry">
-
-Bengtsson, Henrik. 2025. *<span class="nocase">R.utils</span>: Various
-Programming Utilities*. <https://doi.org/10.32614/CRAN.package.R.utils>.
 
 </div>
 
@@ -195,14 +185,6 @@ Interface to “<span class="nocase">data.table</span>”*.
 Frerebeau, Nicolas. 2025. *<span class="nocase">khroma: Colour Schemes
 for Scientific Data Visualization</span>*. Université Bordeaux
 Montaigne. <https://doi.org/10.5281/zenodo.1472077>.
-
-</div>
-
-<div id="ref-stringi" class="csl-entry">
-
-Gagolewski, Marek. 2022. “<span class="nocase">stringi</span>: Fast and
-Portable Character String Processing in R.” *Journal of Statistical
-Software* 103 (2): 1–59. <https://doi.org/10.18637/jss.v103.i02>.
 
 </div>
 
@@ -318,14 +300,6 @@ Phylogenetic Analysis in r.” *Bioinformatics* 27 (4): 592–93.
 Schliep, Klaus, Alastair J. Potts, David A. Morrison, and Guido W.
 Grimm. 2017. “Intertwining Phylogenetic Trees and Networks.” *Methods in
 Ecology and Evolution* 8 (10): 1212–20.
-
-</div>
-
-<div id="ref-fastmatch" class="csl-entry">
-
-Urbanek, Simon. 2026. *<span class="nocase">fastmatch</span>: Fast
-“<span class="nocase">match()</span>” Function*.
-<https://doi.org/10.32614/CRAN.package.fastmatch>.
 
 </div>
 

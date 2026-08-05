@@ -16,7 +16,7 @@ A data.frame with 419 rows and 3 columns:
 Wikidata (https://www.wikidata.org/) and Open Tree of Life (https://tree.opentreeoflife.org/)
 }
 \usage{
-data(orchids_ethnobotanical)
+orchids_ethnobotanical
 }
 \description{
 A dataset of ethnobotanical uses reported for \emph{Orchidaceae} species,

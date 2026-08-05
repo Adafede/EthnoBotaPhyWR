@@ -40,7 +40,7 @@ calculate_branches_values <- function(tree, df, variable, name) {
 
     for (i in seq_len(nrow(df))) {
       if (!is.na(df_ids[[i]])) {
-        match_idx <- fastmatch::fmatch(df_ids[[i]], tip_ids)
+        match_idx <- match(df_ids[[i]], tip_ids)
         if (!is.na(match_idx)) {
           matched_nodes[[i]] <- match_idx
         } else if ("taxon_name" %in% names(df) && !is.na(df$taxon_name[[i]])) {

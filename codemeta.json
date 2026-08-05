@@ -98,22 +98,10 @@
       "@type": "SoftwareApplication",
       "identifier": "cascade",
       "name": "cascade",
+      "version": ">= 0.0.0.9002",
       "sameAs": "https://github.com/adafede/cascade"
     },
     "4": {
-      "@type": "SoftwareApplication",
-      "identifier": "fastmatch",
-      "name": "fastmatch",
-      "version": ">= 1.1.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=fastmatch"
-    },
-    "5": {
       "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
@@ -126,7 +114,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
     },
-    "6": {
+    "5": {
       "@type": "SoftwareApplication",
       "identifier": "ggtext",
       "name": "ggtext",
@@ -139,7 +127,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggtext"
     },
-    "7": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "ggtree",
       "name": "ggtree",
@@ -152,7 +140,7 @@
       },
       "sameAs": "https://bioconductor.org/packages/release/bioc/html/ggtree.html"
     },
-    "8": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "ggtreeExtra",
       "name": "ggtreeExtra",
@@ -165,7 +153,7 @@
       },
       "sameAs": "https://bioconductor.org/packages/release/bioc/html/ggtreeExtra.html"
     },
-    "9": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "jsonlite",
       "name": "jsonlite",
@@ -178,7 +166,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=jsonlite"
     },
-    "10": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "khroma",
       "name": "khroma",
@@ -191,7 +179,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=khroma"
     },
-    "11": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "logger",
       "name": "logger",
@@ -204,11 +192,11 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=logger"
     },
-    "12": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "openssl",
       "name": "openssl",
-      "version": ">= 1.4.0",
+      "version": ">= 2.4.2",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -217,7 +205,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=openssl"
     },
-    "13": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "phangorn",
       "name": "phangorn",
@@ -230,7 +218,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=phangorn"
     },
-    "14": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
@@ -243,20 +231,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=purrr"
     },
-    "15": {
-      "@type": "SoftwareApplication",
-      "identifier": "R.utils",
-      "name": "R.utils",
-      "version": ">= 2.13.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=R.utils"
-    },
-    "16": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "rotl",
       "name": "rotl",
@@ -269,7 +244,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rotl"
     },
-    "17": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "rvest",
       "name": "rvest",
@@ -282,7 +257,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rvest"
     },
-    "18": {
+    "16": {
       "@type": "SoftwareApplication",
       "identifier": "scales",
       "name": "scales",
@@ -295,20 +270,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=scales"
     },
-    "19": {
-      "@type": "SoftwareApplication",
-      "identifier": "stringi",
-      "name": "stringi",
-      "version": ">= 1.8.7",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=stringi"
-    },
-    "20": {
+    "17": {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
@@ -321,7 +283,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
-    "21": {
+    "18": {
       "@type": "SoftwareApplication",
       "identifier": "tidytable",
       "name": "tidytable",
@@ -334,11 +296,11 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidytable"
     },
-    "22": {
+    "19": {
       "@type": "SoftwareApplication",
       "identifier": "tidytree",
       "name": "tidytree",
-      "version": ">= 0.4.6",
+      "version": ">= 0.4.8",
       "provider": {
         "@id": "https://cran.r-project.org",
         "@type": "Organization",
@@ -347,15 +309,10 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidytree"
     },
-    "23": {
-      "@type": "SoftwareApplication",
-      "identifier": "utils",
-      "name": "utils"
-    },
     "SystemRequirements": null
   },
   "keywords": ["Ethnobotany", "Phytochemistry", "Taxonomy", "Wikidata", "ethnobotany", "phytochemistry", "r", "wikidata"],
-  "fileSize": "3131.156KB",
+  "fileSize": "444.841KB",
   "readme": "https://github.com/Adafede/EthnoBotaPhyWR/blob/main/README.md",
   "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental"
 }

@@ -21,6 +21,7 @@ authors:
   orcid: https://orcid.org/0000-0003-0443-9902
 repository: https://github.com/adafede/EthnoBotaPhyWR
 repository-code: https://github.com/adafede/EthnoBotaPhyWR
+doi: 10.5281/zenodo.TODO # replace me
 url: https://adafede.github.io/EthnoBotaPhyWR
 contact:
 - family-names: Rutz

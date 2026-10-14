@@ -158,7 +158,7 @@ get_uses_wd <- function(taxon_qid) {
       "
   PREFIX p: <http://www.wikidata.org/prop/>
   PREFIX ps: <http://www.wikidata.org/prop/statement/>
-  PREFIX pr: <http://www.w3.org/ns/prov#>
+  PREFIX pr: <http://www.wikidata.org/prop/reference/>
   PREFIX prov: <http://www.w3.org/ns/prov#>
   PREFIX wd: <http://www.wikidata.org/entity/>
   PREFIX wdt: <http://www.wikidata.org/prop/direct/>

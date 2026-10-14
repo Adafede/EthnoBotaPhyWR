@@ -1,5 +1,0 @@
-* text=auto eol=lf
-*.R text eol=lf
-*.qmd text eol=lf
-*.md text eol=lf
-data/*.rda binary

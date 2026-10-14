@@ -175,10 +175,6 @@ get_uses_wd <- function(taxon_qid) {
     )
   )
 }
-  "
-    )
-  )
-}
 
 #' @title Get LOTUS data from Wikidata
 #'

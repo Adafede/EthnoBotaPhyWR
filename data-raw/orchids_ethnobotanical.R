@@ -32,7 +32,7 @@ orchids_ethnobotanical <- unique(orchids_ethnobotanical)
 # Store for distribution
 save(
   orchids_ethnobotanical,
-  file = "data/orchids_ethnobotanical.rda",
+  file = "data/orchids_ethnobotanical.rda"
 )
 
 cat("✓ orchids_ethnobotanical dataset prepared\n")

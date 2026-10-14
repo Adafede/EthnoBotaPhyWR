@@ -22,7 +22,7 @@ orchids_compound_classes <- unique(as.data.frame(orchids_compound_classes))
 # Store for distribution
 save(
   orchids_compound_classes,
-  file = "data/orchids_compound_classes.rda",
+  file = "data/orchids_compound_classes.rda"
 )
 
 cat("✓ orchids_compound_classes dataset prepared\n")

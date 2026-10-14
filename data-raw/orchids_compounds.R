@@ -14,7 +14,7 @@ orchids_compounds <- unique(as.data.frame(orchids_compounds))
 # Store for documentation
 save(
   orchids_compounds,
-  file = "data/orchids_compounds.rda",
+  file = "data/orchids_compounds.rda"
 )
 
 cat("✓ orchids_compounds dataset prepared\n")

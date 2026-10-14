@@ -55,7 +55,8 @@ ethnobotafever_tree <- function(
   log_dir
 ) {
   # Set up logging
-  log_file <- paste0(log_dir, taxon_name, "_log.txt")
+  dir.create(log_dir, recursive = TRUE, showWarnings = FALSE)
+  log_file <- file.path(log_dir, paste0(taxon_name, "_log.txt"))
   if (file.exists(log_file)) {
     file.remove(log_file)
   }

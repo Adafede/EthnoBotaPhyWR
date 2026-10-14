@@ -149,23 +149,32 @@ get_compounds_wd <- function(taxon_qid) {
 #' @return A data frame with the retrieved use information.
 #' @keywords internal
 get_uses_wd <- function(taxon_qid) {
+  if (!is.character(taxon_qid) || length(taxon_qid) != 1L) {
+    stop("taxon_qid must be a single character string (Wikidata QID)")
+  }
   query_wikidata_with_retry(
     endpoint = "https://qlever.dev/api/wikidata",
     sparql_query = paste0(
       "
   PREFIX p: <http://www.wikidata.org/prop/>
   PREFIX ps: <http://www.wikidata.org/prop/statement/>
-  PREFIX pr: <http://www.wikidata.org/prop/reference/>
+  PREFIX pr: <http://www.w3.org/ns/prov#>
   PREFIX prov: <http://www.w3.org/ns/prov#>
   PREFIX wd: <http://www.wikidata.org/entity/>
   PREFIX wdt: <http://www.wikidata.org/prop/direct/>
   SELECT DISTINCT ?taxon ?taxon_id_ott ?taxon_use ?ref WHERE {
-    ?taxon (wdt:P171*) wd:Q25308;
-    wdt:P9157 ?taxon_id_ott;
+    ?taxon (wdt:P171*) wd:",
+      taxon_qid,
+      ".
+    ?taxon wdt:P9157 ?taxon_id_ott;
     p:P366 ?use_statement.
     ?use_statement ps:P366 ?taxon_use;
     prov:wasDerivedFrom/pr:P248 ?ref.
   }
+  "
+    )
+  )
+}
   "
     )
   )

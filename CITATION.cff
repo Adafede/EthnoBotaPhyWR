@@ -10,6 +10,7 @@ license: AGPL-3.0-or-later
 title: 'EthnoBotaPhyWR: **EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*,
   *Wikidata* and *R*. It should be pronounced "Ethnobota Fever"'
 version: 0.0.0.9001
+date-released: '2026-10-14'
 abstract: This package provides infrastructure and curated ethnobotanical and phytochemical
   datasets for analyzing plant families, including phylogenetic integration and visualization
   tools.
@@ -18,7 +19,7 @@ authors:
   given-names: Adriano
   email: adafede@gmail.com
   orcid: https://orcid.org/0000-0003-0443-9902
-repository: https://bioconductor.org/
+repository: https://github.com/adafede/EthnoBotaPhyWR
 repository-code: https://github.com/adafede/EthnoBotaPhyWR
 url: https://adafede.github.io/EthnoBotaPhyWR
 contact:

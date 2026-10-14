@@ -29,7 +29,7 @@ get_npclassifier_taxonomy <- function(smiles) {
       tryCatch(
         {
           # Query NPClassifier API for each SMILES string
-          url_id <- paste0(url, order, x)
+          url_id <- paste0(url, order, utils::URLencode(x, reserved = TRUE))
           result <- rvest::read_html(url_id) |>
             rvest::html_text() |>
             jsonlite::fromJSON()

@@ -121,27 +121,28 @@ result <- ethnobotafever_tree(
 ## Additional software credits
 
   | Package        | Version    | Citation                                                                    |
-  | :------------- | :--------- | :-------------------------------------------------------------------------- |
+  | :---           | :---       | :---                                                                        |
   | ape            | 5.8.1      | Paradis and Schliep (2019)                                                  |
   | base           | 4.6.1      | R Core Team (2026a)                                                         |
   | BiocManager    | 1.30.27    | Morgan and Ramos (2025)                                                     |
   | BiocVersion    | 3.23.1     | Morgan (2025)                                                               |
   | cascade        | 0.0.0.9002 | Rutz and Wolfender (2023); Rutz (2026a)                                     |
   | EthnoBotaPhyWR | 0.0.0.9001 | Rutz (2026b)                                                                |
-  | ggtext         | 0.1.2      | Wilke and Wiernik (2022)                                                    |
+  | ggtext         | 0.2.0      | Wilke and Wiernik (2026)                                                    |
   | ggtree         | 4.2.0      | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022) |
   | ggtreeExtra    | 1.22.1     | Xu et al. (2021); Yu (2022b)                                                |
   | grid           | 4.6.1      | R Core Team (2026b)                                                         |
   | gt             | 1.3.0      | Iannone et al. (2026)                                                       |
   | khroma         | 1.17.0     | Frerebeau (2025)                                                            |
-  | knitr          | 1.51       | Xie (2014); Xie (2015); Xie (2025)                                          |
-  | logger         | 0.4.2      | Daróczi and Wickham (2026)                                                  |
+  | knitr          | 1.52       | Xie (2014); Xie (2015); Xie (2026)                                          |
+  | logger         | 0.4.3      | Daróczi and Wickham (2026)                                                  |
   | openssl        | 2.4.2      | Ooms (2026)                                                                 |
   | phangorn       | 2.12.1     | Schliep (2011); Schliep et al. (2017)                                       |
   | quarto         | 1.5.1      | Allaire and Dervieux (2025)                                                 |
-  | rmarkdown      | 2.31       | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026)                 |
+  | rmarkdown      | 2.32       | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026)                 |
   | rotl           | 3.1.1      | Michonneau et al. (2016); OpenTreeOfLife et al. (2019)                      |
   | scales         | 1.4.0      | Wickham et al. (2025)                                                       |
+  | testthat       | 3.3.2      | Wickham (2011)                                                              |
   | tidytable      | 0.11.2     | Fairbanks (2024)                                                            |
   | tidytree       | 0.4.8      | Yu (2022c)                                                                  |
   | tidyverse      | 2.0.0      | Wickham et al. (2019)                                                       |
@@ -303,6 +304,14 @@ Ecology and Evolution* 8 (10): 1212–20.
 
 </div>
 
+<div id="ref-testthat" class="csl-entry">
+
+Wickham, Hadley. 2011. “<span class="nocase">testthat</span>: Get
+Started with Testing.” *The R Journal* 3: 5–10.
+<https://journal.r-project.org/articles/RJ-2011-002/>.
+
+</div>
+
 <div id="ref-tidyverse" class="csl-entry">
 
 Wickham, Hadley, Mara Averick, Jennifer Bryan, et al. 2019. “Welcome to
@@ -321,7 +330,7 @@ Wickham, Hadley, Thomas Lin Pedersen, and Dana Seidel. 2025.
 
 <div id="ref-ggtext" class="csl-entry">
 
-Wilke, Claus O., and Brenton M. Wiernik. 2022.
+Wilke, Claus O., and Brenton M. Wiernik. 2026.
 *<span class="nocase">ggtext</span>: Improved Text Rendering Support for
 “<span class="nocase">ggplot2</span>”*.
 <https://doi.org/10.32614/CRAN.package.ggtext>.
@@ -344,9 +353,9 @@ Hall/CRC. <https://yihui.org/knitr/>.
 
 </div>
 
-<div id="ref-knitr2025" class="csl-entry">
+<div id="ref-knitr2026" class="csl-entry">
 
-Xie, Yihui. 2025. *<span class="nocase">knitr</span>: A General-Purpose
+Xie, Yihui. 2026. *<span class="nocase">knitr</span>: A General-Purpose
 Package for Dynamic Report Generation in R*. <https://yihui.org/knitr/>.
 
 </div>
@@ -354,14 +363,16 @@ Package for Dynamic Report Generation in R*. <https://yihui.org/knitr/>.
 <div id="ref-rmarkdown2018" class="csl-entry">
 
 Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. *R Markdown: The
-Definitive Guide*. Chapman; Hall/CRC. <https://yihui.org/rmarkdown/>.
+Definitive Guide*. Chapman; Hall/CRC.
+<https://pkg.yihui.org/rmarkdown-book/>.
 
 </div>
 
 <div id="ref-rmarkdown2020" class="csl-entry">
 
 Xie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. *R Markdown
-Cookbook*. Chapman; Hall/CRC. <https://yihui.org/rmarkdown-cookbook>.
+Cookbook*. Chapman; Hall/CRC.
+<https://pkg.yihui.org/rmarkdown-cookbook/>.
 
 </div>
 

@@ -311,7 +311,16 @@
     },
     "SystemRequirements": null
   },
-  "keywords": ["Ethnobotany", "Phytochemistry", "Taxonomy", "Wikidata", "ethnobotany", "phytochemistry", "r", "wikidata"],
+  "keywords": [
+    "Ethnobotany",
+    "Phytochemistry",
+    "Taxonomy",
+    "Wikidata",
+    "ethnobotany",
+    "phytochemistry",
+    "r",
+    "wikidata"
+  ],
   "fileSize": "444.841KB",
   "readme": "https://github.com/Adafede/EthnoBotaPhyWR/blob/main/README.md",
   "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental"

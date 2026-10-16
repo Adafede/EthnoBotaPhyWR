@@ -54,6 +54,15 @@ ethnobotafever_tree <- function(
   local_cache,
   log_dir
 ) {
+  # Validate input
+  if (
+    !is.character(taxon_name) || length(taxon_name) != 1L || !nzchar(taxon_name)
+  ) {
+    stop(
+      "taxon_name must be a single non-empty character string",
+      taxon_name = taxon_name
+    )
+  }
   # Set up logging
   dir.create(log_dir, recursive = TRUE, showWarnings = FALSE)
   log_file <- file.path(log_dir, paste0(taxon_name, "_log.txt"))

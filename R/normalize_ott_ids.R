@@ -8,6 +8,6 @@
 #' @return A character vector with the normalized OTT IDs.
 #' @keywords internal
 normalize_ott_ids <- function(x) {
-  x <- suppressWarnings(as.integer(x))
+  x <- as.integer(x)
   ifelse(is.na(x), NA_character_, as.character(x))
 }

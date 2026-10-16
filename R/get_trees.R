@@ -121,7 +121,7 @@ get_trees_cached <- function(ott_ids, df_counted, taxon_name, cache_dir) {
 #' @param taxon_name Character. Name of the focal taxon used for logging and fallback naming.
 #'
 #' @return A list with the taxa missing from the full tree, the full tree object, and the phytochemical tree object.
-get_trees <- function(ott_ids, df_counted, taxon_name) {
+get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
   # Input validation
   if (!(is.numeric(ott_ids) || is.character(ott_ids))) {
     stop("ott_ids must be numeric or character (integer vector of OTT IDs)")
@@ -366,7 +366,7 @@ get_trees <- function(ott_ids, df_counted, taxon_name) {
 
       tree_result <- NULL
       for (batch in batch_ids) {
-        Sys.sleep(0.2)
+        Sys.sleep(batch_delay)
         batch_tree <- tryCatch(
           rotl::tol_induced_subtree(as.integer(batch)),
           error = function(e) {
@@ -453,9 +453,9 @@ get_trees <- function(ott_ids, df_counted, taxon_name) {
     names(taxa_not_in_tree) == "ethnobotanical_count"
   ] <- "ethnobotanical_species_count"
 
-  return(list(
+  list(
     taxa_not_in_tree = taxa_not_in_tree,
     tree_taxa_full = tree_taxa_full,
     tree_taxa_phyto = tree_taxa_phyto
-  ))
+  )
 }

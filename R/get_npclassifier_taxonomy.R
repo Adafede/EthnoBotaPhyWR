@@ -12,7 +12,7 @@
 #'
 #' @examples
 #' # get_npclassifier_taxonomy(c("CCO", "CCN"))
-get_npclassifier_taxonomy <- function(smiles) {
+get_npclassifier_taxonomy <- function(smiles, timeout = 30) {
   # Input validation
   if (!is.character(smiles) && !is.list(smiles)) {
     stop("smiles must be a character vector or list")
@@ -30,7 +30,7 @@ get_npclassifier_taxonomy <- function(smiles) {
         {
           # Query NPClassifier API for each SMILES string
           url_id <- paste0(url, order, utils::URLencode(x, reserved = TRUE))
-          result <- rvest::read_html(url_id) |>
+          result <- rvest::read_html(url_id, timeout = timeout) |>
             rvest::html_text() |>
             jsonlite::fromJSON()
 

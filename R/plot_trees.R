@@ -5,19 +5,26 @@
 #' The helper formats tip labels consistently, derives spacing from the tree
 #' geometry, and returns the main tree plots plus the orphan-taxon panel.
 #'
-#' @param taxa_not_in_tree Data.frame. Taxa that are absent from the tree and should be shown in the orphan panel.
+#' @param taxa_not_in_tree Data.frame. Taxa that are absent from the tree and
+#' should be shown in the orphan panel.
 #' @param tree_taxa_full phylo. Full tree object used for the overview plot.
-#' @param tree_taxa_phyto phylo. Tree object restricted to taxa with reported compounds or uses.
+#' @param tree_taxa_phyto phylo. Tree object restricted to taxa with reported
+#' compounds or uses.
 #' @param df_counted Data.frame. Count table containing tip labels and
 #' summary counts such as `species_count` and `ethnobotanical_count`.
 #' @param df_classes Data.frame. Classification table providing the compound
 #' superclass values, colours, and per-taxon annotations.
-#' @param offset Numeric. Optional override for the tip-label offset used by the tree plots.
-#' @param adjust_point Numeric. Optional override for the x-position of orphan-panel points.
-#' @param adjust_text Numeric. Optional override for the x-position of orphan-panel labels.
-#' @param adjust_margin Numeric. Optional override for the orphan-panel left margin.
+#' @param offset Numeric. Optional override for the tip-label offset used by the
+#' tree plots.
+#' @param adjust_point Numeric. Optional override for the x-position of
+#' orphan-panel points.
+#' @param adjust_text Numeric. Optional override for the x-position of
+#' orphan-panel labels.
+#' @param adjust_margin Numeric. Optional override for the orphan-panel left
+#' margin.
 #' @param genus Logical. If `TRUE`, tip labels are reduced to genus-level names.
-#' @param drop Logical. If `TRUE`, tips not present in `df_counted` are dropped before plotting.
+#' @param drop Logical. If `TRUE`, tips not present in `df_counted` are dropped
+#' before plotting.
 #'
 #' @return A list containing the main tree plots, the orphan-taxon plot,
 #' the orphan data frame, and the derived layout settings.
@@ -133,7 +140,7 @@ plot_trees <- function(
       !is.na(tree$tip.label) & nzchar(tree$tip.label)
     ]
     n_tips <- max(1L, length(tip_labels))
-    max_label_width <- max(nchar(tip_labels), na.rm = TRUE)
+    max_label_width <- max(nchar(tip_labels), 0L, na.rm = TRUE)
     tree_span <- max(1, max(ape::node.depth.edgelength(tree), na.rm = TRUE))
 
     fruit_offset <- preferred_offset %||%

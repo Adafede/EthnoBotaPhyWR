@@ -9,15 +9,18 @@ get_trees_cache_key(ott_ids, df_counted, taxon_name)
 \arguments{
 \item{ott_ids}{Integer vector. OTT IDs to include in the tree.}
 
-\item{df_counted}{Data.frame. Data frame containing at least \code{taxon_id_ott}, \code{compounds_count}, and \code{ethnobotanical_count} columns.}
+\item{df_counted}{Data.frame. Data frame containing at least \code{taxon_id_ott},
+\code{compounds_count}, and \code{ethnobotanical_count} columns.}
 
-\item{taxon_name}{Character. Name of the focal taxon used to build the cache key and log context.}
+\item{taxon_name}{Character. Name of the focal taxon used to build the cache
+key and log context.}
 }
 \value{
-A list with \code{taxa_not_in_tree}, \code{tree_taxa_full}, and \code{tree_taxa_phyto} elements.
+A character scalar cache key.
 }
 \description{
-Builds phylogenetic trees for a set of Open Tree of Life (OTT) IDs using the rotl service. The function returns the taxa that are absent from the requested tree, the full induced subtree, and a second tree restricted to taxa with reported compounds or ethnobotanical uses.
+Builds a deterministic cache key from OTT IDs, a counted data frame, and a
+taxon name so that identical inputs map to the same cached tree result.
 }
 \examples{
 # get_trees_cache_key(

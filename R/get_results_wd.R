@@ -78,7 +78,8 @@ get_subtaxa_wd <- function(taxon_qid) {
 #' @title Get OTT IDs from Wikidata
 #'
 #' @description
-#' Retrieves the Open Tree of Life identifiers for all subtaxa of the given Wikidata taxon.
+#' Retrieves the Open Tree of Life identifiers for all subtaxa of the given
+#' Wikidata taxon.
 #'
 #' @param taxon_qid Character. Wikidata QID of the focal taxon.
 #'
@@ -126,7 +127,8 @@ get_compounds_wd <- function(taxon_qid) {
       "
   PREFIX wd: <http://www.wikidata.org/entity/>
   PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-  SELECT DISTINCT ?compound ?compound_smiles_canonical ?compound_inchikey ?taxon WHERE {
+  SELECT DISTINCT ?compound ?compound_smiles_canonical ?compound_inchikey ?taxon
+  WHERE {
   ?taxon (wdt:P171*) wd:",
       taxon_qid,
       ".
@@ -189,7 +191,8 @@ get_lotus_wd <- function() {
     sparql_query = paste0(
       "
   PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-  SELECT DISTINCT ?compound ?compound_smiles_canonical ?compound_inchikey ?taxon WHERE {
+  SELECT DISTINCT ?compound ?compound_smiles_canonical ?compound_inchikey ?taxon
+  WHERE {
   ?compound wdt:P703 ?taxon.
   ?compound wdt:P233 ?compound_smiles_canonical.
   ?compound wdt:P235 ?compound_inchikey.

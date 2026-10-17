@@ -13,6 +13,7 @@ normalize_ott_ids(x)
 A character vector with the normalized OTT IDs.
 }
 \description{
-Converts OTT IDs to a consistent character representation while preserving missing values as \code{NA}.
+Converts OTT IDs to a consistent character representation while preserving
+missing values as \code{NA}.
 }
 \keyword{internal}

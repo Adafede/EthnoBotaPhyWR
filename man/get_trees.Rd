@@ -4,18 +4,26 @@
 \alias{get_trees}
 \title{Build trees from OTT IDs}
 \usage{
-get_trees(ott_ids, df_counted, taxon_name)
+get_trees(ott_ids, df_counted, taxon_name, batch_delay = 0.2)
 }
 \arguments{
 \item{ott_ids}{Integer vector. OTT IDs to include in the tree.}
 
-\item{df_counted}{Data.frame. Data frame containing at least \code{taxon_id_ott}, \code{compounds_count}, and \code{ethnobotanical_count} columns.}
+\item{df_counted}{Data.frame. Data frame containing at least \code{taxon_id_ott},
+\code{compounds_count}, and \code{ethnobotanical_count} columns.}
 
-\item{taxon_name}{Character. Name of the focal taxon used for logging and fallback naming.}
+\item{taxon_name}{Character. Name of the focal taxon used for logging and
+fallback naming.}
+
+\item{batch_delay}{Numeric. Delay in seconds between batched Open Tree
+requests.}
 }
 \value{
-A list with the taxa missing from the full tree, the full tree object, and the phytochemical tree object.
+A list with the taxa missing from the full tree, the full tree
+object, and the phytochemical tree object.
 }
 \description{
-Builds the full and phytochemical trees for a collection of OTT IDs, falling back to placeholder trees if Open Tree requests fail or return incomplete data.
+Builds the full and phytochemical trees for a collection of OTT IDs, falling
+back to placeholder trees if Open Tree requests fail or return incomplete
+data.
 }

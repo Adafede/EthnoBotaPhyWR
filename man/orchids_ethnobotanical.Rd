@@ -13,7 +13,8 @@ A data.frame with 419 rows and 3 columns:
 }
 }
 \source{
-Wikidata (https://www.wikidata.org/) and Open Tree of Life (https://tree.opentreeoflife.org/)
+Wikidata (https://www.wikidata.org/) and Open Tree of Life
+(https://tree.opentreeoflife.org/)
 }
 \usage{
 orchids_ethnobotanical

@@ -32,7 +32,8 @@ orchids_compounds
 }
 \description{
 A dataset containing phytochemical information from \emph{Orchidaceae} species.
-This is a curated subset linking taxonomic data, chemical structures (SMILES),
+This is a curated subset linking taxonomic data, chemical structures
+(SMILES),
 and NPClassifier taxonomy.
 }
 \examples{

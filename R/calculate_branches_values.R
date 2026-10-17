@@ -1,16 +1,21 @@
 #' @title Calculate branches values
 #'
 #' @description
-#' Calculates values for each branch (node) in a phylogenetic tree, assigning tip values from a data frame and computing internal node values as the mean of descendant tips. Returns a data frame with node-level results for downstream analysis or plotting.
+#' Calculates values for each branch (node) in a phylogenetic tree, assigning
+#' tip values from a data frame and computing internal node values as the mean
+#' of descendant tips. Returns a data frame with node-level results for
+#' downstream analysis or plotting.
 #'
 #' @include normalize_ott_ids.R
 #'
 #' @param tree A phylo object (from ape package)
-#' @param df A data.frame containing at least a 'taxon_name' column and a column for the variable of interest
+#' @param df A data.frame containing at least a 'taxon_name' column and a column
+#' for the variable of interest
 #' @param variable Character. Name of the column in df to use for tip values
 #' @param name Character. Name for the output column in the result
 #'
-#' @return A data.frame with node, count, is_tip, parent_count, and the calculated branch value (named by 'name')
+#' @return A data.frame with node, count, is_tip, parent_count, and the
+#' calculated branch value (named by 'name')
 #'
 #' @examples
 #' NULL
@@ -123,32 +128,5 @@ calculate_branches_values <- function(tree, df, variable, name) {
     NA_real_
   )
 
-  return(tree_data)
+  tree_data
 }
-
-# calculate_branches_values_optimized <- function(tree, df, variable, name) {
-#   n_tips <- ape::Ntip(tree)
-#   n_nodes <- ape::Nnode(tree)
-#
-#   node_values <- numeric(n_tips + n_nodes)
-#
-#   tip_indices <- match(df$taxon_name, tree$tip.label)
-#   valid_tips <- !is.na(tip_indices)
-#   node_values[tip_indices[valid_tips]] <- df[[variable]][valid_tips]
-#
-#   edge_matrix <- tree$edge
-#   internal_nodes <- (n_tips + 1):(n_tips + n_nodes)
-#
-#   descendant_means <- internal_nodes |>
-#     purrr::map(.f = function(node) {
-#       descendants <- phangorn::Descendants(tree, node, type = "tips")[[1]]
-#       mean(node_values[descendants], na.rm = TRUE)
-#     })
-#
-#   node_values[internal_nodes] <- descendant_means
-#
-#   data.table(
-#     node = seq_along(node_values),
-#     !!name := node_values
-#   )
-# }

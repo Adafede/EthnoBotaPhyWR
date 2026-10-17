@@ -19,33 +19,45 @@ plot_trees(
 )
 }
 \arguments{
-\item{taxa_not_in_tree}{Data.frame. Taxa that are absent from the tree and should be shown in the orphan panel.}
+\item{taxa_not_in_tree}{Data.frame. Taxa that are absent from the tree and
+should be shown in the orphan panel.}
 
 \item{tree_taxa_full}{phylo. Full tree object used for the overview plot.}
 
-\item{tree_taxa_phyto}{phylo. Tree object restricted to taxa with reported compounds or uses.}
+\item{tree_taxa_phyto}{phylo. Tree object restricted to taxa with reported
+compounds or uses.}
 
-\item{df_counted}{Data.frame. Count table containing tip labels and summary counts such as \code{species_count} and \code{ethnobotanical_count}.}
+\item{df_counted}{Data.frame. Count table containing tip labels and
+summary counts such as \code{species_count} and \code{ethnobotanical_count}.}
 
-\item{df_classes}{Data.frame. Classification table providing the compound superclass values, colours, and per-taxon annotations.}
+\item{df_classes}{Data.frame. Classification table providing the compound
+superclass values, colours, and per-taxon annotations.}
 
-\item{offset}{Numeric. Optional override for the tip-label offset used by the tree plots.}
+\item{offset}{Numeric. Optional override for the tip-label offset used by the
+tree plots.}
 
-\item{adjust_point}{Numeric. Optional override for the x-position of orphan-panel points.}
+\item{adjust_point}{Numeric. Optional override for the x-position of
+orphan-panel points.}
 
-\item{adjust_text}{Numeric. Optional override for the x-position of orphan-panel labels.}
+\item{adjust_text}{Numeric. Optional override for the x-position of
+orphan-panel labels.}
 
-\item{adjust_margin}{Numeric. Optional override for the orphan-panel left margin.}
+\item{adjust_margin}{Numeric. Optional override for the orphan-panel left
+margin.}
 
 \item{genus}{Logical. If \code{TRUE}, tip labels are reduced to genus-level names.}
 
-\item{drop}{Logical. If \code{TRUE}, tips not present in \code{df_counted} are dropped before plotting.}
+\item{drop}{Logical. If \code{TRUE}, tips not present in \code{df_counted} are dropped
+before plotting.}
 }
 \value{
-A list containing the main tree plots, the orphan-taxon plot, the orphan data frame, and the derived layout settings.
+A list containing the main tree plots, the orphan-taxon plot,
+the orphan data frame, and the derived layout settings.
 }
 \description{
-Plots phylogenetic trees with ethnobotanical and phytochemical overlays. The helper formats tip labels consistently, derives spacing from the tree geometry, and returns the main tree plots plus the orphan-taxon panel.
+Plots phylogenetic trees with ethnobotanical and phytochemical overlays.
+The helper formats tip labels consistently, derives spacing from the tree
+geometry, and returns the main tree plots plus the orphan-taxon panel.
 }
 \examples{
 # plot_trees(...)

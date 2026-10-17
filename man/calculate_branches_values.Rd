@@ -9,17 +9,22 @@ calculate_branches_values(tree, df, variable, name)
 \arguments{
 \item{tree}{A phylo object (from ape package)}
 
-\item{df}{A data.frame containing at least a 'taxon_name' column and a column for the variable of interest}
+\item{df}{A data.frame containing at least a 'taxon_name' column and a column
+for the variable of interest}
 
 \item{variable}{Character. Name of the column in df to use for tip values}
 
 \item{name}{Character. Name for the output column in the result}
 }
 \value{
-A data.frame with node, count, is_tip, parent_count, and the calculated branch value (named by 'name')
+A data.frame with node, count, is_tip, parent_count, and the
+calculated branch value (named by 'name')
 }
 \description{
-Calculates values for each branch (node) in a phylogenetic tree, assigning tip values from a data frame and computing internal node values as the mean of descendant tips. Returns a data frame with node-level results for downstream analysis or plotting.
+Calculates values for each branch (node) in a phylogenetic tree, assigning
+tip values from a data frame and computing internal node values as the mean
+of descendant tips. Returns a data frame with node-level results for
+downstream analysis or plotting.
 }
 \examples{
 NULL

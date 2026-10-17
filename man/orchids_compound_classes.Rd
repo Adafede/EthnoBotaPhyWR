@@ -22,7 +22,8 @@ orchids_compound_classes
 }
 \description{
 NPClassifier taxonomy results for SMILES strings found in \emph{Orchidaceae}.
-Maps each unique SMILES to its pathway, superclass, class, and glycoside status.
+Maps each unique SMILES to its pathway, superclass, class, and glycoside
+status.
 }
 \details{
 This dataset is a deduplicated lookup table for compound classifications.

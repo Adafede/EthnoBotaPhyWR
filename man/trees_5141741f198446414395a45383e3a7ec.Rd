@@ -7,7 +7,8 @@
 \format{
 An \code{.rda} file containing a list with:
 \describe{
-\item{taxa_not_in_tree}{A tidytable/data.frame of taxa that were not found in the tree}
+\item{taxa_not_in_tree}{A tidytable/data.frame of taxa that were not found
+in the tree}
 \item{tree_taxa_full}{A \code{phylo} object for the full induced tree}
 \item{tree_taxa_phyto}{A \code{phylo} object for the phytochemical subset tree}
 }

@@ -1,14 +1,18 @@
 #' @title Get NPClassifier taxonomy
 #'
 #' @description
-#' Classifies a vector or list of SMILES strings using the NPClassifier API. Returns a data.frame with classification results for each SMILES.
+#' Classifies a vector or list of SMILES strings using the NPClassifier API.
+#' Returns a data.frame with classification results for each SMILES.
 #'
 #' @param smiles Character vector or list. SMILES strings to classify.
+#' @param timeout Numeric. Timeout in seconds for each API request.
 #'
-#' @return A data.frame with columns: query, pathway, superclass, class, glycoside.
+#' @return A list of one-row tibbles with columns: query, pathway, superclass,
+#' class, glycoside.
 #'
 #' @details
-#' For each SMILES, this function queries the NPClassifier API and parses the result. If the API call fails, NA values are returned for that entry.
+#' For each SMILES, this function queries the NPClassifier API and parses the
+#' result. If the API call fails, NA values are returned for that entry.
 #'
 #' @examples
 #' # get_npclassifier_taxonomy(c("CCO", "CCN"))

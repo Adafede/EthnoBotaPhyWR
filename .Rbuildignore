@@ -43,3 +43,8 @@
 ^vignettes/articles$
 ^vignettes/articles/.*_files$
 _\.new\.png$
+^AGENTS\.md$
+^POLISH_LOG\.md$
+^\.kb$
+^Rplots\.pdf$
+^EthnoBotaPhyWR\.Rcheck$

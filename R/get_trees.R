@@ -1,15 +1,18 @@
 #' @title Get trees
 #'
 #' @description
-#' Builds phylogenetic trees for a set of Open Tree of Life (OTT) IDs using the rotl service. The function returns the taxa that are absent from the requested tree, the full induced subtree, and a second tree restricted to taxa with reported compounds or ethnobotanical uses.
+#' Builds a deterministic cache key from OTT IDs, a counted data frame, and a
+#' taxon name so that identical inputs map to the same cached tree result.
 #'
 #' @include normalize_ott_ids.R
 #'
 #' @param ott_ids Integer vector. OTT IDs to include in the tree.
-#' @param df_counted Data.frame. Data frame containing at least `taxon_id_ott`, `compounds_count`, and `ethnobotanical_count` columns.
-#' @param taxon_name Character. Name of the focal taxon used to build the cache key and log context.
+#' @param df_counted Data.frame. Data frame containing at least `taxon_id_ott`,
+#' `compounds_count`, and `ethnobotanical_count` columns.
+#' @param taxon_name Character. Name of the focal taxon used to build the cache
+#' key and log context.
 #'
-#' @return A list with `taxa_not_in_tree`, `tree_taxa_full`, and `tree_taxa_phyto` elements.
+#' @return A character scalar cache key.
 #'
 #' @examples
 #' # get_trees_cache_key(
@@ -71,12 +74,16 @@ get_trees_cache_key <- function(ott_ids, df_counted, taxon_name) {
 #' @title Get cached trees
 #'
 #' @description
-#' Returns a cached tree result when available, otherwise builds and serializes the tree result to an `.rda` dataset file on disk.
+#' Returns a cached tree result when available, otherwise builds and serializes
+#' the tree result to an `.rda` dataset file on disk.
 #'
 #' @param ott_ids Integer vector. OTT IDs to include in the tree.
-#' @param df_counted Data.frame. Data frame containing at least `taxon_id_ott`, `compounds_count`, and `ethnobotanical_count` columns.
-#' @param taxon_name Character. Name of the focal taxon used to derive the cache key.
-#' @param cache_dir Character. Directory used for persistent on-disk `.rda` caching (for example `data-raw`).
+#' @param df_counted Data.frame. Data frame containing at least `taxon_id_ott`,
+#' `compounds_count`, and `ethnobotanical_count` columns.
+#' @param taxon_name Character. Name of the focal taxon used to derive the cache
+#' key.
+#' @param cache_dir Character. Directory used for persistent on-disk `.rda`
+#' caching (for example `data-raw`).
 #'
 #' @return The cached or newly built tree result list.
 get_trees_cached <- function(ott_ids, df_counted, taxon_name, cache_dir) {
@@ -114,13 +121,20 @@ get_trees_cached <- function(ott_ids, df_counted, taxon_name, cache_dir) {
 #' @title Build trees from OTT IDs
 #'
 #' @description
-#' Builds the full and phytochemical trees for a collection of OTT IDs, falling back to placeholder trees if Open Tree requests fail or return incomplete data.
+#' Builds the full and phytochemical trees for a collection of OTT IDs, falling
+#' back to placeholder trees if Open Tree requests fail or return incomplete
+#' data.
 #'
 #' @param ott_ids Integer vector. OTT IDs to include in the tree.
-#' @param df_counted Data.frame. Data frame containing at least `taxon_id_ott`, `compounds_count`, and `ethnobotanical_count` columns.
-#' @param taxon_name Character. Name of the focal taxon used for logging and fallback naming.
+#' @param df_counted Data.frame. Data frame containing at least `taxon_id_ott`,
+#' `compounds_count`, and `ethnobotanical_count` columns.
+#' @param taxon_name Character. Name of the focal taxon used for logging and
+#' fallback naming.
+#' @param batch_delay Numeric. Delay in seconds between batched Open Tree
+#' requests.
 #'
-#' @return A list with the taxa missing from the full tree, the full tree object, and the phytochemical tree object.
+#' @return A list with the taxa missing from the full tree, the full tree
+#' object, and the phytochemical tree object.
 get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
   # Input validation
   if (!(is.numeric(ott_ids) || is.character(ott_ids))) {
@@ -215,7 +229,8 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
     },
     error = function(e) {
       logger::log_warn(
-        "Failed to resolve tree lineage for OTT IDs; keeping the original OTT IDs for tree construction."
+        "Failed to resolve tree lineage for OTT IDs;",
+        "keeping the original OTT IDs for tree construction."
       )
       ott_ids_normalized
     }
@@ -388,7 +403,8 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
 
     if (!inherits(tree_result, "phylo")) {
       logger::log_warn(
-        "Failed to build tree from OTT IDs; falling back to a star tree containing all requested IDs."
+        "Failed to build tree from OTT IDs;",
+        "falling back to a star tree containing all requested IDs."
       )
       relabel_tree_with_names(
         build_placeholder_tree(ott_ids_subset, df_counted),

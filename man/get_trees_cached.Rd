@@ -9,15 +9,19 @@ get_trees_cached(ott_ids, df_counted, taxon_name, cache_dir)
 \arguments{
 \item{ott_ids}{Integer vector. OTT IDs to include in the tree.}
 
-\item{df_counted}{Data.frame. Data frame containing at least \code{taxon_id_ott}, \code{compounds_count}, and \code{ethnobotanical_count} columns.}
+\item{df_counted}{Data.frame. Data frame containing at least \code{taxon_id_ott},
+\code{compounds_count}, and \code{ethnobotanical_count} columns.}
 
-\item{taxon_name}{Character. Name of the focal taxon used to derive the cache key.}
+\item{taxon_name}{Character. Name of the focal taxon used to derive the cache
+key.}
 
-\item{cache_dir}{Character. Directory used for persistent on-disk \code{.rda} caching (for example \code{data-raw}).}
+\item{cache_dir}{Character. Directory used for persistent on-disk \code{.rda}
+caching (for example \code{data-raw}).}
 }
 \value{
 The cached or newly built tree result list.
 }
 \description{
-Returns a cached tree result when available, otherwise builds and serializes the tree result to an \code{.rda} dataset file on disk.
+Returns a cached tree result when available, otherwise builds and serializes
+the tree result to an \code{.rda} dataset file on disk.
 }

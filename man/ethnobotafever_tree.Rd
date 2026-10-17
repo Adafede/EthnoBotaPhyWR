@@ -28,42 +28,58 @@ ethnobotafever_tree(
 
 \item{n_multiple_genera}{Integer. Minimum number of genera for filtering.}
 
-\item{n_ethnobotanical_count_min}{Integer. Minimum ethnobotanical count for filtering.}
+\item{n_ethnobotanical_count_min}{Integer. Minimum ethnobotanical count for
+filtering.}
 
 \item{n_compounds_count_min}{Integer. Minimum compound count for filtering.}
 
-\item{example_family_names}{Character vector. Example family names for comparison.}
+\item{example_family_names}{Character vector. Example family names for
+comparison.}
 
-\item{path_molecules}{Character, data.frame, or NULL. Local molecules file or table.}
+\item{path_molecules}{Character, data.frame, or NULL. Local molecules file or
+table.}
 
-\item{path_classes}{Character, data.frame, or NULL. Local classes file or seed data.}
+\item{path_classes}{Character, data.frame, or NULL. Local classes file or
+seed data.}
 
-\item{path_ethnobotanical}{Character, data.frame, or NULL. Local ethnobotanical file or table.}
+\item{path_ethnobotanical}{Character, data.frame, or NULL. Local
+ethnobotanical file or table.}
 
 \item{export_tree_full}{Character. Path for the main full-tree PDF figure.}
 
-\item{export_tree_phyto}{Character. Path for the phytochemical overview PDF figure.}
+\item{export_tree_phyto}{Character. Path for the phytochemical overview PDF
+figure.}
 
-\item{export_tree_phyto_sub}{Character. Path for the species-level phytochemical PDF figure.}
+\item{export_tree_phyto_sub}{Character. Path for the species-level
+phytochemical PDF figure.}
 
-\item{export_table_classified}{Character. Path for the classified compounds export.}
+\item{export_table_classified}{Character. Path for the classified compounds
+export.}
 
-\item{export_table_counts}{Character. Path for the genus-level summary table export.}
+\item{export_table_counts}{Character. Path for the genus-level summary table
+export.}
 
-\item{export_table_counts_sub}{Character or NULL. Path for the filtered species-level counts export.}
+\item{export_table_counts_sub}{Character or NULL. Path for the filtered
+species-level counts export.}
 
-\item{local_cache}{Character. Directory containing \code{.rda} tree cache datasets (for example \code{data-raw}).}
+\item{local_cache}{Character. Directory containing \code{.rda} tree cache datasets
+(for example \code{data-raw}).}
 
 \item{log_dir}{Character. Directory for log files.}
 }
 \value{
-A list containing the rendered plots, exported tables, and the log-file path.
+A list containing the rendered plots, exported tables, and the
+log-file path.
 }
 \description{
-Collects and plots ethnobotanical and phytochemical data for a given taxon. This function performs data retrieval, merging, and logging, and produces summary statistics and outputs for downstream analysis and visualization.
+Collects and plots ethnobotanical and phytochemical data for a given taxon.
+This function performs data retrieval, merging, and logging, and produces
+summary statistics and outputs for downstream analysis and visualization.
 }
 \details{
-This function is a pipeline for data collection, merging, and reporting. It logs progress and statistics throughout. All side effects (file writes, logs) are documented inline.
+This function is a pipeline for data collection, merging, and reporting. It
+logs progress and statistics throughout. All side effects (file writes, logs)
+are documented inline.
 }
 \examples{
 NULL

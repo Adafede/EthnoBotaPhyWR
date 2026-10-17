@@ -13,6 +13,7 @@ get_ott_ids_wd(taxon_qid)
 A data frame with the retrieved taxon identifiers and OTT IDs.
 }
 \description{
-Retrieves the Open Tree of Life identifiers for all subtaxa of the given Wikidata taxon.
+Retrieves the Open Tree of Life identifiers for all subtaxa of the given
+Wikidata taxon.
 }
 \keyword{internal}

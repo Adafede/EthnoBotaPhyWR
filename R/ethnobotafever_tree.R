@@ -1,7 +1,9 @@
 #' @title Ethnobota fever
 #'
 #' @description
-#' Collects and plots ethnobotanical and phytochemical data for a given taxon. This function performs data retrieval, merging, and logging, and produces summary statistics and outputs for downstream analysis and visualization.
+#' Collects and plots ethnobotanical and phytochemical data for a given taxon.
+#' This function performs data retrieval, merging, and logging, and produces
+#' summary statistics and outputs for downstream analysis and visualization.
 #'
 #' @include calculate_branches_values.R
 #' @include get_npclassifier_taxonomy.R
@@ -12,25 +14,39 @@
 #'
 #' @param taxon_name Character. Name of the taxon of interest.
 #' @param n_multiple_genera Integer. Minimum number of genera for filtering.
-#' @param n_ethnobotanical_count_min Integer. Minimum ethnobotanical count for filtering.
+#' @param n_ethnobotanical_count_min Integer. Minimum ethnobotanical count for
+#' filtering.
 #' @param n_compounds_count_min Integer. Minimum compound count for filtering.
-#' @param example_family_names Character vector. Example family names for comparison.
-#' @param path_molecules Character, data.frame, or NULL. Local molecules file or table.
-#' @param path_classes Character, data.frame, or NULL. Local classes file or seed data.
-#' @param path_ethnobotanical Character, data.frame, or NULL. Local ethnobotanical file or table.
+#' @param example_family_names Character vector. Example family names for
+#' comparison.
+#' @param path_molecules Character, data.frame, or NULL. Local molecules file or
+#' table.
+#' @param path_classes Character, data.frame, or NULL. Local classes file or
+#' seed data.
+#' @param path_ethnobotanical Character, data.frame, or NULL. Local
+#' ethnobotanical file or table.
 #' @param export_tree_full Character. Path for the main full-tree PDF figure.
-#' @param export_tree_phyto Character. Path for the phytochemical overview PDF figure.
-#' @param export_tree_phyto_sub Character. Path for the species-level phytochemical PDF figure.
-#' @param export_table_classified Character. Path for the classified compounds export.
-#' @param export_table_counts Character. Path for the genus-level summary table export.
-#' @param export_table_counts_sub Character or NULL. Path for the filtered species-level counts export.
-#' @param local_cache Character. Directory containing `.rda` tree cache datasets (for example `data-raw`).
+#' @param export_tree_phyto Character. Path for the phytochemical overview PDF
+#' figure.
+#' @param export_tree_phyto_sub Character. Path for the species-level
+#' phytochemical PDF figure.
+#' @param export_table_classified Character. Path for the classified compounds
+#' export.
+#' @param export_table_counts Character. Path for the genus-level summary table
+#' export.
+#' @param export_table_counts_sub Character or NULL. Path for the filtered
+#' species-level counts export.
+#' @param local_cache Character. Directory containing `.rda` tree cache datasets
+#' (for example `data-raw`).
 #' @param log_dir Character. Directory for log files.
 #'
-#' @return A list containing the rendered plots, exported tables, and the log-file path.
+#' @return A list containing the rendered plots, exported tables, and the
+#' log-file path.
 #'
 #' @details
-#' This function is a pipeline for data collection, merging, and reporting. It logs progress and statistics throughout. All side effects (file writes, logs) are documented inline.
+#' This function is a pipeline for data collection, merging, and reporting. It
+#' logs progress and statistics throughout. All side effects (file writes, logs)
+#' are documented inline.
 #'
 #' @export
 #'
@@ -63,13 +79,33 @@ ethnobotafever_tree <- function(
       taxon_name = taxon_name
     )
   }
+  for (arg in c(
+    "n_multiple_genera",
+    "n_ethnobotanical_count_min",
+    "n_compounds_count_min"
+  )) {
+    value <- get(arg, envir = environment())
+    if (
+      !is.numeric(value) ||
+        length(value) != 1L ||
+        !is.finite(value) ||
+        value < 0
+    ) {
+      stop(sprintf("%s must be a single finite non-negative number", arg))
+    }
+  }
+  if (!is.null(example_family_names) && !is.character(example_family_names)) {
+    stop("example_family_names must be a character vector or NULL")
+  }
   # Set up logging
   dir.create(log_dir, recursive = TRUE, showWarnings = FALSE)
   log_file <- file.path(log_dir, paste0(taxon_name, "_log.txt"))
   if (file.exists(log_file)) {
     file.remove(log_file)
   }
+  previous_appender <- logger::log_appender()
   logger::log_appender(appender = logger::appender_tee(file = log_file))
+  on.exit(logger::log_appender(previous_appender), add = TRUE)
 
   resolve_input_table <- function(x, label) {
     if (is.null(x)) {
@@ -216,7 +252,7 @@ ethnobotafever_tree <- function(
           nrow(),
         paste0(" subtaxa in Wikidata")
       )
-      return(log$default$record)
+      log$default$record
     })
 
   taxa_ott_wd <- taxon_qid |>
@@ -256,7 +292,7 @@ ethnobotafever_tree <- function(
     " unique varieties"
   )
 
-  example_family_taxa_compounds_wd <- example_family_qids |>
+  example_family_compounds_wd <- example_family_qids |>
     purrr::map(.f = get_compounds_wd)
 
   taxa_compounds_wd <- taxon_qid |>
@@ -323,7 +359,7 @@ ethnobotafever_tree <- function(
       paste0(
         " ",
         taxon_name,
-        " subtaxa with ethnobotanical use reported in total"
+        " subtaxa with chemical compounds reported in total"
       )
     )
   } else {
@@ -356,7 +392,7 @@ ethnobotafever_tree <- function(
     ) |>
     tidytable::distinct(taxon, connectivity_layer, .keep_all = TRUE)
 
-  example_family_taxa_compounds <- example_family_taxa_compounds_wd |>
+  example_family_taxa_compounds <- example_family_compounds_wd |>
     purrr::map(.f = function(df) {
       df |>
         tidytable::mutate(
@@ -383,7 +419,7 @@ ethnobotafever_tree <- function(
           nrow(),
         paste0(" unique connectivities")
       )
-      return(log$default$record)
+      log$default$record
     })
 
   lotus <- get_lotus_wd()
@@ -501,9 +537,6 @@ ethnobotafever_tree <- function(
       species_count = sum(!is.na(unique(taxon.y)))
     ) |>
     tidytable::ungroup() |>
-    # tidytable::mutate(
-    #   compounds_count = tidytable::na_if(x = compounds_count, y = 0)
-    # ) |>
     tidytable::rename(
       taxon = taxon.x,
       taxon_id_ott = taxon_id_ott.x
@@ -642,7 +675,7 @@ ethnobotafever_tree <- function(
     taxa_known_sub |>
       tidytable::distinct(taxon_id_ott) |>
       nrow(),
-    " had a at least one compound or ethnobotanical use reported"
+    " had at least one compound or ethnobotanical use reported"
   )
 
   logger::log_trace("Retrieving compounds classification ...")
@@ -882,14 +915,12 @@ ethnobotafever_tree <- function(
   taxa_known_sub <- data.frame(taxa_known_sub)
   taxa_full <- data.frame(taxa_full)
 
-  return(
-    list(
-      plots_gen = plots_gen,
-      plots_sub = plots_sub,
-      df_taxa_full = taxa_full,
-      df_taxa_ethno_counted = taxa_ethno_counted,
-      df_taxa_known_sub = taxa_known_sub,
-      log_file = log_file
-    )
+  list(
+    plots_gen = plots_gen,
+    plots_sub = plots_sub,
+    df_taxa_full = taxa_full,
+    df_taxa_ethno_counted = taxa_ethno_counted,
+    df_taxa_known_sub = taxa_known_sub,
+    log_file = log_file
   )
 }

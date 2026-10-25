@@ -1,11 +1,15 @@
 ^.*\.Rproj$
 ^.*\.iml$
 ^.*\.log$
+^AGENTS\.md$
 ^CITATION\.cff$
 ^CRAN-SUBMISSION$
+^EthnoBotaPhyWR\.Rcheck$
 ^LICENSE\.md$
+^POLISH_LOG\.md$
 ^README\.Rmd$
 ^README\.qmd$
+^Rplots\.pdf$
 ^[.]?air[.]toml$
 ^\.DS_Store$
 ^\.Rdata$
@@ -17,6 +21,7 @@
 ^\.github$
 ^\.gitignore$
 ^\.idea$
+^\.kb$
 ^\.lintr$
 ^\.poolside$
 ^\.quarto$
@@ -43,8 +48,3 @@
 ^vignettes/articles$
 ^vignettes/articles/.*_files$
 _\.new\.png$
-^AGENTS\.md$
-^POLISH_LOG\.md$
-^\.kb$
-^Rplots\.pdf$
-^EthnoBotaPhyWR\.Rcheck$

@@ -1,10 +1,7 @@
+---
 project:
-  type: website
   output-dir: ../docs/
-
-# Note: freeze functionality can be set at a project level or for individual .qmd files
-# execute:
-#   freeze: false
+  type: website
 
 website:
   title: "$ALTDOC_PACKAGE_NAME"
@@ -14,10 +11,17 @@ website:
   page-navigation: true
   navbar:
     title: EthnoBotaPhyWR
+    description: Infrastructure for Ethnobotanical and Phytochemical Data Integration with Wikidata
     logo: man/figures/logo.svg
     logo-alt: EthnoBotaPhyWR logo
     search: true
     left:
+      - text: Get started
+        file: vignettes/ethnobotafever_tree.qmd
+      - text: Articles
+        menu:
+          - text: Orchids
+            file: vignettes/articles/orchids.qmd
       - text: News
         file: $ALTDOC_NEWS
       - text: License
@@ -31,7 +35,36 @@ website:
   body-header: |
     <!-- 100% privacy-first analytics -->
     <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
-
+  sidebar:
+    contents:
+      - section: Functions
+        contents:
+          - section: Get
+            contents:
+              - text: get_compounds_wd
+                file: man/get_compounds_wd.qmd
+              - text: get_lotus_wd
+                file: man/get_lotus_wd.qmd
+              - text: get_npclassifier_taxonomy
+                file: man/get_npclassifier_taxonomy.qmd
+              - text: get_ott_ids_wd
+                file: man/get_ott_ids_wd.qmd
+              - text: get_subtaxa_wd
+                file: man/get_subtaxa_wd.qmd
+              - text: get_trees_wd
+                file: man/get_trees_wd.qmd
+              - text: get_uses_wd
+                file: man/get_uses_wd.qmd
+          - section: Orchids
+            contents:
+            - text: orchids_compounds_classes
+              file: man/orchids_compounds_classes.qmd
+            - text: orchids_compounds
+              file: man/orchids_compounds.qmd
+            - text: orchids_ethnobotanical
+              file: man/orchids_ethnobotanical.qmd
+          - text: plot_trees
+            file: man/plot_trees.qmd
 format:
   html:
     grid:

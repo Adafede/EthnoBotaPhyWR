@@ -26,3 +26,4 @@ result. If the API call fails, NA values are returned for that entry.
 \examples{
 # get_npclassifier_taxonomy(c("CCO", "CCN"))
 }
+\keyword{internal}

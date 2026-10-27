@@ -1,12 +1,11 @@
 Alastair
 Allaire
 Averick
-Barret
 BiocManager
 BiocVersion
 Bioinformatics
+CMD
 CRC
-Cheng
 Christophe
 Colour
 Dai
@@ -25,7 +24,6 @@ Guangchuang
 Guo
 Hadley
 Huachen
-Iannone
 InChIKey
 JJ
 Jeroen
@@ -53,7 +51,6 @@ QID
 Redelings
 Riederer
 Schliep
-Schloerke
 Seidel
 Semiquantitative
 Shuangbin
@@ -114,6 +111,8 @@ rmarkdown
 rotl
 smallcaps
 subtaxa
+testthat
+tibbles
 tidytable
 tidytree
 tidyverse

@@ -3,12 +3,16 @@ title: "Working with Orchids Datasets"
 description: |
   Guide to using the built-in orchids ethnobotanical and phytochemical datasets
   included with EthnoBotaPhyWR.
-output:
-  quarto::html:
+format:
+  html:
     toc: true
+    toc-depth: 3
     number-sections: true
-editor_options:
-  chunk_output_type: console
+    embed-resources: true
+execute:
+  echo: true
+  warning: false
+  message: false
 vignette: >
   %\VignetteIndexEntry{Working with Orchids Datasets}
   %\VignetteEngine{quarto::html}
@@ -170,7 +174,7 @@ Use `taxon_id_ott` to build phylogenetic trees:
 # Prepare data for tree building
 tree_data <- orchids_ethnobotanical |>
   tidytable::mutate(
-    compounds_count = 0,  # or merge with orchids_compounds
+    compounds_count = 0, # or merge with orchids_compounds
     ethnobotanical_count = 1
   ) |>
   tidytable::distinct(taxon_id_ott, taxon_name, .keep_all = TRUE)
@@ -201,8 +205,10 @@ both <- tidytable::inner_join(
   by = c("taxon", "taxon_name")
 )
 
-cat("Species with both compounds AND ethnobotanical uses:",
-    nrow(both), "/", nrow(spp_ethnobotany), "\n")
+cat(
+  "Species with both compounds AND ethnobotanical uses:",
+  nrow(both), "/", nrow(spp_ethnobotany), "\n"
+)
 ```
 
 ## R-Universe Multi-Format Export

@@ -16,6 +16,7 @@
 #'
 #' @return A data.frame with node, count, is_tip, parent_count, and the
 #' calculated branch value (named by 'name')
+#' @keywords internal
 #'
 #' @examples
 #' NULL

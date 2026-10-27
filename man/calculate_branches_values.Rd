@@ -29,3 +29,4 @@ downstream analysis or plotting.
 \examples{
 NULL
 }
+\keyword{internal}

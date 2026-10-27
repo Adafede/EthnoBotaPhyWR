@@ -1,3 +1,5 @@
+
+
 <!-- README.md is generated from README.qmd. Please edit that file -->
 
 # EthnoBotaPhyWR
@@ -8,15 +10,15 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![No Maintenance
 Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/tima.png)](https://CRAN.R-project.org/package=EthnoBotaPhyWR)
+[![R-CMD-check](https://github.com/adafede/EthnoBotaPhyWR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/adafede/EthnoBotaPhyWR/actions/workflows/R-CMD-check.yaml)
+[![r-universe
+badge](https://adafede.r-universe.dev/EthnoBotaPhyWR/badges/version.png)](https://adafede.r-universe.dev/EthnoBotaPhyWR)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.TODO.svg)](https://doi.org/10.5281/zenodo.TODO)
 <!-- badges: end -->
 
-**EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and
-*R*
-<span class="smallcaps">(maybe you can also find the
-*bot* of *robot*)</span> It
-should be pronounced "Ethnobota Fever".
+**EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*,
+*Wikidata* and *R* <span class="smallcaps">(maybe you can also find the
+*bot* of *robot*)</span> It should be pronounced “Ethnobota Fever”.
 
 ## Requirements
 
@@ -35,17 +37,18 @@ Or simply use the included orchids datasets for analysis.
 
 **EthnoBotaPhyWR** provides:
 
-- **Built-in datasets** for *Orchidaceae* (3,055 compounds + 419 ethnobotanical
-  uses)
+- **Built-in datasets** for *Orchidaceae* (3,055 compounds + 419
+  ethnobotanical uses)
 - **Phylogenetic integration** via Open Tree of Life
 - **Phytochemical analysis** with NPClassifier taxonomy
 - **Data federation** from Wikidata, LOTUS, and external sources
 
 ## Installation
 
-As the package is not (yet) available on CRAN, you will need to install with:
+As the package is not (yet) available on CRAN, you will need to install
+with:
 
-```r
+``` r
 install.packages(
   "EthnoBotaPhyWR",
   repos = c(
@@ -57,14 +60,14 @@ install.packages(
 ```
 
 Once installed, you are ready to go through our
-[documentation](https://adafede.github.io/EthnoBotaPhyWR/articles), with the
-major steps detailed.
+[documentation](https://adafede.github.io/EthnoBotaPhyWR/articles), with
+the major steps detailed.
 
 ## Quick Start
 
 ### Load included datasets
 
-```r
+``` r
 library(EthnoBotaPhyWR)
 
 # Phytochemical data with SMILES and classification
@@ -82,7 +85,7 @@ head(orchids_ethnobotanical)
 
 ### Analyze your own family
 
-```r
+``` r
 # Get data for any plant family (requires Wikidata)
 result <- ethnobotafever_tree(
   taxon_name = "Orchidaceae",
@@ -120,47 +123,41 @@ result <- ethnobotafever_tree(
 
 ## Additional software credits
 
-  | Package        | Version    | Citation                                                                    |
-  | :------------- | :--------- | :-------------------------------------------------------------------------- |
-  | ape            | 5.8.1      | Paradis and Schliep (2019)                                                  |
-  | base           | 4.6.1      | R Core Team (2026a)                                                         |
-  | BiocManager    | 1.30.27    | Morgan and Ramos (2025)                                                     |
-  | BiocVersion    | 3.23.1     | Morgan (2025)                                                               |
-  | cascade        | 0.0.0.9002 | Rutz and Wolfender (2023); Rutz (2026a)                                     |
-  | EthnoBotaPhyWR | 0.0.0.9001 | Rutz (2026b)                                                                |
-  | ggtext         | 0.2.0      | Wilke and Wiernik (2026)                                                    |
-  | ggtree         | 4.2.0      | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022) |
-  | ggtreeExtra    | 1.22.1     | Xu et al. (2021); Yu (2022b)                                                |
-  | grid           | 4.6.1      | R Core Team (2026b)                                                         |
-  | gt             | 1.3.0      | Iannone et al. (2026)                                                       |
-  | khroma         | 1.17.0     | Frerebeau (2025)                                                            |
-  | knitr          | 1.52       | Xie (2014); Xie (2015); Xie (2026)                                          |
-  | logger         | 0.4.3      | Daróczi and Wickham (2026)                                                  |
-  | openssl        | 2.4.2      | Ooms (2026)                                                                 |
-  | phangorn       | 2.12.1     | Schliep (2011); Schliep et al. (2017)                                       |
-  | quarto         | 1.5.1      | Allaire and Dervieux (2025)                                                 |
-  | rmarkdown      | 2.32       | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026)                 |
-  | rotl           | 3.1.1      | Michonneau et al. (2016); OpenTreeOfLife et al. (2019)                      |
-  | scales         | 1.4.0      | Wickham et al. (2025)                                                       |
-  | testthat       | 3.3.2      | Wickham (2011)                                                              |
-  | tidytable      | 0.11.2     | Fairbanks (2024)                                                            |
-  | tidytree       | 0.4.8      | Yu (2022c)                                                                  |
-  | tidyverse      | 2.0.0      | Wickham et al. (2019)                                                       |
+    Warning in utils::citation(pkg_name): could not determine year for
+    'EthnoBotaPhyWR' from package DESCRIPTION file
+
+| Package | Version | Citation |
+|:---|:---|:---|
+| ape | 5.8.1 | Paradis and Schliep (2019) |
+| base | 4.6.1 | R Core Team (2026a) |
+| BiocManager | 1.30.27 | Morgan and Ramos (2025) |
+| BiocVersion | 3.23.1 | Morgan (2025) |
+| cascade | 0.0.0.9002 | Rutz and Wolfender (2023); Rutz (2026) |
+| EthnoBotaPhyWR | 0.0.0.9001 | Rutz (n.d.) |
+| ggtext | 0.2.0 | Wilke and Wiernik (2026) |
+| ggtree | 4.2.0 | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022) |
+| ggtreeExtra | 1.22.1 | Xu et al. (2021); Yu (2022b) |
+| grid | 4.6.1 | R Core Team (2026b) |
+| gt | 1.4.0 | Iannone et al. (2026) |
+| khroma | 1.17.0 | Frerebeau (2025) |
+| knitr | 1.52 | Xie (2014); Xie (2015); Xie (2026) |
+| logger | 0.4.3 | Daróczi and Wickham (2026) |
+| openssl | 2.4.2 | Ooms (2026) |
+| phangorn | 2.12.1 | Schliep (2011); Schliep et al. (2017) |
+| rmarkdown | 2.32 | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026) |
+| rotl | 3.1.1 | Michonneau et al. (2016); OpenTreeOfLife et al. (2019) |
+| scales | 1.4.0 | Wickham et al. (2025) |
+| testthat | 3.3.2 | Wickham (2011) |
+| tidytable | 0.11.2 | Fairbanks (2024) |
+| tidytree | 0.4.8 | Yu (2022c) |
+| tidyverse | 2.0.0 | Wickham et al. (2019) |
 
 <div id="refs" class="references csl-bib-body hanging-indent">
-
-<div id="ref-quarto" class="csl-entry">
-
-Allaire, JJ, and Christophe Dervieux. 2025.
-_<span class="nocase">quarto</span>: R Interface to “Quarto” Markdown
-Publishing System_. <https://doi.org/10.32614/CRAN.package.quarto>.
-
-</div>
 
 <div id="ref-rmarkdown2026" class="csl-entry">
 
 Allaire, JJ, Yihui Xie, Christophe Dervieux, et al. 2026.
-_<span class="nocase">rmarkdown</span>: Dynamic Documents for r_.
+*<span class="nocase">rmarkdown</span>: Dynamic Documents for r*.
 <https://github.com/rstudio/rmarkdown>.
 
 </div>
@@ -168,23 +165,23 @@ _<span class="nocase">rmarkdown</span>: Dynamic Documents for r_.
 <div id="ref-logger" class="csl-entry">
 
 Daróczi, Gergely, and Hadley Wickham. 2026.
-_<span class="nocase">logger</span>: A Lightweight, Modern and Flexible
-Logging Utility_. <https://doi.org/10.32614/CRAN.package.logger>.
+*<span class="nocase">logger</span>: A Lightweight, Modern and Flexible
+Logging Utility*. <https://doi.org/10.32614/CRAN.package.logger>.
 
 </div>
 
 <div id="ref-tidytable" class="csl-entry">
 
-Fairbanks, Mark. 2024. _<span class="nocase">tidytable</span>: Tidy
-Interface to “<span class="nocase">data.table</span>”_.
+Fairbanks, Mark. 2024. *<span class="nocase">tidytable</span>: Tidy
+Interface to “<span class="nocase">data.table</span>”*.
 <https://doi.org/10.32614/CRAN.package.tidytable>.
 
 </div>
 
 <div id="ref-khroma" class="csl-entry">
 
-Frerebeau, Nicolas. 2025. _<span class="nocase">khroma: Colour Schemes
-for Scientific Data Visualization</span>_. Université Bordeaux
+Frerebeau, Nicolas. 2025. *<span class="nocase">khroma: Colour Schemes
+for Scientific Data Visualization</span>*. Université Bordeaux
 Montaigne. <https://doi.org/10.5281/zenodo.1472077>.
 
 </div>
@@ -192,8 +189,8 @@ Montaigne. <https://doi.org/10.5281/zenodo.1472077>.
 <div id="ref-gt" class="csl-entry">
 
 Iannone, Richard, Joe Cheng, Barret Schloerke, et al. 2026.
-_<span class="nocase">gt</span>: Easily Create Presentation-Ready
-Display Tables_. <https://doi.org/10.32614/CRAN.package.gt>.
+*<span class="nocase">gt</span>: Easily Create Presentation-Ready
+Display Tables*. <https://doi.org/10.32614/CRAN.package.gt>.
 
 </div>
 
@@ -201,37 +198,38 @@ Display Tables_. <https://doi.org/10.32614/CRAN.package.gt>.
 
 Michonneau, Francois, Joseph W. Brown, and David J. Winter. 2016.
 “<span class="nocase">rotl</span>: An r Package to Interact with the
-Open Tree of Life Data.” _Methods in Ecology and Evolution_ 7 (12):
+Open Tree of Life Data.” *Methods in Ecology and Evolution* 7 (12):
 1476–81. <https://doi.org/10.1111/2041-210X.12593>.
 
 </div>
 
 <div id="ref-BiocVersion" class="csl-entry">
 
-Morgan, Martin. 2025. _BiocVersion: Set the Appropriate Version of
-Bioconductor Packages_.
+Morgan, Martin. 2025. *BiocVersion: Set the Appropriate Version of
+Bioconductor Packages*.
 
 </div>
 
 <div id="ref-BiocManager" class="csl-entry">
 
-Morgan, Martin, and Marcel Ramos. 2025. _BiocManager: Access the
-Bioconductor Project Package Repository_.
+Morgan, Martin, and Marcel Ramos. 2025. *BiocManager: Access the
+Bioconductor Project Package Repository*.
 <https://doi.org/10.32614/CRAN.package.BiocManager>.
 
 </div>
 
 <div id="ref-openssl" class="csl-entry">
 
-Ooms, Jeroen. 2026. _<span class="nocase">openssl</span>: Toolkit for
-Encryption, Signatures and Certificates Based on OpenSSL_.
+Ooms, Jeroen. 2026. *<span class="nocase">openssl</span>: Toolkit for
+Encryption, Signatures and Certificates Based on OpenSSL*.
 <https://doi.org/10.32614/CRAN.package.openssl>.
 
 </div>
 
 <div id="ref-rotl2019" class="csl-entry">
 
-OpenTreeOfLife, Benjamin Redelings, Luna Luisa Sanchez Reyes, et al. 2019. _Open Tree of Life Synthetic Tree_. Version 12.3. Zenodo.
+OpenTreeOfLife, Benjamin Redelings, Luna Luisa Sanchez Reyes, et al.
+2019. *Open Tree of Life Synthetic Tree*. Version 12.3. Zenodo.
 <https://doi.org/10.5281/zenodo.3937741>.
 
 </div>
@@ -239,40 +237,40 @@ OpenTreeOfLife, Benjamin Redelings, Luna Luisa Sanchez Reyes, et al. 2019. _Open
 <div id="ref-ape" class="csl-entry">
 
 Paradis, Emmanuel, and Klaus Schliep. 2019. “Ape 5.0: An Environment for
-Modern Phylogenetics and Evolutionary Analyses in R.” _Bioinformatics_
+Modern Phylogenetics and Evolutionary Analyses in R.” *Bioinformatics*
 35: 526–28. <https://doi.org/10.1093/bioinformatics/bty633>.
 
 </div>
 
 <div id="ref-base" class="csl-entry">
 
-R Core Team. 2026a. _R: A Language and Environment for Statistical
-Computing_. R Foundation for Statistical Computing.
+R Core Team. 2026a. *R: A Language and Environment for Statistical
+Computing*. R Foundation for Statistical Computing.
 <https://doi.org/10.32614/R.manuals>.
 
 </div>
 
 <div id="ref-grid" class="csl-entry">
 
-R Core Team. 2026b. _R: A Language and Environment for Statistical
-Computing_. R Foundation for Statistical Computing.
+R Core Team. 2026b. *R: A Language and Environment for Statistical
+Computing*. R Foundation for Statistical Computing.
 <https://doi.org/10.32614/R.manuals>.
 
 </div>
 
 <div id="ref-cascade2026" class="csl-entry">
 
-Rutz, Adriano. 2026a. _<span class="nocase">cascade</span>:
+Rutz, Adriano. 2026. *<span class="nocase">cascade</span>:
 Contextualizing Untargeted Annotation with Semi-Quantitative Charged
-Aerosol Detection for Pertinent Characterization of Natural Extracts_.
+Aerosol Detection for Pertinent Characterization of Natural Extracts*.
 
 </div>
 
 <div id="ref-EthnoBotaPhyWR" class="csl-entry">
 
-Rutz, Adriano. 2026b. _EthnoBotaPhyWR: \*\*EthnoBotaPhyWR\*\* Stands for
+Rutz, Adriano. n.d. *EthnoBotaPhyWR: \*\*EthnoBotaPhyWR\*\* Stands for
 \*Ethnobotany\*, \*Phytochemistry\*, \*Wikidata\* and \*r\*. It Should
-Be Pronounced “Ethnobota Fever”_.
+Be Pronounced “Ethnobota Fever”*.
 <https://github.com/adafede/EthnoBotaPhyWR>.
 
 </div>
@@ -281,8 +279,8 @@ Be Pronounced “Ethnobota Fever”_.
 
 Rutz, Adriano, and Jean-Luc Wolfender. 2023. “Automated Composition
 Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based
-Metabolite Profiling Integrating Semiquantitative Detection.” _Journal
-of Agricultural and Food Chemistry_ 71 (46).
+Metabolite Profiling Integrating Semiquantitative Detection.” *Journal
+of Agricultural and Food Chemistry* 71 (46).
 <https://doi.org/10.1021/acs.jafc.3c03099>.
 
 </div>
@@ -290,7 +288,7 @@ of Agricultural and Food Chemistry_ 71 (46).
 <div id="ref-phangorn2011" class="csl-entry">
 
 Schliep, Klaus. 2011. “<span class="nocase">phangorn</span>:
-Phylogenetic Analysis in r.” _Bioinformatics_ 27 (4): 592–93.
+Phylogenetic Analysis in r.” *Bioinformatics* 27 (4): 592–93.
 <https://doi.org/10.1093/bioinformatics/btq706>.
 
 </div>
@@ -298,15 +296,15 @@ Phylogenetic Analysis in r.” _Bioinformatics_ 27 (4): 592–93.
 <div id="ref-phangorn2017" class="csl-entry">
 
 Schliep, Klaus, Alastair J. Potts, David A. Morrison, and Guido W.
-Grimm. 2017. “Intertwining Phylogenetic Trees and Networks.” _Methods in
-Ecology and Evolution_ 8 (10): 1212–20.
+Grimm. 2017. “Intertwining Phylogenetic Trees and Networks.” *Methods in
+Ecology and Evolution* 8 (10): 1212–20.
 
 </div>
 
 <div id="ref-testthat" class="csl-entry">
 
 Wickham, Hadley. 2011. “<span class="nocase">testthat</span>: Get
-Started with Testing.” _The R Journal_ 3: 5–10.
+Started with Testing.” *The R Journal* 3: 5–10.
 <https://journal.r-project.org/articles/RJ-2011-002/>.
 
 </div>
@@ -314,15 +312,15 @@ Started with Testing.” _The R Journal_ 3: 5–10.
 <div id="ref-tidyverse" class="csl-entry">
 
 Wickham, Hadley, Mara Averick, Jennifer Bryan, et al. 2019. “Welcome to
-the <span class="nocase">tidyverse</span>.” _Journal of Open Source
-Software_ 4 (43): 1686. <https://doi.org/10.21105/joss.01686>.
+the <span class="nocase">tidyverse</span>.” *Journal of Open Source
+Software* 4 (43): 1686. <https://doi.org/10.21105/joss.01686>.
 
 </div>
 
 <div id="ref-scales" class="csl-entry">
 
 Wickham, Hadley, Thomas Lin Pedersen, and Dana Seidel. 2025.
-_<span class="nocase">scales</span>: Scale Functions for Visualization_.
+*<span class="nocase">scales</span>: Scale Functions for Visualization*.
 <https://doi.org/10.32614/CRAN.package.scales>.
 
 </div>
@@ -330,8 +328,8 @@ _<span class="nocase">scales</span>: Scale Functions for Visualization_.
 <div id="ref-ggtext" class="csl-entry">
 
 Wilke, Claus O., and Brenton M. Wiernik. 2026.
-_<span class="nocase">ggtext</span>: Improved Text Rendering Support for
-“<span class="nocase">ggplot2</span>”_.
+*<span class="nocase">ggtext</span>: Improved Text Rendering Support for
+“<span class="nocase">ggplot2</span>”*.
 <https://doi.org/10.32614/CRAN.package.ggtext>.
 
 </div>
@@ -339,38 +337,38 @@ _<span class="nocase">ggtext</span>: Improved Text Rendering Support for
 <div id="ref-knitr2014" class="csl-entry">
 
 Xie, Yihui. 2014. “<span class="nocase">knitr</span>: A Comprehensive
-Tool for Reproducible Research in R.” In _Implementing Reproducible
-Computational Research_, edited by Victoria Stodden, Friedrich Leisch,
+Tool for Reproducible Research in R.” In *Implementing Reproducible
+Computational Research*, edited by Victoria Stodden, Friedrich Leisch,
 and Roger D. Peng. Chapman; Hall/CRC.
 
 </div>
 
 <div id="ref-knitr2015" class="csl-entry">
 
-Xie, Yihui. 2015. _Dynamic Documents with R and Knitr_. 2nd ed. Chapman;
+Xie, Yihui. 2015. *Dynamic Documents with R and Knitr*. 2nd ed. Chapman;
 Hall/CRC. <https://yihui.org/knitr/>.
 
 </div>
 
 <div id="ref-knitr2026" class="csl-entry">
 
-Xie, Yihui. 2026. _<span class="nocase">knitr</span>: A General-Purpose
-Package for Dynamic Report Generation in R_. <https://yihui.org/knitr/>.
+Xie, Yihui. 2026. *<span class="nocase">knitr</span>: A General-Purpose
+Package for Dynamic Report Generation in R*. <https://yihui.org/knitr/>.
 
 </div>
 
 <div id="ref-rmarkdown2018" class="csl-entry">
 
-Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. _R Markdown: The
-Definitive Guide_. Chapman; Hall/CRC.
+Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2018. *R Markdown: The
+Definitive Guide*. Chapman; Hall/CRC.
 <https://pkg.yihui.org/rmarkdown-book/>.
 
 </div>
 
 <div id="ref-rmarkdown2020" class="csl-entry">
 
-Xie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. _R Markdown
-Cookbook_. Chapman; Hall/CRC.
+Xie, Yihui, Christophe Dervieux, and Emily Riederer. 2020. *R Markdown
+Cookbook*. Chapman; Hall/CRC.
 <https://pkg.yihui.org/rmarkdown-cookbook/>.
 
 </div>
@@ -379,7 +377,7 @@ Cookbook_. Chapman; Hall/CRC.
 
 Xu, Shuangbin, Zehan Dai, Pingfan Guo, et al. 2021.
 “<span class="nocase">ggtreeExtra</span>: Compact Visualization of
-Richly Annotated Phylogenetic Data.” _Molecular Biology and Evolution_
+Richly Annotated Phylogenetic Data.” *Molecular Biology and Evolution*
 38 (June): 4039–42. <https://doi.org/10.1093/molbev/msab166>.
 
 </div>
@@ -388,38 +386,38 @@ Richly Annotated Phylogenetic Data.” _Molecular Biology and Evolution_
 
 Xu, Shuangbin, Lin Li, Xiao Luo, et al. 2022. “Ggtree: A Serialized Data
 Object for Visualization of a Phylogenetic Tree and Annotation Data.”
-_iMeta_ 1 (4): e56. <https://doi.org/10.1002/imt2.56>.
+*iMeta* 1 (4): e56. <https://doi.org/10.1002/imt2.56>.
 
 </div>
 
 <div id="ref-ggtree2020c" class="csl-entry">
 
 Yu, Guangchuang. 2020. “Using Ggtree to Visualize Data on Tree-Like
-Structures.” _Current Protocols in Bioinformatics_ 69 (1): e96.
+Structures.” *Current Protocols in Bioinformatics* 69 (1): e96.
 <https://doi.org/10.1002/cpbi.96>.
 
 </div>
 
 <div id="ref-ggtree2022a" class="csl-entry">
 
-Yu, Guangchuang. 2022a. _Data Integration, Manipulation and
-Visualization of Phylogenetic Treess_. 1st edition. Chapman; Hall/CRC.
+Yu, Guangchuang. 2022a. *Data Integration, Manipulation and
+Visualization of Phylogenetic Treess*. 1st edition. Chapman; Hall/CRC.
 <https://doi.org/10.1201/9781003279242>.
 
 </div>
 
 <div id="ref-ggtreeExtra2022" class="csl-entry">
 
-Yu, Guangchuang. 2022b. _Data Integration, Manipulation and
-Visualization of Phylogenetic Treess_. 1st edition. Chapman; Hall/CRC.
+Yu, Guangchuang. 2022b. *Data Integration, Manipulation and
+Visualization of Phylogenetic Treess*. 1st edition. Chapman; Hall/CRC.
 <https://www.amazon.com/Integration-Manipulation-Visualization-Phylogenetic-Computational-ebook/dp/B0B5NLZR1Z/>.
 
 </div>
 
 <div id="ref-tidytree" class="csl-entry">
 
-Yu, Guangchuang. 2022c. _Data Integration, Manipulation and
-Visualization of Phylogenetic Treess_. 1st edition. Chapman; Hall/CRC.
+Yu, Guangchuang. 2022c. *Data Integration, Manipulation and
+Visualization of Phylogenetic Treess*. 1st edition. Chapman; Hall/CRC.
 <https://doi.org/10.1201/9781003279242>.
 
 </div>
@@ -428,7 +426,7 @@ Visualization of Phylogenetic Treess_. 1st edition. Chapman; Hall/CRC.
 
 Yu, Guangchuang, Tommy Tsan-Yuk Lam, Huachen Zhu, and Yi Guan. 2018.
 “Two Methods for Mapping and Visualizing Associated Data on Phylogeny
-Using Ggtree.” _Molecular Biology and Evolution_ 35: 3041–43.
+Using Ggtree.” *Molecular Biology and Evolution* 35: 3041–43.
 <https://doi.org/10.1093/molbev/msy194>.
 
 </div>
@@ -438,7 +436,7 @@ Using Ggtree.” _Molecular Biology and Evolution_ 35: 3041–43.
 Yu, Guangchuang, David Smith, Huachen Zhu, Yi Guan, and Tommy Tsan-Yuk
 Lam. 2017. “<span class="nocase">ggtree</span>: An r Package for
 Visualization and Annotation of Phylogenetic Trees with Their Covariates
-and Other Associated Data.” _Methods in Ecology and Evolution_ 8: 28–36.
+and Other Associated Data.” *Methods in Ecology and Evolution* 8: 28–36.
 <https://doi.org/10.1111/2041-210X.12628>.
 
 </div>

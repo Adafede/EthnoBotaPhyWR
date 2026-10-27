@@ -86,6 +86,7 @@ get_trees_cache_key <- function(ott_ids, df_counted, taxon_name) {
 #' caching (for example `data-raw`).
 #'
 #' @return The cached or newly built tree result list.
+#' @keywords internal
 get_trees_cached <- function(ott_ids, df_counted, taxon_name, cache_dir) {
   dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
   cache_key <- get_trees_cache_key(ott_ids, df_counted, taxon_name)
@@ -135,6 +136,7 @@ get_trees_cached <- function(ott_ids, df_counted, taxon_name, cache_dir) {
 #'
 #' @return A list with the taxa missing from the full tree, the full tree
 #' object, and the phytochemical tree object.
+#' @keywords internal
 get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
   # Input validation
   if (!(is.numeric(ott_ids) || is.character(ott_ids))) {
@@ -459,12 +461,11 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
     ]
   ))
 
-  taxa_not_in_tree <- df_counted[
-    !as.character(df_counted$taxon_name) %in% tree_tip_labels_full &
-      (df_counted$compounds_count > 0L | df_counted$ethnobotanical_count > 0L),
-    ,
-    drop = FALSE
-  ]
+  phyto_mask <- df_counted$compounds_count > 0L |
+    df_counted$ethnobotanical_count > 0L
+  in_tree_tips <- as.character(df_counted$taxon_name) %in%
+    tree_tip_labels_full
+  taxa_not_in_tree <- df_counted[!in_tree_tips & phyto_mask, , drop = FALSE]
   names(taxa_not_in_tree)[
     names(taxa_not_in_tree) == "ethnobotanical_count"
   ] <- "ethnobotanical_species_count"

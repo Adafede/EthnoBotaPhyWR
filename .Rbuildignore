@@ -44,6 +44,7 @@
 ^prek[.]toml$
 ^renv$
 ^renv\.lock$
+^styles\.css$
 ^vignettes/\.quarto$
 ^vignettes/articles$
 ^vignettes/articles/.*_files$

@@ -28,6 +28,7 @@
 #'
 #' @return A list containing the main tree plots, the orphan-taxon plot,
 #' the orphan data frame, and the derived layout settings.
+#' @keywords internal
 #'
 #' @examples
 #' # plot_trees(...)

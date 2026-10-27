@@ -62,3 +62,4 @@ geometry, and returns the main tree plots plus the orphan-taxon panel.
 \examples{
 # plot_trees(...)
 }
+\keyword{internal}

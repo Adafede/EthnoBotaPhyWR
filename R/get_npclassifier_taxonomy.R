@@ -13,6 +13,7 @@
 #' @details
 #' For each SMILES, this function queries the NPClassifier API and parses the
 #' result. If the API call fails, NA values are returned for that entry.
+#' @keywords internal
 #'
 #' @examples
 #' # get_npclassifier_taxonomy(c("CCO", "CCN"))

@@ -1,10 +1,14 @@
 ---
-title: EthnoBotaPhyWR
+title: "Using EthnoBotaPhyWR"
+subtitle: "Full pipeline tutorial for ethnobotanical and phytochemical analysis"
+description: |
+  This tutorial illustrates the complete `ethnobotafever_tree()` pipeline,
+  from data retrieval via Wikidata to phylogenetic tree visualization.
 author:
   - name: Adriano Rutz
     orcid: 0000-0003-0443-9902
     number: 1
-    email: rutz@imsb.biol.ethz.ch
+    email: adafede@gmail.com
     affiliations:
       - ref: imsb
     correspondence: true
@@ -20,9 +24,11 @@ affiliations:
     postal-code: 8093
     ror: https://ror.org/03j5gm982
 abstract: |
-  This short article illustrates the use of EthnoBotaPhyWR (pronounced "Ethnobota Fever").
+  This tutorial illustrates the use of EthnoBotaPhyWR (pronounced
+  "Ethnobota Fever"), showing how to collect ethnobotanical and
+  phytochemical data for a taxonomic family.
 citation:
-  url: https://adafede.github.io/EthnoBotaPhyWR/index.html
+  url: https://adafede.github.io/EthnoBotaPhyWR/vignettes/ethnobotafever_tree.html
 comments:
   giscus:
     repo: adafede/EthnoBotaPhyWR
@@ -32,6 +38,9 @@ creative_commons: CC BY
 format:
   html:
     embed-resources: true
+    toc: true
+    toc-depth: 3
+    number-sections: true
 google-scholar: true
 keywords:
   - Ethnobotany
@@ -39,13 +48,14 @@ keywords:
   - Taxonomy
   - Wikidata
   - R
-keywords-formatted:
-  - Ethnobotany
-  - Phytochemistry
-  - Taxonomy
-  - Wikidata
-  - R
-license: CC BY
+  - Phylogenetics
+  - Natural products
+execute:
+  freeze: auto
+vignette: >
+  %\VignetteIndexEntry{Using EthnoBotaPhyWR}
+  %\VignetteEngine{quarto::html}
+  %\VignetteEncoding{UTF-8}
 ---
 
 **EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and
@@ -82,6 +92,7 @@ are described below:
 
 ```{r}
 #| label: parameters
+#| eval: false
 
 ## Taxonomy-related parameters
 taxon_name <- "Orchidaceae" # The scientific name of the family you are interested in
@@ -134,6 +145,7 @@ Change these parameters as required and you are ready for the fever!
 
 ```{r}
 #| label: ethnobotafever_tree
+#| eval: false
 #| message: false
 #| warning: false
 
@@ -171,6 +183,7 @@ First, tables containing different information:
 
 ```{r}
 #| echo: false
+#| eval: false
 #| label: tbl-1
 #| tbl-cap: "Overview of the phytochemistry of the family"
 
@@ -182,6 +195,7 @@ results$df_taxa_full |>
 
 ```{r}
 #| echo: false
+#| eval: false
 #| label: tbl-2
 #| tbl-cap: >-
 #|   Overview of the number of reported uses, compounds, and species per genus
@@ -195,6 +209,7 @@ results$df_taxa_ethno_counted |>
 
 ```{r}
 #| echo: false
+#| eval: false
 #| label: tbl-3
 #| tbl-cap: >-
 #|   Overview of the species within the family for which a decent number of
@@ -230,6 +245,7 @@ Second, some tree-based visualizations:
 ```{r}
 #| label: logs
 #| echo: false
+#| eval: false
 
 readLines(con = results$log_file)
 ```

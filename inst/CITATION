@@ -1,0 +1,12 @@
+citHeader("To cite EthnoBotaPhyWR in publications use:")
+
+bibentry(
+  bibtype = "Manual",
+  title = "EthnoBotaPhyWR: Infrastructure for Ethnobotanical and Phytochemical Data Integration with Wikidata",
+  author = person(given = "Adriano", family = "Rutz", email = "adafede@gmail.com",
+                   role = c("aut", "cre"), comment = c(ORCID = "0000-0003-0443-9902")),
+  year = "2026",
+  note = "R package, version 0.0.0.9001",
+  doi = "10.5281/zenodo.TODO",
+  url = "https://adafede.github.io/EthnoBotaPhyWR"
+)

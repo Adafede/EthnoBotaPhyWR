@@ -1,0 +1,41 @@
+project:
+  type: website
+  output-dir: ../docs/
+
+# Note: freeze functionality can be set at a project level or for individual .qmd files
+# execute:
+#   freeze: false
+
+website:
+  title: "$ALTDOC_PACKAGE_NAME"
+  site-url: https://adafede.github.io/EthnoBotaPhyWR/
+  favicon: man/figures/logo.svg
+  image: man/figures/logo.svg
+  page-navigation: true
+  navbar:
+    title: EthnoBotaPhyWR
+    logo: man/figures/logo.svg
+    logo-alt: EthnoBotaPhyWR logo
+    search: true
+    left:
+      - text: News
+        file: $ALTDOC_NEWS
+      - text: License
+        file: $ALTDOC_LICENSE
+      - text: Citation
+        file: $ALTDOC_CITATION
+    right:
+      - icon: github
+        href: $ALTDOC_PACKAGE_URL_GITHUB
+        aria-label: $ALTDOC_PACKAGE_NAME GitHub
+  body-header: |
+    <!-- 100% privacy-first analytics -->
+    <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+
+format:
+  html:
+    grid:
+      body-width: 1200px
+    linkcolor: "#3377c4"
+    respect-user-color-scheme: true
+    toc: true

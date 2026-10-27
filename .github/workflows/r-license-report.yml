@@ -1,0 +1,23 @@
+---
+name: License Report
+
+permissions: read-all
+
+on:
+  push:
+    branches-ignore:
+      - "main"
+  pull_request:
+    branches:
+      - "main"
+
+jobs:
+  license-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: License Report
+        uses: insightsengineering/r-license-report@6b011d92e042fb70b5670a49021d397fd9f1ee4e

@@ -1,0 +1,75 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  release:
+    types: [published]
+  workflow_dispatch:
+
+name: R-CMD-check
+
+jobs:
+  R-CMD-check:
+    runs-on: ubuntu-latest
+    name: R-CMD-check
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up pandoc
+        uses: rstudio/pandoc@main
+        with:
+          pandoc-version: "3.12.1"
+
+      - name: Setup Python
+        uses: astral-sh/setup-python@latest
+        with:
+          python-version: "3.x"
+
+      - name: Install quarto
+        uses: quarto-dev/quarto-actions/setup@v3
+        with:
+          tinytex: false
+          jupyter: false
+
+      - name: Set up Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+
+      - name: Query dependencies
+        run: |
+          install.packages(c("remotes", "rcmdcheck"))
+          remotes::install_deps(dependencies = TRUE, upgrade = "never")
+          install.packages("pak")
+          pak::pak("adafede/cascade", upgrade = FALSE, ask = FALSE)
+        shell: Rscript {0}
+
+      - name: Check
+        shell: Rscript {0}
+        env:
+          # Add parent dependencies to PATH
+          R_LIB_USER: "${{ github.workspace }}/library"
+          PATH: "${{ github.workspace }}/library/bin:${{ env.PATH }}"
+        run: |
+          rcmdcheck::rcmdcheck(
+            args = c("--as-cran", "--no-manual", "--no-build-vignettes"),
+            error_on = "warning",
+            check_dir = "check"
+          )
+
+      - name: Show test results
+        if: always()
+        run: |
+          echo "== Check log =="
+          cat check/EthnoBotaPhyWR.Rcheck/00check.log
+        shell: bash
+
+      - name: Upload check results
+        if: always()
+        uses: actions/upload-artifact@main
+        with:
+          name: R-CMD-check
+          path: check

@@ -1,1 +1,12 @@
 AGENTS.md
+altdoc/freeze.rds
+_quarto/*
+!_quarto/_freeze/
+
+# Build artifacts
+index.html
+docs/
+*.Rcheck/
+*.tar.gz
+.Rproj.user/
+EthnoBotaPhyWR/

@@ -14,13 +14,17 @@ bibliography: grateful-refs.bib
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![No Maintenance
 Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/tima)](https://CRAN.R-project.org/package=EthnoBotaPhyWR)
+[![R-CMD-check](https://github.com/adafede/EthnoBotaPhyWR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/adafede/EthnoBotaPhyWR/actions/workflows/R-CMD-check.yaml)
+[![r-universe
+badge](https://adafede.r-universe.dev/EthnoBotaPhyWR/badges/version)](https://adafede.r-universe.dev/EthnoBotaPhyWR)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.TODO.svg)](https://doi.org/10.5281/zenodo.TODO)
 <!-- badges: end -->
 
 **EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and
-*R* [(maybe you can also find the *bot* of *robot*)]{.smallcaps} It should be
-pronounced "Ethnobota Fever".
+*R*
+<span class="smallcaps">(maybe you can also find the
+*bot* of *robot*)</span> It
+should be pronounced "Ethnobota Fever".
 
 ## Requirements
 

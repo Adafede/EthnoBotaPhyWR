@@ -1,0 +1,78 @@
+---
+name: External Use
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_request:
+    branches:
+      - main
+      - dev
+  workflow_dispatch: null
+permissions: read-all
+jobs:
+  ethnobotaphywr-test:
+    name: ethnobotaphywr-${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+          - ubuntu-26.04-arm
+          - macos-26-intel
+          # - windows-11-vs2026-arm
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+        with:
+          use-public-rspm: true
+
+      - name: Install dependencies (Linux)
+        if: contains(matrix.os, 'ubuntu')
+        run: |
+          sudo apt-get update && sudo apt-get install -y --no-install-recommends \
+            libarchive-dev libcurl4-openssl-dev libfribidi-dev libharfbuzz-dev libnetcdf-dev libuv1-dev \
+          && sudo apt-get clean \
+          && sudo rm -rf /var/lib/apt/lists/*
+
+      - name: Install dependencies (macOS)
+        if: contains(matrix.os, 'macos')
+        run: |
+          brew update
+          brew install netcdf
+          GETTEXT_PREFIX="$(brew --prefix gettext)"
+          mkdir -p ~/.R
+          cat >> ~/.R/Makevars <<EOF
+          CPPFLAGS += -I${GETTEXT_PREFIX}/include
+          LDFLAGS  += -L${GETTEXT_PREFIX}/lib -lintl
+          EOF
+
+      - name: Install dependencies (Windows)
+        if: contains(matrix.os, 'windows')
+        run: true
+
+      - name: Install
+        run: >
+          install.packages(
+          "EthnoBotaPhyWR",
+          repos = c(
+          "https://adafede.r-universe.dev",
+          "https://cran.r-universe.dev",
+          "https://bioc.r-universe.dev"
+          )
+          )
+        shell: Rscript {0}
+
+      - name: Run pipeline
+        run: |
+          EthnoBotaPhyWR::orchids_ethnobotanical
+          EthnoBotaPhyWR::orchids_compounds
+          EthnoBotaPhyWR::orchids_compound_classes
+        shell: Rscript {0}

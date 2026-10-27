@@ -25,3 +25,4 @@ The cached or newly built tree result list.
 Returns a cached tree result when available, otherwise builds and serializes
 the tree result to an \code{.rda} dataset file on disk.
 }
+\keyword{internal}

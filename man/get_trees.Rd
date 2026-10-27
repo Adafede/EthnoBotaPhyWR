@@ -27,3 +27,4 @@ Builds the full and phytochemical trees for a collection of OTT IDs, falling
 back to placeholder trees if Open Tree requests fail or return incomplete
 data.
 }
+\keyword{internal}

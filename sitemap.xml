@@ -1,59 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://adafede.github.io/EthnoBotaPhyWR/vignettes/articles/orchids.html</loc>
-    <lastmod>2026-10-27T20:21:44.127Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adafede.github.io/EthnoBotaPhyWR/index.html</loc>
-    <lastmod>2026-10-27T20:21:42.392Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adafede.github.io/EthnoBotaPhyWR/LICENSE.html</loc>
-    <lastmod>2026-10-27T20:21:42.378Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adafede.github.io/EthnoBotaPhyWR/man/orchids_compound_classes.html</loc>
-    <lastmod>2026-10-27T20:21:43.745Z</lastmod>
+    <loc>https://adafede.github.io/EthnoBotaPhyWR/man/orchids_ethnobotanical.html</loc>
+    <lastmod>2026-10-27T20:45:52.234Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/EthnoBotaPhyWR/man/trees_886f2bbc1ee37e9433e35b78f5db91ef.html</loc>
-    <lastmod>2026-10-27T20:21:44.016Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adafede.github.io/EthnoBotaPhyWR/man/orchids_ethnobotanical.html</loc>
-    <lastmod>2026-10-27T20:21:43.819Z</lastmod>
+    <lastmod>2026-10-27T20:45:52.337Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/EthnoBotaPhyWR/man/trees_8cca7de252bc0994398aec413cebdbbc.html</loc>
-    <lastmod>2026-10-27T20:21:44.054Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adafede.github.io/EthnoBotaPhyWR/man/trees_5141741f198446414395a45383e3a7ec.html</loc>
-    <lastmod>2026-10-27T20:21:43.978Z</lastmod>
+    <lastmod>2026-10-27T20:45:52.356Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/EthnoBotaPhyWR/man/orchids_compounds.html</loc>
-    <lastmod>2026-10-27T20:21:43.783Z</lastmod>
+    <lastmod>2026-10-27T20:45:52.215Z</lastmod>
   </url>
   <url>
-    <loc>https://adafede.github.io/EthnoBotaPhyWR/man/ethnobotafever_tree.html</loc>
-    <lastmod>2026-10-27T20:21:42.575Z</lastmod>
-  </url>
-  <url>
-    <loc>https://adafede.github.io/EthnoBotaPhyWR/man/trees_9a06c9c148110e62a4e1d2ff8094e462.html</loc>
-    <lastmod>2026-10-27T20:21:44.097Z</lastmod>
+    <loc>https://adafede.github.io/EthnoBotaPhyWR/vignettes/articles/orchids.html</loc>
+    <lastmod>2026-10-27T20:45:52.395Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/EthnoBotaPhyWR/CITATION.html</loc>
-    <lastmod>2026-10-27T20:21:42.421Z</lastmod>
+    <lastmod>2026-10-27T20:45:51.113Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adafede.github.io/EthnoBotaPhyWR/LICENSE.html</loc>
+    <lastmod>2026-10-27T20:45:51.089Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/EthnoBotaPhyWR/NEWS.html</loc>
-    <lastmod>2026-10-27T20:21:42.369Z</lastmod>
+    <lastmod>2026-10-27T20:45:51.084Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adafede.github.io/EthnoBotaPhyWR/index.html</loc>
+    <lastmod>2026-10-27T20:45:51.096Z</lastmod>
   </url>
   <url>
     <loc>https://adafede.github.io/EthnoBotaPhyWR/vignettes/articles/ethnobota_fever_tree.html</loc>
-    <lastmod>2026-10-27T20:21:44.127Z</lastmod>
+    <lastmod>2026-10-27T20:45:52.395Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adafede.github.io/EthnoBotaPhyWR/man/orchids_compound_classes.html</loc>
+    <lastmod>2026-10-27T20:45:52.195Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adafede.github.io/EthnoBotaPhyWR/man/ethnobotafever_tree.html</loc>
+    <lastmod>2026-10-27T20:45:51.198Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adafede.github.io/EthnoBotaPhyWR/man/trees_5141741f198446414395a45383e3a7ec.html</loc>
+    <lastmod>2026-10-27T20:45:52.318Z</lastmod>
+  </url>
+  <url>
+    <loc>https://adafede.github.io/EthnoBotaPhyWR/man/trees_9a06c9c148110e62a4e1d2ff8094e462.html</loc>
+    <lastmod>2026-10-27T20:45:52.379Z</lastmod>
   </url>
 </urlset>

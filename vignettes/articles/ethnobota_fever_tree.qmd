@@ -269,11 +269,11 @@ Second, some tree-based visualizations:
   genus in @fig-3 (mainly to show that even in the most investigated genera, the
   coverage is far from ideal)
 
-![A tree with genera as tips, displaying the taxa of the family, and if compounds or uses have been reported](../man/figures/tree_orchids_full.svg){#fig-1 width=100%}
+![A tree with genera as tips, displaying the taxa of the family, and if compounds or uses have been reported](../../man/figures/tree_orchids_full.svg){#fig-1 width=100%}
 
-![A tree with genera as tips, displaying the taxa of the family for which compounds or uses have been reported](../man/figures/tree_orchids_phyto.svg){#fig-2 width=100%}
+![A tree with genera as tips, displaying the taxa of the family for which compounds or uses have been reported](../../man/figures/tree_orchids_phyto.svg){#fig-2 width=100%}
 
-![A tree with species as tips, displaying the taxa of the family for which a decent number of compounds or uses have been reported in the corresponding genus](../man/figures/tree_orchids_phyto_sub.svg){#fig-3 width=100%}
+![A tree with species as tips, displaying the taxa of the family for which a decent number of compounds or uses have been reported in the corresponding genus](../../man/figures/tree_orchids_phyto_sub.svg){#fig-3 width=100%}
 
 ## Logs
 

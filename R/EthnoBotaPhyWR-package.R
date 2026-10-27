@@ -8,9 +8,7 @@ NULL
 .datatable.aware <- TRUE # nolint: object_name_linter. datatable convention.
 
 .onLoad <- function(libname, pkgname) {
-  ## Hack to avoid rcmdcheck warning since they are needed by {ggtree}
-  invisible(gdtools::font_liberation())
-  invisible(systemfonts::string_width("Fever"))
+  invisible()
 }
 
 #' @title Package startup message

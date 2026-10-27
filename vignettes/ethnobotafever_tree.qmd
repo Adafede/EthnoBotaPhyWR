@@ -63,6 +63,20 @@ vignette: >
 pronounced "Ethnobota Fever".
 
 ```{r}
+#| label: install
+#| include: false
+
+install.packages(
+  "EthnoBotaPhyWR",
+  repos = c(
+    "https://adafede.r-universe.dev",
+    "https://cran.r-universe.dev",
+    "https://bioc.r-universe.dev"
+  )
+)
+```
+
+```{r}
 #| label: imports
 #| include: false
 

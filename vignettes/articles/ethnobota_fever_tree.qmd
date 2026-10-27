@@ -28,19 +28,17 @@ abstract: |
   "Ethnobota Fever"), showing how to collect ethnobotanical and
   phytochemical data for a taxonomic family.
 citation:
-  url: https://adafede.github.io/EthnoBotaPhyWR/vignettes/ethnobotafever_tree.html
+  url: https://adafede.github.io/EthnoBotaPhyWR/vignettes/articles/ethnobotafever_tree.html
 comments:
   giscus:
     repo: adafede/EthnoBotaPhyWR
   hypothesis:
     showHighlights: always
 creative_commons: CC BY
+date: today
 format:
   html:
-    embed-resources: true
-    toc: true
-    toc-depth: 3
-    number-sections: true
+    smooth-scroll: true
 google-scholar: true
 keywords:
   - Ethnobotany
@@ -52,6 +50,16 @@ keywords:
   - Natural products
 execute:
   freeze: auto
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: "#>"
+lang: en
+license: CC BY
+opengraph:
+  image:
+    src: https://github.com/adafede/EthnoBotaPhyWR/blob/main/man/figures/logo.svg
+    alt: EthnoBotaPhyWR logo
 vignette: >
   %\VignetteIndexEntry{Using EthnoBotaPhyWR}
   %\VignetteEngine{quarto::html}

@@ -16,10 +16,10 @@ website:
     logo-alt: EthnoBotaPhyWR logo
     search: true
     left:
-      - text: Get started
-        file: vignettes/ethnobotafever_tree.qmd
       - text: Articles
         menu:
+          - text: Get started
+            file: vignettes/ethnobotafever_tree.qmd
           - text: Orchids
             file: vignettes/articles/orchids.qmd
       - text: News

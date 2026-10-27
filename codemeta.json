@@ -172,6 +172,19 @@
     },
     "6": {
       "@type": "SoftwareApplication",
+      "identifier": "gdtools",
+      "name": "gdtools",
+      "version": ">= 0.5.2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=gdtools"
+    },
+    "7": {
+      "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
       "version": ">= 4.0.3",
@@ -183,7 +196,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
     },
-    "7": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "ggtext",
       "name": "ggtext",
@@ -196,7 +209,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggtext"
     },
-    "8": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "ggtree",
       "name": "ggtree",
@@ -209,7 +222,7 @@
       },
       "sameAs": "https://bioconductor.org/packages/release/bioc/html/ggtree.html"
     },
-    "9": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "ggtreeExtra",
       "name": "ggtreeExtra",
@@ -222,7 +235,7 @@
       },
       "sameAs": "https://bioconductor.org/packages/release/bioc/html/ggtreeExtra.html"
     },
-    "10": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "httr2",
       "name": "httr2",
@@ -235,7 +248,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=httr2"
     },
-    "11": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "jsonlite",
       "name": "jsonlite",
@@ -248,7 +261,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=jsonlite"
     },
-    "12": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "khroma",
       "name": "khroma",
@@ -261,7 +274,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=khroma"
     },
-    "13": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "logger",
       "name": "logger",
@@ -274,7 +287,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=logger"
     },
-    "14": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "openssl",
       "name": "openssl",
@@ -287,7 +300,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=openssl"
     },
-    "15": {
+    "16": {
       "@type": "SoftwareApplication",
       "identifier": "phangorn",
       "name": "phangorn",
@@ -300,7 +313,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=phangorn"
     },
-    "16": {
+    "17": {
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
@@ -313,7 +326,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=purrr"
     },
-    "17": {
+    "18": {
       "@type": "SoftwareApplication",
       "identifier": "rotl",
       "name": "rotl",
@@ -326,7 +339,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rotl"
     },
-    "18": {
+    "19": {
       "@type": "SoftwareApplication",
       "identifier": "rvest",
       "name": "rvest",
@@ -339,7 +352,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rvest"
     },
-    "19": {
+    "20": {
       "@type": "SoftwareApplication",
       "identifier": "scales",
       "name": "scales",
@@ -352,7 +365,20 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=scales"
     },
-    "20": {
+    "21": {
+      "@type": "SoftwareApplication",
+      "identifier": "systemfonts",
+      "name": "systemfonts",
+      "version": ">= 1.3.2",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=systemfonts"
+    },
+    "22": {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
@@ -365,7 +391,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
-    "21": {
+    "23": {
       "@type": "SoftwareApplication",
       "identifier": "tidytable",
       "name": "tidytable",
@@ -378,7 +404,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidytable"
     },
-    "22": {
+    "24": {
       "@type": "SoftwareApplication",
       "identifier": "tidytree",
       "name": "tidytree",
@@ -394,7 +420,7 @@
     "SystemRequirements": null
   },
   "keywords": ["Ethnobotany", "Phytochemistry", "Taxonomy", "Wikidata", "ethnobotany", "phytochemistry", "r", "wikidata"],
-  "fileSize": "5879.214KB",
+  "fileSize": "4199.447KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

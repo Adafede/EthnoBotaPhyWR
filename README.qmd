@@ -7,7 +7,7 @@ bibliography: grateful-refs.bib
 
 <!-- README.md is generated from README.qmd. Please edit that file -->
 
-# EthnoBotaPhyWR
+# EthnoBotaPhyWR <img src='https://raw.githubusercontent.com/adafede/EthnoBotaPhyWR/main/man/figures/logo.svg' align="right" height="139" />
 
 <!-- badges: start -->
 [![Lifecycle:

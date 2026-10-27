@@ -97,6 +97,13 @@ ethnobotafever_tree <- function(
   if (!is.null(example_family_names) && !is.character(example_family_names)) {
     stop("example_family_names must be a character vector or NULL")
   }
+  ## Ensure example_family_names is named so that purrr::imap() provides
+  ## the family name (not the numeric index) in log messages.
+  if (
+    is.character(example_family_names) && is.null(names(example_family_names))
+  ) {
+    names(example_family_names) <- example_family_names
+  }
   # Set up logging
   dir.create(log_dir, recursive = TRUE, showWarnings = FALSE)
   log_file <- file.path(log_dir, paste0(taxon_name, "_log.txt"))
@@ -105,7 +112,20 @@ ethnobotafever_tree <- function(
   }
   previous_appender <- logger::log_appender()
   logger::log_appender(appender = logger::appender_tee(file = log_file))
-  on.exit(logger::log_appender(previous_appender), add = TRUE)
+  on.exit(
+    logger::log_appender(
+      appender = if (is.function(previous_appender)) {
+        previous_appender
+      } else {
+        get(
+          as.character(previous_appender),
+          mode = "function",
+          envir = asNamespace("logger")
+        )
+      }
+    ),
+    add = TRUE
+  )
 
   resolve_input_table <- function(x, label) {
     if (is.null(x)) {
@@ -130,11 +150,11 @@ ethnobotafever_tree <- function(
   }
 
   taxon_qid <- taxon_name |>
-    cascade::taxon_name_to_qid()
+    taxon_name_to_qid()
 
   example_family_qids <- example_family_names |>
     purrr::map(
-      .f = cascade::taxon_name_to_qid
+      .f = taxon_name_to_qid
     )
 
   taxa_wd <- taxon_qid |>
@@ -784,21 +804,16 @@ ethnobotafever_tree <- function(
       .keep_all = TRUE
     )
 
-  cascade_prepare_hierarchy <- get(
-    "prepare_hierarchy",
-    envir = asNamespace("cascade")
-  )
-  cascade_prepare_plot <- get(
-    "prepare_plot",
-    envir = asNamespace("cascade")
-  )
+  ## Note: prepare_hierarchy and prepare_plot are vendored from cascade
+  ## (R/cascade/prepare_hierarchy.R and R/cascade/prepare_plot.R) to
+  ## reduce dependency weight. See the vendoring comments in those files.
   compounds_hierarchy <- taxa_compounds_classes |>
-    cascade_prepare_hierarchy(type = "literature") |>
-    cascade_prepare_plot() |>
+    prepare_hierarchy(type = "literature") |>
+    prepare_plot() |>
     tidytable::rename(taxon_name = species)
   compounds_hierarchy_sub <- taxa_compounds_classes_sub |>
-    cascade_prepare_hierarchy(type = "literature") |>
-    cascade_prepare_plot() |>
+    prepare_hierarchy(type = "literature") |>
+    prepare_plot() |>
     tidytable::rename(taxon_name = species)
 
   taxa_classes <- taxa_gen_ott_cpd |>

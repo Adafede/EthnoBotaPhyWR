@@ -3,17 +3,17 @@
 #' @description
 #' Runs a Wikidata query and retries transient failures such as rate limits.
 #'
-#' @param ... Arguments passed to `cascade::query_wikidata()`.
+#' @param ... Arguments passed to `query_wikidata()`.
 #' @param max_retries Integer. Maximum number of attempts before failing.
 #' @param base_delay Numeric. Base delay for retry backoff.
 #'
-#' @return The query result returned by `cascade::query_wikidata()`.
+#' @return The query result returned by `query_wikidata()`.
 #' @keywords internal
 query_wikidata_with_retry <- function(..., max_retries = 5L, base_delay = 2) {
   attempt <- 1L
   while (attempt <= max_retries) {
     result <- tryCatch(
-      cascade::query_wikidata(...),
+      query_wikidata(...),
       error = function(e) {
         if (
           grepl(

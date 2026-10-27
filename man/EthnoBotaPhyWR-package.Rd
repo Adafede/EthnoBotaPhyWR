@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.svg}{options: style='float: right' alt='logo' width='120'}}
 
-Infrastructure and curated ethnobotanical and phytochemical datasets for analyzing plant families, including phylogenetic integration and visualization tools.
+Infrastructure and curated ethnobotanical and phytochemical datasets for analyzing plant families, including phylogenetic integration and visualization tools. Includes vendored functions from the 'cascade' package (https://github.com/adafede/cascade) to minimize the dependency tree.
 }
 \seealso{
 Useful links:

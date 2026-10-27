@@ -7,14 +7,14 @@
 query_wikidata_with_retry(..., max_retries = 5L, base_delay = 2)
 }
 \arguments{
-\item{...}{Arguments passed to \code{cascade::query_wikidata()}.}
+\item{...}{Arguments passed to \code{query_wikidata()}.}
 
 \item{max_retries}{Integer. Maximum number of attempts before failing.}
 
 \item{base_delay}{Numeric. Base delay for retry backoff.}
 }
 \value{
-The query result returned by \code{cascade::query_wikidata()}.
+The query result returned by \code{query_wikidata()}.
 }
 \description{
 Runs a Wikidata query and retries transient failures such as rate limits.

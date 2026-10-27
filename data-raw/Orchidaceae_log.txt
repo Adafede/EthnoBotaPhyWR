@@ -1,45 +1,45 @@
-INFO [2026-10-14 17:43:16] We found 290 Orchidaceae subtaxa with ethnobotanical use reported on Wikidata
-INFO [2026-10-14 17:43:16] We found 418 Orchidaceae subtaxa with ethnobotanical use reported locally
-INFO [2026-10-14 17:43:16] ... of which 318 are not on Wikidata yet. These should definitely be shared!
-INFO [2026-10-14 17:43:16] We found 608 Orchidaceae subtaxa with ethnobotanical use reported in total
-INFO [2026-10-14 17:43:16] We found 77720 Orchidaceae subtaxa in Wikidata
-INFO [2026-10-14 17:43:17] ... 2483 unique genera
-INFO [2026-10-14 17:43:17] ... 67490 unique species
-INFO [2026-10-14 17:43:17] ... and 3552 unique varieties
-INFO [2026-10-14 17:43:17] In comparison, Poaceae had 34138 subtaxa in Wikidata
-INFO [2026-10-14 17:43:17] In comparison, Fabaceae had 66746 subtaxa in Wikidata
-INFO [2026-10-14 17:43:17] In comparison, Asteraceae had 102602 subtaxa in Wikidata
-INFO [2026-10-14 17:43:17] In comparison, Orchidaceae had 77720 subtaxa in Wikidata
-INFO [2026-10-14 17:43:17] In comparison, Rosaceae had 21084 subtaxa in Wikidata
-INFO [2026-10-14 17:43:17] In comparison, Solanaceae had 10845 subtaxa in Wikidata
-INFO [2026-10-14 17:43:17] We found 31590 Orchidaceae subtaxa with an Open Tree of Life ID in Wikidata
-INFO [2026-10-14 17:43:17] ... 1301 unique genera
-INFO [2026-10-14 17:43:17] ... 29923 unique species
-INFO [2026-10-14 17:43:17] ... 128 unique varieties
-INFO [2026-10-14 17:43:19] We found 242 Orchidaceae subtaxa with at least one chemical compound reported in Wikidata
-INFO [2026-10-14 17:43:19] We found 242 Orchidaceae subtaxa with at least one chemical compound reported locally
-INFO [2026-10-14 17:43:19] ... of which 0 are not on Wikidata yet. Good job!
-INFO [2026-10-14 17:43:19] We found 242 Orchidaceae subtaxa with ethnobotanical use reported in total
-INFO [2026-10-14 17:43:19] ... 3048 unique chemical compound-taxon pairs
-INFO [2026-10-14 17:43:19] ... 1669 unique chemical compounds
-INFO [2026-10-14 17:43:19] ... 1430 unique connectivities
-INFO [2026-10-14 17:43:19] In comparison, Poaceae had 1604 unique connectivities
-INFO [2026-10-14 17:43:19] In comparison, Fabaceae had 9601 unique connectivities
-INFO [2026-10-14 17:43:19] In comparison, Asteraceae had 17218 unique connectivities
-INFO [2026-10-14 17:43:19] In comparison, Orchidaceae had 1430 unique connectivities
-INFO [2026-10-14 17:43:19] In comparison, Rosaceae had 2257 unique connectivities
-INFO [2026-10-14 17:43:19] In comparison, Solanaceae had 4030 unique connectivities
-INFO [2026-10-14 17:43:23] And 151968 unique connectivities were found among all taxa in Wikidata
-INFO [2026-10-14 17:43:23] Among the 1430 unique connectivities found in Orchidaceae ...
-INFO [2026-10-14 17:43:24] ... 864 were specific to the family ...
-INFO [2026-10-14 17:43:24] ... ... of which 741 were specific to a genus within the family
-INFO [2026-10-14 17:43:24] ... ... of which 122 were found in multiple genera within the family
-INFO [2026-10-14 17:43:24] ... ... of which 3 were found in at least 10 genera within the family
-INFO [2026-10-14 17:43:24] ... ... ... these were OPPGAHUCKDKQJR, BMSPEISBKGSBTR, OZZPAAPLZANUHM
-INFO [2026-10-14 17:43:24] Among the 1301 Orchidaceae genera and their subtaxa with an Open Tree of Life ID in Wikidata ...
-INFO [2026-10-14 17:43:24] ... 129 had an ethnobotanical use reported
-INFO [2026-10-14 17:43:24] ... 70 had at least one chemical compound reported in Wikidata
-INFO [2026-10-14 17:43:24] ... 55 had both
-INFO [2026-10-14 17:43:24] ... Arundina, Bletilla, Bulbophyllum, Calanthe, Coelogyne, Cymbidium, Cypripedium, Dactylorhiza, Dendrobium, Eulophia, Gastrodia, Gymnadenia, Habenaria, Liparis, Nervilia, Orchis, Peristylus, Pleione, Vanilla had at least 10 ethnobotanical uses or 50 compounds reported
-INFO [2026-10-14 17:43:24] ... ... they encompass 6419 species
-INFO [2026-10-14 17:43:25] ... ... ... of which 371 had a at least one compound or ethnobotanical use reported
+INFO [2026-10-27 16:42:28] We found 290 Orchidaceae subtaxa with ethnobotanical use reported on Wikidata
+INFO [2026-10-27 16:42:28] We found 418 Orchidaceae subtaxa with ethnobotanical use reported locally
+INFO [2026-10-27 16:42:28] ... of which 318 are not on Wikidata yet. These should definitely be shared!
+INFO [2026-10-27 16:42:28] We found 608 Orchidaceae subtaxa with ethnobotanical use reported in total
+INFO [2026-10-27 16:42:28] We found 77726 Orchidaceae subtaxa in Wikidata
+INFO [2026-10-27 16:42:28] ... 2483 unique genera
+INFO [2026-10-27 16:42:29] ... 67494 unique species
+INFO [2026-10-27 16:42:29] ... and 3552 unique varieties
+INFO [2026-10-27 16:42:29] In comparison, Poaceae had 34138 subtaxa in Wikidata
+INFO [2026-10-27 16:42:29] In comparison, Fabaceae had 66748 subtaxa in Wikidata
+INFO [2026-10-27 16:42:29] In comparison, Asteraceae had 102605 subtaxa in Wikidata
+INFO [2026-10-27 16:42:29] In comparison, Orchidaceae had 77726 subtaxa in Wikidata
+INFO [2026-10-27 16:42:29] In comparison, Rosaceae had 21084 subtaxa in Wikidata
+INFO [2026-10-27 16:42:29] In comparison, Solanaceae had 10851 subtaxa in Wikidata
+INFO [2026-10-27 16:42:29] We found 31590 Orchidaceae subtaxa with an Open Tree of Life ID in Wikidata
+INFO [2026-10-27 16:42:29] ... 1301 unique genera
+INFO [2026-10-27 16:42:29] ... 29923 unique species
+INFO [2026-10-27 16:42:29] ... 128 unique varieties
+INFO [2026-10-27 16:42:34] We found 242 Orchidaceae subtaxa with at least one chemical compound reported in Wikidata
+INFO [2026-10-27 16:42:34] We found 242 Orchidaceae subtaxa with at least one chemical compound reported locally
+INFO [2026-10-27 16:42:34] ... of which 4 are not on Wikidata yet. These should definitely be shared!
+INFO [2026-10-27 16:42:34] We found 242 Orchidaceae subtaxa with chemical compounds reported in total
+INFO [2026-10-27 16:42:34] ... 3048 unique chemical compound-taxon pairs
+INFO [2026-10-27 16:42:34] ... 1669 unique chemical compounds
+INFO [2026-10-27 16:42:34] ... 1430 unique connectivities
+INFO [2026-10-27 16:42:34] In comparison, Poaceae had 1604 unique connectivities
+INFO [2026-10-27 16:42:34] In comparison, Fabaceae had 9601 unique connectivities
+INFO [2026-10-27 16:42:34] In comparison, Asteraceae had 17218 unique connectivities
+INFO [2026-10-27 16:42:34] In comparison, Orchidaceae had 1429 unique connectivities
+INFO [2026-10-27 16:42:34] In comparison, Rosaceae had 2257 unique connectivities
+INFO [2026-10-27 16:42:34] In comparison, Solanaceae had 4030 unique connectivities
+INFO [2026-10-27 16:42:39] And 151967 unique connectivities were found among all taxa in Wikidata
+INFO [2026-10-27 16:42:39] Among the 1430 unique connectivities found in Orchidaceae ...
+INFO [2026-10-27 16:42:39] ... 864 were specific to the family ...
+INFO [2026-10-27 16:42:39] ... ... of which 741 were specific to a genus within the family
+INFO [2026-10-27 16:42:39] ... ... of which 122 were found in multiple genera within the family
+INFO [2026-10-27 16:42:40] ... ... of which 3 were found in at least 10 genera within the family
+INFO [2026-10-27 16:42:40] ... ... ... these were OPPGAHUCKDKQJR, BMSPEISBKGSBTR, OZZPAAPLZANUHM
+INFO [2026-10-27 16:42:40] Among the 1301 Orchidaceae genera and their subtaxa with an Open Tree of Life ID in Wikidata ...
+INFO [2026-10-27 16:42:40] ... 129 had an ethnobotanical use reported
+INFO [2026-10-27 16:42:40] ... 70 had at least one chemical compound reported in Wikidata
+INFO [2026-10-27 16:42:40] ... 55 had both
+INFO [2026-10-27 16:42:40] ... Arundina, Bletilla, Bulbophyllum, Calanthe, Coelogyne, Cymbidium, Cypripedium, Dactylorhiza, Dendrobium, Eulophia, Gastrodia, Gymnadenia, Habenaria, Liparis, Nervilia, Orchis, Peristylus, Pleione, Vanilla had at least 10 ethnobotanical uses or 50 compounds reported
+INFO [2026-10-27 16:42:40] ... ... they encompass 6419 species
+INFO [2026-10-27 16:42:40] ... ... ... of which 371 had at least one compound or ethnobotanical use reported

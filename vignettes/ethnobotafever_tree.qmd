@@ -66,10 +66,9 @@ pronounced "Ethnobota Fever".
 #| label: imports
 #| include: false
 
-## External sources
-source(
-  file = "https://raw.githubusercontent.com/adafede/cascade/main/R/colors.R"
-)
+## No need to source colors.R from cascade — the functions and
+## color palettes are now vendored as internal functions in
+## R/cascade_*.R (see DESCRIPTION for rationale).
 library(EthnoBotaPhyWR)
 library(ggplot2) # required because of `geom_col`
 ```
@@ -96,7 +95,7 @@ are described below:
 ## Taxonomy-related parameters
 taxon_name <- "Orchidaceae" # The scientific name of the family you are interested in
 
-example_family_names <- list( # The scientific name(s) of family(ies) you want to compare to
+example_family_names <- c( # The scientific name(s) of family(ies) you want to compare to
   "Poaceae" = "Poaceae",
   "Fabaceae" = "Fabaceae",
   "Asteraceae" = "Asteraceae",
@@ -109,9 +108,15 @@ example_family_names <- list( # The scientific name(s) of family(ies) you want t
 n_multiple_genera <- 10L # The minimal number of genera where a compound was found in to consider the latter relatively widespread
 n_ethnobotanical_count_min <- 10L # The minimal number of species within the genus for which an ethnobotanical use has been reported to consider the genus relatively widely used
 n_compounds_count_min <- 50L # The minimal number of compounds reported in a taxon to consider the latter relatively widely investigated
+```
+
+```{r}
+#| label: dirs
+#| message: false
+#| warning: false
 
 ## File paths
-pkg_root <- normalizePath(file.path("data-raw", ".."), mustWork = TRUE)
+pkg_root <- normalizePath(file.path("../data-raw", ".."), mustWork = TRUE)
 cache_dir <- file.path(pkg_root, "data")
 log_dir <- file.path(pkg_root, "data-raw/")
 figures_dir <- file.path(pkg_root, "man", "figures")
@@ -229,11 +234,11 @@ Second, some tree-based visualizations:
   genus in @fig-3 (mainly to show that even in the most investigated genera, the
   coverage is far from ideal)
 
-![A tree with genera as tips, displaying the taxa of the family, and if compounds or uses have been reported](man/figures/tree_orchids_full.pdf){#fig-1 width=100%}
+![A tree with genera as tips, displaying the taxa of the family, and if compounds or uses have been reported](../man/figures/tree_orchids_full.pdf){#fig-1 width=100%}
 
-![A tree with genera as tips, displaying the taxa of the family for which compounds or uses have been reported](man/figures/tree_orchids_phyto.pdf){#fig-2 width=100%}
+![A tree with genera as tips, displaying the taxa of the family for which compounds or uses have been reported](../man/figures/tree_orchids_phyto.pdf){#fig-2 width=100%}
 
-![A tree with species as tips, displaying the taxa of the family for which a decent number of compounds or uses have been reported in the corresponding genus](man/figures/tree_orchids_phyto_sub.pdf){#fig-3 width=100%}
+![A tree with species as tips, displaying the taxa of the family for which a decent number of compounds or uses have been reported in the corresponding genus](../man/figures/tree_orchids_phyto_sub.pdf){#fig-3 width=100%}
 
 ## Logs
 

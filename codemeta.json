@@ -2,7 +2,7 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "EthnoBotaPhyWR",
-  "description": "Infrastructure and curated ethnobotanical and phytochemical datasets for analyzing plant families, including phylogenetic integration and visualization tools.",
+  "description": "Infrastructure and curated ethnobotanical and phytochemical datasets for analyzing plant families, including phylogenetic integration and visualization tools. Includes vendored functions from the 'cascade' package (https://github.com/adafede/cascade) to minimize the dependency tree.",
   "name": "EthnoBotaPhyWR: Infrastructure for Ethnobotanical and Phytochemical Data Integration with Wikidata",
   "relatedLink": "https://adafede.github.io/EthnoBotaPhyWR",
   "codeRepository": "https://github.com/adafede/EthnoBotaPhyWR",
@@ -133,12 +133,44 @@
     },
     "3": {
       "@type": "SoftwareApplication",
-      "identifier": "cascade",
-      "name": "cascade",
-      "version": ">= 0.0.0.9002",
-      "sameAs": "https://github.com/adafede/cascade"
+      "identifier": "curl",
+      "name": "curl",
+      "version": ">= 5.0.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=curl"
     },
     "4": {
+      "@type": "SoftwareApplication",
+      "identifier": "data.table",
+      "name": "data.table",
+      "version": ">= 1.15.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=data.table"
+    },
+    "5": {
+      "@type": "SoftwareApplication",
+      "identifier": "forcats",
+      "name": "forcats",
+      "version": ">= 0.5.4",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=forcats"
+    },
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
@@ -151,7 +183,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
     },
-    "5": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "ggtext",
       "name": "ggtext",
@@ -164,7 +196,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggtext"
     },
-    "6": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "ggtree",
       "name": "ggtree",
@@ -177,7 +209,7 @@
       },
       "sameAs": "https://bioconductor.org/packages/release/bioc/html/ggtree.html"
     },
-    "7": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "ggtreeExtra",
       "name": "ggtreeExtra",
@@ -190,7 +222,20 @@
       },
       "sameAs": "https://bioconductor.org/packages/release/bioc/html/ggtreeExtra.html"
     },
-    "8": {
+    "10": {
+      "@type": "SoftwareApplication",
+      "identifier": "httr2",
+      "name": "httr2",
+      "version": ">= 1.0.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=httr2"
+    },
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "jsonlite",
       "name": "jsonlite",
@@ -203,7 +248,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=jsonlite"
     },
-    "9": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "khroma",
       "name": "khroma",
@@ -216,7 +261,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=khroma"
     },
-    "10": {
+    "13": {
       "@type": "SoftwareApplication",
       "identifier": "logger",
       "name": "logger",
@@ -229,7 +274,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=logger"
     },
-    "11": {
+    "14": {
       "@type": "SoftwareApplication",
       "identifier": "openssl",
       "name": "openssl",
@@ -242,7 +287,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=openssl"
     },
-    "12": {
+    "15": {
       "@type": "SoftwareApplication",
       "identifier": "phangorn",
       "name": "phangorn",
@@ -255,7 +300,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=phangorn"
     },
-    "13": {
+    "16": {
       "@type": "SoftwareApplication",
       "identifier": "purrr",
       "name": "purrr",
@@ -268,7 +313,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=purrr"
     },
-    "14": {
+    "17": {
       "@type": "SoftwareApplication",
       "identifier": "rotl",
       "name": "rotl",
@@ -281,7 +326,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rotl"
     },
-    "15": {
+    "18": {
       "@type": "SoftwareApplication",
       "identifier": "rvest",
       "name": "rvest",
@@ -294,7 +339,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rvest"
     },
-    "16": {
+    "19": {
       "@type": "SoftwareApplication",
       "identifier": "scales",
       "name": "scales",
@@ -307,7 +352,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=scales"
     },
-    "17": {
+    "20": {
       "@type": "SoftwareApplication",
       "identifier": "tibble",
       "name": "tibble",
@@ -320,7 +365,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tibble"
     },
-    "18": {
+    "21": {
       "@type": "SoftwareApplication",
       "identifier": "tidytable",
       "name": "tidytable",
@@ -333,7 +378,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidytable"
     },
-    "19": {
+    "22": {
       "@type": "SoftwareApplication",
       "identifier": "tidytree",
       "name": "tidytree",
@@ -349,7 +394,7 @@
     "SystemRequirements": null
   },
   "keywords": ["Ethnobotany", "Phytochemistry", "Taxonomy", "Wikidata", "ethnobotany", "phytochemistry", "r", "wikidata"],
-  "fileSize": "1792.732KB",
+  "fileSize": "5879.214KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",

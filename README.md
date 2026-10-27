@@ -52,7 +52,6 @@ install.packages(
   "EthnoBotaPhyWR",
   repos = c(
     "https://adafede.r-universe.dev",
-    "https://taxonomicallyinformedannotation.r-universe.dev",
     "https://cran.r-universe.dev",
     "https://bioc.r-universe.dev"
   )
@@ -129,16 +128,19 @@ result <- ethnobotafever_tree(
   | base           | 4.6.1      | R Core Team (2026a)                                                         |
   | BiocManager    | 1.30.27    | Morgan and Ramos (2025)                                                     |
   | BiocVersion    | 3.23.1     | Morgan (2025)                                                               |
-  | cascade        | 0.0.0.9002 | Rutz and Wolfender (2023); Rutz (2026)                                      |
-  | EthnoBotaPhyWR | 0.0.0.9001 | Rutz (n.d.)                                                                 |
+  | curl           | 8.1.0      | Ooms (2026a)                                                                |
+  | data.table     | 1.18.6.1   | Barrett et al. (2026)                                                       |
+  | EthnoBotaPhyWR | 0.0.0.9001 | Rutz (2026)                                                                 |
   | ggtext         | 0.2.0      | Wilke and Wiernik (2026)                                                    |
   | ggtree         | 4.2.0      | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022) |
   | ggtreeExtra    | 1.22.1     | Xu et al. (2021); Yu (2022b)                                                |
   | grid           | 4.6.1      | R Core Team (2026b)                                                         |
+  | gt             | 1.4.0      | Iannone et al. (2026)                                                       |
+  | httr2          | 1.3.0      | Wickham (2026)                                                              |
   | khroma         | 1.17.0     | Frerebeau (2025)                                                            |
   | knitr          | 1.52       | Xie (2014); Xie (2015); Xie (2026)                                          |
   | logger         | 0.4.3      | Daróczi and Wickham (2026)                                                  |
-  | openssl        | 2.4.2      | Ooms (2026)                                                                 |
+  | openssl        | 2.4.2      | Ooms (2026b)                                                                |
   | phangorn       | 2.12.1     | Schliep (2011); Schliep et al. (2017)                                       |
   | rmarkdown      | 2.32       | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026)                 |
   | rotl           | 3.1.1      | Michonneau et al. (2016); OpenTreeOfLife et al. (2019)                      |
@@ -156,6 +158,15 @@ result <- ethnobotafever_tree(
 Allaire, JJ, Yihui Xie, Christophe Dervieux, et al. 2026.
 *<span class="nocase">rmarkdown</span>: Dynamic Documents for r*.
 <https://github.com/rstudio/rmarkdown>.
+
+</div>
+
+<div id="ref-datatable" class="csl-entry">
+
+Barrett, Tyson, Matt Dowle, Arun Srinivasan, et al. 2026.
+*<span class="nocase">data.table</span>: Extension of
+“<span class="nocase">data.frame</span>”*.
+<https://doi.org/10.32614/CRAN.package.data.table>.
 
 </div>
 
@@ -183,6 +194,14 @@ Montaigne. <https://doi.org/10.5281/zenodo.1472077>.
 
 </div>
 
+<div id="ref-gt" class="csl-entry">
+
+Iannone, Richard, Joe Cheng, Barret Schloerke, et al. 2026.
+*<span class="nocase">gt</span>: Easily Create Presentation-Ready
+Display Tables*. <https://doi.org/10.32614/CRAN.package.gt>.
+
+</div>
+
 <div id="ref-rotl2016" class="csl-entry">
 
 Michonneau, Francois, Joseph W. Brown, and David J. Winter. 2016.
@@ -207,9 +226,17 @@ Bioconductor Project Package Repository*.
 
 </div>
 
+<div id="ref-curl" class="csl-entry">
+
+Ooms, Jeroen. 2026a. *<span class="nocase">curl</span>: A Modern and
+Flexible Web Client for r*.
+<https://doi.org/10.32614/CRAN.package.curl>.
+
+</div>
+
 <div id="ref-openssl" class="csl-entry">
 
-Ooms, Jeroen. 2026. *<span class="nocase">openssl</span>: Toolkit for
+Ooms, Jeroen. 2026b. *<span class="nocase">openssl</span>: Toolkit for
 Encryption, Signatures and Certificates Based on OpenSSL*.
 <https://doi.org/10.32614/CRAN.package.openssl>.
 
@@ -255,30 +282,11 @@ Computing*. R Foundation for Statistical Computing.
 
 </div>
 
-<div id="ref-cascade2026" class="csl-entry">
-
-Rutz, Adriano. 2026. *<span class="nocase">cascade</span>:
-Contextualizing Untargeted Annotation with Semi-Quantitative Charged
-Aerosol Detection for Pertinent Characterization of Natural Extracts*.
-
-</div>
-
 <div id="ref-EthnoBotaPhyWR" class="csl-entry">
 
-Rutz, Adriano. n.d. *EthnoBotaPhyWR: \*\*EthnoBotaPhyWR\*\* Stands for
-\*Ethnobotany\*, \*Phytochemistry\*, \*Wikidata\* and \*r\*. It Should
-Be Pronounced “Ethnobota Fever”*.
-<https://github.com/adafede/EthnoBotaPhyWR>.
-
-</div>
-
-<div id="ref-cascade2023" class="csl-entry">
-
-Rutz, Adriano, and Jean-Luc Wolfender. 2023. “Automated Composition
-Assessment of Natural Extracts: Untargeted Mass Spectrometry-Based
-Metabolite Profiling Integrating Semiquantitative Detection.” *Journal
-of Agricultural and Food Chemistry* 71 (46).
-<https://doi.org/10.1021/acs.jafc.3c03099>.
+Rutz, Adriano. 2026. *EthnoBotaPhyWR: Infrastructure for Ethnobotanical
+and Phytochemical Data Integration with Wikidata*.
+<https://doi.org/10.5281/zenodo.TODO>.
 
 </div>
 
@@ -303,6 +311,13 @@ Ecology and Evolution* 8 (10): 1212–20.
 Wickham, Hadley. 2011. “<span class="nocase">testthat</span>: Get
 Started with Testing.” *The R Journal* 3: 5–10.
 <https://journal.r-project.org/articles/RJ-2011-002/>.
+
+</div>
+
+<div id="ref-httr2" class="csl-entry">
+
+Wickham, Hadley. 2026. *Httr2: Perform HTTP Requests and Process the
+Responses*. <https://doi.org/10.32614/CRAN.package.httr2>.
 
 </div>
 

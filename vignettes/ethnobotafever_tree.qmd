@@ -118,7 +118,7 @@ n_compounds_count_min <- 50L # The minimal number of compounds reported in a tax
 ## File paths
 pkg_root <- normalizePath(file.path("../data-raw", ".."), mustWork = TRUE)
 cache_dir <- file.path(pkg_root, "data")
-log_dir <- file.path(pkg_root, "data-raw/")
+log_dir <- file.path(pkg_root, "data-raw")
 figures_dir <- file.path(pkg_root, "man", "figures")
 dir.create(figures_dir, recursive = TRUE, showWarnings = FALSE)
 

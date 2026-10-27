@@ -1,20 +1,33 @@
 ---
-title: "Working with Orchids Datasets"
-description: |
-  Guide to using the built-in orchids ethnobotanical and phytochemical datasets
-  included with EthnoBotaPhyWR.
+title: Orchids
+author:
+  name: Adriano Rutz
+  orcid: 0000-0003-0443-9902
+citation:
+  url: https://adafede.github.io/EthnoBotaPhyWR/vignettes/articles/orchids.html
+comments:
+  giscus:
+    repo: adafede/EthnoBotaPhyWR
+  hypothesis:
+    showHighlights: always
+creative_commons: CC BY
+date: today
 format:
   html:
-    toc: true
-    toc-depth: 3
-    number-sections: true
-    embed-resources: true
-execute:
-  echo: true
-  warning: false
-  message: false
+    smooth-scroll: true
+google-scholar: true
+knitr:
+  opts_chunk:
+    collapse: true
+    comment: "#>"
+lang: en
+license: CC BY
+opengraph:
+  image:
+    src: https://github.com/adafede/EthnoBotaPhyWR/blob/main/man/figures/logo.svg
+    alt: EthnoBotaPhyWR logo
 vignette: >
-  %\VignetteIndexEntry{Working with Orchids Datasets}
+  %\VignetteIndexEntry{1 Basics}
   %\VignetteEngine{quarto::html}
   %\VignetteEncoding{UTF-8}
 ---

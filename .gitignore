@@ -10,3 +10,7 @@ docs/
 *.tar.gz
 .Rproj.user/
 EthnoBotaPhyWR/
+vignettes/*.html
+vignettes/*.pdf
+vignettes/articles/*_files$
+vignettes/*_files$

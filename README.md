@@ -132,6 +132,7 @@ result <- ethnobotafever_tree(
   | curl           | 8.1.0      | Ooms (2026a)                                                                |
   | data.table     | 1.18.6.1   | Barrett et al. (2026)                                                       |
   | EthnoBotaPhyWR | 0.0.0.9001 | Rutz (2026)                                                                 |
+  | gdtools        | 0.5.2      | Gohel et al. (2026)                                                         |
   | ggtext         | 0.2.0      | Wilke and Wiernik (2026)                                                    |
   | ggtree         | 4.2.0      | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022) |
   | ggtreeExtra    | 1.22.1     | Xu et al. (2021); Yu (2022b)                                                |
@@ -147,6 +148,7 @@ result <- ethnobotafever_tree(
   | rotl           | 3.1.1      | Michonneau et al. (2016); OpenTreeOfLife et al. (2019)                      |
   | scales         | 1.4.0      | Wickham et al. (2025)                                                       |
   | spelling       | 2.3.2      | Ooms and Hester (2025)                                                      |
+  | systemfonts    | 1.3.2      | Pedersen et al. (2026)                                                      |
   | testthat       | 3.3.2      | Wickham (2011)                                                              |
   | tidytable      | 0.11.2     | Fairbanks (2024)                                                            |
   | tidytree       | 0.4.8      | Yu (2022c)                                                                  |
@@ -192,6 +194,15 @@ Interface to “<span class="nocase">data.table</span>”*.
 Frerebeau, Nicolas. 2025. *<span class="nocase">khroma: Colour Schemes
 for Scientific Data Visualization</span>*. Université Bordeaux
 Montaigne. <https://doi.org/10.5281/zenodo.1472077>.
+
+</div>
+
+<div id="ref-gdtools" class="csl-entry">
+
+Gohel, David, Hadley Wickham, Lionel Henry, and Jeroen Ooms. 2026.
+*<span class="nocase">gdtools</span>: Font Metrics and Font Management
+Utilities for r Graphics*.
+<https://doi.org/10.32614/CRAN.package.gdtools>.
 
 </div>
 
@@ -264,6 +275,14 @@ OpenTreeOfLife, Benjamin Redelings, Luna Luisa Sanchez Reyes, et al.
 Paradis, Emmanuel, and Klaus Schliep. 2019. “Ape 5.0: An Environment for
 Modern Phylogenetics and Evolutionary Analyses in R.” *Bioinformatics*
 35: 526–28. <https://doi.org/10.1093/bioinformatics/bty633>.
+
+</div>
+
+<div id="ref-systemfonts" class="csl-entry">
+
+Pedersen, Thomas Lin, Jeroen Ooms, and Devon Govett. 2026.
+*<span class="nocase">systemfonts</span>: System Native Font Finding*.
+<https://doi.org/10.32614/CRAN.package.systemfonts>.
 
 </div>
 

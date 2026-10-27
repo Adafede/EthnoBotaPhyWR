@@ -19,7 +19,7 @@ website:
       - text: Articles
         menu:
           - text: Get started
-            file: vignettes/ethnobotafever_tree.qmd
+            file: vignettes/articles/ethnobotafever_tree.qmd
           - text: Orchids
             file: vignettes/articles/orchids.qmd
       - text: News

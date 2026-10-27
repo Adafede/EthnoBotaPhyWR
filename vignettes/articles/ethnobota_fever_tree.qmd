@@ -28,7 +28,7 @@ abstract: |
   "Ethnobota Fever"), showing how to collect ethnobotanical and
   phytochemical data for a taxonomic family.
 citation:
-  url: https://adafede.github.io/EthnoBotaPhyWR/vignettes/articles/ethnobotafever_tree.html
+  url: https://adafede.github.io/EthnoBotaPhyWR/vignettes/articles/ethnobota_fever_tree.html
 comments:
   giscus:
     repo: adafede/EthnoBotaPhyWR

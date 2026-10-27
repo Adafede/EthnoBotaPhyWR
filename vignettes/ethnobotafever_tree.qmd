@@ -92,7 +92,6 @@ are described below:
 
 ```{r}
 #| label: parameters
-#| eval: false
 
 ## Taxonomy-related parameters
 taxon_name <- "Orchidaceae" # The scientific name of the family you are interested in
@@ -145,7 +144,6 @@ Change these parameters as required and you are ready for the fever!
 
 ```{r}
 #| label: ethnobotafever_tree
-#| eval: false
 #| message: false
 #| warning: false
 
@@ -183,7 +181,6 @@ First, tables containing different information:
 
 ```{r}
 #| echo: false
-#| eval: false
 #| label: tbl-1
 #| tbl-cap: "Overview of the phytochemistry of the family"
 
@@ -195,7 +192,6 @@ results$df_taxa_full |>
 
 ```{r}
 #| echo: false
-#| eval: false
 #| label: tbl-2
 #| tbl-cap: >-
 #|   Overview of the number of reported uses, compounds, and species per genus
@@ -209,7 +205,6 @@ results$df_taxa_ethno_counted |>
 
 ```{r}
 #| echo: false
-#| eval: false
 #| label: tbl-3
 #| tbl-cap: >-
 #|   Overview of the species within the family for which a decent number of
@@ -245,7 +240,6 @@ Second, some tree-based visualizations:
 ```{r}
 #| label: logs
 #| echo: false
-#| eval: false
 
 readLines(con = results$log_file)
 ```

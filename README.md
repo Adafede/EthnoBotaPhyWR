@@ -1,5 +1,3 @@
-
-
 <!-- README.md is generated from README.qmd. Please edit that file -->
 
 # EthnoBotaPhyWR
@@ -16,9 +14,11 @@ badge](https://adafede.r-universe.dev/EthnoBotaPhyWR/badges/version.png)](https:
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.TODO.svg)](https://doi.org/10.5281/zenodo.TODO)
 <!-- badges: end -->
 
-**EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*,
-*Wikidata* and *R* <span class="smallcaps">(maybe you can also find the
-*bot* of *robot*)</span> It should be pronounced “Ethnobota Fever”.
+**EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and
+*R*
+<span class="smallcaps">(maybe you can also find the
+*bot* of *robot*)</span> It
+should be pronounced "Ethnobota Fever".
 
 ## Requirements
 
@@ -37,18 +37,17 @@ Or simply use the included orchids datasets for analysis.
 
 **EthnoBotaPhyWR** provides:
 
-- **Built-in datasets** for *Orchidaceae* (3,055 compounds + 419
-  ethnobotanical uses)
+- **Built-in datasets** for *Orchidaceae* (3,055 compounds + 419 ethnobotanical
+  uses)
 - **Phylogenetic integration** via Open Tree of Life
 - **Phytochemical analysis** with NPClassifier taxonomy
 - **Data federation** from Wikidata, LOTUS, and external sources
 
 ## Installation
 
-As the package is not (yet) available on CRAN, you will need to install
-with:
+As the package is not (yet) available on CRAN, you will need to install with:
 
-``` r
+```r
 install.packages(
   "EthnoBotaPhyWR",
   repos = c(
@@ -60,14 +59,14 @@ install.packages(
 ```
 
 Once installed, you are ready to go through our
-[documentation](https://adafede.github.io/EthnoBotaPhyWR/articles), with
-the major steps detailed.
+[documentation](https://adafede.github.io/EthnoBotaPhyWR/articles), with the
+major steps detailed.
 
 ## Quick Start
 
 ### Load included datasets
 
-``` r
+```r
 library(EthnoBotaPhyWR)
 
 # Phytochemical data with SMILES and classification
@@ -85,7 +84,7 @@ head(orchids_ethnobotanical)
 
 ### Analyze your own family
 
-``` r
+```r
 # Get data for any plant family (requires Wikidata)
 result <- ethnobotafever_tree(
   taxon_name = "Orchidaceae",
@@ -123,34 +122,36 @@ result <- ethnobotafever_tree(
 
 ## Additional software credits
 
-    Warning in utils::citation(pkg_name): could not determine year for
-    'EthnoBotaPhyWR' from package DESCRIPTION file
+```
+Warning in utils::citation(pkg_name): could not determine year for
+'EthnoBotaPhyWR' from package DESCRIPTION file
+```
 
-| Package | Version | Citation |
-|:---|:---|:---|
-| ape | 5.8.1 | Paradis and Schliep (2019) |
-| base | 4.6.1 | R Core Team (2026a) |
-| BiocManager | 1.30.27 | Morgan and Ramos (2025) |
-| BiocVersion | 3.23.1 | Morgan (2025) |
-| cascade | 0.0.0.9002 | Rutz and Wolfender (2023); Rutz (2026) |
-| EthnoBotaPhyWR | 0.0.0.9001 | Rutz (n.d.) |
-| ggtext | 0.2.0 | Wilke and Wiernik (2026) |
-| ggtree | 4.2.0 | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022) |
-| ggtreeExtra | 1.22.1 | Xu et al. (2021); Yu (2022b) |
-| grid | 4.6.1 | R Core Team (2026b) |
-| gt | 1.4.0 | Iannone et al. (2026) |
-| khroma | 1.17.0 | Frerebeau (2025) |
-| knitr | 1.52 | Xie (2014); Xie (2015); Xie (2026) |
-| logger | 0.4.3 | Daróczi and Wickham (2026) |
-| openssl | 2.4.2 | Ooms (2026) |
-| phangorn | 2.12.1 | Schliep (2011); Schliep et al. (2017) |
-| rmarkdown | 2.32 | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026) |
-| rotl | 3.1.1 | Michonneau et al. (2016); OpenTreeOfLife et al. (2019) |
-| scales | 1.4.0 | Wickham et al. (2025) |
-| testthat | 3.3.2 | Wickham (2011) |
-| tidytable | 0.11.2 | Fairbanks (2024) |
-| tidytree | 0.4.8 | Yu (2022c) |
-| tidyverse | 2.0.0 | Wickham et al. (2019) |
+  | Package        | Version    | Citation                                                                    |
+  | :---           | :---       | :---                                                                        |
+  | ape            | 5.8.1      | Paradis and Schliep (2019)                                                  |
+  | base           | 4.6.1      | R Core Team (2026a)                                                         |
+  | BiocManager    | 1.30.27    | Morgan and Ramos (2025)                                                     |
+  | BiocVersion    | 3.23.1     | Morgan (2025)                                                               |
+  | cascade        | 0.0.0.9002 | Rutz and Wolfender (2023); Rutz (2026)                                      |
+  | EthnoBotaPhyWR | 0.0.0.9001 | Rutz (n.d.)                                                                 |
+  | ggtext         | 0.2.0      | Wilke and Wiernik (2026)                                                    |
+  | ggtree         | 4.2.0      | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022) |
+  | ggtreeExtra    | 1.22.1     | Xu et al. (2021); Yu (2022b)                                                |
+  | grid           | 4.6.1      | R Core Team (2026b)                                                         |
+  | gt             | 1.4.0      | Iannone et al. (2026)                                                       |
+  | khroma         | 1.17.0     | Frerebeau (2025)                                                            |
+  | knitr          | 1.52       | Xie (2014); Xie (2015); Xie (2026)                                          |
+  | logger         | 0.4.3      | Daróczi and Wickham (2026)                                                  |
+  | openssl        | 2.4.2      | Ooms (2026)                                                                 |
+  | phangorn       | 2.12.1     | Schliep (2011); Schliep et al. (2017)                                       |
+  | rmarkdown      | 2.32       | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026)                 |
+  | rotl           | 3.1.1      | Michonneau et al. (2016); OpenTreeOfLife et al. (2019)                      |
+  | scales         | 1.4.0      | Wickham et al. (2025)                                                       |
+  | testthat       | 3.3.2      | Wickham (2011)                                                              |
+  | tidytable      | 0.11.2     | Fairbanks (2024)                                                            |
+  | tidytree       | 0.4.8      | Yu (2022c)                                                                  |
+  | tidyverse      | 2.0.0      | Wickham et al. (2019)                                                       |
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 

@@ -1,8 +1,24 @@
 ---
 title: Orchids
 author:
-  name: Adriano Rutz
-  orcid: 0000-0003-0443-9902
+  - name: Adriano Rutz
+    orcid: 0000-0003-0443-9902
+    number: 1
+    email: adafede@gmail.com
+    affiliations:
+      - ref: imsb
+    correspondence: true
+affiliations:
+  - id: imsb
+    number: 1
+    name: ETH Zürich
+    department: Institute for Molecular Systems Biology
+    group: Zamboni
+    address: Otto-Stern-Weg, 3
+    city: Zürich
+    country: Switzerland
+    postal-code: 8093
+    ror: https://ror.org/03j5gm982
 citation:
   url: https://adafede.github.io/EthnoBotaPhyWR/vignettes/articles/orchids.html
 comments:

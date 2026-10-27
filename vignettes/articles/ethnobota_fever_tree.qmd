@@ -78,6 +78,7 @@ install.packages(
   "EthnoBotaPhyWR",
   repos = c(
     "https://adafede.r-universe.dev",
+    "https://davidgohel.r-universe.dev", # required for ggiraph, required for ggtree
     "https://cran.r-universe.dev",
     "https://bioc.r-universe.dev"
   )
@@ -138,7 +139,19 @@ n_compounds_count_min <- 50L # The minimal number of compounds reported in a tax
 #| warning: false
 
 ## File paths
-pkg_root <- normalizePath(file.path("../../data-raw", ".."), mustWork = TRUE)
+pkg_root <- tryCatch(
+  {
+    p <- "."
+    for (i in seq_len(10L)) {
+      if (file.exists(file.path(p, "DESCRIPTION")) && dir.exists(file.path(p, "data-raw"))) {
+        break
+      }
+      p <- file.path(p, "..")
+    }
+    normalizePath(p)
+  },
+  error = function(e) normalizePath(".")
+)
 cache_dir <- file.path(pkg_root, "data")
 log_dir <- file.path(pkg_root, "data-raw")
 figures_dir <- file.path(pkg_root, "man", "figures")

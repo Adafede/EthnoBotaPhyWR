@@ -58,6 +58,7 @@ install.packages(
   "EthnoBotaPhyWR",
   repos = c(
     "https://adafede.r-universe.dev",
+    "https://davidgohel.r-universe.dev", # required for ggiraph, required for ggtree
     "https://cran.r-universe.dev",
     "https://bioc.r-universe.dev"
   )

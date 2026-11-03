@@ -1,7 +1,6 @@
 start <- Sys.time()
 
 library(EthnoBotaPhyWR)
-library(ggplot2) # required because of `geom_col`
 
 taxon_name <- "Orchidaceae"
 
@@ -9,7 +8,7 @@ n_multiple_genera <- 10L
 n_ethnobotanical_count_min <- 10L
 n_compounds_count_min <- 50L
 
-example_family_names <- list(
+example_family_names <- c(
   "Poaceae" = "Poaceae",
   "Fabaceae" = "Fabaceae",
   "Asteraceae" = "Asteraceae",
@@ -20,17 +19,17 @@ example_family_names <- list(
 
 pkg_root <- normalizePath(file.path("data-raw", ".."), mustWork = TRUE)
 cache_dir <- file.path(pkg_root, "data")
-log_dir <- file.path(pkg_root, "data-raw/")
+log_dir <- file.path(pkg_root, "data-raw")
 figures_dir <- file.path(pkg_root, "man", "figures")
 dir.create(figures_dir, recursive = TRUE, showWarnings = FALSE)
 
-path_molecules <- orchids_compounds
-path_classes <- orchids_compound_classes
-path_ethnobotanical <- orchids_ethnobotanical
+path_molecules <- EthnoBotaPhyWR::orchids_compounds
+path_classes <- EthnoBotaPhyWR::orchids_compound_classes
+path_ethnobotanical <- EthnoBotaPhyWR::orchids_ethnobotanical
 
-export_tree_full <- file.path(figures_dir, "tree_orchids_full.pdf")
-export_tree_phyto <- file.path(figures_dir, "tree_orchids_phyto.pdf")
-export_tree_phyto_sub <- file.path(figures_dir, "tree_orchids_phyto_sub.pdf")
+export_tree_full <- file.path(figures_dir, "tree_orchids_full.svg")
+export_tree_phyto <- file.path(figures_dir, "tree_orchids_phyto.svg")
+export_tree_phyto_sub <- file.path(figures_dir, "tree_orchids_phyto_sub.svg")
 export_table_classified <- file.path(
   pkg_root,
   "data-raw",
@@ -47,13 +46,8 @@ export_table_counts_sub <- file.path(
   "orchids_table_counts_sub.tsv"
 )
 
-local_cache <- file.path(pkg_root, "data")
+local_cache <- cache_dir
 dir.create(log_dir, recursive = TRUE, showWarnings = FALSE)
-
-## External sources
-source(
-  file = "https://raw.githubusercontent.com/adafede/cascade/main/R/colors.R"
-)
 
 results <- ethnobotafever_tree(
   taxon_name = taxon_name,
@@ -73,6 +67,16 @@ results <- ethnobotafever_tree(
   local_cache = local_cache,
   log_dir = log_dir
 )
+
+extdata_itol <- file.path(pkg_root, "inst", "extdata", "itol")
+dir.create(extdata_itol, recursive = TRUE, showWarnings = FALSE)
+itol_src <- list.files(
+  file.path(pkg_root, "data-raw", "itol"),
+  full.names = TRUE
+)
+if (length(itol_src) > 0L) {
+  file.copy(itol_src, extdata_itol, overwrite = TRUE)
+}
 
 end <- Sys.time()
 

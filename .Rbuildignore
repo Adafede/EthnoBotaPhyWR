@@ -63,4 +63,7 @@
 ^vignettes/articles$
 ^vignettes/articles/*_files$
 ^vignettes/articles/\.quarto$
+^man/figures/.*\.(html|pdf)$
+^man/figures/.*_circular_si\.svg$
+^man/figures/.*_files$
 _\.new\.png$

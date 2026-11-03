@@ -42,18 +42,28 @@ test_that("prepare_hierarchy, prepare_plot, and plot_trees work offline", {
     c("taxon_name", "ids", "values", "color") %in% names(plotted_classes)
   ))
 
-  tree_multi <- ape::read.tree(text = "(GenusA:1,(GenusB:1,GenusC:1):1);")
-  plots <- plot_tr(
-    taxa_not_in_tree = trees$taxa_not_in_tree,
-    tree_taxa_full = tree_multi,
-    tree_taxa_phyto = tree_multi,
-    df_counted = df_counted,
-    df_classes = plotted_classes
-  )
+  if (
+    tryCatch(
+      {
+        loadNamespace("ggtree")
+        TRUE
+      },
+      error = function(e) FALSE
+    )
+  ) {
+    tree_multi <- ape::read.tree(text = "(GenusA:1,(GenusB:1,GenusC:1):1);")
+    plots <- plot_tr(
+      taxa_not_in_tree = trees$taxa_not_in_tree,
+      tree_taxa_full = tree_multi,
+      tree_taxa_phyto = tree_multi,
+      df_counted = df_counted,
+      df_classes = plotted_classes
+    )
 
-  expect_s3_class(plots$plot_tree_taxa_bars, "gg")
-  expect_s3_class(plots$plot_tree_taxa_phyto_bars, "gg")
-  expect_s3_class(plots$plot_orphan_taxa, "gg")
+    expect_s3_class(plots$plot_tree_taxa_bars, "gg")
+    expect_s3_class(plots$plot_tree_taxa_phyto_bars, "gg")
+    expect_s3_class(plots$plot_orphan_taxa, "gg")
+  }
 })
 
 test_that("Wikidata and NPClassifier helpers validate inputs", {

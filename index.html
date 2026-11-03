@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.19">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -93,14 +93,15 @@ div.csl-indent {
 <link href="./man/figures/logo.svg" rel="icon" type="image/svg+xml">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2f71d848462b676b2af838f1236eb696.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-3dba021ccb97a5709654d2c27fb431b2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -129,14 +130,43 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-sidebar floating nav-fixed quarto-light">
+<body class="nav-sidebar floating nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
@@ -147,8 +177,7 @@ div.csl-indent {
     <span class="navbar-title">EthnoBotaPhyWR</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -191,15 +220,16 @@ div.csl-indent {
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
@@ -207,18 +237,15 @@ div.csl-indent {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Section">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
- <span class="menu-text">Functions</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Functions</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./man/ethnobotafever_tree.html" class="sidebar-item-text sidebar-link">
@@ -233,7 +260,7 @@ div.csl-indent {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
@@ -245,6 +272,7 @@ div.csl-indent {
   <li><a href="#quick-start" id="toc-quick-start" class="nav-link" data-scroll-target="#quick-start">Quick Start</a>
   <ul class="collapse">
   <li><a href="#load-included-datasets" id="toc-load-included-datasets" class="nav-link" data-scroll-target="#load-included-datasets">Load included datasets</a></li>
+  <li><a href="#interactive-exploration-on-itol-interactive-tree-of-life" id="toc-interactive-exploration-on-itol-interactive-tree-of-life" class="nav-link" data-scroll-target="#interactive-exploration-on-itol-interactive-tree-of-life">Interactive Exploration on iTOL (Interactive Tree Of Life)</a></li>
   <li><a href="#analyze-your-own-family" id="toc-analyze-your-own-family" class="nav-link" data-scroll-target="#analyze-your-own-family">Analyze your own family</a></li>
   </ul></li>
   <li><a href="#main-citations" id="toc-main-citations" class="nav-link" data-scroll-target="#main-citations">Main Citations</a>
@@ -259,7 +287,7 @@ div.csl-indent {
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content" tabindex="-1"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
@@ -287,10 +315,13 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="features">Features</h2>
 <p><strong>EthnoBotaPhyWR</strong> provides:</p>
 <ul>
-<li><strong>Built-in datasets</strong> for <em>Orchidaceae</em> (3,055 compounds + 419 ethnobotanical uses)</li>
-<li><strong>Phylogenetic integration</strong> via Open Tree of Life</li>
+<li><strong>Built-in datasets</strong> for <em>Orchidaceae</em> (3,055 compounds + 419 ethnobotanical uses + pre-computed Open Tree of Life <code>phylo</code> caches)</li>
+<li><strong>Bundled Newick &amp; iTOL v6 files</strong> (<code>inst/extdata/itol/</code>) for immediate interactive exploration on <a href="https://itol.embl.de">iTOL</a></li>
+<li><strong>Publication &amp; interactive tree bundles</strong>: every run exports vector <code>.svg</code>, journal-ready vector <code>.pdf</code>, and self-contained interactive <code>.html</code> (<code>ggiraph</code> with pan/zoom, hover tooltips, and a live taxon search bar), including both a clade-collapsed rectangular overview (<code>▲</code> for unstudied sister clades) and an uncollapsed circular (<code>fan</code>) supplementary overview</li>
+<li><strong>Log-scaled compound bars &amp; hierarchical legend</strong>: bar widths scale by <span class="math inline">\(\log(1 + n)\)</span> with exact compound counts printed at each bar tip and a 6-column hierarchical pathway/superclass legend (<code>[Pathway]</code> + 5 <code>microshades</code> superclasses per row)</li>
+<li><strong>Phylogenetic integration</strong> via Open Tree of Life (<code>rotl</code>)</li>
 <li><strong>Phytochemical analysis</strong> with NPClassifier taxonomy</li>
-<li><strong>Data federation</strong> from Wikidata, LOTUS, and external sources</li>
+<li><strong>Data federation</strong> from Wikidata (QLever), LOTUS, and local tables</li>
 </ul>
 </section>
 <section id="installation" class="level2">
@@ -323,7 +354,30 @@ div.csl-indent {
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Ethnobotanical uses linked to phylogenetics</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(orchids_ethnobotanical)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(orchids_ethnobotanical)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(orchids_ethnobotanical)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Bundled Newick (.tre) and iTOL v6 annotation (.txt) files</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>itol_dir <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"itol"</span>, <span class="at">package =</span> <span class="st">"EthnoBotaPhyWR"</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(itol_dir)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="interactive-exploration-on-itol-interactive-tree-of-life" class="level3">
+<h3 class="anchored" data-anchor-id="interactive-exploration-on-itol-interactive-tree-of-life">Interactive Exploration on iTOL (Interactive Tree Of Life)</h3>
+<p>Both the pre-bundled <em>Orchidaceae</em> files (<code>system.file("extdata", "itol", package = "EthnoBotaPhyWR")</code>) and the files generated in <code>&lt;dirname(export_table_counts)&gt;/itol/</code> when running <code>ethnobotafever_tree()</code> on any plant family can be explored on <a href="https://itol.embl.de">iTOL</a>:</p>
+<ol type="1">
+<li>Open <a href="https://itol.embl.de/upload.cgi" class="uri">https://itol.embl.de/upload.cgi</a> and upload one of the <code>.tre</code> Newick files:
+<ul>
+<li><code>&lt;Taxon&gt;_full_genera_tree.tre</code> (all genera in the family)</li>
+<li><code>&lt;Taxon&gt;_phyto_genera_tree.tre</code> (genera with reported compounds or uses)</li>
+<li><code>&lt;Taxon&gt;_phyto_species_tree.tre</code> (species-level tree for major genera)</li>
+</ul></li>
+<li>Once the tree opens in the iTOL viewer, <strong>drag and drop</strong> the three companion <code>.txt</code> annotation files directly onto the browser canvas:
+<ul>
+<li><code>*_itol_ethnobotany.txt</code> (<code>DATASET_GRADIENT</code>: <span class="math inline">\(\log_{10}\)</span> ethnobotanical species count)</li>
+<li><code>*_itol_species_richness.txt</code> (<code>DATASET_SIMPLEBAR</code>: known species count per taxon)</li>
+<li><code>*_itol_compounds_multibar.txt</code> (<code>DATASET_MULTIBAR</code>: stacked compound superclass counts colored with the exact <code>cascade</code>/<code>microshades</code> palette)</li>
+</ul></li>
+<li>Use iTOL’s built-in controls to search taxa, dynamically collapse or expand clades, re-root, and switch between rectangular, circular, and unrooted layouts.</li>
+</ol>
 </section>
 <section id="analyze-your-own-family" class="level3">
 <h3 class="anchored" data-anchor-id="analyze-your-own-family">Analyze your own family</h3>
@@ -386,7 +440,7 @@ div.csl-indent {
 </tr>
 <tr class="even">
 <td style="text-align: left;">base</td>
-<td style="text-align: left;">4.6.1</td>
+<td style="text-align: left;">4.6.2</td>
 <td style="text-align: left;">R Core Team (2026a)</td>
 </tr>
 <tr class="odd">
@@ -402,7 +456,7 @@ div.csl-indent {
 <tr class="odd">
 <td style="text-align: left;">curl</td>
 <td style="text-align: left;">8.1.0</td>
-<td style="text-align: left;">Ooms (2026a)</td>
+<td style="text-align: left;">Ooms (2026)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">data.table</td>
@@ -415,9 +469,9 @@ div.csl-indent {
 <td style="text-align: left;">Rutz (2026)</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">ggtext</td>
-<td style="text-align: left;">0.2.0</td>
-<td style="text-align: left;">Wilke and Wiernik (2026)</td>
+<td style="text-align: left;">ggiraph</td>
+<td style="text-align: left;">0.9.6</td>
+<td style="text-align: left;">Gohel and Skintzos (2026)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ggtree</td>
@@ -431,7 +485,7 @@ div.csl-indent {
 </tr>
 <tr class="odd">
 <td style="text-align: left;">grid</td>
-<td style="text-align: left;">4.6.1</td>
+<td style="text-align: left;">4.6.2</td>
 <td style="text-align: left;">R Core Team (2026b)</td>
 </tr>
 <tr class="even">
@@ -440,9 +494,9 @@ div.csl-indent {
 <td style="text-align: left;">Iannone et al.&nbsp;(2026)</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">httr2</td>
-<td style="text-align: left;">1.3.0</td>
-<td style="text-align: left;">Wickham (2026)</td>
+<td style="text-align: left;">htmlwidgets</td>
+<td style="text-align: left;">1.6.4</td>
+<td style="text-align: left;">Vaidyanathan et al.&nbsp;(2023)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">khroma</td>
@@ -460,16 +514,6 @@ div.csl-indent {
 <td style="text-align: left;">Daróczi and Wickham (2026)</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">openssl</td>
-<td style="text-align: left;">2.4.2</td>
-<td style="text-align: left;">Ooms (2026b)</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">phangorn</td>
-<td style="text-align: left;">2.12.1</td>
-<td style="text-align: left;">Schliep (2011); Schliep et al.&nbsp;(2017)</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">rmarkdown</td>
 <td style="text-align: left;">2.32</td>
 <td style="text-align: left;">Xie et al.&nbsp;(2018); Xie et al.&nbsp;(2020); Allaire et al.&nbsp;(2026)</td>
@@ -480,34 +524,29 @@ div.csl-indent {
 <td style="text-align: left;">Michonneau et al.&nbsp;(2016); OpenTreeOfLife et al.&nbsp;(2019)</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">scales</td>
-<td style="text-align: left;">1.4.0</td>
-<td style="text-align: left;">Wickham et al.&nbsp;(2025)</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">spelling</td>
 <td style="text-align: left;">2.3.2</td>
 <td style="text-align: left;">Ooms and Hester (2025)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">testthat</td>
 <td style="text-align: left;">3.3.2</td>
 <td style="text-align: left;">Wickham (2011)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">tidytable</td>
 <td style="text-align: left;">0.11.2</td>
 <td style="text-align: left;">Fairbanks (2024)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">tidytree</td>
-<td style="text-align: left;">0.4.8</td>
-<td style="text-align: left;">Yu (2022c)</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">tidyverse</td>
 <td style="text-align: left;">2.0.0</td>
 <td style="text-align: left;">Wickham et al.&nbsp;(2019)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">tools</td>
+<td style="text-align: left;">4.6.2</td>
+<td style="text-align: left;">R Core Team (2026c)</td>
 </tr>
 </tbody>
 </table>
@@ -527,6 +566,9 @@ Fairbanks, Mark. 2024. <em><span class="nocase">tidytable</span>: Tidy Interface
 <div id="ref-khroma" class="csl-entry" role="listitem">
 Frerebeau, Nicolas. 2025. <em><span class="nocase">khroma: Colour Schemes for Scientific Data Visualization</span></em>. Université Bordeaux Montaigne. <a href="https://doi.org/10.5281/zenodo.1472077" class="uri">https://doi.org/10.5281/zenodo.1472077</a>.
 </div>
+<div id="ref-ggiraph" class="csl-entry" role="listitem">
+Gohel, David, and Panagiotis Skintzos. 2026. <em><span class="nocase">ggiraph</span>: Make “<span class="nocase">ggplot2</span>” Graphics Interactive</em>. <a href="https://doi.org/10.32614/CRAN.package.ggiraph" class="uri">https://doi.org/10.32614/CRAN.package.ggiraph</a>.
+</div>
 <div id="ref-gt" class="csl-entry" role="listitem">
 Iannone, Richard, Joe Cheng, Barret Schloerke, et al.&nbsp;2026. <em><span class="nocase">gt</span>: Easily Create Presentation-Ready Display Tables</em>. <a href="https://doi.org/10.32614/CRAN.package.gt" class="uri">https://doi.org/10.32614/CRAN.package.gt</a>.
 </div>
@@ -540,10 +582,7 @@ Morgan, Martin. 2025. <em>BiocVersion: Set the Appropriate Version of Bioconduct
 Morgan, Martin, and Marcel Ramos. 2025. <em>BiocManager: Access the Bioconductor Project Package Repository</em>. <a href="https://doi.org/10.32614/CRAN.package.BiocManager" class="uri">https://doi.org/10.32614/CRAN.package.BiocManager</a>.
 </div>
 <div id="ref-curl" class="csl-entry" role="listitem">
-Ooms, Jeroen. 2026a. <em><span class="nocase">curl</span>: A Modern and Flexible Web Client for r</em>. <a href="https://doi.org/10.32614/CRAN.package.curl" class="uri">https://doi.org/10.32614/CRAN.package.curl</a>.
-</div>
-<div id="ref-openssl" class="csl-entry" role="listitem">
-Ooms, Jeroen. 2026b. <em><span class="nocase">openssl</span>: Toolkit for Encryption, Signatures and Certificates Based on OpenSSL</em>. <a href="https://doi.org/10.32614/CRAN.package.openssl" class="uri">https://doi.org/10.32614/CRAN.package.openssl</a>.
+Ooms, Jeroen. 2026. <em><span class="nocase">curl</span>: A Modern and Flexible Web Client for r</em>. <a href="https://doi.org/10.32614/CRAN.package.curl" class="uri">https://doi.org/10.32614/CRAN.package.curl</a>.
 </div>
 <div id="ref-spelling" class="csl-entry" role="listitem">
 Ooms, Jeroen, and Jim Hester. 2025. <em><span class="nocase">spelling</span>: Tools for Spell Checking in r</em>. <a href="https://doi.org/10.32614/CRAN.package.spelling" class="uri">https://doi.org/10.32614/CRAN.package.spelling</a>.
@@ -560,29 +599,20 @@ R Core Team. 2026a. <em>R: A Language and Environment for Statistical Computing<
 <div id="ref-grid" class="csl-entry" role="listitem">
 R Core Team. 2026b. <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing. <a href="https://doi.org/10.32614/R.manuals" class="uri">https://doi.org/10.32614/R.manuals</a>.
 </div>
+<div id="ref-tools" class="csl-entry" role="listitem">
+R Core Team. 2026c. <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing. <a href="https://doi.org/10.32614/R.manuals" class="uri">https://doi.org/10.32614/R.manuals</a>.
+</div>
 <div id="ref-EthnoBotaPhyWR" class="csl-entry" role="listitem">
 Rutz, Adriano. 2026. <em>EthnoBotaPhyWR: Infrastructure for Ethnobotanical and Phytochemical Data Integration with Wikidata</em>. <a href="https://doi.org/10.5281/zenodo.TODO" class="uri">https://doi.org/10.5281/zenodo.TODO</a>.
 </div>
-<div id="ref-phangorn2011" class="csl-entry" role="listitem">
-Schliep, Klaus. 2011. “<span class="nocase">phangorn</span>: Phylogenetic Analysis in r.” <em>Bioinformatics</em> 27 (4): 592–93. <a href="https://doi.org/10.1093/bioinformatics/btq706" class="uri">https://doi.org/10.1093/bioinformatics/btq706</a>.
-</div>
-<div id="ref-phangorn2017" class="csl-entry" role="listitem">
-Schliep, Klaus, Alastair J. Potts, David A. Morrison, and Guido W. Grimm. 2017. “Intertwining Phylogenetic Trees and Networks.” <em>Methods in Ecology and Evolution</em> 8 (10): 1212–20.
+<div id="ref-htmlwidgets" class="csl-entry" role="listitem">
+Vaidyanathan, Ramnath, Yihui Xie, JJ Allaire, Joe Cheng, Carson Sievert, and Kenton Russell. 2023. <em><span class="nocase">htmlwidgets</span>: HTML Widgets for r</em>. <a href="https://doi.org/10.32614/CRAN.package.htmlwidgets" class="uri">https://doi.org/10.32614/CRAN.package.htmlwidgets</a>.
 </div>
 <div id="ref-testthat" class="csl-entry" role="listitem">
 Wickham, Hadley. 2011. “<span class="nocase">testthat</span>: Get Started with Testing.” <em>The R Journal</em> 3: 5–10. <a href="https://journal.r-project.org/articles/RJ-2011-002/" class="uri">https://journal.r-project.org/articles/RJ-2011-002/</a>.
 </div>
-<div id="ref-httr2" class="csl-entry" role="listitem">
-Wickham, Hadley. 2026. <em>Httr2: Perform HTTP Requests and Process the Responses</em>. <a href="https://doi.org/10.32614/CRAN.package.httr2" class="uri">https://doi.org/10.32614/CRAN.package.httr2</a>.
-</div>
 <div id="ref-tidyverse" class="csl-entry" role="listitem">
 Wickham, Hadley, Mara Averick, Jennifer Bryan, et al.&nbsp;2019. “Welcome to the <span class="nocase">tidyverse</span>.” <em>Journal of Open Source Software</em> 4 (43): 1686. <a href="https://doi.org/10.21105/joss.01686" class="uri">https://doi.org/10.21105/joss.01686</a>.
-</div>
-<div id="ref-scales" class="csl-entry" role="listitem">
-Wickham, Hadley, Thomas Lin Pedersen, and Dana Seidel. 2025. <em><span class="nocase">scales</span>: Scale Functions for Visualization</em>. <a href="https://doi.org/10.32614/CRAN.package.scales" class="uri">https://doi.org/10.32614/CRAN.package.scales</a>.
-</div>
-<div id="ref-ggtext" class="csl-entry" role="listitem">
-Wilke, Claus O., and Brenton M. Wiernik. 2026. <em><span class="nocase">ggtext</span>: Improved Text Rendering Support for “<span class="nocase">ggplot2</span>”</em>. <a href="https://doi.org/10.32614/CRAN.package.ggtext" class="uri">https://doi.org/10.32614/CRAN.package.ggtext</a>.
 </div>
 <div id="ref-knitr2014" class="csl-entry" role="listitem">
 Xie, Yihui. 2014. “<span class="nocase">knitr</span>: A Comprehensive Tool for Reproducible Research in R.” In <em>Implementing Reproducible Computational Research</em>, edited by Victoria Stodden, Friedrich Leisch, and Roger D. Peng. Chapman; Hall/CRC.
@@ -613,9 +643,6 @@ Yu, Guangchuang. 2022a. <em>Data Integration, Manipulation and Visualization of 
 </div>
 <div id="ref-ggtreeExtra2022" class="csl-entry" role="listitem">
 Yu, Guangchuang. 2022b. <em>Data Integration, Manipulation and Visualization of Phylogenetic Treess</em>. 1st edition. Chapman; Hall/CRC. <a href="https://www.amazon.com/Integration-Manipulation-Visualization-Phylogenetic-Computational-ebook/dp/B0B5NLZR1Z/" class="uri">https://www.amazon.com/Integration-Manipulation-Visualization-Phylogenetic-Computational-ebook/dp/B0B5NLZR1Z/</a>.
-</div>
-<div id="ref-tidytree" class="csl-entry" role="listitem">
-Yu, Guangchuang. 2022c. <em>Data Integration, Manipulation and Visualization of Phylogenetic Treess</em>. 1st edition. Chapman; Hall/CRC. <a href="https://doi.org/10.1201/9781003279242" class="uri">https://doi.org/10.1201/9781003279242</a>.
 </div>
 <div id="ref-ggtree2018d" class="csl-entry" role="listitem">
 Yu, Guangchuang, Tommy Tsan-Yuk Lam, Huachen Zhu, and Yi Guan. 2018. “Two Methods for Mapping and Visualizing Associated Data on Phylogeny Using Ggtree.” <em>Molecular Biology and Evolution</em> 35: 3041–43. <a href="https://doi.org/10.1093/molbev/msy194" class="uri">https://doi.org/10.1093/molbev/msy194</a>.
@@ -708,7 +735,8 @@ Yu, Guangchuang, David Smith, Huachen Zhu, Yi Guan, and Tommy Tsan-Yuk Lam. 2017
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -717,8 +745,69 @@ Yu, Guangchuang, David Smith, Huachen Zhu, Yi Guan, and Tommy Tsan-Yuk Lam. 2017
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -732,6 +821,7 @@ Yu, Guangchuang, David Smith, Huachen Zhu, Yi Guan, and Tommy Tsan-Yuk Lam. 2017
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -894,44 +984,54 @@ Yu, Guangchuang, David Smith, Huachen Zhu, Yi Guan, and Tommy Tsan-Yuk Lam. 2017
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1029,6 +1129,9 @@ Yu, Guangchuang, David Smith, Huachen Zhu, Yi Guan, and Tommy Tsan-Yuk Lam. 2017
       }
     }
   });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 <footer class="footer">

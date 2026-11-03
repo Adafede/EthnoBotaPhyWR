@@ -30,6 +30,15 @@ This dataset is a deduplicated lookup table for compound classifications.
 Use it to quickly retrieve NPClassifier results for a given SMILES string
 without querying the live API.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_2258} (Cheminformatics)
+\item Data: \verb{http://edamontology.org/data_1463} (Small molecule structure)
+\item Format: \verb{http://edamontology.org/format_1196} (SMILES)
+}
+}
+
 \examples{
 data(orchids_compound_classes)
 head(orchids_compound_classes)

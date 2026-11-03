@@ -72,13 +72,15 @@ pronounced "Ethnobota Fever".
 
 ```{r}
 #| label: install
+#| eval: false
 #| include: false
 
 install.packages(
   "EthnoBotaPhyWR",
   repos = c(
     "https://adafede.r-universe.dev",
-    "https://davidgohel.r-universe.dev", # required for ggiraph, required for ggtree
+    # required for ggiraph, required for ggtree
+    "https://davidgohel.r-universe.dev",
     "https://cran.r-universe.dev",
     "https://bioc.r-universe.dev"
   )
@@ -93,7 +95,6 @@ install.packages(
 ## color palettes are now vendored as internal functions in
 ## R/cascade_*.R (see DESCRIPTION for rationale).
 library(EthnoBotaPhyWR)
-library(ggplot2) # required because of `geom_col`
 ```
 
 ## Introduction
@@ -116,9 +117,11 @@ are described below:
 #| label: parameters
 
 ## Taxonomy-related parameters
-taxon_name <- "Orchidaceae" # The scientific name of the family you are interested in
+# The scientific name of the family of interest
+taxon_name <- "Orchidaceae"
 
-example_family_names <- c( # The scientific name(s) of family(ies) you want to compare to
+# The scientific name(s) of family(ies) to compare against
+example_family_names <- c(
   "Poaceae" = "Poaceae",
   "Fabaceae" = "Fabaceae",
   "Asteraceae" = "Asteraceae",
@@ -128,9 +131,12 @@ example_family_names <- c( # The scientific name(s) of family(ies) you want to c
 )
 
 ## Thresholds
-n_multiple_genera <- 10L # The minimal number of genera where a compound was found in to consider the latter relatively widespread
-n_ethnobotanical_count_min <- 10L # The minimal number of species within the genus for which an ethnobotanical use has been reported to consider the genus relatively widely used
-n_compounds_count_min <- 50L # The minimal number of compounds reported in a taxon to consider the latter relatively widely investigated
+# Minimal number of genera where a compound is found to consider it widespread
+n_multiple_genera <- 10L
+# Minimal species per genus with reported ethnobotanical use
+n_ethnobotanical_count_min <- 10L
+# Minimal compounds reported in a taxon to consider it widely investigated
+n_compounds_count_min <- 50L
 ```
 
 ```{r}
@@ -143,7 +149,9 @@ pkg_root <- tryCatch(
   {
     p <- "."
     for (i in seq_len(10L)) {
-      if (file.exists(file.path(p, "DESCRIPTION")) && dir.exists(file.path(p, "data-raw"))) {
+      has_desc <- file.exists(file.path(p, "DESCRIPTION"))
+      has_raw <- dir.exists(file.path(p, "data-raw"))
+      if (has_desc && has_raw) {
         break
       }
       p <- file.path(p, "..")
@@ -169,7 +177,11 @@ export_table_classified <- file.path(
   "data-raw",
   "orchids_table_unique_connectivity_classified.tsv"
 )
-export_table_counts <- file.path(pkg_root, "data-raw", "orchids_table_counts.tsv")
+export_table_counts <- file.path(
+  pkg_root,
+  "data-raw",
+  "orchids_table_counts.tsv"
+)
 export_table_counts_sub <- file.path(
   pkg_root,
   "data-raw",
@@ -256,24 +268,45 @@ results$df_taxa_known_sub |>
   gt::opt_interactive()
 ```
 
-Second, some tree-based visualizations:
+Second, tree-based visualizations (each exported simultaneously as `.svg`, publication-ready vector `.pdf`, and a self-contained interactive `.html` widget with a live taxon search bar, hover tooltips, and pan/zoom):
 
-- A tree with genera as tips, displaying the taxa of the family, and if
-  compounds or uses have been reported in @fig-1 (mainly to show the majority
-  remains non-investigated)
-- A tree with genera as tips, displaying the taxa of the family for which
-  compounds or uses have been reported in @fig-2 (mainly to make them easier to
-  read)
-- A tree with species as tips, displaying the taxa of the family for which a
-  decent number of compounds or uses have been reported in the corresponding
-  genus in @fig-3 (mainly to show that even in the most investigated genera, the
-  coverage is far from ideal)
+- **Clade-collapsed rectangular genus overview** (@fig-1): displays all active genera individually (`●`, italic labels) while collapsing purely unstudied clades and polytomies into summary rows (`▲`, upright labels showing `(+N genera)`), preserving exact tip-weighted branch averages.
+- **Uncollapsed circular (`fan`) supplementary genus overview** (`tree_orchids_full_circular_si.{svg,pdf,html}`, @fig-1b): displays all 1,272 genera without collapsing for supplementary materials.
+- **Phytochemical & ethnobotanical genus tree** (@fig-2): restricted to genera with reported compounds or ethnobotanical uses.
+- **Species-level phytochemical tree** (@fig-3): displays species within the most widely investigated genera, highlighting coverage gaps even within well-studied genera.
 
-![A tree with genera as tips, displaying the taxa of the family, and if compounds or uses have been reported](../../man/figures/tree_orchids_full.svg){#fig-1 width=100%}
+In all trees:
 
-![A tree with genera as tips, displaying the taxa of the family for which compounds or uses have been reported](../../man/figures/tree_orchids_phyto.svg){#fig-2 width=100%}
+- **Compound bar scale & counts**: total bar length scales with $\log(1 + \text{compounds})$ (with a reference log-scale axis at the top of the bar column and the exact integer compound count printed at the right tip of each bar), while segments inside each bar preserve the exact within-taxon superclass proportions.
+- **Hierarchical 6-column legend**: each row corresponds to one NPClassifier chemical pathway (`[Pathway]` in column 1 followed by its 5 `microshades` subclasses ordered from darkest to lightest across columns 2–6).
 
-![A tree with species as tips, displaying the taxa of the family for which a decent number of compounds or uses have been reported in the corresponding genus](../../man/figures/tree_orchids_phyto_sub.svg){#fig-3 width=100%}
+![Clade-collapsed genus overview tree](../../man/figures/tree_orchids_full.svg){#fig-1 width=100%}
+
+![Uncollapsed circular supplementary genus overview tree](../../man/figures/tree_orchids_full_circular_si.svg){#fig-1b width=100%}
+
+![Phytochemical and ethnobotanical genus tree](../../man/figures/tree_orchids_phyto.svg){#fig-2 width=100%}
+
+![Species-level phytochemical tree for major genera](../../man/figures/tree_orchids_phyto_sub.svg){#fig-3 width=100%}
+
+### Using the Exported Newick Trees & Annotations on iTOL
+
+Running `ethnobotafever_tree()` automatically writes Newick `.tre` trees and official iTOL v6 annotation files to `file.path(dirname(export_table_counts), "itol")`. For *Orchidaceae*, these files are also shipped inside the package and can be located with:
+
+```{r}
+#| label: itol-files
+
+itol_dir <- system.file("extdata", "itol", package = "EthnoBotaPhyWR")
+list.files(itol_dir)
+```
+
+To explore any of the three trees (`*_full_genera`, `*_phyto_genera`, or `*_phyto_species`) interactively on [iTOL (Interactive Tree Of Life)](https://itol.embl.de):
+
+1. Go to <https://itol.embl.de/upload.cgi> and upload the `*_tree.tre` Newick file.
+2. Open the uploaded tree and **drag and drop** its three companion `.txt` files directly onto the iTOL tree canvas:
+   - `*_itol_ethnobotany.txt` (`DATASET_GRADIENT` — $\log_{10}$ ethnobotanical species richness)
+   - `*_itol_species_richness.txt` (`DATASET_SIMPLEBAR` — total known species per taxon)
+   - `*_itol_compounds_multibar.txt` (`DATASET_MULTIBAR` — stacked compound superclass counts with matching `microshades` hex colors)
+3. In the iTOL control panel (**Datasets** tab), toggle datasets on/off, search any taxon, or click any internal node to collapse, expand, or prune clades.
 
 ## Logs
 

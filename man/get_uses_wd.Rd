@@ -15,4 +15,12 @@ A data frame with the retrieved use information.
 \description{
 Retrieves ethnobotanical-use annotations for a given Wikidata taxon QID.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_0780} (Plant biology)
+\item Operation: \verb{http://edamontology.org/operation_2422} (Data retrieval)
+}
+}
+
 \keyword{internal}

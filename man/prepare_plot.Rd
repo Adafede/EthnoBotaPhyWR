@@ -7,14 +7,23 @@
 prepare_plot(dataframe, organism = "species")
 }
 \arguments{
-\item{dataframe}{Dataframe}
+\item{dataframe}{Data.frame. Output of \code{prepare_hierarchy()}.}
 
-\item{organism}{Organism}
+\item{organism}{Character. Column name identifying the organism or species.}
 }
 \value{
-A dataframe prepared for plots
+A \code{tidytable} prepared for plotting.
 }
 \description{
-Prepare plot
+Prepares hierarchical compound classification data for plotting by assigning
+group ranks, microshades palettes, and ordered factor levels.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_2258} (Cheminformatics)
+\item Operation: \verb{http://edamontology.org/operation_0337} (Visualisation)
+}
+}
+
 \keyword{internal}

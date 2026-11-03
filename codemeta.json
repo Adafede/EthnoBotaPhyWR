@@ -185,19 +185,6 @@
     },
     "5": {
       "@type": "SoftwareApplication",
-      "identifier": "forcats",
-      "name": "forcats",
-      "version": ">= 0.5.4",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=forcats"
-    },
-    "6": {
-      "@type": "SoftwareApplication",
       "identifier": "ggplot2",
       "name": "ggplot2",
       "version": ">= 4.0.3",
@@ -209,20 +196,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=ggplot2"
     },
-    "7": {
-      "@type": "SoftwareApplication",
-      "identifier": "ggtext",
-      "name": "ggtext",
-      "version": ">= 0.1.2",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=ggtext"
-    },
-    "8": {
+    "6": {
       "@type": "SoftwareApplication",
       "identifier": "ggtree",
       "name": "ggtree",
@@ -235,7 +209,7 @@
       },
       "sameAs": "https://bioconductor.org/packages/release/bioc/html/ggtree.html"
     },
-    "9": {
+    "7": {
       "@type": "SoftwareApplication",
       "identifier": "ggtreeExtra",
       "name": "ggtreeExtra",
@@ -248,20 +222,7 @@
       },
       "sameAs": "https://bioconductor.org/packages/release/bioc/html/ggtreeExtra.html"
     },
-    "10": {
-      "@type": "SoftwareApplication",
-      "identifier": "httr2",
-      "name": "httr2",
-      "version": ">= 1.0.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=httr2"
-    },
-    "11": {
+    "8": {
       "@type": "SoftwareApplication",
       "identifier": "jsonlite",
       "name": "jsonlite",
@@ -274,7 +235,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=jsonlite"
     },
-    "12": {
+    "9": {
       "@type": "SoftwareApplication",
       "identifier": "khroma",
       "name": "khroma",
@@ -287,7 +248,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=khroma"
     },
-    "13": {
+    "10": {
       "@type": "SoftwareApplication",
       "identifier": "logger",
       "name": "logger",
@@ -300,46 +261,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=logger"
     },
-    "14": {
-      "@type": "SoftwareApplication",
-      "identifier": "openssl",
-      "name": "openssl",
-      "version": ">= 2.4.2",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=openssl"
-    },
-    "15": {
-      "@type": "SoftwareApplication",
-      "identifier": "phangorn",
-      "name": "phangorn",
-      "version": ">= 2.12.1",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=phangorn"
-    },
-    "16": {
-      "@type": "SoftwareApplication",
-      "identifier": "purrr",
-      "name": "purrr",
-      "version": ">= 1.2.2",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=purrr"
-    },
-    "17": {
+    "11": {
       "@type": "SoftwareApplication",
       "identifier": "rotl",
       "name": "rotl",
@@ -352,46 +274,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=rotl"
     },
-    "18": {
-      "@type": "SoftwareApplication",
-      "identifier": "rvest",
-      "name": "rvest",
-      "version": ">= 1.0.5",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=rvest"
-    },
-    "19": {
-      "@type": "SoftwareApplication",
-      "identifier": "scales",
-      "name": "scales",
-      "version": ">= 1.4.0",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=scales"
-    },
-    "20": {
-      "@type": "SoftwareApplication",
-      "identifier": "tibble",
-      "name": "tibble",
-      "version": ">= 3.3.1",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=tibble"
-    },
-    "21": {
+    "12": {
       "@type": "SoftwareApplication",
       "identifier": "tidytable",
       "name": "tidytable",
@@ -404,22 +287,47 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=tidytable"
     },
-    "22": {
-      "@type": "SoftwareApplication",
-      "identifier": "tidytree",
-      "name": "tidytree",
-      "version": ">= 0.4.8",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=tidytree"
-    },
     "SystemRequirements": null
   },
-  "keywords": ["Ethnobotany", "Phytochemistry", "Taxonomy", "Wikidata", "ethnobotany", "phytochemistry", "r", "wikidata"],
+  "keywords": [
+    "Ethnobotany",
+    "Phytochemistry",
+    "Taxonomy",
+    "Wikidata",
+    "naturalProducts",
+    "chemotaxonomy",
+    "phylogenetics",
+    "EDAM:topic_0780",
+    "EDAM:topic_0154",
+    "EDAM:topic_2258",
+    "EDAM:topic_3293",
+    "EDAM:topic_0637",
+    "EDAM:topic_3077",
+    "EDAM:operation_0224",
+    "EDAM:operation_2422",
+    "EDAM:operation_2990",
+    "EDAM:operation_0324",
+    "EDAM:operation_0567",
+    "EDAM:operation_0337",
+    "EDAM:operation_1812",
+    "EDAM:data_0872",
+    "EDAM:data_3272",
+    "EDAM:data_1872",
+    "EDAM:data_1868",
+    "EDAM:data_3028",
+    "EDAM:data_1463",
+    "EDAM:data_2301",
+    "EDAM:data_1086",
+    "EDAM:format_1196",
+    "EDAM:format_1199",
+    "EDAM:format_3475",
+    "EDAM:format_3508",
+    "EDAM:format_3604",
+    "ethnobotany",
+    "phytochemistry",
+    "r",
+    "wikidata"
+  ],
   "fileSize": "4165.848KB",
   "citation": [
     {
@@ -445,5 +353,22 @@
   "releaseNotes": "https://github.com/adafede/EthnoBotaPhyWR/blob/main/NEWS.md",
   "readme": "https://github.com/Adafede/EthnoBotaPhyWR/blob/main/README.md",
   "contIntegration": "https://github.com/adafede/EthnoBotaPhyWR/actions/workflows/R-CMD-check.yaml",
-  "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental"
+  "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental",
+  "applicationCategory": [
+    "https://edamontology.org/topic_0780",
+    "https://edamontology.org/topic_0154",
+    "https://edamontology.org/topic_2258",
+    "https://edamontology.org/topic_3293",
+    "https://edamontology.org/topic_0637",
+    "https://edamontology.org/topic_3077"
+  ],
+  "featureList": [
+    "https://edamontology.org/operation_0224",
+    "https://edamontology.org/operation_2422",
+    "https://edamontology.org/operation_2990",
+    "https://edamontology.org/operation_0324",
+    "https://edamontology.org/operation_0567",
+    "https://edamontology.org/operation_0337",
+    "https://edamontology.org/operation_1812"
+  ]
 }

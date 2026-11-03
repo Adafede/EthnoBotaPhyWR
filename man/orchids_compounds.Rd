@@ -33,9 +33,20 @@ orchids_compounds
 \description{
 A dataset containing phytochemical information from \emph{Orchidaceae} species.
 This is a curated subset linking taxonomic data, chemical structures
-(SMILES),
-and NPClassifier taxonomy.
+(SMILES), and NPClassifier taxonomy.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_2258} (Cheminformatics),
+\verb{http://edamontology.org/topic_0780} (Plant biology)
+\item Data: \verb{http://edamontology.org/data_1463} (Small molecule structure),
+\verb{http://edamontology.org/data_1868} (Taxon)
+\item Format: \verb{http://edamontology.org/format_1196} (SMILES),
+\verb{http://edamontology.org/format_1199} (InChIKey)
+}
+}
+
 \examples{
 data(orchids_compounds)
 head(orchids_compounds)

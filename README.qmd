@@ -44,10 +44,21 @@ Or simply use the included orchids datasets for analysis.
 **EthnoBotaPhyWR** provides:
 
 - **Built-in datasets** for *Orchidaceae* (3,055 compounds + 419 ethnobotanical
-  uses)
-- **Phylogenetic integration** via Open Tree of Life
+  uses + pre-computed Open Tree of Life `phylo` caches)
+- **Bundled Newick & iTOL v6 files** (`inst/extdata/itol/`) for immediate
+  interactive exploration on [iTOL](https://itol.embl.de)
+- **Publication & interactive tree bundles**: every run exports vector `.svg`,
+  journal-ready vector `.pdf`, and self-contained interactive `.html` (`ggiraph`
+  with pan/zoom, hover tooltips, and a live taxon search bar), including both a
+  clade-collapsed rectangular overview (`▲` for unstudied sister clades) and an
+  uncollapsed circular (`fan`) supplementary overview
+- **Log-scaled compound bars & hierarchical legend**: bar widths scale by
+  $\log(1 + n)$ with exact compound counts printed at each bar tip and a
+  6-column hierarchical pathway/superclass legend (`[Pathway]` + 5 `microshades`
+  superclasses per row)
+- **Phylogenetic integration** via Open Tree of Life (`rotl`)
 - **Phytochemical analysis** with NPClassifier taxonomy
-- **Data federation** from Wikidata, LOTUS, and external sources
+- **Data federation** from Wikidata (QLever), LOTUS, and local tables
 
 ## Installation
 
@@ -87,7 +98,25 @@ head(orchids_compound_classes)
 # Ethnobotanical uses linked to phylogenetics
 data(orchids_ethnobotanical)
 head(orchids_ethnobotanical)
+
+# Bundled Newick (.tre) and iTOL v6 annotation (.txt) files
+itol_dir <- system.file("extdata", "itol", package = "EthnoBotaPhyWR")
+list.files(itol_dir)
 ```
+
+### Interactive Exploration on iTOL (Interactive Tree Of Life)
+
+Both the pre-bundled *Orchidaceae* files (`system.file("extdata", "itol", package = "EthnoBotaPhyWR")`) and the files generated in `<dirname(export_table_counts)>/itol/` when running `ethnobotafever_tree()` on any plant family can be explored on [iTOL](https://itol.embl.de):
+
+1. Open <https://itol.embl.de/upload.cgi> and upload one of the `.tre` Newick files:
+   - `<Taxon>_full_genera_tree.tre` (all genera in the family)
+   - `<Taxon>_phyto_genera_tree.tre` (genera with reported compounds or uses)
+   - `<Taxon>_phyto_species_tree.tre` (species-level tree for major genera)
+2. Once the tree opens in the iTOL viewer, **drag and drop** the three companion `.txt` annotation files directly onto the browser canvas:
+   - `*_itol_ethnobotany.txt` (`DATASET_GRADIENT`: $\log_{10}$ ethnobotanical species count)
+   - `*_itol_species_richness.txt` (`DATASET_SIMPLEBAR`: known species count per taxon)
+   - `*_itol_compounds_multibar.txt` (`DATASET_MULTIBAR`: stacked compound superclass counts colored with the exact `cascade`/`microshades` palette)
+3. Use iTOL's built-in controls to search taxa, dynamically collapse or expand clades, re-root, and switch between rectangular, circular, and unrooted layouts.
 
 ### Analyze your own family
 

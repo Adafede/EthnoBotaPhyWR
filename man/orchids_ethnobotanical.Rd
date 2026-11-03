@@ -28,6 +28,15 @@ Each row represents a species with documented ethnobotanical uses.
 The \code{taxon_id_ott} field enables integration with phylogenetic analyses
 via the Open Tree of Life API.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_0780} (Plant biology),
+\verb{http://edamontology.org/topic_0637} (Taxonomy)
+\item Data: \verb{http://edamontology.org/data_1868} (Taxon)
+}
+}
+
 \examples{
 data(orchids_ethnobotanical)
 head(orchids_ethnobotanical)

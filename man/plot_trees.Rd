@@ -15,7 +15,8 @@ plot_trees(
   adjust_text = NULL,
   adjust_margin = NULL,
   genus = TRUE,
-  drop = FALSE
+  drop = FALSE,
+  collapse_inactive = TRUE
 )
 }
 \arguments{
@@ -33,8 +34,7 @@ summary counts such as \code{species_count} and \code{ethnobotanical_count}.}
 \item{df_classes}{Data.frame. Classification table providing the compound
 superclass values, colours, and per-taxon annotations.}
 
-\item{offset}{Numeric. Optional override for the tip-label offset used by the
-tree plots.}
+\item{offset}{Numeric. Optional override for the fruit-panel offset.}
 
 \item{adjust_point}{Numeric. Optional override for the x-position of
 orphan-panel points.}
@@ -49,16 +49,36 @@ margin.}
 
 \item{drop}{Logical. If \code{TRUE}, tips not present in \code{df_counted} are dropped
 before plotting.}
+
+\item{collapse_inactive}{Logical. If \code{TRUE} (default), collapses purely
+unstudied clades and polytomy siblings in the rectangular \code{tree_taxa_full}
+plot when the tree has more than 60 tips, while keeping the circular SI
+overview uncollapsed.}
 }
 \value{
-A list containing the main tree plots, the orphan-taxon plot,
-the orphan data frame, and the derived layout settings.
+A list containing the rectangular and circular tree plots,
+interactive \code{girafe} widgets (when \code{ggiraph} is installed), the orphan-taxon
+plot, the orphan data frame, and the derived layout settings.
 }
 \description{
 Plots phylogenetic trees with ethnobotanical and phytochemical overlays.
-The helper formats tip labels consistently, derives spacing from the tree
-geometry, and returns the main tree plots plus the orphan-taxon panel.
+Builds both a clade-collapsed rectangular overview tree and an uncollapsed
+circular (\code{fan}) supplementary overview tree, scales compound bars
+proportionally to log-total compound richness, formats a 6-column
+hierarchical pathway/superclass legend (5 shades per pathway row), and
+supports static vector (SVG/PDF), interactive HTML (\code{ggiraph}), and iTOL
+exports.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_3293} (Phylogenetics)
+\item Operation: \verb{http://edamontology.org/operation_0567}
+(Phylogenetic tree visualisation)
+\item Data: \verb{http://edamontology.org/data_0872} (Phylogenetic tree)
+}
+}
+
 \examples{
 # plot_trees(...)
 }

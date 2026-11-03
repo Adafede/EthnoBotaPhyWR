@@ -12,4 +12,13 @@ A data frame with compound, SMILES, InChIKey, and taxon identifiers.
 \description{
 Retrieves LOTUS compound annotations from Wikidata.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_2258} (Cheminformatics)
+\item Operation: \verb{http://edamontology.org/operation_2422} (Data retrieval)
+\item Data: \verb{http://edamontology.org/data_1463} (Small molecule structure)
+}
+}
+
 \keyword{internal}

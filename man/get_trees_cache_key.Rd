@@ -22,6 +22,15 @@ A character scalar cache key.
 Builds a deterministic cache key from OTT IDs, a counted data frame, and a
 taxon name so that identical inputs map to the same cached tree result.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_3293} (Phylogenetics)
+\item Operation: \verb{http://edamontology.org/operation_0324}
+(Phylogenetic analysis)
+}
+}
+
 \examples{
 # get_trees_cache_key(
 #   c(1234, 5678),

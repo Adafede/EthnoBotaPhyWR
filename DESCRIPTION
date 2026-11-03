@@ -25,28 +25,20 @@ Imports:
     ape (>= 5.8.1),
     curl (>= 5.0.0),
     data.table (>= 1.15.0),
-    forcats (>= 0.5.4),
     ggplot2 (>= 4.0.3),
-    ggtext (>= 0.1.2),
     ggtree (>= 4.0.5),
     ggtreeExtra (>= 1.20.1),
-    httr2 (>= 1.0.0),
     jsonlite (>= 2.0.0),
     khroma (>= 1.17.0),
     logger (>= 0.4.2),
-    openssl (>= 2.4.2),
-    phangorn (>= 2.12.1),
-    purrr (>= 1.2.2),
     rotl (>= 3.1.1),
-    rvest (>= 1.0.5),
-    scales (>= 1.4.0),
-    tibble (>= 3.3.1),
-    tidytable (>= 0.11.2),
-    tidytree (>= 0.4.8)
+    tidytable (>= 0.11.2)
 Suggests:
     altdoc,
     gdtools (>= 0.5.2),
+    ggiraph,
     gt (>= 1.3.0),
+    htmlwidgets,
     quarto (>= 1.5.1),
     spelling,
     svglite (>= 2.2.2),
@@ -77,5 +69,40 @@ Language: en-US
 LazyData: TRUE
 VignetteBuilder:
     quarto
-biocViews: Ethnobotany, Phytochemistry, Taxonomy, Wikidata
-X-schema.org-keywords: Ethnobotany, Phytochemistry, Taxonomy, Wikidata
+biocViews: Ethnobotany, Phytochemistry, Taxonomy, Wikidata, Cheminformatics,
+    Phylogenetics, NaturalProducts, Software
+X-schema.org-keywords: Ethnobotany, Phytochemistry, Taxonomy, Wikidata,
+    naturalProducts, chemotaxonomy, phylogenetics, EDAM:topic_0780,
+    EDAM:topic_0154, EDAM:topic_2258, EDAM:topic_3293, EDAM:topic_0637,
+    EDAM:topic_3077, EDAM:operation_0224, EDAM:operation_2422,
+    EDAM:operation_2990, EDAM:operation_0324, EDAM:operation_0567,
+    EDAM:operation_0337, EDAM:operation_1812, EDAM:data_0872, EDAM:data_3272,
+    EDAM:data_1872, EDAM:data_1868, EDAM:data_3028, EDAM:data_1463,
+    EDAM:data_2301, EDAM:data_1086, EDAM:format_1196, EDAM:format_1199,
+    EDAM:format_3475, EDAM:format_3508, EDAM:format_3604
+X-EDAM-Topic: http://edamontology.org/topic_0780 (Plant biology),
+    http://edamontology.org/topic_0154 (Small molecules),
+    http://edamontology.org/topic_2258 (Cheminformatics),
+    http://edamontology.org/topic_3293 (Phylogenetics),
+    http://edamontology.org/topic_0637 (Taxonomy),
+    http://edamontology.org/topic_3077 (Data acquisition)
+X-EDAM-Operation: http://edamontology.org/operation_0224 (Query and retrieval),
+    http://edamontology.org/operation_2422 (Data retrieval),
+    http://edamontology.org/operation_2990 (Classification),
+    http://edamontology.org/operation_0324 (Phylogenetic analysis),
+    http://edamontology.org/operation_0567 (Phylogenetic tree visualisation),
+    http://edamontology.org/operation_0337 (Visualisation),
+    http://edamontology.org/operation_1812 (Data parsing)
+X-EDAM-Data: http://edamontology.org/data_0872 (Phylogenetic tree),
+    http://edamontology.org/data_3272 (Species tree),
+    http://edamontology.org/data_1872 (Taxonomic classification),
+    http://edamontology.org/data_1868 (Taxon),
+    http://edamontology.org/data_3028 (Taxonomy),
+    http://edamontology.org/data_1463 (Small molecule structure),
+    http://edamontology.org/data_2301 (SMILES string),
+    http://edamontology.org/data_1086 (Compound identifier)
+X-EDAM-Format: http://edamontology.org/format_1196 (SMILES),
+    http://edamontology.org/format_1199 (InChIKey),
+    http://edamontology.org/format_3475 (TSV),
+    http://edamontology.org/format_3508 (PDF),
+    http://edamontology.org/format_3604 (SVG)

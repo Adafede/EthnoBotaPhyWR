@@ -15,4 +15,13 @@ A data frame with the retrieved taxon names and ranks.
 \description{
 Retrieves all subtaxa and their ranks for a given Wikidata taxon QID.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_0637} (Taxonomy)
+\item Operation: \verb{http://edamontology.org/operation_2422} (Data retrieval)
+\item Data: \verb{http://edamontology.org/data_1868} (Taxon)
+}
+}
+
 \keyword{internal}

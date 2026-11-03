@@ -16,4 +16,13 @@ A data frame with the retrieved taxon identifiers and OTT IDs.
 Retrieves the Open Tree of Life identifiers for all subtaxa of the given
 Wikidata taxon.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_3293} (Phylogenetics)
+\item Operation: \verb{http://edamontology.org/operation_2422} (Data retrieval)
+\item Data: \verb{http://edamontology.org/data_1868} (Taxon)
+}
+}
+
 \keyword{internal}

@@ -13,7 +13,17 @@ normalize_ott_ids(x)
 A character vector with the normalized OTT IDs.
 }
 \description{
-Converts OTT IDs to a consistent character representation while preserving
-missing values as \code{NA}.
+Converts Open Tree of Life (OTT) identifiers to a consistent character
+representation while preserving missing values as \code{NA_character_}.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_0637} (Taxonomy)
+\item Operation: \verb{http://edamontology.org/operation_1812} (Data parsing)
+\item Data: \verb{http://edamontology.org/data_0842} (Identifier),
+\verb{http://edamontology.org/data_1868} (Taxon)
+}
+}
+
 \keyword{internal}

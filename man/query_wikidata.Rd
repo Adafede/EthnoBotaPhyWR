@@ -25,7 +25,8 @@ from character columns (default TRUE).}
 
 \item{agent}{Character. User-Agent header string.}
 
-\item{timeout}{Integer. Total request timeout in seconds (default 3600).}
+\item{timeout}{Integer. Total request timeout in seconds
+(default 3600).}
 
 \item{fallback}{Logical. Retry with QLever Wikidata endpoint on failure.}
 
@@ -42,7 +43,7 @@ such as QLever that do not accept GET requests.}
 A \code{data.table}.
 }
 \description{
-Performs a SPARQL query and returns a data.table. Optimised for very large
+Performs a SPARQL query and returns a \code{data.table}. Optimised for very large
 result sets (millions of rows):
 \itemize{
 \item Requests \strong{CSV} (no IRI angle-bracket decoration, smallest text format)
@@ -54,4 +55,12 @@ during download)
 
 Falls back to JSON for endpoints that do not support CSV.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_3077} (Data acquisition)
+\item Operation: \verb{http://edamontology.org/operation_2422} (Data retrieval)
+}
+}
+
 \keyword{internal}

@@ -12,17 +12,27 @@ get_npclassifier_taxonomy(smiles, timeout = 30)
 \item{timeout}{Numeric. Timeout in seconds for each API request.}
 }
 \value{
-A list of one-row tibbles with columns: query, pathway, superclass,
-class, glycoside.
+A list of one-row data frames with columns: \code{query}, \code{pathway},
+\code{superclass}, \code{class}, \code{glycoside}.
 }
 \description{
 Classifies a vector or list of SMILES strings using the NPClassifier API.
-Returns a data.frame with classification results for each SMILES.
+Returns a list of one-row data frames with classification results for each
+SMILES string.
 }
 \details{
-For each SMILES, this function queries the NPClassifier API and parses the
-result. If the API call fails, NA values are returned for that entry.
+Queries the NPClassifier API via a pooled \code{curl} handle and parses the JSON
+payload. If an API call fails, \code{NA} values are returned for that entry.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_2258} (Cheminformatics)
+\item Operation: \verb{http://edamontology.org/operation_2990} (Classification)
+\item Format: \verb{http://edamontology.org/format_1196} (SMILES)
+}
+}
+
 \examples{
 # get_npclassifier_taxonomy(c("CCO", "CCN"))
 }

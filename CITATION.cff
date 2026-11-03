@@ -2,7 +2,7 @@
 # CITATION.cff file created with {cffr} R package
 # See also: https://docs.ropensci.org/cffr/
 # ------------------------------------------------
-
+ 
 cff-version: 1.2.0
 message: 'To cite package "EthnoBotaPhyWR" in publications use:'
 type: software
@@ -46,6 +46,35 @@ keywords:
 - Phytochemistry
 - Taxonomy
 - Wikidata
+- naturalProducts
+- chemotaxonomy
+- phylogenetics
+- EDAM:topic_0780
+- EDAM:topic_0154
+- EDAM:topic_2258
+- EDAM:topic_3293
+- EDAM:topic_0637
+- EDAM:topic_3077
+- EDAM:operation_0224
+- EDAM:operation_2422
+- EDAM:operation_2990
+- EDAM:operation_0324
+- EDAM:operation_0567
+- EDAM:operation_0337
+- EDAM:operation_1812
+- EDAM:data_0872
+- EDAM:data_3272
+- EDAM:data_1872
+- EDAM:data_1868
+- EDAM:data_3028
+- EDAM:data_1463
+- EDAM:data_2301
+- EDAM:data_1086
+- EDAM:format_1196
+- EDAM:format_1199
+- EDAM:format_3475
+- EDAM:format_3508
+- EDAM:format_3604
 - ethnobotany
 - phytochemistry
 - r
@@ -217,19 +246,6 @@ references:
   doi: 10.32614/CRAN.package.data.table
   version: '>= 1.15.0'
 - type: software
-  title: forcats
-  abstract: 'forcats: Tools for Working with Categorical Variables (Factors)'
-  notes: Imports
-  url: https://forcats.tidyverse.org/
-  repository: https://CRAN.R-project.org/package=forcats
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@posit.co
-  year: '2026'
-  doi: 10.32614/CRAN.package.forcats
-  version: '>= 0.5.4'
-- type: software
   title: ggplot2
   abstract: 'ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics'
   notes: Imports
@@ -271,24 +287,6 @@ references:
   doi: 10.32614/CRAN.package.ggplot2
   version: '>= 4.0.3'
 - type: software
-  title: ggtext
-  abstract: 'ggtext: Improved Text Rendering Support for ''ggplot2'''
-  notes: Imports
-  url: https://wilkelab.org/ggtext/
-  repository: https://CRAN.R-project.org/package=ggtext
-  authors:
-  - family-names: Wilke
-    given-names: Claus O.
-    email: wilke@austin.utexas.edu
-    orcid: https://orcid.org/0000-0002-7470-9261
-  - family-names: Wiernik
-    given-names: Brenton M.
-    email: brenton@wiernik.org
-    orcid: https://orcid.org/0000-0001-9560-6336
-  year: '2026'
-  doi: 10.32614/CRAN.package.ggtext
-  version: '>= 0.1.2'
-- type: software
   title: ggtree
   abstract: 'ggtree: an R package for visualization of tree and annotation data'
   notes: Imports
@@ -327,19 +325,6 @@ references:
     orcid: https://orcid.org/0000-0002-6485-8781
   year: '2026'
   version: '>= 1.20.1'
-- type: software
-  title: httr2
-  abstract: 'httr2: Perform HTTP Requests and Process the Responses'
-  notes: Imports
-  url: https://httr2.r-lib.org
-  repository: https://CRAN.R-project.org/package=httr2
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@posit.co
-  year: '2026'
-  doi: 10.32614/CRAN.package.httr2
-  version: '>= 1.0.0'
 - type: software
   title: jsonlite
   abstract: 'jsonlite: A Simple and Robust JSON Parser and Generator for R'
@@ -387,64 +372,6 @@ references:
   doi: 10.32614/CRAN.package.logger
   version: '>= 0.4.2'
 - type: software
-  title: openssl
-  abstract: 'openssl: Toolkit for Encryption, Signatures and Certificates Based on
-    OpenSSL'
-  notes: Imports
-  url: https://jeroen.r-universe.dev/openssl
-  repository: https://CRAN.R-project.org/package=openssl
-  authors:
-  - family-names: Ooms
-    given-names: Jeroen
-    email: jeroenooms@gmail.com
-    orcid: https://orcid.org/0000-0002-4035-0289
-  year: '2026'
-  doi: 10.32614/CRAN.package.openssl
-  version: '>= 2.4.2'
-- type: software
-  title: phangorn
-  abstract: 'phangorn: Phylogenetic Reconstruction and Analysis'
-  notes: Imports
-  url: https://klausvigo.github.io/phangorn/
-  repository: https://bioconductor.org/
-  authors:
-  - family-names: Schliep
-    given-names: Klaus
-    email: klaus.schliep@gmail.com
-    orcid: https://orcid.org/0000-0003-2941-0161
-  - family-names: Paradis
-    given-names: Emmanuel
-    orcid: https://orcid.org/0000-0003-3092-2199
-  - family-names: Oliveira Martins
-    given-names: Leonardo
-    name-particle: de
-    orcid: https://orcid.org/0000-0001-5247-1320
-  - family-names: Potts
-    given-names: Alastair
-  - family-names: Bardel-Kahr
-    given-names: Iris
-    orcid: https://orcid.org/0000-0002-8950-834X
-  year: '2026'
-  doi: 10.32614/CRAN.package.phangorn
-  version: '>= 2.12.1'
-- type: software
-  title: purrr
-  abstract: 'purrr: Functional Programming Tools'
-  notes: Imports
-  url: https://purrr.tidyverse.org/
-  repository: https://CRAN.R-project.org/package=purrr
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@posit.co
-    orcid: https://orcid.org/0000-0003-4757-117X
-  - family-names: Henry
-    given-names: Lionel
-    email: lionel@posit.co
-  year: '2026'
-  doi: 10.32614/CRAN.package.purrr
-  version: '>= 1.2.2'
-- type: software
   title: rotl
   abstract: 'rotl: Interface to the ''Open Tree of Life'' API'
   notes: Imports
@@ -465,55 +392,6 @@ references:
   doi: 10.32614/CRAN.package.rotl
   version: '>= 3.1.1'
 - type: software
-  title: rvest
-  abstract: 'rvest: Easily Harvest (Scrape) Web Pages'
-  notes: Imports
-  url: https://rvest.tidyverse.org/
-  repository: https://CRAN.R-project.org/package=rvest
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@posit.co
-  year: '2026'
-  doi: 10.32614/CRAN.package.rvest
-  version: '>= 1.0.5'
-- type: software
-  title: scales
-  abstract: 'scales: Scale Functions for Visualization'
-  notes: Imports
-  url: https://scales.r-lib.org
-  repository: https://CRAN.R-project.org/package=scales
-  authors:
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@posit.co
-  - family-names: Pedersen
-    given-names: Thomas Lin
-    email: thomas.pedersen@posit.co
-    orcid: https://orcid.org/0000-0002-5147-4711
-  - family-names: Seidel
-    given-names: Dana
-  year: '2026'
-  doi: 10.32614/CRAN.package.scales
-  version: '>= 1.4.0'
-- type: software
-  title: tibble
-  abstract: 'tibble: Simple Data Frames'
-  notes: Imports
-  url: https://tibble.tidyverse.org/
-  repository: https://CRAN.R-project.org/package=tibble
-  authors:
-  - family-names: Müller
-    given-names: Kirill
-    email: kirill@cynkra.com
-    orcid: https://orcid.org/0000-0002-1416-3412
-  - family-names: Wickham
-    given-names: Hadley
-    email: hadley@rstudio.com
-  year: '2026'
-  doi: 10.32614/CRAN.package.tibble
-  version: '>= 3.3.1'
-- type: software
   title: tidytable
   abstract: 'tidytable: Tidy Interface to ''data.table'''
   notes: Imports
@@ -526,20 +404,6 @@ references:
   year: '2026'
   doi: 10.32614/CRAN.package.tidytable
   version: '>= 0.11.2'
-- type: software
-  title: tidytree
-  abstract: 'tidytree: A Tidy Tool for Phylogenetic Tree Data Manipulation'
-  notes: Imports
-  url: https://yulab-smu.top/contribution-tree-data/
-  repository: https://CRAN.R-project.org/package=tidytree
-  authors:
-  - family-names: Yu
-    given-names: Guangchuang
-    email: guangchuangyu@gmail.com
-    orcid: https://orcid.org/0000-0002-6485-8781
-  year: '2026'
-  doi: 10.32614/CRAN.package.tidytree
-  version: '>= 0.4.8'
 - type: software
   title: altdoc
   abstract: 'altdoc: Package Documentation Websites with ''Quarto'', ''Docsify'',
@@ -721,3 +585,4 @@ references:
   year: '2026'
   doi: 10.32614/CRAN.package.testthat
   version: '>= 3.0.0'
+

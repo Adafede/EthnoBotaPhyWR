@@ -81,6 +81,47 @@ This function is a pipeline for data collection, merging, and reporting. It
 logs progress and statistics throughout. All side effects (file writes, logs)
 are documented inline.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topics:
+\itemize{
+\item \verb{http://edamontology.org/topic_0780} (Plant biology)
+\item \verb{http://edamontology.org/topic_0154} (Small molecules)
+\item \verb{http://edamontology.org/topic_2258} (Cheminformatics)
+\item \verb{http://edamontology.org/topic_3293} (Phylogenetics)
+\item \verb{http://edamontology.org/topic_0637} (Taxonomy)
+}
+\item Operations:
+\itemize{
+\item \verb{http://edamontology.org/operation_0224} (Query and retrieval)
+\item \verb{http://edamontology.org/operation_2422} (Data retrieval)
+\item \verb{http://edamontology.org/operation_2990} (Classification)
+\item \verb{http://edamontology.org/operation_0324} (Phylogenetic analysis)
+\item \verb{http://edamontology.org/operation_0567}
+(Phylogenetic tree visualisation)
+}
+\item Data:
+\itemize{
+\item \verb{http://edamontology.org/data_0872} (Phylogenetic tree)
+\item \verb{http://edamontology.org/data_3272} (Species tree)
+\item \verb{http://edamontology.org/data_1463} (Small molecule structure)
+\item \verb{http://edamontology.org/data_2301} (SMILES string)
+\item \verb{http://edamontology.org/data_1086} (Compound identifier)
+\item \verb{http://edamontology.org/data_1868} (Taxon)
+\item \verb{http://edamontology.org/data_1872} (Taxonomic classification)
+}
+\item Formats:
+\itemize{
+\item \verb{http://edamontology.org/format_1196} (SMILES)
+\item \verb{http://edamontology.org/format_1199} (InChIKey)
+\item \verb{http://edamontology.org/format_3475} (TSV)
+\item \verb{http://edamontology.org/format_3508} (PDF)
+\item \verb{http://edamontology.org/format_3604} (SVG)
+}
+}
+}
+
 \examples{
 NULL
 }

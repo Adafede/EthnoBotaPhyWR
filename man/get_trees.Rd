@@ -27,4 +27,14 @@ Builds the full and phytochemical trees for a collection of OTT IDs, falling
 back to placeholder trees if Open Tree requests fail or return incomplete
 data.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_3293} (Phylogenetics)
+\item Operation: \verb{http://edamontology.org/operation_0324}
+(Phylogenetic analysis)
+\item Data: \verb{http://edamontology.org/data_0872} (Phylogenetic tree)
+}
+}
+
 \keyword{internal}

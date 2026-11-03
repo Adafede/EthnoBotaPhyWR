@@ -2,19 +2,29 @@
 % Please edit documentation in R/cascade_taxon_name_to_qid.R
 \name{taxon_name_to_qid}
 \alias{taxon_name_to_qid}
-\title{Taxon name to QID}
+\title{Taxon name to Wikidata QID}
 \usage{
 taxon_name_to_qid(taxon_name)
 }
 \arguments{
-\item{taxon_name}{Taxon name}
+\item{taxon_name}{Character. Scientific name of the taxon.}
 }
 \value{
-A QID
+A character vector of matching Wikidata QIDs.
 }
 \description{
-Taxon name to QID
+Resolves a scientific taxon name (\code{wdt:P225}) to its Wikidata QID via the
+QLever Wikidata SPARQL endpoint with retry backoff.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_0637} (Taxonomy)
+\item Operation: \verb{http://edamontology.org/operation_2422} (Data retrieval)
+\item Data: \verb{http://edamontology.org/data_1868} (Taxon)
+}
+}
+
 \examples{
 \dontrun{
 taxon_name_to_qid(taxon_name = "Gentiana lutea")

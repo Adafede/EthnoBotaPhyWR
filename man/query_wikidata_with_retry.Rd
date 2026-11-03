@@ -19,4 +19,12 @@ The query result returned by \code{query_wikidata()}.
 \description{
 Runs a Wikidata query and retries transient failures such as rate limits.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_3077} (Data acquisition)
+\item Operation: \verb{http://edamontology.org/operation_2422} (Data retrieval)
+}
+}
+
 \keyword{internal}

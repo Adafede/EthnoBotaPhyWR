@@ -12,18 +12,27 @@ prepare_hierarchy(
 )
 }
 \arguments{
-\item{dataframe}{Dataframe}
+\item{dataframe}{Data.frame. Input table of classified structures.}
 
-\item{type}{Type}
+\item{type}{Character. Mode (\code{"literature"} or \code{"analysis"}).}
 
-\item{detector}{Detector}
+\item{detector}{Character. Detector parameter retained for compatibility.}
 
-\item{rescale}{Rescale}
+\item{rescale}{Logical. Rescale flag retained for compatibility.}
 }
 \value{
-A dataframe with prepared hierarchy
+A \code{tidytable} with prepared hierarchy counts.
 }
 \description{
-Prepare hierarchy
+Transforms NPClassifier pathway, superclass, and class annotations into a
+parent-child hierarchy suitable for \code{prepare_plot()}.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_2258} (Cheminformatics)
+\item Operation: \verb{http://edamontology.org/operation_2990} (Classification)
+}
+}
+
 \keyword{internal}

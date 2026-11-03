@@ -25,4 +25,14 @@ The cached or newly built tree result list.
 Returns a cached tree result when available, otherwise builds and serializes
 the tree result to an \code{.rda} dataset file on disk.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_3293} (Phylogenetics)
+\item Operation: \verb{http://edamontology.org/operation_0324}
+(Phylogenetic analysis)
+\item Data: \verb{http://edamontology.org/data_0872} (Phylogenetic tree)
+}
+}
+
 \keyword{internal}

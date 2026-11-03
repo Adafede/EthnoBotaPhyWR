@@ -7,18 +7,18 @@
 calculate_branches_values(tree, df, variable, name)
 }
 \arguments{
-\item{tree}{A phylo object (from ape package)}
+\item{tree}{A \code{phylo} object (from the \code{ape} package).}
 
-\item{df}{A data.frame containing at least a 'taxon_name' column and a column
-for the variable of interest}
+\item{df}{A \code{data.frame} containing at least a \code{taxon_name} column and a
+column for the variable of interest.}
 
-\item{variable}{Character. Name of the column in df to use for tip values}
+\item{variable}{Character. Name of the column in \code{df} to use for tip values.}
 
-\item{name}{Character. Name for the output column in the result}
+\item{name}{Character. Name for the output column in the result.}
 }
 \value{
-A data.frame with node, count, is_tip, parent_count, and the
-calculated branch value (named by 'name')
+A \code{data.frame} with \code{parent}, \code{node}, \code{label}, \code{count}, \code{is_tip},
+\code{parent_count}, and the calculated branch value (named by \code{name}).
 }
 \description{
 Calculates values for each branch (node) in a phylogenetic tree, assigning
@@ -26,6 +26,17 @@ tip values from a data frame and computing internal node values as the mean
 of descendant tips. Returns a data frame with node-level results for
 downstream analysis or plotting.
 }
+\section{EDAM}{
+
+\itemize{
+\item Topic: \verb{http://edamontology.org/topic_3293} (Phylogenetics)
+\item Operation: \verb{http://edamontology.org/operation_0324}
+(Phylogenetic analysis)
+\item Data: \verb{http://edamontology.org/data_0872} (Phylogenetic tree),
+\verb{http://edamontology.org/data_3272} (Species tree)
+}
+}
+
 \examples{
 NULL
 }

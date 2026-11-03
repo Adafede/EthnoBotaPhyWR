@@ -3,16 +3,15 @@
 ##
 ## Vendored to avoid cascade's heavy dependency tree (it pulls in
 ## cheminformatics packages like MSnbase, CAMERA, etc.). Only the
-## SPARQL query function is needed here. Dependencies (curl, data.table)
-## are declared in this package's DESCRIPTION instead of being
-## auto-installed at runtime.
+## SPARQL query function is needed here. Dependencies (curl, data.table,
+## jsonlite) are declared in this package's DESCRIPTION.
 ##
 ## Original file: R/query_wikidata.R in adafede/cascade
 
 #' @title Query a SPARQL endpoint efficiently
 #'
 #' @description
-#' Performs a SPARQL query and returns a data.table. Optimised for very large
+#' Performs a SPARQL query and returns a `data.table`. Optimised for very large
 #' result sets (millions of rows):
 #'
 #'  - Requests **CSV** (no IRI angle-bracket decoration, smallest text format)
@@ -28,7 +27,8 @@
 #'                      from character columns (default TRUE).
 #' @param endpoint      Character. SPARQL endpoint URL.
 #' @param agent         Character. User-Agent header string.
-#' @param timeout       Integer. Total request timeout in seconds (default 3600).
+#' @param timeout       Integer. Total request timeout in seconds
+#'                      (default 3600).
 #' @param fallback      Logical. Retry with QLever Wikidata endpoint on failure.
 #' @param headers       Character or NULL. Optional `Accept` header used for
 #'                      backward compatibility with older versions. If set,
@@ -39,6 +39,11 @@
 #'                      such as QLever that do not accept GET requests.
 #'
 #' @return A `data.table`.
+#'
+#' @section EDAM:
+#' - Topic: `http://edamontology.org/topic_3077` (Data acquisition)
+#' - Operation: `http://edamontology.org/operation_2422` (Data retrieval)
+#'
 #' @keywords internal
 query_wikidata <- function(
   sparql_query,
@@ -99,10 +104,9 @@ query_wikidata <- function(
       call. = FALSE
     )
   }
-  if (
-    !(is.null(headers) ||
-      (is.character(headers) && length(headers) == 1L && !is.na(headers)))
-  ) {
+  valid_headers <- is.null(headers) ||
+    (is.character(headers) && length(headers) == 1L && !is.na(headers))
+  if (!valid_headers) {
     stop(
       "`headers` must be NULL or a single non-missing character string.",
       call. = FALSE
@@ -134,13 +138,31 @@ query_wikidata <- function(
 
   # ── Helpers ─────────────────────────────────────────────────────────────────
 
-  # Build the full request URL with query param
   build_url <- function(ep) {
     sep <- if (grepl("?", ep, fixed = TRUE)) "&" else "?"
     paste0(ep, sep, "query=", curl::curl_escape(sparql_query))
   }
 
-  # Strip Wikidata entity prefix from all character columns (vectorised)
+  make_handle <- function(accept, use_post) {
+    h <- curl::new_handle()
+    hdrs <- list(
+      "Accept" = accept,
+      "Accept-Encoding" = "gzip, deflate",
+      "User-Agent" = agent
+    )
+    curl::handle_setopt(h, timeout = as.integer(timeout), followlocation = 1L)
+    if (use_post) {
+      curl::handle_setopt(
+        h,
+        post = 1L,
+        postfields = paste0("query=", curl::curl_escape(sparql_query))
+      )
+      hdrs[["Content-Type"]] <- "application/x-www-form-urlencoded"
+    }
+    curl::handle_setheaders(h, .list = hdrs)
+    h
+  }
+
   strip_wd <- function(dt) {
     wd <- "^https?://www\\.wikidata\\.org/entity/"
     char_j <- which(vapply(dt, is.character, logical(1L)))
@@ -158,35 +180,10 @@ query_wikidata <- function(
     tmp <- tempfile(fileext = ".csv")
     on.exit(unlink(tmp), add = TRUE)
 
-    h <- curl::new_handle()
-    curl::handle_setheaders(
-      h,
-      "Accept" = accept,
-      "Accept-Encoding" = "gzip, deflate", # compress transfer
-      "User-Agent" = agent
-    )
-    curl::handle_setopt(h, timeout = as.integer(timeout), followlocation = 1L)
-
-    if (use_post) {
-      curl::handle_setopt(
-        h,
-        post = 1L,
-        postfields = paste0("query=", curl::curl_escape(sparql_query))
-      )
-      curl::handle_setheaders(
-        h,
-        "Content-Type" = "application/x-www-form-urlencoded"
-      )
-      url <- ep
-    } else {
-      # Stream to disk — curl decompresses gzip transparently
-      url <- build_url(ep)
-    }
-
+    h <- make_handle(accept = accept, use_post = use_post)
+    url <- if (use_post) ep else build_url(ep)
     curl::curl_download(url, destfile = tmp, handle = h, quiet = TRUE)
 
-    # Detect if the server returned an error document instead of CSV
-    # (some endpoints return 200 + HTML error page)
     first_line <- readLines(tmp, n = 1L, warn = FALSE)
     if (length(first_line) && startsWith(trimws(first_line), "<")) {
       stop(
@@ -196,7 +193,6 @@ query_wikidata <- function(
       )
     }
 
-    # fread: C-level, multi-threaded, handles gzip natively too
     dt <- data.table::fread(
       tmp,
       sep = ",",
@@ -218,22 +214,17 @@ query_wikidata <- function(
     accept = "application/sparql-results+json",
     use_post = post
   ) {
-    req <- httr2::request(ep) |>
-      httr2::req_user_agent(agent) |>
-      httr2::req_headers(
-        Accept = accept,
-        `Accept-Encoding` = "gzip, deflate"
-      ) |>
-      httr2::req_timeout(timeout)
-
-    req <- if (use_post) {
-      req |> httr2::req_body_form(query = sparql_query)
-    } else {
-      req |> httr2::req_url_query(query = sparql_query)
+    h <- make_handle(accept = accept, use_post = use_post)
+    url <- if (use_post) ep else build_url(ep)
+    resp <- curl::curl_fetch_memory(url, handle = h)
+    if (resp$status_code >= 400L) {
+      stop("HTTP ", resp$status_code, " from ", ep, call. = FALSE)
     }
 
-    resp <- httr2::req_perform(req)
-    body <- httr2::resp_body_json(resp)
+    body <- jsonlite::fromJSON(
+      rawToChar(resp$content),
+      simplifyVector = FALSE
+    )
     col_names <- unlist(body$head$vars)
     bindings <- body$results$bindings
 
@@ -246,15 +237,13 @@ query_wikidata <- function(
       ))
     }
 
-    # Vectorised column extraction — no nested for-loops
     dt <- data.table::as.data.table(
       stats::setNames(
-        lapply(col_names, \(col) {
+        lapply(col_names, function(col) {
           vapply(
             bindings,
-            \(row) {
-              v <- row[[col]]$value
-              v %||% NA_character_
+            function(row) {
+              row[[col]]$value %||% NA_character_
             },
             character(1L)
           )
@@ -263,7 +252,6 @@ query_wikidata <- function(
       )
     )
 
-    # xsd:dateTime detection & conversion
     for (col in col_names) {
       is_datetime <- any(vapply(
         bindings,

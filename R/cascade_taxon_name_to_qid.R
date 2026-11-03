@@ -6,32 +6,49 @@
 ##
 ## Original file: R/taxon_name_to_qid.R in adafede/cascade
 
-#' Taxon name to QID
+#' @title Taxon name to Wikidata QID
+#'
+#' @description
+#' Resolves a scientific taxon name (`wdt:P225`) to its Wikidata QID via the
+#' QLever Wikidata SPARQL endpoint with retry backoff.
+#'
+#' @param taxon_name Character. Scientific name of the taxon.
+#'
+#' @return A character vector of matching Wikidata QIDs.
+#'
+#' @section EDAM:
+#' - Topic: `http://edamontology.org/topic_0637` (Taxonomy)
+#' - Operation: `http://edamontology.org/operation_2422` (Data retrieval)
+#' - Data: `http://edamontology.org/data_1868` (Taxon)
 #'
 #' @keywords internal
-#' @param taxon_name Taxon name
-#'
-#' @return A QID
 #'
 #' @examples \dontrun{
 #' taxon_name_to_qid(taxon_name = "Gentiana lutea")
 #' }
 taxon_name_to_qid <- function(taxon_name) {
-  # Fetch the SPARQL query template from remote repository
-  query_template <- "https://adafede.github.io/sparql-examples/examples/Taxa/wd_taxa_name_to_qid.rq" |>
-    readLines() |>
-    paste0(collapse = "\n")
+  if (
+    !is.character(taxon_name) || length(taxon_name) != 1L || !nzchar(taxon_name)
+  ) {
+    stop("taxon_name must be a single non-empty character string")
+  }
 
-  # Substitute the taxon name parameter
-  query <- gsub(
-    pattern = "Gentiana lutea",
-    replacement = taxon_name,
-    x = query_template,
-    fixed = FALSE
+  query <- paste0(
+    "PREFIX wdt: <http://www.wikidata.org/prop/direct/>\n",
+    "SELECT DISTINCT ?taxon WHERE {\n",
+    "  ?taxon wdt:P225 \"",
+    taxon_name,
+    "\".\n",
+    "}\n"
   )
 
-  # Execute query and extract QID
-  query_wikidata(sparql_query = query) |>
+  query_wikidata_with_retry(
+    endpoint = "https://qlever.dev/api/wikidata",
+    sparql_query = query
+  ) |>
     tidytable::pull(taxon) |>
-    gsub(pattern = "http://www.wikidata.org/entity/", replacement = "")
+    sub(
+      pattern = "^https?://www\\.wikidata\\.org/entity/",
+      replacement = ""
+    )
 }

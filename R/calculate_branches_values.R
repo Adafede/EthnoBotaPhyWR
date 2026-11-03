@@ -8,20 +8,27 @@
 #'
 #' @include normalize_ott_ids.R
 #'
-#' @param tree A phylo object (from ape package)
-#' @param df A data.frame containing at least a 'taxon_name' column and a column
-#' for the variable of interest
-#' @param variable Character. Name of the column in df to use for tip values
-#' @param name Character. Name for the output column in the result
+#' @param tree A `phylo` object (from the `ape` package).
+#' @param df A `data.frame` containing at least a `taxon_name` column and a
+#' column for the variable of interest.
+#' @param variable Character. Name of the column in `df` to use for tip values.
+#' @param name Character. Name for the output column in the result.
 #'
-#' @return A data.frame with node, count, is_tip, parent_count, and the
-#' calculated branch value (named by 'name')
+#' @return A `data.frame` with `parent`, `node`, `label`, `count`, `is_tip`,
+#' `parent_count`, and the calculated branch value (named by `name`).
+#'
+#' @section EDAM:
+#' - Topic: `http://edamontology.org/topic_3293` (Phylogenetics)
+#' - Operation: `http://edamontology.org/operation_0324`
+#'   (Phylogenetic analysis)
+#' - Data: `http://edamontology.org/data_0872` (Phylogenetic tree),
+#'   `http://edamontology.org/data_3272` (Species tree)
+#'
 #' @keywords internal
 #'
 #' @examples
 #' NULL
 calculate_branches_values <- function(tree, df, variable, name) {
-  # Validate input
   if (!inherits(tree, "phylo")) {
     stop("tree must be a phylo object")
   }
@@ -29,100 +36,121 @@ calculate_branches_values <- function(tree, df, variable, name) {
     stop("df must contain 'taxon_name' and the specified variable column")
   }
 
-  # Assign tip values
-  values <- tidytable::pull(df, !!as.name(variable))
-  values <- suppressWarnings(as.numeric(values))
+  values <- suppressWarnings(as.numeric(df[[variable]]))
   values[!is.finite(values)] <- NA_real_
+  weights <- if ("tip_weight" %in% names(df)) {
+    w <- suppressWarnings(as.numeric(df$tip_weight))
+    w[!is.finite(w) | w <= 0] <- 1
+    w
+  } else {
+    rep(1, nrow(df))
+  }
 
-  if (
-    !is.null(tree$tip_id_ott) &&
-      "taxon_id_ott" %in% names(df) &&
-      !all(is.na(normalize_ott_ids(df$taxon_id_ott)))
-  ) {
-    tip_ids <- normalize_ott_ids(tree$tip_id_ott)
+  if (!is.null(tree$tip_id_ott) && "taxon_id_ott" %in% names(df)) {
     df_ids <- normalize_ott_ids(df$taxon_id_ott)
-    matched_nodes <- integer(nrow(df))
-    matched_nodes[] <- NA_integer_
-
-    for (i in seq_len(nrow(df))) {
-      if (!is.na(df_ids[[i]])) {
-        match_idx <- match(df_ids[[i]], tip_ids)
-        if (!is.na(match_idx)) {
-          matched_nodes[[i]] <- match_idx
-        } else if ("taxon_name" %in% names(df) && !is.na(df$taxon_name[[i]])) {
-          label_match <- match(df$taxon_name[[i]], tree$tip.label)
-          if (!is.na(label_match)) {
-            matched_nodes[[i]] <- label_match
-          }
-        }
-      } else if ("taxon_name" %in% names(df) && !is.na(df$taxon_name[[i]])) {
-        label_match <- match(df$taxon_name[[i]], tree$tip.label)
-        if (!is.na(label_match)) {
-          matched_nodes[[i]] <- label_match
-        }
+    if (!all(is.na(df_ids))) {
+      tip_ids <- normalize_ott_ids(tree$tip_id_ott)
+      matched_nodes <- match(df_ids, tip_ids)
+      missing_idx <- is.na(matched_nodes)
+      if (any(missing_idx)) {
+        matched_nodes[missing_idx] <- match(
+          df$taxon_name[missing_idx],
+          tree$tip.label
+        )
       }
+      valid_match <- !is.na(matched_nodes)
+      node_values <- data.frame(
+        node = matched_nodes[valid_match],
+        count = values[valid_match],
+        weight = weights[valid_match]
+      )
+    } else {
+      node_values <- data.frame(
+        node = match(df$taxon_name, tree$tip.label),
+        count = values,
+        weight = weights
+      )
     }
-
-    valid_match <- !is.na(matched_nodes)
-    node_values <- data.frame(
-      node = matched_nodes[valid_match],
-      count = values[valid_match]
-    )
-  } else if ("taxon_name" %in% names(df)) {
+  } else {
     node_values <- data.frame(
       node = match(df$taxon_name, tree$tip.label),
-      count = values
-    )
-  } else {
-    stop(
-      "df must contain either 'taxon_id_ott' or 'taxon_name' to map tip values"
+      count = values,
+      weight = weights
     )
   }
 
-  # Internal nodes
   n_tips <- ape::Ntip(tree)
   n_nodes <- ape::Nnode(tree)
-  internal_nodes <- (n_tips + 1):(n_tips + n_nodes)
+  internal_nodes <- seq.int(n_tips + 1L, length.out = n_nodes)
 
-  # Calculate internal node values as mean of descendant tip values
-  internal_node_values <- purrr::map_dfr(
-    internal_nodes,
-    .f = function(x) {
-      descendants <- phangorn::Descendants(tree, x, type = "tips")[[1]]
-      descendant_values <- node_values$count[node_values$node %in% descendants]
-      descendant_values <- descendant_values[is.finite(descendant_values)]
-      data.frame(
-        node = x,
-        count = if (length(descendant_values) == 0L) {
-          NA_real_
-        } else {
-          base::mean(descendant_values, na.rm = TRUE)
-        }
-      )
-    }
+  partitions <- if (n_nodes > 0L) ape::prop.part(tree) else list()
+  internal_counts <- vapply(
+    partitions,
+    function(descendants) {
+      idx <- node_values$node %in% descendants
+      desc_vals <- node_values$count[idx]
+      desc_w <- node_values$weight[idx]
+      valid <- is.finite(desc_vals)
+      if (!any(valid)) {
+        NA_real_
+      } else {
+        sum(desc_vals[valid] * desc_w[valid]) / sum(desc_w[valid])
+      }
+    },
+    numeric(1L)
   )
 
-  # Combine tip and internal node values
-  node_values <- tidytable::bind_rows(node_values, internal_node_values)
+  node_values <- tidytable::bind_rows(
+    node_values[, c("node", "count")],
+    data.frame(node = internal_nodes, count = internal_counts)
+  )
 
-  # Combine with tree structure
-  tree_data <- tidytree::as_tibble(tree) |>
-    tidytable::left_join(node_values, by = "node")
+  total_nodes <- n_tips + n_nodes
+  all_nodes <- seq_len(total_nodes)
+  edge_idx <- match(all_nodes, tree$edge[, 2L])
+  parent <- tree$edge[edge_idx, 1L]
+  parent[is.na(parent)] <- all_nodes[is.na(parent)]
+
+  node_labels <- if (!is.null(tree$node.label)) {
+    as.character(tree$node.label)
+  } else {
+    rep(NA_character_, n_nodes)
+  }
+  labels <- c(as.character(tree$tip.label), node_labels)
+
+  if (!is.null(tree$edge.length)) {
+    branch_length <- tree$edge.length[edge_idx]
+    if (!is.null(tree$root.edge)) {
+      branch_length[parent == all_nodes] <- tree$root.edge
+    }
+    tree_base <- data.frame(
+      parent = as.integer(parent),
+      node = as.integer(all_nodes),
+      branch.length = as.numeric(branch_length),
+      label = labels,
+      stringsAsFactors = FALSE
+    )
+  } else {
+    tree_base <- data.frame(
+      parent = as.integer(parent),
+      node = as.integer(all_nodes),
+      label = labels,
+      stringsAsFactors = FALSE
+    )
+  }
+
+  tree_data <- tidytable::left_join(tree_base, node_values, by = "node")
   tree_data$is_tip <- tree_data$node <= n_tips
   tree_data$parent_count <- tree_data$count[match(
     tree_data$parent,
     tree_data$node
   )]
-  tree_data[[name]] <- ifelse(
+  branch_val <- ifelse(
     test = tree_data$is_tip,
     yes = tree_data$count,
     no = (tree_data$count + tree_data$parent_count) / 2
   )
-  tree_data[[name]] <- ifelse(
-    is.finite(tree_data[[name]]),
-    tree_data[[name]],
-    NA_real_
-  )
+  tree_data[[name]] <- ifelse(is.finite(branch_val), branch_val, NA_real_)
   tree_data$count <- ifelse(
     is.finite(tree_data$count),
     tree_data$count,

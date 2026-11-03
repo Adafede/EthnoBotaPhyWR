@@ -14,6 +14,11 @@
 #'
 #' @return A character scalar cache key.
 #'
+#' @section EDAM:
+#' - Topic: `http://edamontology.org/topic_3293` (Phylogenetics)
+#' - Operation: `http://edamontology.org/operation_0324`
+#'   (Phylogenetic analysis)
+#'
 #' @examples
 #' # get_trees_cache_key(
 #' #   c(1234, 5678),
@@ -86,11 +91,19 @@ get_trees_cache_key <- function(ott_ids, df_counted, taxon_name) {
 #' caching (for example `data-raw`).
 #'
 #' @return The cached or newly built tree result list.
+#'
+#' @section EDAM:
+#' - Topic: `http://edamontology.org/topic_3293` (Phylogenetics)
+#' - Operation: `http://edamontology.org/operation_0324`
+#'   (Phylogenetic analysis)
+#' - Data: `http://edamontology.org/data_0872` (Phylogenetic tree)
+#'
 #' @keywords internal
 get_trees_cached <- function(ott_ids, df_counted, taxon_name, cache_dir) {
   dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
   cache_key <- get_trees_cache_key(ott_ids, df_counted, taxon_name)
-  cache_object_name <- paste0("trees_", openssl::md5(cache_key))
+  cache_hash <- unname(tools::md5sum(bytes = charToRaw(cache_key)))
+  cache_object_name <- paste0("trees_", cache_hash)
   cache_file <- file.path(
     cache_dir,
     paste0(cache_object_name, ".rda")
@@ -136,16 +149,22 @@ get_trees_cached <- function(ott_ids, df_counted, taxon_name, cache_dir) {
 #'
 #' @return A list with the taxa missing from the full tree, the full tree
 #' object, and the phytochemical tree object.
+#'
+#' @section EDAM:
+#' - Topic: `http://edamontology.org/topic_3293` (Phylogenetics)
+#' - Operation: `http://edamontology.org/operation_0324`
+#'   (Phylogenetic analysis)
+#' - Data: `http://edamontology.org/data_0872` (Phylogenetic tree)
+#'
 #' @keywords internal
 get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
-  # Input validation
   if (!(is.numeric(ott_ids) || is.character(ott_ids))) {
     stop("ott_ids must be numeric or character (integer vector of OTT IDs)")
   }
   if (!is.data.frame(df_counted)) {
     stop("df_counted must be a data.frame")
   }
-  if (!is.character(taxon_name) || length(taxon_name) != 1) {
+  if (!is.character(taxon_name) || length(taxon_name) != 1L) {
     stop("taxon_name must be a single character string")
   }
   required_cols <- c("taxon_id_ott", "compounds_count", "ethnobotanical_count")
@@ -191,12 +210,23 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
       return(list(valid = character(), invalid = character()))
     }
 
-    ott_ids_integer <- suppressWarnings(as.integer(ott_ids_subset))
-    valid_flags <- !is.na(ott_ids_integer) & rotl::is_in_tree(ott_ids_integer)
+    ott_int <- suppressWarnings(as.integer(ott_ids_subset))
+    in_tree_flags <- tryCatch(
+      rotl::is_in_tree(ott_int[!is.na(ott_int)]),
+      error = function(e) {
+        logger::log_warn(
+          "Failed to resolve tree lineage for OTT IDs; ",
+          "keeping the original OTT IDs for tree construction."
+        )
+        rep(TRUE, sum(!is.na(ott_int)))
+      }
+    )
+    valid_flags <- !is.na(ott_int)
+    valid_flags[valid_flags] <- in_tree_flags
 
     list(
-      valid = as.character(ott_ids_integer[valid_flags]),
-      invalid = as.character(ott_ids_integer[!valid_flags])
+      valid = as.character(ott_int[valid_flags]),
+      invalid = as.character(ott_int[!valid_flags])
     )
   }
 
@@ -219,29 +249,7 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
     ))
   }
 
-  validated_ids <- validate_ott_ids(ott_ids_normalized)
-
-  ott_in_tree_tax <- tryCatch(
-    {
-      if (length(validated_ids$valid) == 0L) {
-        character()
-      } else {
-        as.character(validated_ids$valid)
-      }
-    },
-    error = function(e) {
-      logger::log_warn(
-        "Failed to resolve tree lineage for OTT IDs;",
-        "keeping the original OTT IDs for tree construction."
-      )
-      ott_ids_normalized
-    }
-  )
-
-  tree_query_ids <- unique(c(
-    ott_ids_normalized,
-    normalize_ott_ids(ott_in_tree_tax)
-  ))
+  tree_query_ids <- unique(ott_ids_normalized)
   tree_query_ids_validated <- validate_ott_ids(tree_query_ids)
 
   relabel_tree_with_names <- function(
@@ -338,18 +346,10 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
         as.character(tree$tip_id_ott)
       }
 
-      new_tip_ids <- rep(NA_character_, length(missing_labels))
-      for (i in seq_along(missing_labels)) {
-        label <- missing_labels[[i]]
-        matched_row <- fallback_lookup[
-          fallback_lookup$taxon_name == label,
-          ,
-          drop = FALSE
-        ]
-        if (nrow(matched_row) > 0L) {
-          new_tip_ids[[i]] <- matched_row$taxon_id_ott[[1L]]
-        }
-
+      new_tip_ids <- fallback_lookup$taxon_id_ott[
+        match(missing_labels, fallback_lookup$taxon_name)
+      ]
+      for (label in missing_labels) {
         tip_tree <- ape::read.tree(text = paste0("(", label, ");"))
         tree <- ape::bind.tree(tree, tip_tree, where = "root")
       }

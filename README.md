@@ -1,5 +1,3 @@
-
-
 <!-- README.md is generated from README.qmd. Please edit that file -->
 
 # EthnoBotaPhyWR <img src='https://raw.githubusercontent.com/adafede/EthnoBotaPhyWR/main/man/figures/logo.svg' align="right" height="139" />
@@ -16,9 +14,11 @@ badge](https://adafede.r-universe.dev/EthnoBotaPhyWR/badges/version.png)](https:
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.TODO.svg)](https://doi.org/10.5281/zenodo.TODO)
 <!-- badges: end -->
 
-**EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*,
-*Wikidata* and *R* <span class="smallcaps">(maybe you can also find the
-*bot* of *robot*)</span> It should be pronounced “Ethnobota Fever”.
+**EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and
+*R*
+<span class="smallcaps">(maybe you can also find the
+*bot* of *robot*)</span> It
+should be pronounced "Ethnobota Fever".
 
 ## Requirements
 
@@ -37,30 +37,28 @@ Or simply use the included orchids datasets for analysis.
 
 **EthnoBotaPhyWR** provides:
 
-- **Built-in datasets** for *Orchidaceae* (3,055 compounds + 419
-  ethnobotanical uses + pre-computed Open Tree of Life `phylo` caches)
-- **Bundled Newick & iTOL v6 files** (`inst/extdata/itol/`) for
-  immediate interactive exploration on [iTOL](https://itol.embl.de)
-- **Publication & interactive tree bundles**: every run exports vector
-  `.svg`, journal-ready vector `.pdf`, and self-contained interactive
-  `.html` (`ggiraph` with pan/zoom, hover tooltips, and a live taxon
-  search bar), including both a clade-collapsed rectangular overview
-  (`▲` for unstudied sister clades) and an uncollapsed circular (`fan`)
-  supplementary overview
-- **Log-scaled compound bars & hierarchical legend**: bar widths scale
-  by $\log(1 + n)$ with exact compound counts printed at each bar tip
-  and a 6-column hierarchical pathway/superclass legend (`[Pathway]` + 5
-  `microshades` superclasses per row)
+- **Built-in datasets** for *Orchidaceae* (3,055 compounds + 419 ethnobotanical
+  uses + pre-computed Open Tree of Life `phylo` caches)
+- **Bundled Newick & iTOL v6 files** (`inst/extdata/itol/`) for immediate
+  interactive exploration on [iTOL](https://itol.embl.de)
+- **Publication & interactive tree bundles**: every run exports vector `.svg`,
+  journal-ready vector `.pdf`, and self-contained interactive `.html` (`ggiraph`
+  with pan/zoom, hover tooltips, and a live taxon search bar), including both a
+  clade-collapsed rectangular overview (`▲` for unstudied sister clades) and an
+  uncollapsed circular (`fan`) supplementary overview
+- **Log-scaled compound bars & hierarchical legend**: bar widths scale by
+  $\log(1 + n)$ with exact compound counts printed at each bar tip and a
+  6-column hierarchical pathway/superclass legend (`[Pathway]` + 5 `microshades`
+  superclasses per row)
 - **Phylogenetic integration** via Open Tree of Life (`rotl`)
 - **Phytochemical analysis** with NPClassifier taxonomy
 - **Data federation** from Wikidata (QLever), LOTUS, and local tables
 
 ## Installation
 
-As the package is not (yet) available on CRAN, you will need to install
-with:
+As the package is not (yet) available on CRAN, you will need to install with:
 
-``` r
+```r
 install.packages(
   "EthnoBotaPhyWR",
   repos = c(
@@ -73,14 +71,14 @@ install.packages(
 ```
 
 Once installed, you are ready to go through our
-[documentation](https://adafede.github.io/EthnoBotaPhyWR/articles), with
-the major steps detailed.
+[documentation](https://adafede.github.io/EthnoBotaPhyWR/articles), with the
+major steps detailed.
 
 ## Quick Start
 
 ### Load included datasets
 
-``` r
+```r
 library(EthnoBotaPhyWR)
 
 # Phytochemical data with SMILES and classification
@@ -103,34 +101,31 @@ list.files(itol_dir)
 ### Interactive Exploration on iTOL (Interactive Tree Of Life)
 
 Both the pre-bundled *Orchidaceae* files
-(`system.file("extdata", "itol", package = "EthnoBotaPhyWR")`) and the
-files generated in `<dirname(export_table_counts)>/itol/` when running
+(`system.file("extdata", "itol", package = "EthnoBotaPhyWR")`) and the files
+generated in `<dirname(export_table_counts)>/itol/` when running
 `ethnobotafever_tree()` on any plant family can be explored on
 [iTOL](https://itol.embl.de):
 
-1.  Open <https://itol.embl.de/upload.cgi> and upload one of the `.tre`
-    Newick files:
-    - `<Taxon>_full_genera_tree.tre` (all genera in the family)
-    - `<Taxon>_phyto_genera_tree.tre` (genera with reported compounds or
-      uses)
-    - `<Taxon>_phyto_species_tree.tre` (species-level tree for major
-      genera)
-2.  Once the tree opens in the iTOL viewer, **drag and drop** the three
-    companion `.txt` annotation files directly onto the browser canvas:
-    - `*_itol_ethnobotany.txt` (`DATASET_GRADIENT`: $\log_{10}$
-      ethnobotanical species count)
-    - `*_itol_species_richness.txt` (`DATASET_SIMPLEBAR`: known species
-      count per taxon)
-    - `*_itol_compounds_multibar.txt` (`DATASET_MULTIBAR`: stacked
-      compound superclass counts colored with the exact
-      `cascade`/`microshades` palette)
-3.  Use iTOL’s built-in controls to search taxa, dynamically collapse or
-    expand clades, re-root, and switch between rectangular, circular,
-    and unrooted layouts.
+1. Open <https://itol.embl.de/upload.cgi> and upload one of the `.tre` Newick
+   files:
+   - `<Taxon>_full_genera_tree.tre` (all genera in the family)
+   - `<Taxon>_phyto_genera_tree.tre` (genera with reported compounds or uses)
+   - `<Taxon>_phyto_species_tree.tre` (species-level tree for major genera)
+2. Once the tree opens in the iTOL viewer, **drag and drop** the three companion
+   `.txt` annotation files directly onto the browser canvas:
+   - `*_itol_ethnobotany.txt` (`DATASET_GRADIENT`: $\log_{10}$ ethnobotanical
+     species count)
+   - `*_itol_species_richness.txt` (`DATASET_SIMPLEBAR`: known species count per
+     taxon)
+   - `*_itol_compounds_multibar.txt` (`DATASET_MULTIBAR`: stacked compound
+     superclass counts colored with the exact `cascade`/`microshades` palette)
+3. Use iTOL's built-in controls to search taxa, dynamically collapse or expand
+   clades, re-root, and switch between rectangular, circular, and unrooted
+   layouts.
 
 ### Analyze your own family
 
-``` r
+```r
 # Get data for any plant family (requires Wikidata)
 result <- ethnobotafever_tree(
   taxon_name = "Orchidaceae",
@@ -168,31 +163,31 @@ result <- ethnobotafever_tree(
 
 ## Additional software credits
 
-| Package | Version | Citation |
-|:---|:---|:---|
-| ape | 5.8.1 | Paradis and Schliep (2019) |
-| base | 4.6.2 | R Core Team (2026a) |
-| BiocManager | 1.30.27 | Morgan and Ramos (2025) |
-| BiocVersion | 3.23.1 | Morgan (2025) |
-| curl | 8.1.0 | Ooms (2026) |
-| data.table | 1.18.6.1 | Barrett et al. (2026) |
-| EthnoBotaPhyWR | 0.0.0.9001 | Rutz (2026) |
-| ggiraph | 0.9.6 | Gohel and Skintzos (2026) |
-| ggtree | 4.2.0 | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022) |
-| ggtreeExtra | 1.22.1 | Xu et al. (2021); Yu (2022b) |
-| grid | 4.6.2 | R Core Team (2026b) |
-| gt | 1.4.0 | Iannone et al. (2026) |
-| htmlwidgets | 1.6.4 | Vaidyanathan et al. (2023) |
-| khroma | 1.17.0 | Frerebeau (2025) |
-| knitr | 1.52 | Xie (2014); Xie (2015); Xie (2026) |
-| logger | 0.4.3 | Daróczi and Wickham (2026) |
-| rmarkdown | 2.32 | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026) |
-| rotl | 3.1.1 | Michonneau et al. (2016); OpenTreeOfLife et al. (2019) |
-| spelling | 2.3.2 | Ooms and Hester (2025) |
-| testthat | 3.3.2 | Wickham (2011) |
-| tidytable | 0.11.2 | Fairbanks (2024) |
-| tidyverse | 2.0.0 | Wickham et al. (2019) |
-| tools | 4.6.2 | R Core Team (2026c) |
+  | Package        | Version    | Citation                                                                    |
+  | :---           | :---       | :---                                                                        |
+  | ape            | 5.8.1      | Paradis and Schliep (2019)                                                  |
+  | base           | 4.6.2      | R Core Team (2026a)                                                         |
+  | BiocManager    | 1.30.27    | Morgan and Ramos (2025)                                                     |
+  | BiocVersion    | 3.23.1     | Morgan (2025)                                                               |
+  | curl           | 8.1.0      | Ooms (2026)                                                                 |
+  | data.table     | 1.18.6.1   | Barrett et al. (2026)                                                       |
+  | EthnoBotaPhyWR | 0.0.0.9001 | Rutz (2026)                                                                 |
+  | ggiraph        | 0.9.6      | Gohel and Skintzos (2026)                                                   |
+  | ggtree         | 4.2.0      | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022) |
+  | ggtreeExtra    | 1.22.1     | Xu et al. (2021); Yu (2022b)                                                |
+  | grid           | 4.6.2      | R Core Team (2026b)                                                         |
+  | gt             | 1.4.0      | Iannone et al. (2026)                                                       |
+  | htmlwidgets    | 1.6.4      | Vaidyanathan et al. (2023)                                                  |
+  | khroma         | 1.17.0     | Frerebeau (2025)                                                            |
+  | knitr          | 1.52       | Xie (2014); Xie (2015); Xie (2026)                                          |
+  | logger         | 0.4.3      | Daróczi and Wickham (2026)                                                  |
+  | rmarkdown      | 2.32       | Xie et al. (2018); Xie et al. (2020); Allaire et al. (2026)                 |
+  | rotl           | 3.1.1      | Michonneau et al. (2016); OpenTreeOfLife et al. (2019)                      |
+  | spelling       | 2.3.2      | Ooms and Hester (2025)                                                      |
+  | testthat       | 3.3.2      | Wickham (2011)                                                              |
+  | tidytable      | 0.11.2     | Fairbanks (2024)                                                            |
+  | tidyverse      | 2.0.0      | Wickham et al. (2019)                                                       |
+  | tools          | 4.6.2      | R Core Team (2026c)                                                         |
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 

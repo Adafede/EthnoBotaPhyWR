@@ -53,6 +53,9 @@
 ^graphify-out/
 ^grateful-refs\.bib$
 ^inst/_targets$
+^man/figures/.*\.(html|pdf)$
+^man/figures/.*_circular_si\.svg$
+^man/figures/.*_files$
 ^pkgdown$
 ^prek[.]toml$
 ^renv$
@@ -63,7 +66,4 @@
 ^vignettes/articles$
 ^vignettes/articles/*_files$
 ^vignettes/articles/\.quarto$
-^man/figures/.*\.(html|pdf)$
-^man/figures/.*_circular_si\.svg$
-^man/figures/.*_files$
 _\.new\.png$

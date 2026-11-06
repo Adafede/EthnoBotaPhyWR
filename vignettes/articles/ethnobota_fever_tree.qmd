@@ -268,17 +268,33 @@ results$df_taxa_known_sub |>
   gt::opt_interactive()
 ```
 
-Second, tree-based visualizations (each exported simultaneously as `.svg`, publication-ready vector `.pdf`, and a self-contained interactive `.html` widget with a live taxon search bar, hover tooltips, and pan/zoom):
+Second, tree-based visualizations (each exported simultaneously as `.svg`,
+publication-ready vector `.pdf`, and a self-contained interactive `.html` widget
+with a live taxon search bar, hover tooltips, and pan/zoom):
 
-- **Clade-collapsed rectangular genus overview** (@fig-1): displays all active genera individually (`●`, italic labels) while collapsing purely unstudied clades and polytomies into summary rows (`▲`, upright labels showing `(+N genera)`), preserving exact tip-weighted branch averages.
-- **Uncollapsed circular (`fan`) supplementary genus overview** (`tree_orchids_full_circular_si.{svg,pdf,html}`, @fig-1b): displays all 1,272 genera without collapsing for supplementary materials.
-- **Phytochemical & ethnobotanical genus tree** (@fig-2): restricted to genera with reported compounds or ethnobotanical uses.
-- **Species-level phytochemical tree** (@fig-3): displays species within the most widely investigated genera, highlighting coverage gaps even within well-studied genera.
+- **Clade-collapsed rectangular genus overview** (@fig-1): displays all active
+  genera individually (`●`, italic labels) while collapsing purely unstudied
+  clades and polytomies into summary rows (`▲`, upright labels showing
+  `(+N genera)`), preserving exact tip-weighted branch averages.
+- **Uncollapsed circular (`fan`) supplementary genus overview**
+  (`tree_orchids_full_circular_si.{svg,pdf,html}`, @fig-1b): displays all 1,272
+  genera without collapsing for supplementary materials.
+- **Phytochemical & ethnobotanical genus tree** (@fig-2): restricted to genera
+  with reported compounds or ethnobotanical uses.
+- **Species-level phytochemical tree** (@fig-3): displays species within the
+  most widely investigated genera, highlighting coverage gaps even within
+  well-studied genera.
 
 In all trees:
 
-- **Compound bar scale & counts**: total bar length scales with $\log(1 + \text{compounds})$ (with a reference log-scale axis at the top of the bar column and the exact integer compound count printed at the right tip of each bar), while segments inside each bar preserve the exact within-taxon superclass proportions.
-- **Hierarchical 6-column legend**: each row corresponds to one NPClassifier chemical pathway (`[Pathway]` in column 1 followed by its 5 `microshades` subclasses ordered from darkest to lightest across columns 2–6).
+- **Compound bar scale & counts**: total bar length scales with
+  $\log(1 + \text{compounds})$ (with a reference log-scale axis at the top of
+  the bar column and the exact integer compound count printed at the right tip
+  of each bar), while segments inside each bar preserve the exact within-taxon
+  superclass proportions.
+- **Hierarchical 6-column legend**: each row corresponds to one NPClassifier
+  chemical pathway (`[Pathway]` in column 1 followed by its 5 `microshades`
+  subclasses ordered from darkest to lightest across columns 2--6).
 
 ![Clade-collapsed genus overview tree](../../man/figures/tree_orchids_full.svg){#fig-1 width=100%}
 
@@ -290,7 +306,10 @@ In all trees:
 
 ### Using the Exported Newick Trees & Annotations on iTOL
 
-Running `ethnobotafever_tree()` automatically writes Newick `.tre` trees and official iTOL v6 annotation files to `file.path(dirname(export_table_counts), "itol")`. For *Orchidaceae*, these files are also shipped inside the package and can be located with:
+Running `ethnobotafever_tree()` automatically writes Newick `.tre` trees and
+official iTOL v6 annotation files to
+`file.path(dirname(export_table_counts), "itol")`. For *Orchidaceae*, these
+files are also shipped inside the package and can be located with:
 
 ```{r}
 #| label: itol-files
@@ -299,14 +318,22 @@ itol_dir <- system.file("extdata", "itol", package = "EthnoBotaPhyWR")
 list.files(itol_dir)
 ```
 
-To explore any of the three trees (`*_full_genera`, `*_phyto_genera`, or `*_phyto_species`) interactively on [iTOL (Interactive Tree Of Life)](https://itol.embl.de):
+To explore any of the three trees (`*_full_genera`, `*_phyto_genera`, or
+`*_phyto_species`) interactively on [iTOL (Interactive Tree Of
+Life)](https://itol.embl.de):
 
-1. Go to <https://itol.embl.de/upload.cgi> and upload the `*_tree.tre` Newick file.
-2. Open the uploaded tree and **drag and drop** its three companion `.txt` files directly onto the iTOL tree canvas:
-   - `*_itol_ethnobotany.txt` (`DATASET_GRADIENT` — $\log_{10}$ ethnobotanical species richness)
-   - `*_itol_species_richness.txt` (`DATASET_SIMPLEBAR` — total known species per taxon)
-   - `*_itol_compounds_multibar.txt` (`DATASET_MULTIBAR` — stacked compound superclass counts with matching `microshades` hex colors)
-3. In the iTOL control panel (**Datasets** tab), toggle datasets on/off, search any taxon, or click any internal node to collapse, expand, or prune clades.
+1. Go to <https://itol.embl.de/upload.cgi> and upload the `*_tree.tre` Newick
+   file.
+2. Open the uploaded tree and **drag and drop** its three companion `.txt` files
+   directly onto the iTOL tree canvas:
+   - `*_itol_ethnobotany.txt` (`DATASET_GRADIENT` --- $\log_{10}$ ethnobotanical
+     species richness)
+   - `*_itol_species_richness.txt` (`DATASET_SIMPLEBAR` --- total known species
+     per taxon)
+   - `*_itol_compounds_multibar.txt` (`DATASET_MULTIBAR` --- stacked compound
+     superclass counts with matching `microshades` hex colors)
+3. In the iTOL control panel (**Datasets** tab), toggle datasets on/off, search
+   any taxon, or click any internal node to collapse, expand, or prune clades.
 
 ## Logs
 

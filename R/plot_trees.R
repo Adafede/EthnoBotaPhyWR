@@ -2,12 +2,12 @@
 #'
 #' @description
 #' Plots phylogenetic trees with ethnobotanical and phytochemical overlays.
-#' Builds both a clade-collapsed rectangular overview tree and an uncollapsed
-#' circular (`fan`) supplementary overview tree, scales compound bars
-#' proportionally to log-total compound richness, formats a 6-column
-#' hierarchical pathway/superclass legend (5 shades per pathway row), and
-#' supports static vector (SVG/PDF), interactive HTML (`ggiraph`), and iTOL
-#' exports.
+#' Uses Grafen-calibrated branch lengths with Felsenstein pruning ML ancestral
+#' state reconstruction (`method = "phylo"`), highlights statistically enriched
+#' ethnobotanical clades (`is_hot_node`, FDR `q < 0.05`) with red
+#' diamond markers, scales tip points by `log10` species richness and
+#' compound bars by `log(1 + n)`, and exports static vector (SVG/PDF),
+#' interactive HTML (`ggiraph`), and iTOL v6 files.
 #'
 #' @param taxa_not_in_tree Data.frame. Taxa that are absent from the tree and
 #' should be shown in the orphan panel.
@@ -135,17 +135,11 @@ plot_trees <- function(
 
   scale_tip_sizes <- function(counts) {
     counts <- suppressWarnings(as.numeric(counts))
-    counts[!is.finite(counts)] <- 1
-    counts <- pmax(1, counts)
+    counts[!is.finite(counts) | counts < 1] <- 1
     if (length(counts) == 0L) {
       return(numeric(0))
     }
-    log_counts <- log1p(counts)
-    max_log <- max(log_counts, na.rm = TRUE)
-    if (!is.finite(max_log) || max_log <= 0) {
-      return(rep(1.8, length(counts)))
-    }
-    1.8 + (log_counts / max_log) * (5.4 - 1.8)
+    log10(counts)
   }
 
   scale_fruit_values_by_taxon <- function(df_cls, df_cnt) {
@@ -372,13 +366,35 @@ plot_trees <- function(
       cand
     }
 
+    postorder_subtrees <- function(tr) {
+      n_t <- length(tr$tip.label)
+      n_i <- tr$Nnode
+      if (n_i <= 0L) {
+        return(list())
+      }
+      tr_p <- tryCatch(
+        ape::reorder.phylo(tr, "postorder"),
+        error = function(e) tr
+      )
+      desc_list <- vector("list", n_t + n_i)
+      for (k in seq_len(n_t)) {
+        desc_list[[k]] <- k
+      }
+      e_mat <- tr_p$edge
+      for (u in unique(e_mat[, 1L])) {
+        ch <- e_mat[e_mat[, 1L] == u, 2L]
+        desc_list[[u]] <- unlist(desc_list[ch], use.names = FALSE)
+      }
+      desc_list[(n_t + 1L):(n_t + n_i)]
+    }
+
     repeat {
       n_before <- length(tree$tip.label)
       if (n_before <= 3L) {
         break
       }
 
-      parts <- ape::prop.part(tree)
+      parts <- postorder_subtrees(tree)
       n_tips <- length(tree$tip.label)
       is_act <- tip_base[tree$tip.label] %in% active_set
       inact_clade <- vapply(
@@ -770,7 +786,7 @@ plot_trees <- function(
         tip_size = if (genus) {
           scale_tip_sizes(species_count)
         } else {
-          rep(2.6, length(species_count))
+          rep(0.4, length(species_count))
         },
         ethnobotanical_species_average = ifelse(
           is.finite(ethnobotanical_species_average) &
@@ -778,20 +794,41 @@ plot_trees <- function(
           ethnobotanical_species_average,
           NA_real_
         ),
-        tooltip_text = sprintf(
-          "<b>%s</b>%s<br/>Known species: %d<br/>Ethnobotanical species: %d%s",
-          ifelse(is.na(label), "", label),
-          ifelse(
-            is_collapsed & nzchar(collapsed_members),
-            paste0("<br/>Collapsed: ", collapsed_members),
-            ""
+        is_hot_node = !is_tip &
+          !is.na(hot_node_qval) &
+          is.finite(hot_node_qval) &
+          hot_node_qval < 0.05,
+        tooltip_text = ifelse(
+          is_tip,
+          sprintf(
+            paste0(
+              "<b>%s</b>%s<br/>Known species: %d<br/>",
+              "Ethnobotanical species: %d (EB rate: %.1f%%)%s"
+            ),
+            ifelse(is.na(label), "", label),
+            ifelse(
+              is_collapsed & nzchar(collapsed_members),
+              paste0("<br/>Collapsed: ", collapsed_members),
+              ""
+            ),
+            as.integer(round(species_count)),
+            as.integer(round(ethnobotanical_count)),
+            ifelse(is.finite(eb_rate), 100 * eb_rate, 0),
+            ifelse(
+              !is.na(compound_summary) & nzchar(compound_summary),
+              paste0("<br/>", compound_summary),
+              ""
+            )
           ),
-          as.integer(round(species_count)),
-          as.integer(round(ethnobotanical_count)),
-          ifelse(
-            !is.na(compound_summary) & nzchar(compound_summary),
-            paste0("<br/>", compound_summary),
-            ""
+          sprintf(
+            paste0(
+              "<b>Clade %s</b><br/>Felsenstein ML ASR: %.2f<br/>",
+              "Empirical Bayes rate: %.1f%%<br/>Hot-clade FDR q = %.3g"
+            ),
+            ifelse(is.na(label) | !nzchar(label), paste0("#", node), label),
+            ifelse(is.finite(phylo_asr), phylo_asr, 0),
+            ifelse(is.finite(eb_rate), 100 * eb_rate, 0),
+            ifelse(is.finite(hot_node_qval), hot_node_qval, 1)
           )
         )
       )
@@ -801,29 +838,34 @@ plot_trees <- function(
   logger::log_trace(
     "Calculating ethnobotanical use at different levels of the tree..."
   )
-  tree_data <- calculate_branches_values(
+  raw_bv_full <- calculate_branches_values(
     tree = tree_taxa_full,
     df = df_counted_full,
     variable = "ethnobotanical_count",
-    name = "ethnobotanical_species_average"
-  ) |>
-    enrich_tree_data(df_counted_full)
+    name = "ethnobotanical_species_average",
+    method = "phylo"
+  )
+  tree_data <- enrich_tree_data(raw_bv_full, df_counted_full)
 
-  tree_data_raw <- calculate_branches_values(
+  raw_bv_uncollapsed <- calculate_branches_values(
     tree = tree_taxa_full_raw,
     df = df_counted_plot,
     variable = "ethnobotanical_count",
-    name = "ethnobotanical_species_average"
-  ) |>
-    enrich_tree_data(df_counted_plot)
+    name = "ethnobotanical_species_average",
+    method = "phylo"
+  )
+  phylo_signal_full <- attr(raw_bv_uncollapsed, "phylo_signal")
+  tree_data_raw <- enrich_tree_data(raw_bv_uncollapsed, df_counted_plot)
 
-  tree_data_phyto <- calculate_branches_values(
+  raw_bv_phyto <- calculate_branches_values(
     tree = tree_taxa_phyto,
     df = df_counted_plot,
     variable = "ethnobotanical_count",
-    name = "ethnobotanical_species_average"
-  ) |>
-    enrich_tree_data(df_counted_plot)
+    name = "ethnobotanical_species_average",
+    method = "phylo"
+  )
+  phylo_signal_phyto <- attr(raw_bv_phyto, "phylo_signal")
+  tree_data_phyto <- enrich_tree_data(raw_bv_phyto, df_counted_plot)
 
   layout_full <- estimate_layout(tree_taxa_full, offset, genus_mode = genus)
   layout_phyto <- estimate_layout(tree_taxa_phyto, offset, genus_mode = genus)
@@ -894,6 +936,21 @@ plot_trees <- function(
     if (use_ggiraph) {
       p_base <- p_base +
         ggiraph::geom_point_interactive(
+          data = function(d) {
+            d[!d$isTip & !is.na(d$is_hot_node) & d$is_hot_node, , drop = FALSE]
+          },
+          mapping = ggplot2::aes(
+            x = x,
+            y = y,
+            tooltip = tooltip_text,
+            data_id = as.character(node)
+          ),
+          shape = 18L,
+          size = 3.2,
+          color = "#dc2626",
+          inherit.aes = FALSE
+        ) +
+        ggiraph::geom_point_interactive(
           data = function(d) d[d$isTip, , drop = FALSE],
           mapping = ggplot2::aes(
             x = x,
@@ -919,6 +976,16 @@ plot_trees <- function(
         )
     } else {
       p_base <- p_base +
+        ggplot2::geom_point(
+          data = function(d) {
+            d[!d$isTip & !is.na(d$is_hot_node) & d$is_hot_node, , drop = FALSE]
+          },
+          mapping = ggplot2::aes(x = x, y = y),
+          shape = 18L,
+          size = 3.2,
+          color = "#dc2626",
+          inherit.aes = FALSE
+        ) +
         ggtree::geom_tippoint(
           mapping = ggplot2::aes(size = tip_size, shape = tip_shape)
         ) +
@@ -943,8 +1010,9 @@ plot_trees <- function(
         name = "Known species",
         labels = label_math_10,
         range = c(1.6, 5.4),
-        breaks = c(1.8, 3.0, 5.2),
-        limits = c(1.6, 5.6)
+        breaks = c(0, 1, 2, 3),
+        limits = c(0, 4),
+        guide = if (genus) "legend" else "none"
       ) +
       base_tree_theme
 
@@ -1336,8 +1404,8 @@ plot_trees <- function(
         name = "Known species",
         labels = label_math_10,
         range = c(0.6, 2.8),
-        breaks = c(1.8, 3.0, 5.2),
-        limits = c(1.6, 5.6)
+        breaks = c(0, 1, 2, 3),
+        limits = c(0, 4)
       ) +
       base_tree_theme
 
@@ -1491,7 +1559,7 @@ plot_trees <- function(
         tip_size = if (genus) {
           scale_tip_sizes(species_count)
         } else {
-          rep(2.6, length(species_count))
+          rep(0.4, length(species_count))
         },
         ethnobotanical_species_count = pmax(
           0,
@@ -1534,8 +1602,8 @@ plot_trees <- function(
         name = "Known species",
         labels = label_math_10,
         range = c(1.6, 5.4),
-        breaks = c(1.8, 3.0, 5.2),
-        limits = c(1.6, 5.6)
+        breaks = c(0, 1, 2, 3),
+        limits = c(0, 4)
       ) +
       ggplot2::geom_col(
         mapping = ggplot2::aes(x = values_plot, y = plot_label, fill = ids),
@@ -1640,7 +1708,10 @@ plot_trees <- function(
     taxa_orphan = orphan_plot_data,
     layout_full = layout_full,
     layout_circular = layout_circular,
-    layout_phyto = layout_phyto
+    layout_phyto = layout_phyto,
+    phylo_signal_full = phylo_signal_full,
+    phylo_signal_phyto = phylo_signal_phyto,
+    tree_data_phyto = tree_data_phyto
   )
 }
 

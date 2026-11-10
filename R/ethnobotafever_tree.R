@@ -40,13 +40,27 @@
 #' (for example `data-raw`).
 #' @param log_dir Character. Directory for log files.
 #'
-#' @return A list containing the rendered plots, exported tables, and the
-#' log-file path.
+#' @return A list containing the rendered plots, interactive widgets, exported
+#' tables (`df_taxa_full`, `df_taxa_ethno_counted`, `df_taxa_known_sub`), and
+#' the log-file path (`log_file`).
 #'
 #' @details
-#' This function is a pipeline for data collection, merging, and reporting. It
-#' logs progress and statistics throughout. All side effects (file writes, logs)
-#' are documented inline.
+#' Executes the full analysis pipeline:
+#' - Resolves Open Tree of Life synthetic subtrees in a single batch query,
+#'   substituting exemplar species OTT IDs (`exemplar_ott_id`) for paraphyletic
+#'   genera and matching tips by `_ott<ID>` suffix.
+#' - Computes genus-level NPClassifier superclass Shannon entropy
+#'   (`shannon_diversity`) and Hill numbers (`hill_q1`), Empirical Bayes
+#'   Beta-Binomial shrunken ethnobotanical rates (`ethnobotanical_rate_eb`),
+#'   and log-log OLS compound residuals adjusted for species richness
+#'   (`compounds_residual`).
+#' - Tests family-wide chemotaxonomic scaffold enrichment against LOTUS
+#'   (hypergeometric test with Benjamini-Hochberg FDR and Haldane-Anscombe
+#'   `log2` odds ratio) and ethnobotanical-phytochemical association across
+#'   genera (Fisher's exact test).
+#' - Computes Grafen branch lengths, Felsenstein pruning ML ancestral states,
+#'   Blomberg's `K` phylogenetic signal, and species-weighted hypergeometric
+#'   clade enrichment (`is_hot_node`).
 #'
 #' @section EDAM:
 #' - Topics:
@@ -320,17 +334,23 @@ ethnobotafever_tree <- function(
   )
   taxa_gen_ott <- taxa_gen |>
     tidytable::inner_join(taxa_ott_wd) |>
-    tidytable::mutate(taxon_id_ott = normalize_ott_ids(taxon_id_ott))
+    tidytable::mutate(taxon_id_ott = normalize_ott_ids(taxon_id_ott)) |>
+    tidytable::filter(!is.na(taxon_id_ott)) |>
+    tidytable::distinct(taxon_name, .keep_all = TRUE)
   logger::log_info("... ", nrow(taxa_gen_ott), " unique genera")
 
   taxa_spe_ott <- taxa_spe |>
     tidytable::inner_join(taxa_ott_wd) |>
-    tidytable::mutate(taxon_id_ott = normalize_ott_ids(taxon_id_ott))
+    tidytable::mutate(taxon_id_ott = normalize_ott_ids(taxon_id_ott)) |>
+    tidytable::filter(!is.na(taxon_id_ott)) |>
+    tidytable::distinct(taxon, .keep_all = TRUE)
   logger::log_info("... ", nrow(taxa_spe_ott), " unique species")
 
   taxa_var_ott <- taxa_var |>
     tidytable::inner_join(taxa_ott_wd) |>
-    tidytable::mutate(taxon_id_ott = normalize_ott_ids(taxon_id_ott))
+    tidytable::mutate(taxon_id_ott = normalize_ott_ids(taxon_id_ott)) |>
+    tidytable::filter(!is.na(taxon_id_ott)) |>
+    tidytable::distinct(taxon, .keep_all = TRUE)
   logger::log_info("... ", nrow(taxa_var_ott), " unique varieties")
 
   example_family_compounds_wd <- lapply(example_family_qids, get_compounds_wd)
@@ -512,6 +532,61 @@ ethnobotafever_tree <- function(
     paste0(widespread_connectivities, collapse = ", ")
   )
 
+  # Statistical chemotaxonomic enrichment (Hypergeometric / Haldane-Anscombe log2 OR)
+  lotus_outside <- lotus_compounds |>
+    tidytable::anti_join(taxa_compounds, by = c("taxon" = "taxon"))
+  n_fam_taxa <- length(unique(taxa_compounds$taxon))
+  n_out_taxa <- max(1L, length(unique(lotus_outside$taxon)))
+  fam_conn_genera <- taxa_compounds |>
+    tidytable::inner_join(taxa_gen) |>
+    tidytable::rename(generic_epithet = taxon_name) |>
+    tidytable::bind_rows(taxa_compounds |> tidytable::inner_join(taxa_spe)) |>
+    tidytable::bind_rows(taxa_compounds |> tidytable::inner_join(taxa_var)) |>
+    tidytable::summarize(
+      n_genera = tidytable::n_distinct(generic_epithet),
+      a_taxa = tidytable::n_distinct(taxon),
+      .by = connectivity_layer
+    )
+  out_conn_taxa <- lotus_outside |>
+    tidytable::filter(
+      connectivity_layer %in% fam_conn_genera$connectivity_layer
+    ) |>
+    tidytable::summarize(
+      b_taxa = tidytable::n_distinct(taxon),
+      .by = connectivity_layer
+    )
+  conn_enrichment <- fam_conn_genera |>
+    tidytable::left_join(out_conn_taxa, by = "connectivity_layer") |>
+    tidytable::mutate(
+      b_taxa = tidytable::replace_na(b_taxa, 0L),
+      c_taxa = pmax(0L, n_fam_taxa - a_taxa),
+      d_taxa = pmax(0L, n_out_taxa - b_taxa),
+      log2_or = log2(
+        ((a_taxa + 0.5) * (d_taxa + 0.5)) / ((b_taxa + 0.5) * (c_taxa + 0.5))
+      ),
+      p_val = stats::phyper(
+        q = a_taxa - 1L,
+        m = a_taxa + b_taxa,
+        n = c_taxa + d_taxa,
+        k = n_fam_taxa,
+        lower.tail = FALSE
+      )
+    ) |>
+    tidytable::mutate(q_val = stats::p.adjust(p_val, method = "BH")) |>
+    tidytable::arrange(-n_genera, -log2_or)
+  enriched_widespread <- conn_enrichment |>
+    tidytable::filter(
+      n_genera >= n_multiple_genera & q_val < 0.05 & log2_or > 2
+    )
+  logger::log_info(
+    "... Using hypergeometric enrichment (FDR q < 0.05, log2 OR > 2) vs LOTUS, ",
+    nrow(enriched_widespread),
+    " widespread connectivities (>= ",
+    n_multiple_genera,
+    " genera) were statistically enriched chemotaxonomic markers: ",
+    paste0(enriched_widespread$connectivity_layer, collapse = ", ")
+  )
+
   taxa_gen_ott_cpd <- taxa_gen_ott |>
     tidytable::left_join(taxa_compounds)
 
@@ -635,6 +710,27 @@ ethnobotafever_tree <- function(
     " had both"
   )
 
+  # Fisher's exact test for correlated ethnobotanical & phytochemical presence
+  tab_2x2 <- table(
+    has_ethno = taxa_ethno_counted$ethnobotanical_count >= 1L,
+    has_cpd = taxa_ethno_counted$compounds_count >= 1L
+  )
+  if (all(dim(tab_2x2) == c(2L, 2L))) {
+    ft_res <- stats::fisher.test(tab_2x2)
+    logger::log_info(
+      sprintf(
+        paste0(
+          "... Fisher's exact test for ethnobotanical-phytochemical ",
+          "enrichment across genera: OR = %.2f (95%% CI [%.2f, %.2f], p = %.3g)"
+        ),
+        unname(ft_res$estimate),
+        ft_res$conf.int[1L],
+        ft_res$conf.int[2L],
+        ft_res$p.value
+      )
+    )
+  }
+
   taxa_known <- taxa_ethno_counted |>
     tidytable::filter(
       ethnobotanical_count >= n_ethnobotanical_count_min |
@@ -644,16 +740,10 @@ ethnobotafever_tree <- function(
     tidytable::inner_join(
       taxa_spe_ott_cpd |>
         tidytable::distinct(taxon, compound_inchikey, .keep_all = TRUE) |>
-        tidytable::group_by(taxon) |>
-        tidytable::add_count(compound_inchikey, name = "compounds_count") |>
         tidytable::mutate(
-          compounds_count = ifelse(
-            test = is.na(compound_inchikey),
-            yes = 0,
-            no = compounds_count
-          )
-        ) |>
-        tidytable::ungroup(),
+          compounds_count = sum(!is.na(compound_inchikey)),
+          .by = taxon
+        ),
       by = c("taxon_name" = "generic_epithet")
     ) |>
     tidytable::left_join(
@@ -779,7 +869,131 @@ ethnobotafever_tree <- function(
     tidytable::relocate(taxon_name, .before = ids) |>
     tidytable::distinct(taxon_name, values, ids, color, .keep_all = TRUE)
 
-  taxa_ott_wd_ids <- unique(taxa_counted$taxon_id_ott)
+  # Compute genus-level Hill chemical diversity (^1D), EB shrunk medicinal rate,
+  # allometric compound residuals, and exemplar species OTT IDs for OTL resolution
+  hill_by_genus <- taxa_compounds_classes |>
+    tidytable::mutate(
+      cls_key = ifelse(
+        is.na(best_candidate_3) | !nzchar(as.character(best_candidate_3)),
+        ifelse(
+          is.na(best_candidate_2) | !nzchar(as.character(best_candidate_2)),
+          as.character(best_candidate_1),
+          as.character(best_candidate_2)
+        ),
+        as.character(best_candidate_3)
+      )
+    ) |>
+    tidytable::summarize(n_cls = tidytable::n(), .by = c(organism, cls_key)) |>
+    tidytable::mutate(p_cls = n_cls / sum(n_cls), .by = organism) |>
+    tidytable::summarize(
+      shannon_diversity = round(-sum(p_cls * log(p_cls)), 4L),
+      hill_q1 = round(exp(-sum(p_cls * log(p_cls))), 4L),
+      .by = organism
+    )
+
+  resolve_exemplar_otts <- function(spe_df) {
+    cand <- data.table::as.data.table(spe_df)[
+      !is.na(taxon_id_ott) & nzchar(taxon_id_ott),
+      utils::head(.SD, 4L),
+      by = generic_epithet
+    ]
+    if (nrow(cand) == 0L) {
+      return(data.frame(
+        taxon_name = character(0),
+        exemplar_ott_id = character(0),
+        stringsAsFactors = FALSE
+      ))
+    }
+    ids_u <- unique(suppressWarnings(as.integer(cand$taxon_id_ott)))
+    ids_u <- ids_u[!is.na(ids_u)]
+    good_ids <- tryCatch(
+      {
+        h <- curl::new_handle(timeout = 25L, followlocation = 1L)
+        curl::handle_setheaders(h, "Content-Type" = "application/json")
+        curl::handle_setopt(
+          h,
+          postfields = jsonlite::toJSON(
+            list(ott_ids = ids_u),
+            auto_unbox = TRUE
+          )
+        )
+        r1 <- curl::curl_fetch_memory(
+          "https://api.opentreeoflife.org/v3/tree_of_life/induced_subtree",
+          handle = h
+        )
+        b1 <- jsonlite::fromJSON(rawToChar(r1$content))
+        unk <- if (r1$status_code == 400L && !is.null(b1$unknown)) {
+          as.integer(sub("^ott", "", names(b1$unknown)))
+        } else {
+          integer(0)
+        }
+        ids_2 <- setdiff(ids_u, unk)
+        if (length(ids_2) >= 2L && r1$status_code == 400L) {
+          curl::handle_setopt(
+            h,
+            postfields = jsonlite::toJSON(
+              list(ott_ids = ids_2),
+              auto_unbox = TRUE
+            )
+          )
+          r2 <- curl::curl_fetch_memory(
+            "https://api.opentreeoflife.org/v3/tree_of_life/induced_subtree",
+            handle = h
+          )
+          b1 <- jsonlite::fromJSON(rawToChar(r2$content))
+        }
+        brk <- if (length(b1$broken) > 0L) {
+          as.integer(sub("^ott", "", names(b1$broken)))
+        } else {
+          integer(0)
+        }
+        setdiff(ids_2, brk)
+      },
+      error = function(e) ids_u
+    )
+    cand_ok <- cand[as.integer(taxon_id_ott) %in% good_ids][,
+      utils::head(.SD, 1L),
+      by = generic_epithet
+    ]
+    data.frame(
+      taxon_name = as.character(cand_ok$generic_epithet),
+      exemplar_ott_id = as.character(cand_ok$taxon_id_ott),
+      stringsAsFactors = FALSE
+    )
+  }
+
+  exemplar_map <- resolve_exemplar_otts(taxa_spe_ott)
+
+  k_eb <- pmax(0, as.numeric(taxa_ethno_counted$ethnobotanical_count))
+  n_eb <- pmax(1, as.numeric(taxa_ethno_counted$species_count), k_eb)
+  m_eb <- sum(k_eb) / sum(n_eb)
+  v_eb <- stats::var(k_eb / n_eb)
+  conc_eb <- if (is.finite(v_eb) && v_eb > 0 && m_eb > 0 && m_eb < 1) {
+    max(1, min(200, (m_eb * (1 - m_eb) / v_eb) - 1))
+  } else {
+    2
+  }
+  alpha_eb <- m_eb * conc_eb
+  beta_eb <- (1 - m_eb) * conc_eb
+  fit_allom <- stats::lm(
+    log10(taxa_ethno_counted$compounds_count + 1) ~
+      log10(taxa_ethno_counted$species_count + 1)
+  )
+
+  taxa_ethno_counted <- taxa_ethno_counted |>
+    tidytable::left_join(hill_by_genus, by = c("taxon_name" = "organism")) |>
+    tidytable::left_join(exemplar_map, by = "taxon_name") |>
+    tidytable::mutate(
+      ethnobotanical_rate_eb = round(
+        (k_eb + alpha_eb) / (n_eb + alpha_eb + beta_eb),
+        5L
+      ),
+      compounds_residual = round(as.numeric(stats::residuals(fit_allom)), 4L),
+      shannon_diversity = tidytable::replace_na(shannon_diversity, 0),
+      hill_q1 = tidytable::replace_na(hill_q1, 0)
+    )
+
+  taxa_ott_wd_ids <- unique(taxa_ethno_counted$taxon_id_ott)
   taxa_ott_wd_ids_sub <- unique(taxa_known_sub$taxon_id_ott)
 
   logger::log_trace("Retrieving Open Tree Taxonomy now... taking some time!")
@@ -808,6 +1022,44 @@ ethnobotafever_tree <- function(
     df_counted = taxa_ethno_counted,
     df_classes = taxa_classes
   )
+
+  sig_full <- plots_gen$phylo_signal_full
+  if (!is.null(sig_full) && is.finite(sig_full$K)) {
+    logger::log_info(
+      sprintf(
+        paste0(
+          "Phylogenetic signal across full genus tree (Blomberg's K): ",
+          "K = %.3f (permutation p = %.3f across %d contrasts)"
+        ),
+        sig_full$K,
+        sig_full$p_val,
+        sig_full$n_contrasts
+      )
+    )
+  }
+  sig_phyto <- plots_gen$phylo_signal_phyto
+  if (!is.null(sig_phyto) && is.finite(sig_phyto$K)) {
+    logger::log_info(
+      sprintf(
+        paste0(
+          "Phylogenetic signal across active phyto genus tree (Blomberg's K): ",
+          "K = %.3f (permutation p = %.3f across %d contrasts)"
+        ),
+        sig_phyto$K,
+        sig_phyto$p_val,
+        sig_phyto$n_contrasts
+      )
+    )
+  }
+  if (!is.null(plots_gen$tree_data_phyto)) {
+    hot_df <- plots_gen$tree_data_phyto
+    hot_nodes <- hot_df[!hot_df$is_tip & hot_df$is_hot_node, , drop = FALSE]
+    logger::log_info(
+      "Clade-level hypergeometric hot-node analysis identified ",
+      nrow(hot_nodes),
+      " statistically significant ethnobotanical clades (FDR q < 0.05)"
+    )
+  }
 
   plots_sub <- plot_trees(
     taxa_not_in_tree = trees_sub$taxa_not_in_tree,

@@ -4,7 +4,13 @@
 \alias{calculate_branches_values}
 \title{Calculate branches values}
 \usage{
-calculate_branches_values(tree, df, variable, name)
+calculate_branches_values(
+  tree,
+  df,
+  variable,
+  name,
+  method = c("mean", "phylo")
+)
 }
 \arguments{
 \item{tree}{A \code{phylo} object (from the \code{ape} package).}
@@ -15,16 +21,25 @@ column for the variable of interest.}
 \item{variable}{Character. Name of the column in \code{df} to use for tip values.}
 
 \item{name}{Character. Name for the output column in the result.}
+
+\item{method}{Character. Either \code{"mean"} (default, unweighted/tip-weighted
+descendant mean for backward compatibility) or \code{"phylo"} (Felsenstein pruning
+ML ancestral state reconstruction on Grafen branch lengths).}
 }
 \value{
-A \code{data.frame} with \code{parent}, \code{node}, \code{label}, \code{count}, \code{is_tip},
+A \code{data.frame} with \code{parent}, \code{node}, \code{label}, \code{count}, \code{phylo_asr},
+\code{eb_rate}, \code{hot_node_pval}, \code{hot_node_qval}, \code{is_hot_node}, \code{is_tip},
 \code{parent_count}, and the calculated branch value (named by \code{name}).
 }
 \description{
-Calculates values for each branch (node) in a phylogenetic tree, assigning
-tip values from a data frame and computing internal node values as the mean
-of descendant tips. Returns a data frame with node-level results for
-downstream analysis or plotting.
+Calculates values for each branch (node) in a phylogenetic tree. Assigns tip
+values from a data frame and computes internal node states via both weighted
+descendant means (\code{count}) and two-pass Felsenstein pruning / belief
+propagation ancestral state reconstruction (\code{phylo_asr}) on Grafen-calibrated
+branch lengths. Also computes Empirical Bayes Beta-Binomial shrunk rates
+(\code{eb_rate}), clade-level hypergeometric "hot node" enrichment p/q-values
+(\code{hot_node_pval}, \code{hot_node_qval}, \code{is_hot_node}), and Blomberg's K
+phylogenetic signal (\code{attr(result, "phylo_signal")}).
 }
 \section{EDAM}{
 

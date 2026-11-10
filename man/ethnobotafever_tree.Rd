@@ -68,8 +68,9 @@ species-level counts export.}
 \item{log_dir}{Character. Directory for log files.}
 }
 \value{
-A list containing the rendered plots, exported tables, and the
-log-file path.
+A list containing the rendered plots, interactive widgets, exported
+tables (\code{df_taxa_full}, \code{df_taxa_ethno_counted}, \code{df_taxa_known_sub}), and
+the log-file path (\code{log_file}).
 }
 \description{
 Collects and plots ethnobotanical and phytochemical data for a given taxon.
@@ -77,9 +78,24 @@ This function performs data retrieval, merging, and logging, and produces
 summary statistics and outputs for downstream analysis and visualization.
 }
 \details{
-This function is a pipeline for data collection, merging, and reporting. It
-logs progress and statistics throughout. All side effects (file writes, logs)
-are documented inline.
+Executes the full analysis pipeline:
+\itemize{
+\item Resolves Open Tree of Life synthetic subtrees in a single batch query,
+substituting exemplar species OTT IDs (\code{exemplar_ott_id}) for paraphyletic
+genera and matching tips by \verb{_ott<ID>} suffix.
+\item Computes genus-level NPClassifier superclass Shannon entropy
+(\code{shannon_diversity}) and Hill numbers (\code{hill_q1}), Empirical Bayes
+Beta-Binomial shrunken ethnobotanical rates (\code{ethnobotanical_rate_eb}),
+and log-log OLS compound residuals adjusted for species richness
+(\code{compounds_residual}).
+\item Tests family-wide chemotaxonomic scaffold enrichment against LOTUS
+(hypergeometric test with Benjamini-Hochberg FDR and Haldane-Anscombe
+\code{log2} odds ratio) and ethnobotanical-phytochemical association across
+genera (Fisher's exact test).
+\item Computes Grafen branch lengths, Felsenstein pruning ML ancestral states,
+Blomberg's \code{K} phylogenetic signal, and species-weighted hypergeometric
+clade enrichment (\code{is_hot_node}).
+}
 }
 \section{EDAM}{
 

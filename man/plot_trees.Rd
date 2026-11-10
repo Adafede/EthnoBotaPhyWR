@@ -62,12 +62,12 @@ plot, the orphan data frame, and the derived layout settings.
 }
 \description{
 Plots phylogenetic trees with ethnobotanical and phytochemical overlays.
-Builds both a clade-collapsed rectangular overview tree and an uncollapsed
-circular (\code{fan}) supplementary overview tree, scales compound bars
-proportionally to log-total compound richness, formats a 6-column
-hierarchical pathway/superclass legend (5 shades per pathway row), and
-supports static vector (SVG/PDF), interactive HTML (\code{ggiraph}), and iTOL
-exports.
+Uses Grafen-calibrated branch lengths with Felsenstein pruning ML ancestral
+state reconstruction (\code{method = "phylo"}), highlights statistically enriched
+ethnobotanical clades (\code{is_hot_node}, FDR \code{q < 0.05}) with red
+diamond markers, scales tip points by \code{log10} species richness and
+compound bars by \code{log(1 + n)}, and exports static vector (SVG/PDF),
+interactive HTML (\code{ggiraph}), and iTOL v6 files.
 }
 \section{EDAM}{
 

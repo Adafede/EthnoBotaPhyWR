@@ -50,8 +50,15 @@ Or simply use the included orchids datasets for analysis.
   $\log(1 + n)$ with exact compound counts printed at each bar tip and a
   6-column hierarchical pathway/superclass legend (`[Pathway]` + 5 `microshades`
   superclasses per row)
-- **Phylogenetic integration** via Open Tree of Life (`rotl`)
-- **Phytochemical analysis** with NPClassifier taxonomy
+- **Phylogenetic comparative methods**: batch Open Tree of Life subtree
+  resolution with exemplar species substitution for paraphyletic genera,
+  Grafen-calibrated Felsenstein pruning ML ancestral state reconstruction,
+  Blomberg's $K$ phylogenetic signal, and hypergeometric hot-clade enrichment
+  ($\text{FDR } q < 0.05$)
+- **Chemotaxonomic & diversity metrics**: NPClassifier superclass Hill diversity
+  ($^1D = \exp(H')$), Empirical Bayes Beta-Binomial ethnobotanical rates,
+  allometric species-richness compound residuals, and hypergeometric scaffold
+  enrichment against LOTUS
 - **Data federation** from Wikidata (QLever), LOTUS, and local tables
 
 ## Installation
@@ -166,7 +173,7 @@ result <- ethnobotafever_tree(
   | Package        | Version    | Citation                                                                    |
   | :---           | :---       | :---                                                                        |
   | ape            | 5.8.1      | Paradis and Schliep (2019)                                                  |
-  | base           | 4.6.2      | R Core Team (2026a)                                                         |
+  | base           | 4.6.2      | R Core Team (2026)                                                          |
   | BiocManager    | 1.30.27    | Morgan and Ramos (2025)                                                     |
   | BiocVersion    | 3.23.1     | Morgan (2025)                                                               |
   | curl           | 8.1.0      | Ooms (2026)                                                                 |
@@ -175,7 +182,6 @@ result <- ethnobotafever_tree(
   | ggiraph        | 0.9.6      | Gohel and Skintzos (2026)                                                   |
   | ggtree         | 4.2.0      | Yu et al. (2017); Yu et al. (2018); Yu (2020); Yu (2022a); Xu et al. (2022) |
   | ggtreeExtra    | 1.22.1     | Xu et al. (2021); Yu (2022b)                                                |
-  | grid           | 4.6.2      | R Core Team (2026b)                                                         |
   | gt             | 1.4.0      | Iannone et al. (2026)                                                       |
   | htmlwidgets    | 1.6.4      | Vaidyanathan et al. (2023)                                                  |
   | khroma         | 1.17.0     | Frerebeau (2025)                                                            |
@@ -187,7 +193,6 @@ result <- ethnobotafever_tree(
   | testthat       | 3.3.2      | Wickham (2011)                                                              |
   | tidytable      | 0.11.2     | Fairbanks (2024)                                                            |
   | tidyverse      | 2.0.0      | Wickham et al. (2019)                                                       |
-  | tools          | 4.6.2      | R Core Team (2026c)                                                         |
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 
@@ -307,23 +312,7 @@ Modern Phylogenetics and Evolutionary Analyses in R.” *Bioinformatics*
 
 <div id="ref-base" class="csl-entry">
 
-R Core Team. 2026a. *R: A Language and Environment for Statistical
-Computing*. R Foundation for Statistical Computing.
-<https://doi.org/10.32614/R.manuals>.
-
-</div>
-
-<div id="ref-grid" class="csl-entry">
-
-R Core Team. 2026b. *R: A Language and Environment for Statistical
-Computing*. R Foundation for Statistical Computing.
-<https://doi.org/10.32614/R.manuals>.
-
-</div>
-
-<div id="ref-tools" class="csl-entry">
-
-R Core Team. 2026c. *R: A Language and Environment for Statistical
+R Core Team. 2026. *R: A Language and Environment for Statistical
 Computing*. R Foundation for Statistical Computing.
 <https://doi.org/10.32614/R.manuals>.
 

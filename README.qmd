@@ -56,8 +56,15 @@ Or simply use the included orchids datasets for analysis.
   $\log(1 + n)$ with exact compound counts printed at each bar tip and a
   6-column hierarchical pathway/superclass legend (`[Pathway]` + 5 `microshades`
   superclasses per row)
-- **Phylogenetic integration** via Open Tree of Life (`rotl`)
-- **Phytochemical analysis** with NPClassifier taxonomy
+- **Phylogenetic comparative methods**: batch Open Tree of Life subtree
+  resolution with exemplar species substitution for paraphyletic genera,
+  Grafen-calibrated Felsenstein pruning ML ancestral state reconstruction,
+  Blomberg's $K$ phylogenetic signal, and hypergeometric hot-clade enrichment
+  ($\text{FDR } q < 0.05$)
+- **Chemotaxonomic & diversity metrics**: NPClassifier superclass Hill diversity
+  ($^1D = \exp(H')$), Empirical Bayes Beta-Binomial ethnobotanical rates,
+  allometric species-richness compound residuals, and hypergeometric scaffold
+  enrichment against LOTUS
 - **Data federation** from Wikidata (QLever), LOTUS, and local tables
 
 ## Installation

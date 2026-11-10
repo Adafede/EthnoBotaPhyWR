@@ -10,7 +10,8 @@ get_trees(ott_ids, df_counted, taxon_name, batch_delay = 0.2)
 \item{ott_ids}{Integer vector. OTT IDs to include in the tree.}
 
 \item{df_counted}{Data.frame. Data frame containing at least \code{taxon_id_ott},
-\code{compounds_count}, and \code{ethnobotanical_count} columns.}
+\code{compounds_count}, and \code{ethnobotanical_count} columns, and optionally
+\code{exemplar_ott_id}.}
 
 \item{taxon_name}{Character. Name of the focal taxon used for logging and
 fallback naming.}
@@ -23,9 +24,10 @@ A list with the taxa missing from the full tree, the full tree
 object, and the phytochemical tree object.
 }
 \description{
-Builds the full and phytochemical trees for a collection of OTT IDs, falling
-back to placeholder trees if Open Tree requests fail or return incomplete
-data.
+Builds the full and phytochemical trees for a collection of OTT IDs via the
+Open Tree of Life synthetic tree, resolving paraphyletic/broken genus nodes
+via exemplar species OTT IDs when available and matching returned Newick tips
+by their exact \verb{_ott<ID>} suffix.
 }
 \section{EDAM}{
 

@@ -21,11 +21,15 @@ prepare_hierarchy(
 \item{rescale}{Logical. Rescale flag retained for compatibility.}
 }
 \value{
-A \code{tidytable} with prepared hierarchy counts.
+A \code{tidytable} with prepared hierarchy counts (\code{parents}, \code{ids},
+\code{labels}, \code{sample}, \code{species}, \code{values}).
 }
 \description{
-Transforms NPClassifier pathway, superclass, and class annotations into a
-parent-child hierarchy suitable for \code{prepare_plot()}.
+Transforms NPClassifier pathway, superclass, and class annotations into an
+exact mass-conserving 3-level parent-child hierarchy suitable for
+\code{prepare_plot()}. Ranks top pathways and top 4 named superclasses per pathway
+by marginal abundance (with deterministic tie-breaking) and folds remaining
+superclasses into \verb{<Pathway> Other}.
 }
 \section{EDAM}{
 

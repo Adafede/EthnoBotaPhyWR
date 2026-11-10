@@ -227,7 +227,10 @@ First, tables containing different information:
 
 - An overview of the phytochemistry of the family in @tbl-1
 - An overview of the number of reported uses, compounds, and species per genus
-  within the family in @tbl-2
+  within the family in @tbl-2, along with NPClassifier superclass Shannon
+  entropy (`shannon_diversity`), Hill diversity ($^1D = \exp(H')$, `hill_q1`),
+  Empirical Bayes shrunken ethnobotanical proportion (`ethnobotanical_rate_eb`),
+  and log-log species-richness-adjusted compound residual (`compounds_residual`)
 - An overview of the species within the family for which a decent number of
   compounds or uses have been reported in @tbl-3
 
@@ -277,8 +280,8 @@ with a live taxon search bar, hover tooltips, and pan/zoom):
   clades and polytomies into summary rows (`▲`, upright labels showing
   `(+N genera)`), preserving exact tip-weighted branch averages.
 - **Uncollapsed circular (`fan`) supplementary genus overview**
-  (`tree_orchids_full_circular_si.{svg,pdf,html}`, @fig-1b): displays all 1,272
-  genera without collapsing for supplementary materials.
+  (`tree_orchids_full_circular_si.{svg,pdf,html}`, @fig-1b): displays all 847
+  placed genera without collapsing for supplementary materials.
 - **Phytochemical & ethnobotanical genus tree** (@fig-2): restricted to genera
   with reported compounds or ethnobotanical uses.
 - **Species-level phytochemical tree** (@fig-3): displays species within the
@@ -287,11 +290,18 @@ with a live taxon search bar, hover tooltips, and pan/zoom):
 
 In all trees:
 
+- **Phylogenetic ancestral state reconstruction & hot clades**: internal
+  branches are colored using Felsenstein pruning ML ancestral state
+  reconstruction on Grafen-calibrated branch lengths (`method = "phylo"`), and
+  clades significantly enriched in ethnobotanical uses (species-weighted
+  hypergeometric test, Benjamini-Hochberg $\text{FDR } q < 0.05$) are marked
+  with red diamonds (`♦`).
 - **Compound bar scale & counts**: total bar length scales with
   $\log(1 + \text{compounds})$ (with a reference log-scale axis at the top of
   the bar column and the exact integer compound count printed at the right tip
   of each bar), while segments inside each bar preserve the exact within-taxon
-  superclass proportions.
+  superclass proportions, and tip circle areas scale with $\log_{10}$ species
+  richness.
 - **Hierarchical 6-column legend**: each row corresponds to one NPClassifier
   chemical pathway (`[Pathway]` in column 1 followed by its 5 `microshades`
   subclasses ordered from darkest to lightest across columns 2--6).

@@ -76,6 +76,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -183,7 +212,8 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#ethnobotaphywr-0.0.0.9001" id="toc-ethnobotaphywr-0.0.0.9001" class="nav-link active" data-scroll-target="#ethnobotaphywr-0.0.0.9001">EthnoBotaPhyWR 0.0.0.9001</a>
   <ul class="collapse">
-  <li><a href="#new-package" id="toc-new-package" class="nav-link" data-scroll-target="#new-package">New package</a></li>
+  <li><a href="#new-features-and-algorithmic-improvements" id="toc-new-features-and-algorithmic-improvements" class="nav-link" data-scroll-target="#new-features-and-algorithmic-improvements">New features and algorithmic improvements</a></li>
+  <li><a href="#initial-release" id="toc-initial-release" class="nav-link" data-scroll-target="#initial-release">Initial release</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -196,17 +226,24 @@ ul.task-list li input[type="checkbox"] {
 <script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 <section id="ethnobotaphywr-0.0.0.9001" class="level1">
 <h1>EthnoBotaPhyWR 0.0.0.9001</h1>
-<section id="new-package" class="level2">
-<h2 class="anchored" data-anchor-id="new-package">New package</h2>
+<section id="new-features-and-algorithmic-improvements" class="level2">
+<h2 class="anchored" data-anchor-id="new-features-and-algorithmic-improvements">New features and algorithmic improvements</h2>
 <ul>
-<li>Initial development version.</li>
+<li><code>get_trees()</code> queries the Open Tree of Life v3 <code>induced_subtree</code> endpoint in a single batch request, substitutes exemplar species OTT IDs (<code>exemplar_ott_id</code>) for paraphyletic genera, matches Newick tips by exact <code>_ott&lt;ID&gt;</code> suffix, and grafts unplaced species at their congeneric MRCA.</li>
+<li><code>calculate_branches_values()</code> supports <code>method = "phylo"</code> with Grafen branch length calibration, two-pass Felsenstein pruning ML ancestral state reconstruction (<code>phylo_asr</code>), Empirical Bayes Beta-Binomial shrinkage (<code>eb_rate</code>), hypergeometric clade enrichment with Benjamini-Hochberg FDR (<code>hot_node_pval</code>, <code>hot_node_qval</code>, <code>is_hot_node</code>), and Blomberg’s <span class="math inline">\(K\)</span> phylogenetic signal with permutation testing.</li>
+<li><code>ethnobotafever_tree()</code> computes hypergeometric chemotaxonomic scaffold enrichment against LOTUS, Fisher’s exact test for ethnobotanical-phytochemical coupling across genera, NPClassifier superclass Shannon/Hill diversity (<code>shannon_diversity</code>, <code>hill_q1</code>), Empirical Bayes ethnobotanical rates (<code>ethnobotanical_rate_eb</code>), and log-log species-richness compound residuals (<code>compounds_residual</code>).</li>
+<li><code>prepare_hierarchy()</code> performs an exact mass-conserving 3-level (<code>pathway -&gt; superclass -&gt; class</code>) rollup, preserving unclassified (<code>Other</code>) and multi-label compounds without tie-breaking loss.</li>
+<li><code>plot_trees()</code> highlights statistically enriched ethnobotanical clades with red diamond markers, computes subtree summaries in <span class="math inline">\(O(N)\)</span> postorder traversal, and scales tip sizes by <span class="math inline">\(\log_{10}\)</span> species counts matching the legend breaks.</li>
+</ul>
+</section>
+<section id="initial-release" class="level2">
+<h2 class="anchored" data-anchor-id="initial-release">Initial release</h2>
+<ul>
 <li>Provides infrastructure for ethnobotanical and phytochemical data integration with Wikidata and the Open Tree of Life.</li>
 <li>Includes curated <em>Orchidaceae</em> datasets (3,055 compounds, 419 ethnobotanical uses, 1,574 compound classifications).</li>
 <li>Exports <code>ethnobotafever_tree()</code> as the main analysis pipeline function.</li>
 <li>Provides <code>get_npclassifier_taxonomy()</code> for compound classification via the NPClassifier API.</li>
 <li>Provides <code>normalize_ott_ids()</code> for OTT ID normalization.</li>
-<li>Provides <code>calculate_branches_values()</code> for phylogenetic branch value computation.</li>
-<li>Provides <code>plot_trees()</code> for phylogenetic tree visualization with ethnobotanical and phytochemical overlays.</li>
 <li>Built-in caching for phylogenetic tree construction via <code>get_trees_cached()</code>.</li>
 </ul>
 

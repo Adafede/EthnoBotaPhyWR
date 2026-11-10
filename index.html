@@ -319,8 +319,8 @@ window.Quarto = {
 <li><strong>Bundled Newick &amp; iTOL v6 files</strong> (<code>inst/extdata/itol/</code>) for immediate interactive exploration on <a href="https://itol.embl.de">iTOL</a></li>
 <li><strong>Publication &amp; interactive tree bundles</strong>: every run exports vector <code>.svg</code>, journal-ready vector <code>.pdf</code>, and self-contained interactive <code>.html</code> (<code>ggiraph</code> with pan/zoom, hover tooltips, and a live taxon search bar), including both a clade-collapsed rectangular overview (<code>▲</code> for unstudied sister clades) and an uncollapsed circular (<code>fan</code>) supplementary overview</li>
 <li><strong>Log-scaled compound bars &amp; hierarchical legend</strong>: bar widths scale by <span class="math inline">\(\log(1 + n)\)</span> with exact compound counts printed at each bar tip and a 6-column hierarchical pathway/superclass legend (<code>[Pathway]</code> + 5 <code>microshades</code> superclasses per row)</li>
-<li><strong>Phylogenetic integration</strong> via Open Tree of Life (<code>rotl</code>)</li>
-<li><strong>Phytochemical analysis</strong> with NPClassifier taxonomy</li>
+<li><strong>Phylogenetic comparative methods</strong>: batch Open Tree of Life subtree resolution with exemplar species substitution for paraphyletic genera, Grafen-calibrated Felsenstein pruning ML ancestral state reconstruction, Blomberg’s <span class="math inline">\(K\)</span> phylogenetic signal, and hypergeometric hot-clade enrichment (<span class="math inline">\(\text{FDR } q &lt; 0.05\)</span>)</li>
+<li><strong>Chemotaxonomic &amp; diversity metrics</strong>: NPClassifier superclass Hill diversity (<span class="math inline">\(^1D = \exp(H')\)</span>), Empirical Bayes Beta-Binomial ethnobotanical rates, allometric species-richness compound residuals, and hypergeometric scaffold enrichment against LOTUS</li>
 <li><strong>Data federation</strong> from Wikidata (QLever), LOTUS, and local tables</li>
 </ul>
 </section>
@@ -441,7 +441,7 @@ window.Quarto = {
 <tr class="even">
 <td style="text-align: left;">base</td>
 <td style="text-align: left;">4.6.2</td>
-<td style="text-align: left;">R Core Team (2026a)</td>
+<td style="text-align: left;">R Core Team (2026)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">BiocManager</td>
@@ -484,69 +484,59 @@ window.Quarto = {
 <td style="text-align: left;">Xu et al.&nbsp;(2021); Yu (2022b)</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">grid</td>
-<td style="text-align: left;">4.6.2</td>
-<td style="text-align: left;">R Core Team (2026b)</td>
-</tr>
-<tr class="even">
 <td style="text-align: left;">gt</td>
 <td style="text-align: left;">1.4.0</td>
 <td style="text-align: left;">Iannone et al.&nbsp;(2026)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">htmlwidgets</td>
 <td style="text-align: left;">1.6.4</td>
 <td style="text-align: left;">Vaidyanathan et al.&nbsp;(2023)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">khroma</td>
 <td style="text-align: left;">1.17.0</td>
 <td style="text-align: left;">Frerebeau (2025)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">knitr</td>
 <td style="text-align: left;">1.52</td>
 <td style="text-align: left;">Xie (2014); Xie (2015); Xie (2026)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">logger</td>
 <td style="text-align: left;">0.4.3</td>
 <td style="text-align: left;">Daróczi and Wickham (2026)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">rmarkdown</td>
 <td style="text-align: left;">2.32</td>
 <td style="text-align: left;">Xie et al.&nbsp;(2018); Xie et al.&nbsp;(2020); Allaire et al.&nbsp;(2026)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">rotl</td>
 <td style="text-align: left;">3.1.1</td>
 <td style="text-align: left;">Michonneau et al.&nbsp;(2016); OpenTreeOfLife et al.&nbsp;(2019)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">spelling</td>
 <td style="text-align: left;">2.3.2</td>
 <td style="text-align: left;">Ooms and Hester (2025)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">testthat</td>
 <td style="text-align: left;">3.3.2</td>
 <td style="text-align: left;">Wickham (2011)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">tidytable</td>
 <td style="text-align: left;">0.11.2</td>
 <td style="text-align: left;">Fairbanks (2024)</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">tidyverse</td>
 <td style="text-align: left;">2.0.0</td>
 <td style="text-align: left;">Wickham et al.&nbsp;(2019)</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">tools</td>
-<td style="text-align: left;">4.6.2</td>
-<td style="text-align: left;">R Core Team (2026c)</td>
 </tr>
 </tbody>
 </table>
@@ -594,13 +584,7 @@ OpenTreeOfLife, Benjamin Redelings, Luna Luisa Sanchez Reyes, et al. 2019. <em>O
 Paradis, Emmanuel, and Klaus Schliep. 2019. “Ape 5.0: An Environment for Modern Phylogenetics and Evolutionary Analyses in R.” <em>Bioinformatics</em> 35: 526–28. <a href="https://doi.org/10.1093/bioinformatics/bty633" class="uri">https://doi.org/10.1093/bioinformatics/bty633</a>.
 </div>
 <div id="ref-base" class="csl-entry" role="listitem">
-R Core Team. 2026a. <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing. <a href="https://doi.org/10.32614/R.manuals" class="uri">https://doi.org/10.32614/R.manuals</a>.
-</div>
-<div id="ref-grid" class="csl-entry" role="listitem">
-R Core Team. 2026b. <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing. <a href="https://doi.org/10.32614/R.manuals" class="uri">https://doi.org/10.32614/R.manuals</a>.
-</div>
-<div id="ref-tools" class="csl-entry" role="listitem">
-R Core Team. 2026c. <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing. <a href="https://doi.org/10.32614/R.manuals" class="uri">https://doi.org/10.32614/R.manuals</a>.
+R Core Team. 2026. <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing. <a href="https://doi.org/10.32614/R.manuals" class="uri">https://doi.org/10.32614/R.manuals</a>.
 </div>
 <div id="ref-EthnoBotaPhyWR" class="csl-entry" role="listitem">
 Rutz, Adriano. 2026. <em>EthnoBotaPhyWR: Infrastructure for Ethnobotanical and Phytochemical Data Integration with Wikidata</em>. <a href="https://doi.org/10.5281/zenodo.TODO" class="uri">https://doi.org/10.5281/zenodo.TODO</a>.

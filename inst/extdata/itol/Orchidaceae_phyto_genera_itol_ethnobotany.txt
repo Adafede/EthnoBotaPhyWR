@@ -22,7 +22,6 @@ Gomesa	0.0000
 Hammarbya	0.0000
 Peristylus	1.0414
 Paphiopedilum	0.8451
-Saccoglossum	0.0000
 Ornithocephalus	0.3010
 Rhynchostele	0.3010
 Pelatantheria	0.3010

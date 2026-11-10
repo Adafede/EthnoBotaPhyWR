@@ -20,12 +20,11 @@ Gomesa	136
 Hammarbya	1
 Peristylus	114
 Paphiopedilum	132
-Saccoglossum	1
 Ornithocephalus	53
 Rhynchostele	19
 Pelatantheria	8
 Rauhiella	3
-Phragmipedium	34
+Phragmipedium	33
 Laelia	31
 Sobralia	164
 Gastrochilus	65
@@ -64,7 +63,7 @@ Epipactis	81
 Platanthera	165
 Cephalanthera	26
 Vanilla	126
-Gymnadenia	44
+Gymnadenia	43
 Liparis	450
 Epipogium	4
 Corallorhiza	11

@@ -2,91 +2,91 @@ DATASET_MULTIBAR
 SEPARATOR TAB
 DATASET_LABEL	Compound superclasses
 COLOR	#4E7705
-FIELD_COLORS	#4E7705	#6D9F06	#97CE2F	#BDEC6F	#DDFFA0	#9D654C	#C17754	#F09163	#FCB076	#FFD5AF	#098BD9	#56B4E9	#7DCCFF	#BCE1FF	#E7F4FF	#148F77	#009E73	#43BA8F	#48C9B0	#A3E4D7	#7D3560	#A1527F	#CC79A7	#E794C1	#EFB6D6	#6a51a3	#807dba	#9e9ac8	#ff7f00	#fe9929	#fdae6b
-FIELD_LABELS	Shikimates and Phenylpropanoids-Phenanthrenoids	Shikimates and Phenylpropanoids-Stilbenoids	Shikimates and Phenylpropanoids-	Shikimates and Phenylpropanoids-Flavonoids	Shikimates and Phenylpropanoids-Shikimates and Phenylpropanoids Other	Terpenoids-Sesquiterpenoids	Terpenoids-Steroids	Terpenoids-Triterpenoids	Terpenoids-Monoterpenoids	Terpenoids-Terpenoids Other	Fatty acids-Fatty acyls	Fatty acids-Fatty esters	Fatty acids-Fatty Acids and Conjugates	Fatty acids-Fatty acids Other	Fatty acids-Sphingolipids	Polyketides-Polycyclic aromatic polyketides	Polyketides-	Polyketides-Cyclic polyketides	Polyketides-Polyketides Other	Polyketides-Naphthalenes	Alkaloids-Pseudoalkaloids	Alkaloids-Tryptophan alkaloids	Alkaloids-	Alkaloids-Alkaloids Other	Alkaloids-Anthranilic acid alkaloids	Amino acids and Peptides-Small peptides	Amino acids and Peptides-	Amino acids and Peptides-Peptide alkaloids	Carbohydrates-Nucleosides	Carbohydrates-Saccharides	Carbohydrates-Aminosugars and aminoglycosides
+FIELD_COLORS	#4E7705	#6D9F06	#97CE2F	#BDEC6F	#DDFFA0	#9D654C	#C17754	#F09163	#FCB076	#FFD5AF	#098BD9	#56B4E9	#7DCCFF	#BCE1FF	#E7F4FF	#148F77	#009E73	#43BA8F	#48C9B0	#A3E4D7	#7D3560	#A1527F	#CC79A7	#E794C1	#EFB6D6	#6a51a3	#807dba	#9e9ac8	#bcbddc	#ff7f00	#fe9929	#fdae6b	#616161
+FIELD_LABELS	Shikimates and Phenylpropanoids-Phenanthrenoids	Shikimates and Phenylpropanoids-Shikimates and Phenylpropanoids Other	Shikimates and Phenylpropanoids-Stilbenoids	Shikimates and Phenylpropanoids-Flavonoids	Shikimates and Phenylpropanoids-Phenolic acids (C6-C1)	Terpenoids-Sesquiterpenoids	Terpenoids-Steroids	Terpenoids-Triterpenoids	Terpenoids-Terpenoids Other	Terpenoids-Monoterpenoids	Fatty acids-Fatty acyls	Fatty acids-Fatty esters	Fatty acids-Fatty Acids and Conjugates	Fatty acids-Sphingolipids	Fatty acids-Fatty acids Other	Polyketides-Polycyclic aromatic polyketides	Polyketides-Cyclic polyketides	Polyketides-Polyketides Other	Polyketides-Chromanes	Polyketides-Naphthalenes	Alkaloids-Pseudoalkaloids	Alkaloids-Tryptophan alkaloids	Alkaloids-Alkaloids Other	Alkaloids-Peptide alkaloids	Alkaloids-Anthranilic acid alkaloids	Amino acids and Peptides-Small peptides	Amino acids and Peptides-Phenylpropanoids (C6-C3)	Amino acids and Peptides-Amino acids and Peptides Other	Amino acids and Peptides-Peptide alkaloids	Carbohydrates-Nucleosides	Carbohydrates-Saccharides	Carbohydrates-Aminosugars and aminoglycosides	Other-Other Other
 DATA
-Bletilla_striata	57	14	6	5	0	0	0	0	1	3	0	1	0	0	0	2	0	0	0	0	0	0	2	0	0	0	0	0	0	0	0
-Dendrobium_nobile	45	15	3	4	12	47	3	0	0	5	1	0	0	0	0	7	0	1	0	2	11	0	1	1	0	0	0	0	1	0	0
-Bletilla_formosana	33	10	1	6	0	0	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0
-Coelogyne_chinensis	22	12	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0
-Bulbophyllum_vaginatum	20	3	1	0	2	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Bletilla_ochracea	13	12	2	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Bulbophyllum_reptans	13	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_plicatile	13	3	2	0	3	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_denneanum	12	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Calanthe_cardioglossa	10	2	0	2	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0
-Coelogyne_nitida	10	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	1	1	0	0	0	0	0	0	0	0	0	0	0
-Gymnadenia_conopsea	10	10	9	0	1	0	1	0	4	6	0	0	0	0	0	0	0	1	1	0	0	0	2	2	0	1	0	1	1	0	0
-Dendrobium_chrysotoxum	8	6	3	1	0	0	3	0	0	0	0	0	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_loddigesii	8	6	1	7	2	0	5	0	0	1	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0
-Bulbophyllum_odoratissimum	7	2	0	2	0	0	2	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Bulbophyllum_retusiusculum	7	4	5	1	4	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Coelogyne_flaccida	7	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_officinale	7	19	9	9	10	8	2	1	4	5	18	6	3	1	0	1	0	1	2	1	0	0	0	1	0	0	0	0	3	1	0
-Dendrobium_thyrsiflorum	7	1	1	0	3	0	3	0	0	0	0	0	0	1	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Pleione_bulbocodioides	7	15	1	13	2	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0
-Arundina_graminifolia	6	9	5	2	4	0	0	1	4	2	0	0	0	0	0	4	0	0	2	1	0	2	0	0	0	0	0	0	0	0	0
-Cymbidium_aloifolium	6	5	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	1	0	0	0
-Coelogyne_articulata	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Coelogyne_ovalis	5	2	0	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_fimbriatum	5	14	0	1	1	0	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0
-Coelogyne_cristata	4	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Coelogyne_stricta	4	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_aphyllum	4	7	3	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_chrysanthum	4	4	0	1	1	1	2	0	0	0	0	0	0	0	0	1	0	1	0	1	1	0	0	2	0	0	0	0	0	0	0
-Dendrobium_densiflorum	4	6	0	3	5	0	1	2	0	0	0	0	0	0	0	2	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_longicornu	4	9	1	2	2	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0
-Bulbophyllum_andersonii	3	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_polyanthum	3	3	0	0	0	0	2	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0
-Bulbophyllum_fuscopurpureum	2	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Coelogyne_barbata	2	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_amoenum	2	6	0	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_moniliforme	2	17	4	3	6	15	2	0	0	1	0	0	0	0	0	0	1	0	0	2	1	0	0	0	0	0	0	0	0	1	0
-Dendrobium_parishii	2	4	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_trigonopus	2	4	0	2	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Bulbophyllum_kwangtungense	1	2	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Bulbophyllum_leopardinum	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Calanthe_discolor	1	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	3	0	0	1	0	0	0	0	0	0
-Coelogyne_corymbosa	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Coelogyne_prolifera	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Cypripedium_macranthos	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_aurantiacum	1	2	0	1	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_candidum	1	15	3	3	1	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_herbaceum	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_moschatum	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Eulophia_ochreata	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Eulophia_petersii	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Habenaria_intermedia	1	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_gratiosissimum	0	14	1	0	6	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0
-Pleione_yunnanensis	0	9	0	5	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_devonianum	0	7	0	1	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_capillipes	0	5	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_cariniferum	0	3	0	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_williamsonii	0	3	0	1	0	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Cymbidium_giganteum	0	2	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Cymbidium_goeringii	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0
-Cymbidium_iridioides	0	2	0	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_falconeri	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Calanthe_masuca	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_crepidatum	0	1	0	0	0	0	1	0	0	3	0	0	0	0	0	0	0	0	0	0	1	0	0	2	0	0	0	0	0	0	0
-Dendrobium_lituiflorum	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_terminale	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Gastrodia_elata	0	1	18	0	1	1	2	0	0	0	0	1	1	1	0	0	0	3	3	0	0	1	2	1	0	1	0	0	4	4	1
-Dactylorhiza_hatagirea	0	0	5	0	0	0	2	0	1	0	0	0	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Vanilla_planifolia	0	0	2	0	1	0	10	0	6	0	52	2	0	0	0	0	3	0	0	0	0	0	1	0	0	0	0	0	0	0	0
-Nervilia_fordii	0	0	0	12	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dactylorhiza_maculata	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Orchis_militaris	0	0	0	2	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Cymbidium_kanran	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_tosaense	0	0	0	1	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0
-Dendrobium_crumenatum	0	0	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	18	0	0	0	0	0
-Habenaria_repens	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_aduncum	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_linawianum	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0
-Nervilia_plicata	0	0	0	0	0	0	20	13	0	1	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Nervilia_aragoana	0	0	0	0	0	0	7	0	0	1	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dendrobium_catenatum	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0
-Dactylorhiza_majalis	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Cypripedium_calceolus	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0
-Calanthe_triplicata	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0
-Habenaria_plantaginea	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0
+Bletilla_striata	57	7	14	5	3	0	0	0	3	1	0	1	0	0	0	2	0	0	0	0	0	0	2	0	0	0	0	0	0	0	0	0	3
+Dendrobium_nobile	45	22	15	4	7	48	3	0	5	0	1	0	0	0	0	7	1	0	0	2	11	0	2	0	0	0	2	0	0	1	0	0	7
+Bletilla_formosana	33	1	10	6	3	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	2
+Coelogyne_chinensis	22	1	13	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0
+Bulbophyllum_vaginatum	20	5	3	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Bletilla_ochracea	14	2	12	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_plicatile	13	5	3	0	1	0	1	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1
+Bulbophyllum_reptans	13	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_denneanum	12	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Calanthe_cardioglossa	11	1	2	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0
+Gymnadenia_conopsea	10	16	10	0	7	0	1	0	6	4	0	0	0	0	0	0	1	1	0	0	0	0	2	2	0	1	0	0	1	1	0	0	28
+Coelogyne_nitida	10	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	2	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_chrysotoxum	8	5	6	1	2	0	3	0	0	0	0	0	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_loddigesii	8	3	6	7	0	0	5	0	1	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	6
+Pleione_bulbocodioides	7	3	16	13	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0
+Bulbophyllum_odoratissimum	7	0	2	2	2	0	2	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Bulbophyllum_retusiusculum	7	11	4	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	3
+Dendrobium_officinale	7	29	19	9	8	8	2	1	5	4	18	6	3	0	1	1	1	1	1	1	1	0	1	0	1	0	3	0	0	3	1	0	13
+Coelogyne_flaccida	7	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_thyrsiflorum	7	5	1	0	0	0	3	0	0	0	0	0	0	0	1	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Arundina_graminifolia	6	10	9	2	1	0	0	1	2	4	0	0	0	0	0	4	0	0	2	1	0	2	0	0	0	0	0	0	0	0	0	0	24
+Cymbidium_aloifolium	6	0	5	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	1	0	0	0	0
+Coelogyne_articulata	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Coelogyne_ovalis	5	0	2	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_fimbriatum	5	1	14	1	0	0	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	1
+Coelogyne_cristata	4	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Coelogyne_stricta	4	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_aphyllum	4	3	7	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_densiflorum	4	6	6	3	0	0	1	2	0	0	0	0	0	0	0	2	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_chrysanthum	4	1	4	1	0	1	2	0	0	0	0	0	0	0	0	1	1	0	0	1	1	0	2	0	0	0	0	0	0	0	0	0	1
+Dendrobium_longicornu	4	5	9	2	6	0	2	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	3
+Dendrobium_polyanthum	3	0	3	0	0	0	2	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0
+Bulbophyllum_andersonii	3	0	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_amoenum	2	0	6	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_moniliforme	2	10	17	3	2	15	2	0	1	0	0	0	0	0	0	0	0	1	0	2	2	0	0	0	0	0	0	0	0	0	1	0	2
+Dendrobium_trigonopus	2	1	4	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_parishii	2	0	4	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Bulbophyllum_fuscopurpureum	2	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Coelogyne_barbata	2	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_candidum	1	4	15	3	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	2
+Habenaria_intermedia	1	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Calanthe_discolor	1	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	4	0	0	1	0	0	0	0	0	0	0	3
+Cypripedium_macranthos	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_aurantiacum	1	1	2	1	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Eulophia_ochreata	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_herbaceum	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Coelogyne_corymbosa	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Eulophia_petersii	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Bulbophyllum_kwangtungense	1	2	2	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Bulbophyllum_leopardinum	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_moschatum	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Coelogyne_prolifera	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Gastrodia_elata	0	23	1	0	3	1	2	0	0	0	0	1	1	0	1	0	3	2	1	0	0	1	3	0	0	1	0	0	0	4	4	1	13
+Dendrobium_gratiosissimum	0	8	14	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	2
+Vanilla_planifolia	0	7	0	0	12	0	10	0	0	6	52	2	0	0	0	0	0	3	0	0	0	0	1	0	0	0	0	0	0	0	0	0	6
+Dactylorhiza_hatagirea	0	5	0	0	1	0	2	0	0	1	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	6
+Dendrobium_devonianum	0	3	7	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_crumenatum	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	18	0	0	0	0	0	0	0
+Orchis_militaris	0	2	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	2
+Dendrobium_falconeri	0	2	2	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	2
+Nervilia_fordii	0	1	0	12	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_tosaense	0	1	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0
+Habenaria_repens	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	2
+Dendrobium_williamsonii	0	1	3	1	1	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dactylorhiza_maculata	0	1	0	2	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Pleione_yunnanensis	0	0	9	5	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_capillipes	0	0	5	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_cariniferum	0	0	3	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Cymbidium_giganteum	0	0	2	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Cymbidium_goeringii	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0
+Cymbidium_iridioides	0	0	2	0	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_terminale	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Calanthe_masuca	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_lituiflorum	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_crepidatum	0	0	1	0	0	0	1	0	3	0	0	0	0	0	0	0	0	0	0	0	1	0	2	0	0	0	0	0	0	0	0	0	0
+Cymbidium_kanran	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_linawianum	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_aduncum	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Nervilia_plicata	0	0	0	0	0	0	20	13	1	0	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Nervilia_aragoana	0	0	0	0	0	0	7	0	1	0	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Dendrobium_catenatum	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0
+Dactylorhiza_majalis	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1
+Cypripedium_calceolus	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0
+Calanthe_triplicata	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	1
+Habenaria_plantaginea	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1

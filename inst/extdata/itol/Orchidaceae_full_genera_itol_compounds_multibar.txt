@@ -2,75 +2,76 @@ DATASET_MULTIBAR
 SEPARATOR TAB
 DATASET_LABEL	Compound superclasses
 COLOR	#4E7705
-FIELD_COLORS	#4E7705	#6D9F06	#97CE2F	#BDEC6F	#DDFFA0	#9D654C	#C17754	#F09163	#FCB076	#FFD5AF	#098BD9	#56B4E9	#7DCCFF	#BCE1FF	#E7F4FF	#148F77	#009E73	#43BA8F	#48C9B0	#A3E4D7	#7D3560	#A1527F	#CC79A7	#E794C1	#EFB6D6	#6a51a3	#807dba	#9e9ac8	#bcbddc	#ff7f00	#fe9929	#fdae6b	#fec44f	#feeda0
-FIELD_LABELS	Shikimates and Phenylpropanoids-Phenanthrenoids	Shikimates and Phenylpropanoids-Stilbenoids	Shikimates and Phenylpropanoids-Shikimates and Phenylpropanoids Other	Shikimates and Phenylpropanoids-Flavonoids	Shikimates and Phenylpropanoids-	Terpenoids-Sesquiterpenoids	Terpenoids-Steroids	Terpenoids-Terpenoids Other	Terpenoids-Triterpenoids	Terpenoids-Monoterpenoids	Fatty acids-Fatty acyls	Fatty acids-Fatty esters	Fatty acids-Fatty Acids and Conjugates	Fatty acids-Fatty acids Other	Fatty acids-Fatty acyl glycosides	Alkaloids-Pseudoalkaloids	Alkaloids-Anthranilic acid alkaloids	Alkaloids-Alkaloids Other	Alkaloids-Ornithine alkaloids	Alkaloids-	Polyketides-Polycyclic aromatic polyketides	Polyketides-Polyketides Other	Polyketides-Cyclic polyketides	Polyketides-	Polyketides-Chromanes	Amino acids and Peptides-Small peptides	Amino acids and Peptides-Peptide alkaloids	Amino acids and Peptides-Amino acids and Peptides Other	Amino acids and Peptides-Fatty Acids and Conjugates	Carbohydrates-Saccharides	Carbohydrates-Nucleosides	Carbohydrates-Carbohydrates Other	Carbohydrates-Aminosugars and aminoglycosides	Carbohydrates-Polyols
+FIELD_COLORS	#4E7705	#6D9F06	#97CE2F	#BDEC6F	#DDFFA0	#9D654C	#C17754	#F09163	#FCB076	#FFD5AF	#098BD9	#56B4E9	#7DCCFF	#BCE1FF	#E7F4FF	#148F77	#009E73	#43BA8F	#48C9B0	#A3E4D7	#7D3560	#A1527F	#CC79A7	#E794C1	#EFB6D6	#6a51a3	#807dba	#9e9ac8	#bcbddc	#dadaeb	#ff7f00	#fe9929	#fdae6b	#fec44f	#feeda0	#616161
+FIELD_LABELS	Shikimates and Phenylpropanoids-Phenanthrenoids	Shikimates and Phenylpropanoids-Shikimates and Phenylpropanoids Other	Shikimates and Phenylpropanoids-Stilbenoids	Shikimates and Phenylpropanoids-Flavonoids	Shikimates and Phenylpropanoids-Phenolic acids (C6-C1)	Terpenoids-Sesquiterpenoids	Terpenoids-Steroids	Terpenoids-Terpenoids Other	Terpenoids-Triterpenoids	Terpenoids-Monoterpenoids	Fatty acids-Fatty acyls	Fatty acids-Fatty esters	Fatty acids-Fatty Acids and Conjugates	Fatty acids-Fatty acids Other	Fatty acids-Fatty acyl glycosides	Alkaloids-Pseudoalkaloids	Alkaloids-Alkaloids Other	Alkaloids-Anthranilic acid alkaloids	Alkaloids-Tryptophan alkaloids	Alkaloids-Ornithine alkaloids	Polyketides-Polycyclic aromatic polyketides	Polyketides-Naphthalenes	Polyketides-Cyclic polyketides	Polyketides-Polyketides Other	Polyketides-Chromanes	Amino acids and Peptides-Small peptides	Amino acids and Peptides-Peptide alkaloids	Amino acids and Peptides-Phenylpropanoids (C6-C3)	Amino acids and Peptides-Fatty Acids and Conjugates	Amino acids and Peptides-Amino acids and Peptides Other	Carbohydrates-Saccharides	Carbohydrates-Nucleosides	Carbohydrates-Carbohydrates Other	Carbohydrates-Aminosugars and aminoglycosides	Carbohydrates-Polyols	Other-Other Other
 DATA
-Dendrobium	96	79	43	35	23	74	13	20	3	4	19	6	4	2	0	14	0	6	1	1	10	8	2	2	1	18	1	0	0	1	3	0	0	1
-Bletilla	78	23	0	13	9	0	1	3	0	1	0	1	0	0	0	0	1	0	0	2	2	1	0	0	0	0	0	0	0	0	0	0	0	0
-Bulbophyllum	64	21	11	3	14	3	7	1	2	2	13	2	5	3	0	0	1	1	0	2	0	0	4	1	0	6	0	0	1	14	0	2	0	1
-Coelogyne	43	13	1	0	0	0	2	0	0	0	1	0	0	0	0	0	0	0	0	0	0	3	0	1	0	0	0	0	0	0	0	0	0	0
-Agrostophyllum	23	1	0	0	0	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Calanthe	17	2	1	2	1	0	1	1	0	0	0	0	0	0	0	0	2	4	0	0	0	4	0	1	0	0	0	0	0	0	0	0	0	0
-Spiranthes	16	0	1	8	3	0	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0
-Cymbidium	15	5	0	1	0	0	1	0	2	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	1	1	0	0	0	0	0	0
-Cyrtopodium	13	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Eriodes	12	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Gymnadenia	10	10	1	0	9	0	1	6	0	4	0	0	0	0	0	0	0	2	0	2	0	1	1	0	0	1	1	0	0	0	1	0	0	0
-Pleione	9	22	2	17	3	0	0	1	2	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0
-Cremastra	8	0	0	0	2	0	1	0	0	0	0	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Maxillaria	7	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Thunia	7	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Arundina	6	9	4	2	5	0	0	2	1	4	0	0	0	0	0	0	0	2	0	0	4	1	0	0	2	0	0	0	0	0	0	0	0	0
-Nidema	6	4	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Pinalia	6	0	0	0	0	0	2	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Eulophia	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Pholidota	5	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Liparis	4	1	0	1	0	0	0	4	0	1	0	0	0	0	0	0	0	0	2	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Luisia	4	0	1	1	1	0	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Scaphyglottis	4	4	0	0	0	0	0	0	6	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Acampe	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Catasetum	3	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Otochilus	3	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Vanda	3	1	1	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0
-Epidendrum	2	8	1	3	0	0	3	0	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Himantoglossum	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Phalaenopsis	2	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Stanhopea	2	0	0	1	0	0	3	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Aerides	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Cypripedium	1	0	0	1	0	0	3	0	4	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0
-Eria	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Habenaria	1	0	1	3	0	0	1	1	0	1	0	0	1	0	0	1	0	0	0	1	0	0	0	1	0	0	0	0	0	0	0	0	0	0
-Prosthechea	1	3	0	4	1	0	0	1	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Phragmipedium	0	10	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Anthogonium	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Gastrodia	0	1	1	0	18	1	2	0	0	0	0	1	1	1	0	0	0	2	0	2	0	2	3	0	0	1	0	0	0	4	4	0	1	0
-Oncidium	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	18	0	0	0	0	0	0	0	0
-Nervilia	0	0	1	12	0	0	23	1	13	0	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Orchis	0	0	1	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Peristeria	0	0	1	0	4	0	0	0	0	1	4	5	1	1	0	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	0
-Vanilla	0	0	1	0	2	0	10	0	0	6	52	2	0	0	0	0	0	0	0	1	0	0	0	3	0	0	0	0	0	0	0	0	0	0
-Goodyera	0	0	0	4	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Anoectochilus	0	0	0	3	2	0	5	2	2	0	0	0	0	0	2	0	0	1	0	0	0	0	1	0	0	0	0	0	0	2	1	0	0	0
-Cattleya	0	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dactylorhiza	0	0	0	2	5	0	2	0	0	1	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Dracula	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Ophrys	0	0	0	2	2	4	0	0	0	11	18	8	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Rauhiella	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Papilionanthe	0	0	0	0	4	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Cyrtosia	0	0	0	0	1	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Neofinetia	0	0	0	0	1	1	0	1	1	4	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Notylia	0	0	0	0	0	3	0	0	0	1	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Trichotosia	0	0	0	0	0	0	2	1	0	6	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Corallorhiza	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Epipogium	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Neottia	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Panisea	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Gomesa	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Ludisia	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Phaius	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	7	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Drakaea	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	5	0	0	0	0	0	0	0	0	5	0	0	0	0	0	0	0
-Cryptostylis	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Hammarbya	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Crepidium	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Malaxis	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-Earina	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0
+Dendrobium	96	87	79	35	21	77	13	20	3	4	19	6	4	2	0	15	7	1	0	1	10	7	2	3	1	18	1	4	0	0	1	3	0	0	1	35
+Bletilla	79	10	23	13	4	0	1	3	0	1	0	1	0	0	0	0	2	1	0	0	2	0	0	1	0	0	0	0	0	0	0	0	0	0	0	5
+Bulbophyllum	64	36	21	5	8	3	7	1	2	2	13	2	5	3	0	0	2	1	1	0	0	0	4	1	0	6	0	0	1	0	14	0	2	0	1	10
+Coelogyne	43	1	14	1	0	0	2	0	0	0	1	0	0	0	0	0	0	0	0	0	0	2	0	2	0	0	0	0	0	0	0	0	0	0	0	0
+Agrostophyllum	23	0	1	0	1	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Calanthe	18	2	2	2	0	0	1	1	0	0	0	0	0	0	0	0	0	2	4	0	0	4	0	1	0	0	0	0	0	0	0	0	0	0	0	6
+Spiranthes	16	5	0	8	1	0	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	2
+Cymbidium	15	0	5	1	0	0	1	0	2	0	0	0	0	0	0	0	1	0	0	0	0	1	0	0	0	0	1	0	0	1	0	0	0	0	0	0
+Cyrtopodium	13	0	3	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	4
+Eriodes	12	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Gymnadenia	10	16	10	0	7	0	1	6	0	4	0	0	0	0	0	0	4	0	0	0	0	0	1	1	0	1	1	0	0	0	0	1	0	0	0	28
+Pleione	9	5	23	17	0	0	0	1	2	0	0	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0
+Cremastra	8	2	0	0	1	0	1	0	0	0	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	2
+Thunia	7	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Maxillaria	7	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Arundina	6	10	9	2	1	0	0	2	1	4	0	0	0	0	0	0	0	0	2	0	4	1	0	0	2	0	0	0	0	0	0	0	0	0	0	24
+Pinalia	6	0	0	0	0	0	2	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Nidema	6	0	4	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1
+Pholidota	5	0	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Eulophia	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Liparis	4	0	1	1	0	0	0	4	0	1	0	0	0	0	0	0	1	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1
+Scaphyglottis	4	0	4	0	0	0	0	0	6	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Luisia	4	2	0	1	1	0	1	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	2
+Otochilus	3	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Catasetum	3	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Acampe	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Vanda	3	1	1	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	5
+Epidendrum	2	1	8	3	0	0	3	0	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Phalaenopsis	2	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Himantoglossum	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Stanhopea	2	0	0	1	0	0	3	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Habenaria	1	3	0	3	0	0	1	1	0	1	0	0	1	0	0	1	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	5
+Cypripedium	1	0	0	1	0	0	3	0	4	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Prosthechea	1	1	3	4	0	0	0	1	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Aerides	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Eria	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Gastrodia	0	23	1	0	3	1	2	0	0	0	0	1	1	1	0	0	3	0	1	0	0	0	3	2	1	1	0	0	0	0	4	4	0	1	0	13
+Vanilla	0	7	0	0	13	0	10	0	0	6	52	2	0	0	0	0	1	0	0	0	0	0	0	3	0	0	0	0	0	0	0	0	0	0	0	6
+Peristeria	0	6	0	0	0	0	0	0	0	1	4	5	1	1	0	0	0	0	0	0	0	0	1	0	0	1	0	0	0	0	0	0	0	0	0	2
+Dactylorhiza	0	6	0	2	2	0	2	0	0	1	0	0	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	6
+Ophrys	0	4	0	2	0	4	0	0	0	11	18	8	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Papilionanthe	0	4	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Oncidium	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	18	0	0	0	0	0	0	0	0	0	0
+Notylia	0	3	0	0	0	3	0	0	0	1	1	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Orchis	0	2	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	2
+Anoectochilus	0	2	0	3	0	0	5	2	2	0	0	0	0	0	2	0	1	0	0	0	0	0	1	0	0	0	0	0	0	0	2	1	0	0	0	5
+Leptotes	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Nervilia	0	1	0	12	0	0	23	1	13	0	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Neofinetia	0	1	0	0	1	1	0	1	1	4	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Cyrtosia	0	1	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	2
+Phragmipedium	0	0	10	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Anthogonium	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Goodyera	0	0	0	4	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1
+Cattleya	0	0	0	3	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	5
+Dracula	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	4
+Rauhiella	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Trichotosia	0	0	0	0	0	0	2	1	0	6	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Epipogium	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Corallorhiza	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Neottia	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Panisea	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Gomesa	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Ludisia	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1
+Drakaea	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	5	0	0	0	0	0	0	0	0	0	5	0	0	0	0	0	0	0	0	0
+Cryptostylis	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Phaius	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	7	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Hammarbya	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Malaxis	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Crepidium	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+Earina	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0

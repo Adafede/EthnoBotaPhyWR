@@ -18,7 +18,6 @@ Dendrobium_draconis	1.8195
 Liparis_bootanensis	1.2304
 Peristylus_forceps	1.0414
 Calanthe_tricarinata	1.3802
-Liparis_cespitosa	1.2304
 Habenaria_pantlingiana	1.5185
 Pleione_scopulorum	0.9031
 Liparis_cathcartii	1.2304
@@ -28,7 +27,6 @@ Peristylus_coeloceras	1.0414
 Dendrobium_terminale	1.8195
 Habenaria_pectinata	1.5185
 Calanthe_davidii	1.3802
-Bletilla_sinensis	0.6990
 Peristylus_goodyeroides	1.0414
 Calanthe_lyroglossa	1.3802
 Calanthe_hancockii	1.3802
@@ -101,7 +99,6 @@ Calanthe_plantaginea	1.3802
 Liparis_dunnii	1.2304
 Liparis_nigra	1.2304
 Dendrobium_lohohense	1.8195
-Habenaria_stenopetala	1.5185
 Dendrobium_salaccense	1.8195
 Habenaria_davidii	1.5185
 Dendrobium_aurantiacum	1.8195
@@ -126,9 +123,9 @@ Dendrobium_capillipes	1.8195
 Habenaria_tibetica	1.5185
 Peristylus_tentaculatus	1.0414
 Peristylus_densus	1.0414
+Bletilla_foliosa	0.6990
 Coelogyne_candoonensis	1.2788
 Coelogyne_odoratissima	1.2788
-Bulbophyllum_viridescens	1.6232
 Pleione_humilis	0.9031
 Calanthe_ceciliae	1.3802
 Eulophia_macrobulbon	1.1461
@@ -157,7 +154,6 @@ Dendrobium_denudans	1.8195
 Dendrobium_cumulatum	1.8195
 Dendrobium_eriiflorum	1.8195
 Dendrobium_denneanum	1.8195
-Dendrobium_hendersonii	1.8195
 Dendrobium_herbaceum	1.8195
 Dendrobium_hymenanthum	1.8195
 Dendrobium_ochreatum	1.8195
@@ -172,7 +168,7 @@ Dendrobium_teretifolium	1.8195
 Vanilla_somae	0.8451
 Habenaria_acuminata	1.5185
 Gymnadenia_rhellicani	0.6990
-Habenaria_foliosa	1.5185
+Habenaria_epipactidea	1.5185
 Habenaria_hollandiana	1.5185
 Habenaria_digitata	1.5185
 Habenaria_longicorniculata	1.5185
@@ -214,6 +210,7 @@ Orchis_militaris	1.1139
 Dendrobium_moniliforme	1.8195
 Dendrobium_amplum	1.8195
 Dendrobium_comatum	1.8195
+Dendrobium_fugax	1.8195
 Dendrobium_fuscescens	1.8195
 Dendrobium_macraei	1.8195
 Dendrobium_macrostachyum	1.8195
@@ -280,6 +277,7 @@ Bulbophyllum_acutiflorum	1.6232
 Bulbophyllum_affine	1.6232
 Bulbophyllum_ambrosia	1.6232
 Bulbophyllum_andersonii	1.6232
+Bulbophyllum_caespitosum	1.6232
 Bulbophyllum_careyanum	1.6232
 Bulbophyllum_cheiri	1.6232
 Bulbophyllum_coweniorum	1.6232
@@ -299,6 +297,7 @@ Bulbophyllum_leopardinum	1.6232
 Bulbophyllum_levinei	1.6232
 Bulbophyllum_lilacinum	1.6232
 Bulbophyllum_lupulinum	1.6232
+Bulbophyllum_maximum	1.6232
 Bulbophyllum_mutabile	1.6232
 Bulbophyllum_protractum	1.6232
 Bulbophyllum_reptans	1.6232
@@ -371,6 +370,7 @@ Bulbophyllum_flaviflorum	1.6232
 Dendrobium_senile	1.8195
 Dendrobium_fimbriatum	1.8195
 Bulbophyllum_calyptratum	1.6232
+Habenaria_frappieri	1.5185
 Dactylorhiza_incarnata	1.2041
 Coelogyne_cantonensis	1.2788
 Liparis_cordifolia	1.2304

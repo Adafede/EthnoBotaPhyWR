@@ -16,7 +16,6 @@ Dendrobium_draconis	1587
 Liparis_bootanensis	450
 Peristylus_forceps	114
 Calanthe_tricarinata	223
-Liparis_cespitosa	450
 Habenaria_pantlingiana	881
 Pleione_scopulorum	27
 Liparis_cathcartii	450
@@ -26,7 +25,6 @@ Peristylus_coeloceras	114
 Dendrobium_terminale	1587
 Habenaria_pectinata	881
 Calanthe_davidii	223
-Bletilla_sinensis	6
 Peristylus_goodyeroides	114
 Calanthe_lyroglossa	223
 Calanthe_hancockii	223
@@ -94,12 +92,11 @@ Dendrobium_hancockii	1587
 Calanthe_brevicornu	223
 Dendrobium_monticola	1587
 Liparis_inaperta	450
-Gymnadenia_orchidis	44
+Gymnadenia_orchidis	43
 Calanthe_plantaginea	223
 Liparis_dunnii	450
 Liparis_nigra	450
 Dendrobium_lohohense	1587
-Habenaria_stenopetala	881
 Dendrobium_salaccense	1587
 Habenaria_davidii	881
 Dendrobium_aurantiacum	1587
@@ -124,9 +121,9 @@ Dendrobium_capillipes	1587
 Habenaria_tibetica	881
 Peristylus_tentaculatus	114
 Peristylus_densus	114
+Bletilla_foliosa	6
 Coelogyne_candoonensis	224
 Coelogyne_odoratissima	224
-Bulbophyllum_viridescens	2046
 Pleione_humilis	27
 Calanthe_ceciliae	223
 Eulophia_macrobulbon	200
@@ -155,7 +152,6 @@ Dendrobium_denudans	1587
 Dendrobium_cumulatum	1587
 Dendrobium_eriiflorum	1587
 Dendrobium_denneanum	1587
-Dendrobium_hendersonii	1587
 Dendrobium_herbaceum	1587
 Dendrobium_hymenanthum	1587
 Dendrobium_ochreatum	1587
@@ -169,8 +165,8 @@ Dendrobium_subulatum	1587
 Dendrobium_teretifolium	1587
 Vanilla_somae	126
 Habenaria_acuminata	881
-Gymnadenia_rhellicani	44
-Habenaria_foliosa	881
+Gymnadenia_rhellicani	43
+Habenaria_epipactidea	881
 Habenaria_hollandiana	881
 Habenaria_digitata	881
 Habenaria_longicorniculata	881
@@ -187,7 +183,7 @@ Nervilia_macroglossa	81
 Cypripedium_calceolus	105
 Dendrobium_xantholeucum	1587
 Orchis_mascula	62
-Gymnadenia_conopsea	44
+Gymnadenia_conopsea	43
 Dactylorhiza_viridis	116
 Bletilla_striata	6
 Orchis_purpurea	62
@@ -212,6 +208,7 @@ Orchis_militaris	62
 Dendrobium_moniliforme	1587
 Dendrobium_amplum	1587
 Dendrobium_comatum	1587
+Dendrobium_fugax	1587
 Dendrobium_fuscescens	1587
 Dendrobium_macraei	1587
 Dendrobium_macrostachyum	1587
@@ -278,6 +275,7 @@ Bulbophyllum_acutiflorum	2046
 Bulbophyllum_affine	2046
 Bulbophyllum_ambrosia	2046
 Bulbophyllum_andersonii	2046
+Bulbophyllum_caespitosum	2046
 Bulbophyllum_careyanum	2046
 Bulbophyllum_cheiri	2046
 Bulbophyllum_coweniorum	2046
@@ -297,6 +295,7 @@ Bulbophyllum_leopardinum	2046
 Bulbophyllum_levinei	2046
 Bulbophyllum_lilacinum	2046
 Bulbophyllum_lupulinum	2046
+Bulbophyllum_maximum	2046
 Bulbophyllum_mutabile	2046
 Bulbophyllum_protractum	2046
 Bulbophyllum_reptans	2046
@@ -343,7 +342,7 @@ Eulophia_ensata	200
 Eulophia_speciosa	200
 Habenaria_delavayi	881
 Habenaria_fordii	881
-Gymnadenia_crassinervis	44
+Gymnadenia_crassinervis	43
 Habenaria_plantaginea	881
 Habenaria_mairei	881
 Calanthe_calanthoides	223
@@ -369,6 +368,7 @@ Bulbophyllum_flaviflorum	2046
 Dendrobium_senile	1587
 Dendrobium_fimbriatum	1587
 Bulbophyllum_calyptratum	2046
+Habenaria_frappieri	881
 Dactylorhiza_incarnata	116
 Coelogyne_cantonensis	224
 Liparis_cordifolia	450

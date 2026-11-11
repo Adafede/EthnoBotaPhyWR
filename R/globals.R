@@ -2,6 +2,8 @@
 
 #' @keywords internal
 utils::globalVariables(c(
+  ".",
+  ":=",
   ".N",
   ".SD",
   "a_taxa",

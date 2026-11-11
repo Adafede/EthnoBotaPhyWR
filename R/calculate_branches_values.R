@@ -330,7 +330,7 @@ calculate_branches_values <- function(
           mean(ape::pic(x_p, tr_bin)^2, na.rm = TRUE)
         })
         k_stat <- if (is.finite(mse_obs) && mse_obs > 0) {
-          median(mse_perm, na.rm = TRUE) / mse_obs
+          stats::median(mse_perm, na.rm = TRUE) / mse_obs
         } else {
           NA_real_
         }

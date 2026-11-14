@@ -266,21 +266,16 @@ window.Quarto = {
   <ul>
   <li><a href="#ethnobotaphywr" id="toc-ethnobotaphywr" class="nav-link active" data-scroll-target="#ethnobotaphywr">EthnoBotaPhyWR <img src="https://raw.githubusercontent.com/adafede/EthnoBotaPhyWR/main/man/figures/logo.svg" align="right" height="139"></a>
   <ul class="collapse">
-  <li><a href="#requirements" id="toc-requirements" class="nav-link" data-scroll-target="#requirements">Requirements</a></li>
-  <li><a href="#features" id="toc-features" class="nav-link" data-scroll-target="#features">Features</a></li>
+  <li><a href="#scope-and-exported-api" id="toc-scope-and-exported-api" class="nav-link" data-scroll-target="#scope-and-exported-api">Scope and exported API</a></li>
   <li><a href="#installation" id="toc-installation" class="nav-link" data-scroll-target="#installation">Installation</a></li>
-  <li><a href="#quick-start" id="toc-quick-start" class="nav-link" data-scroll-target="#quick-start">Quick Start</a>
+  <li><a href="#quick-start" id="toc-quick-start" class="nav-link" data-scroll-target="#quick-start">Quick start</a>
   <ul class="collapse">
-  <li><a href="#load-included-datasets" id="toc-load-included-datasets" class="nav-link" data-scroll-target="#load-included-datasets">Load included datasets</a></li>
-  <li><a href="#interactive-exploration-on-itol-interactive-tree-of-life" id="toc-interactive-exploration-on-itol-interactive-tree-of-life" class="nav-link" data-scroll-target="#interactive-exploration-on-itol-interactive-tree-of-life">Interactive Exploration on iTOL (Interactive Tree Of Life)</a></li>
-  <li><a href="#analyze-your-own-family" id="toc-analyze-your-own-family" class="nav-link" data-scroll-target="#analyze-your-own-family">Analyze your own family</a></li>
+  <li><a href="#inspect-bundled-datasets-and-itol-files-offline" id="toc-inspect-bundled-datasets-and-itol-files-offline" class="nav-link" data-scroll-target="#inspect-bundled-datasets-and-itol-files-offline">Inspect bundled datasets and iTOL files (offline)</a></li>
+  <li><a href="#interactive-exploration-on-itol" id="toc-interactive-exploration-on-itol" class="nav-link" data-scroll-target="#interactive-exploration-on-itol">Interactive exploration on iTOL</a></li>
+  <li><a href="#analyze-a-plant-family-requires-network-access" id="toc-analyze-a-plant-family-requires-network-access" class="nav-link" data-scroll-target="#analyze-a-plant-family-requires-network-access">Analyze a plant family (requires network access)</a></li>
   </ul></li>
-  <li><a href="#main-citations" id="toc-main-citations" class="nav-link" data-scroll-target="#main-citations">Main Citations</a>
-  <ul class="collapse">
-  <li><a href="#lotus" id="toc-lotus" class="nav-link" data-scroll-target="#lotus">LOTUS</a></li>
-  <li><a href="#open-tree-taxonomy" id="toc-open-tree-taxonomy" class="nav-link" data-scroll-target="#open-tree-taxonomy">Open Tree Taxonomy</a></li>
-  <li><a href="#npclassifier" id="toc-npclassifier" class="nav-link" data-scroll-target="#npclassifier">NPClassifier</a></li>
-  </ul></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
+  <li><a href="#main-data-source-citations" id="toc-main-data-source-citations" class="nav-link" data-scroll-target="#main-data-source-citations">Main data source citations</a></li>
   <li><a href="#additional-software-credits" id="toc-additional-software-credits" class="nav-link" data-scroll-target="#additional-software-credits">Additional software credits</a></li>
   </ul></li>
   </ul>
@@ -296,126 +291,105 @@ window.Quarto = {
 <section id="ethnobotaphywr" class="level1">
 <h1>EthnoBotaPhyWR <img src="https://raw.githubusercontent.com/adafede/EthnoBotaPhyWR/main/man/figures/logo.svg" align="right" height="139"></h1>
 <!-- badges: start -->
-<p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" class="img-fluid" alt="Lifecycle: experimental"></a> <a href="http://unmaintained.tech/"><img src="http://unmaintained.tech/badge.svg" class="img-fluid" alt="No Maintenance Intended"></a> <a href="https://github.com/adafede/EthnoBotaPhyWR/actions/workflows/R-CMD-check.yaml"><img src="https://github.com/adafede/EthnoBotaPhyWR/actions/workflows/R-CMD-check.yaml/badge.svg" class="img-fluid" alt="R-CMD-check"></a> <a href="https://adafede.r-universe.dev/EthnoBotaPhyWR"><img src="https://adafede.r-universe.dev/EthnoBotaPhyWR/badges/version.png" class="img-fluid" alt="r-universe badge"></a> <a href="https://doi.org/10.5281/zenodo.TODO"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.TODO.svg" class="img-fluid" alt="DOI"></a> <!-- badges: end --></p>
-<p><strong>EthnoBotaPhyWR</strong> stands for <em>ethnobotany</em>, <em>phytochemistry</em>, <em>Wikidata</em> and <em>R</em> <span class="smallcaps">(maybe you can also find the <em>bot</em> of <em>robot</em>)</span> It should be pronounced “Ethnobota Fever”.</p>
-<section id="requirements" class="level2">
-<h2 class="anchored" data-anchor-id="requirements">Requirements</h2>
-<p>Here is what you <em>minimally</em> need:</p>
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" class="img-fluid" alt="Lifecycle: experimental"></a> <a href="https://github.com/adafede/EthnoBotaPhyWR/actions/workflows/R-CMD-check.yaml"><img src="https://github.com/adafede/EthnoBotaPhyWR/actions/workflows/R-CMD-check.yaml/badge.svg" class="img-fluid" alt="R-CMD-check"></a> <a href="https://adafede.r-universe.dev/EthnoBotaPhyWR"><img src="https://adafede.r-universe.dev/EthnoBotaPhyWR/badges/version.png" class="img-fluid" alt="r-universe badge"></a> <!-- badges: end --></p>
+<p><strong>EthnoBotaPhyWR</strong> combines ethnobotanical use records and phytochemical occurrence data from Wikidata and LOTUS on Open Tree of Life phylogenies.</p>
+<section id="scope-and-exported-api" class="level2">
+<h2 class="anchored" data-anchor-id="scope-and-exported-api">Scope and exported API</h2>
+<p>The package exports a single pipeline entry point alongside curated <em>Orchidaceae</em> datasets:</p>
 <ul>
-<li>The scientific name of the taxonomic family you are interested in</li>
+<li><code>ethnobotafever_tree()</code> runs the end-to-end analysis for any plant family, querying Wikidata (via QLever), Open Tree of Life, and NPClassifier, computing diversity and phylogenetic metrics, and exporting trees, tables, and iTOL annotations.</li>
+<li><code>orchids_compounds</code> (3,055 rows), <code>orchids_compound_classes</code> (1,574 rows), and <code>orchids_ethnobotanical</code> (419 rows) are curated plain <code>data.frame</code> objects for <em>Orchidaceae</em>.</li>
+<li><code>trees_dec344ba7ea88a268b3feac0403844a3</code> and <code>trees_9f61da756dff1e09426c110eefce3824</code> store precomputed Open Tree of Life <code>phylo</code> caches for the bundled <em>Orchidaceae</em> run.</li>
+<li><code>system.file("extdata", "itol", package = "EthnoBotaPhyWR")</code> provides precomputed Newick trees (<code>.tre</code>) and iTOL v6 annotation files (<code>.txt</code>) for <em>Orchidaceae</em>.</li>
 </ul>
-<p>Additionally, you can provide:</p>
-<ul>
-<li>Your own list of chemical compounds found in subtaxa of the family</li>
-<li>Your own list of ethnobotanical uses of subtaxa of the family</li>
-</ul>
-<p>Or simply use the included orchids datasets for analysis.</p>
-</section>
-<section id="features" class="level2">
-<h2 class="anchored" data-anchor-id="features">Features</h2>
-<p><strong>EthnoBotaPhyWR</strong> provides:</p>
-<ul>
-<li><strong>Built-in datasets</strong> for <em>Orchidaceae</em> (3,055 compounds + 419 ethnobotanical uses + pre-computed Open Tree of Life <code>phylo</code> caches)</li>
-<li><strong>Bundled Newick &amp; iTOL v6 files</strong> (<code>inst/extdata/itol/</code>) for immediate interactive exploration on <a href="https://itol.embl.de">iTOL</a></li>
-<li><strong>Publication &amp; interactive tree bundles</strong>: every run exports vector <code>.svg</code>, journal-ready vector <code>.pdf</code>, and self-contained interactive <code>.html</code> (<code>ggiraph</code> with pan/zoom, hover tooltips, and a live taxon search bar), including both a clade-collapsed rectangular overview (<code>▲</code> for unstudied sister clades) and an uncollapsed circular (<code>fan</code>) supplementary overview</li>
-<li><strong>Log-scaled compound bars &amp; hierarchical legend</strong>: bar widths scale by <span class="math inline">\(\log(1 + n)\)</span> with exact compound counts printed at each bar tip and a 6-column hierarchical pathway/superclass legend (<code>[Pathway]</code> + 5 <code>microshades</code> superclasses per row)</li>
-<li><strong>Phylogenetic comparative methods</strong>: batch Open Tree of Life subtree resolution with exemplar species substitution for paraphyletic genera, Grafen-calibrated Felsenstein pruning ML ancestral state reconstruction, Blomberg’s <span class="math inline">\(K\)</span> phylogenetic signal, and hypergeometric hot-clade enrichment (<span class="math inline">\(\text{FDR } q &lt; 0.05\)</span>)</li>
-<li><strong>Chemotaxonomic &amp; diversity metrics</strong>: NPClassifier superclass Hill diversity (<span class="math inline">\(^1D = \exp(H')\)</span>), Empirical Bayes Beta-Binomial ethnobotanical rates, allometric species-richness compound residuals, and hypergeometric scaffold enrichment against LOTUS</li>
-<li><strong>Data federation</strong> from Wikidata (QLever), LOTUS, and local tables</li>
-</ul>
+<p>All remaining helpers (tree caching, phylogenetic signal and ancestral state calculation, NPClassifier lookup, hierarchy rollup, and plotting) are internal to the package.</p>
 </section>
 <section id="installation" class="level2">
 <h2 class="anchored" data-anchor-id="installation">Installation</h2>
-<p>As the package is not (yet) available on CRAN, you will need to install with:</p>
+<p>Bioconductor packages <code>ggtree</code> and <code>ggtreeExtra</code> are required imports. Install from r-universe (with CRAN and Bioconductor repositories enabled):</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"EthnoBotaPhyWR"</span>,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">repos =</span> <span class="fu">c</span>(</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://adafede.r-universe.dev"</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://davidgohel.r-universe.dev"</span>, <span class="co"># required for ggiraph, required for ggtree</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://davidgohel.r-universe.dev"</span>,</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://cran.r-universe.dev"</span>,</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://bioc.r-universe.dev"</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Once installed, you are ready to go through our <a href="https://adafede.github.io/EthnoBotaPhyWR/articles">documentation</a>, with the major steps detailed.</p>
+<p>Or install the development version from GitHub:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"adafede/EthnoBotaPhyWR"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Documentation articles are published on the package site: <a href="https://adafede.github.io/EthnoBotaPhyWR/vignettes/articles/ethnobota_fever_tree.html">Full pipeline tutorial</a> and <a href="https://adafede.github.io/EthnoBotaPhyWR/vignettes/articles/orchids.html">Orchids datasets</a>.</p>
 </section>
 <section id="quick-start" class="level2">
-<h2 class="anchored" data-anchor-id="quick-start">Quick Start</h2>
-<section id="load-included-datasets" class="level3">
-<h3 class="anchored" data-anchor-id="load-included-datasets">Load included datasets</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(EthnoBotaPhyWR)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Phytochemical data with SMILES and classification</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(orchids_compounds)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(orchids_compounds)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># NPClassifier taxonomy lookup</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(orchids_compound_classes)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(orchids_compound_classes)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Ethnobotanical uses linked to phylogenetics</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(orchids_ethnobotanical)</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(orchids_ethnobotanical)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Bundled Newick (.tre) and iTOL v6 annotation (.txt) files</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>itol_dir <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"itol"</span>, <span class="at">package =</span> <span class="st">"EthnoBotaPhyWR"</span>)</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(itol_dir)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<h2 class="anchored" data-anchor-id="quick-start">Quick start</h2>
+<section id="inspect-bundled-datasets-and-itol-files-offline" class="level3">
+<h3 class="anchored" data-anchor-id="inspect-bundled-datasets-and-itol-files-offline">Inspect bundled datasets and iTOL files (offline)</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(EthnoBotaPhyWR)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(orchids_compounds)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(orchids_compound_classes)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(orchids_ethnobotanical)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(orchids_compounds)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(orchids_compound_classes)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(orchids_ethnobotanical)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>itol_dir <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">"extdata"</span>, <span class="st">"itol"</span>, <span class="at">package =</span> <span class="st">"EthnoBotaPhyWR"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(itol_dir)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="interactive-exploration-on-itol-interactive-tree-of-life" class="level3">
-<h3 class="anchored" data-anchor-id="interactive-exploration-on-itol-interactive-tree-of-life">Interactive Exploration on iTOL (Interactive Tree Of Life)</h3>
-<p>Both the pre-bundled <em>Orchidaceae</em> files (<code>system.file("extdata", "itol", package = "EthnoBotaPhyWR")</code>) and the files generated in <code>&lt;dirname(export_table_counts)&gt;/itol/</code> when running <code>ethnobotafever_tree()</code> on any plant family can be explored on <a href="https://itol.embl.de">iTOL</a>:</p>
+<section id="interactive-exploration-on-itol" class="level3">
+<h3 class="anchored" data-anchor-id="interactive-exploration-on-itol">Interactive exploration on iTOL</h3>
+<p>To inspect either the bundled <em>Orchidaceae</em> outputs or files written to <code>&lt;dirname(export_table_counts)&gt;/itol/</code> by <code>ethnobotafever_tree()</code>:</p>
 <ol type="1">
-<li>Open <a href="https://itol.embl.de/upload.cgi" class="uri">https://itol.embl.de/upload.cgi</a> and upload one of the <code>.tre</code> Newick files:
-<ul>
-<li><code>&lt;Taxon&gt;_full_genera_tree.tre</code> (all genera in the family)</li>
-<li><code>&lt;Taxon&gt;_phyto_genera_tree.tre</code> (genera with reported compounds or uses)</li>
-<li><code>&lt;Taxon&gt;_phyto_species_tree.tre</code> (species-level tree for major genera)</li>
-</ul></li>
-<li>Once the tree opens in the iTOL viewer, <strong>drag and drop</strong> the three companion <code>.txt</code> annotation files directly onto the browser canvas:
+<li>Upload one of the <code>.tre</code> files (<code>*_full_genera_tree.tre</code>, <code>*_phyto_genera_tree.tre</code>, or <code>*_phyto_species_tree.tre</code>) to <a href="https://itol.embl.de/upload.cgi" class="uri">https://itol.embl.de/upload.cgi</a>.</li>
+<li>Drag and drop its three companion annotation files onto the tree canvas:
 <ul>
 <li><code>*_itol_ethnobotany.txt</code> (<code>DATASET_GRADIENT</code>: <span class="math inline">\(\log_{10}\)</span> ethnobotanical species count)</li>
 <li><code>*_itol_species_richness.txt</code> (<code>DATASET_SIMPLEBAR</code>: known species count per taxon)</li>
-<li><code>*_itol_compounds_multibar.txt</code> (<code>DATASET_MULTIBAR</code>: stacked compound superclass counts colored with the exact <code>cascade</code>/<code>microshades</code> palette)</li>
+<li><code>*_itol_compounds_multibar.txt</code> (<code>DATASET_MULTIBAR</code>: stacked compound superclass counts colored by pathway)</li>
 </ul></li>
-<li>Use iTOL’s built-in controls to search taxa, dynamically collapse or expand clades, re-root, and switch between rectangular, circular, and unrooted layouts.</li>
 </ol>
 </section>
-<section id="analyze-your-own-family" class="level3">
-<h3 class="anchored" data-anchor-id="analyze-your-own-family">Analyze your own family</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get data for any plant family (requires Wikidata)</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">ethnobotafever_tree</span>(</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">taxon_name =</span> <span class="st">"Orchidaceae"</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_multiple_genera =</span> <span class="dv">1</span>,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_ethnobotanical_count_min =</span> <span class="dv">0</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_compounds_count_min =</span> <span class="dv">0</span>,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">example_family_names =</span> <span class="fu">c</span>(<span class="st">"Solanaceae"</span>, <span class="st">"Fabaceae"</span>),</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">path_molecules =</span> <span class="cn">NULL</span>,  <span class="co"># or path to your own</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">path_classes =</span> <span class="cn">NULL</span>,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">path_ethnobotanical =</span> <span class="cn">NULL</span>,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">export_tree_full =</span> <span class="st">"~/orchids_tree_full.pdf"</span>,</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">export_tree_phyto =</span> <span class="st">"~/orchids_tree_phyto.pdf"</span>,</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">export_tree_phyto_sub =</span> <span class="st">"~/orchids_tree_phyto_sub.pdf"</span>,</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">export_table_classified =</span> <span class="st">"~/orchids_classified.tsv"</span>,</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">export_table_counts =</span> <span class="st">"~/orchids_counts.tsv"</span>,</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">export_table_counts_sub =</span> <span class="st">"~/orchids_counts_sub.tsv"</span>,</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">local_cache =</span> <span class="st">"~/.ethnobotaphy_cache"</span>,</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">log_dir =</span> <span class="st">"~/"</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="analyze-a-plant-family-requires-network-access" class="level3">
+<h3 class="anchored" data-anchor-id="analyze-a-plant-family-requires-network-access">Analyze a plant family (requires network access)</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>out_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">"ethnobotaphywr_demo"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(out_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>result <span class="ot">&lt;-</span> <span class="fu">ethnobotafever_tree</span>(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">taxon_name =</span> <span class="st">"Orchidaceae"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_multiple_genera =</span> <span class="dv">10</span>L,</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_ethnobotanical_count_min =</span> <span class="dv">10</span>L,</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n_compounds_count_min =</span> <span class="dv">50</span>L,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">example_family_names =</span> <span class="fu">c</span>(<span class="st">"Solanaceae"</span>, <span class="st">"Fabaceae"</span>),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">path_molecules =</span> orchids_compounds,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">path_classes =</span> orchids_compound_classes,</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">path_ethnobotanical =</span> orchids_ethnobotanical,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">export_tree_full =</span> <span class="fu">file.path</span>(out_dir, <span class="st">"orchids_tree_full.svg"</span>),</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">export_tree_phyto =</span> <span class="fu">file.path</span>(out_dir, <span class="st">"orchids_tree_phyto.svg"</span>),</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">export_tree_phyto_sub =</span> <span class="fu">file.path</span>(out_dir, <span class="st">"orchids_tree_phyto_sub.svg"</span>),</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">export_table_classified =</span> <span class="fu">file.path</span>(out_dir, <span class="st">"orchids_classified.tsv"</span>),</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">export_table_counts =</span> <span class="fu">file.path</span>(out_dir, <span class="st">"orchids_counts.tsv"</span>),</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">export_table_counts_sub =</span> <span class="fu">file.path</span>(out_dir, <span class="st">"orchids_counts_sub.tsv"</span>),</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">local_cache =</span> <span class="fu">file.path</span>(out_dir, <span class="st">"cache"</span>),</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">log_dir =</span> out_dir</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="main-citations" class="level2">
-<h2 class="anchored" data-anchor-id="main-citations">Main Citations</h2>
-<section id="lotus" class="level3">
-<h3 class="anchored" data-anchor-id="lotus">LOTUS</h3>
-<p><a href="https://doi.org/10.7554/eLife.70780" class="uri">https://doi.org/10.7554/eLife.70780</a></p>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<ul>
+<li><strong>Source database bias and incompleteness</strong>: Wikidata and LOTUS record only published and digitized occurrences; zero or low counts for a taxon reflect lack of curated records rather than true biological absence.</li>
+<li><strong>Topological branch lengths</strong>: Open Tree of Life synthetic subtrees do not provide calibrated divergence times. Phylogenetic ancestral state reconstruction (<code>method = "phylo"</code>) and Blomberg’s <span class="math inline">\(K\)</span> use Grafen branch lengths as a topological approximation.</li>
+<li><strong>External service dependency</strong>: Running <code>ethnobotafever_tree()</code> without complete local tables and caches requires live HTTP access to QLever (Wikidata endpoint), the Open Tree of Life v3 API, and GNPS2 NPClassifier.</li>
+</ul>
 </section>
-<section id="open-tree-taxonomy" class="level3">
-<h3 class="anchored" data-anchor-id="open-tree-taxonomy">Open Tree Taxonomy</h3>
-<p><a href="https://doi.org/10.3897/BDJ.5.e12581" class="uri">https://doi.org/10.3897/BDJ.5.e12581</a></p>
-</section>
-<section id="npclassifier" class="level3">
-<h3 class="anchored" data-anchor-id="npclassifier">NPClassifier</h3>
-<p><a href="https://doi.org/10.1021/acs.jnatprod.1c00399" class="uri">https://doi.org/10.1021/acs.jnatprod.1c00399</a></p>
-</section>
+<section id="main-data-source-citations" class="level2">
+<h2 class="anchored" data-anchor-id="main-data-source-citations">Main data source citations</h2>
+<ul>
+<li>LOTUS: <a href="https://doi.org/10.7554/eLife.70780" class="uri">https://doi.org/10.7554/eLife.70780</a></li>
+<li>Open Tree Taxonomy: <a href="https://doi.org/10.3897/BDJ.5.e12581" class="uri">https://doi.org/10.3897/BDJ.5.e12581</a></li>
+<li>NPClassifier: <a href="https://doi.org/10.1021/acs.jnatprod.1c00399" class="uri">https://doi.org/10.1021/acs.jnatprod.1c00399</a></li>
+</ul>
 </section>
 <section id="additional-software-credits" class="level2">
 <h2 class="anchored" data-anchor-id="additional-software-credits">Additional software credits</h2>
@@ -587,7 +561,7 @@ Paradis, Emmanuel, and Klaus Schliep. 2019. “Ape 5.0: An Environment for Moder
 R Core Team. 2026. <em>R: A Language and Environment for Statistical Computing</em>. R Foundation for Statistical Computing. <a href="https://doi.org/10.32614/R.manuals" class="uri">https://doi.org/10.32614/R.manuals</a>.
 </div>
 <div id="ref-EthnoBotaPhyWR" class="csl-entry" role="listitem">
-Rutz, Adriano. 2026. <em>EthnoBotaPhyWR: Infrastructure for Ethnobotanical and Phytochemical Data Integration with Wikidata</em>. <a href="https://doi.org/10.5281/zenodo.TODO" class="uri">https://doi.org/10.5281/zenodo.TODO</a>.
+Rutz, Adriano. 2026. <em>EthnoBotaPhyWR: Infrastructure for Ethnobotanical and Phytochemical Data Integration with Wikidata</em>. <a href="https://adafede.github.io/EthnoBotaPhyWR/" class="uri">https://adafede.github.io/EthnoBotaPhyWR/</a>.
 </div>
 <div id="ref-htmlwidgets" class="csl-entry" role="listitem">
 Vaidyanathan, Ramnath, Yihui Xie, JJ Allaire, Joe Cheng, Carson Sievert, and Kenton Russell. 2023. <em><span class="nocase">htmlwidgets</span>: HTML Widgets for r</em>. <a href="https://doi.org/10.32614/CRAN.package.htmlwidgets" class="uri">https://doi.org/10.32614/CRAN.package.htmlwidgets</a>.

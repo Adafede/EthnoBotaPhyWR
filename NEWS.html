@@ -212,8 +212,8 @@ window.Quarto = {
   <ul>
   <li><a href="#ethnobotaphywr-0.0.0.9001" id="toc-ethnobotaphywr-0.0.0.9001" class="nav-link active" data-scroll-target="#ethnobotaphywr-0.0.0.9001">EthnoBotaPhyWR 0.0.0.9001</a>
   <ul class="collapse">
-  <li><a href="#new-features-and-algorithmic-improvements" id="toc-new-features-and-algorithmic-improvements" class="nav-link" data-scroll-target="#new-features-and-algorithmic-improvements">New features and algorithmic improvements</a></li>
-  <li><a href="#initial-release" id="toc-initial-release" class="nav-link" data-scroll-target="#initial-release">Initial release</a></li>
+  <li><a href="#public-api-and-datasets" id="toc-public-api-and-datasets" class="nav-link" data-scroll-target="#public-api-and-datasets">Public API and datasets</a></li>
+  <li><a href="#fixes-and-improvements" id="toc-fixes-and-improvements" class="nav-link" data-scroll-target="#fixes-and-improvements">Fixes and improvements</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -226,25 +226,23 @@ window.Quarto = {
 <script async="" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 <section id="ethnobotaphywr-0.0.0.9001" class="level1">
 <h1>EthnoBotaPhyWR 0.0.0.9001</h1>
-<section id="new-features-and-algorithmic-improvements" class="level2">
-<h2 class="anchored" data-anchor-id="new-features-and-algorithmic-improvements">New features and algorithmic improvements</h2>
+<section id="public-api-and-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="public-api-and-datasets">Public API and datasets</h2>
 <ul>
-<li><code>get_trees()</code> queries the Open Tree of Life v3 <code>induced_subtree</code> endpoint in a single batch request, substitutes exemplar species OTT IDs (<code>exemplar_ott_id</code>) for paraphyletic genera, matches Newick tips by exact <code>_ott&lt;ID&gt;</code> suffix, and grafts unplaced species at their congeneric MRCA.</li>
-<li><code>calculate_branches_values()</code> supports <code>method = "phylo"</code> with Grafen branch length calibration, two-pass Felsenstein pruning ML ancestral state reconstruction (<code>phylo_asr</code>), Empirical Bayes Beta-Binomial shrinkage (<code>eb_rate</code>), hypergeometric clade enrichment with Benjamini-Hochberg FDR (<code>hot_node_pval</code>, <code>hot_node_qval</code>, <code>is_hot_node</code>), and Blomberg’s <span class="math inline">\(K\)</span> phylogenetic signal with permutation testing.</li>
-<li><code>ethnobotafever_tree()</code> computes hypergeometric chemotaxonomic scaffold enrichment against LOTUS, Fisher’s exact test for ethnobotanical-phytochemical coupling across genera, NPClassifier superclass Shannon/Hill diversity (<code>shannon_diversity</code>, <code>hill_q1</code>), Empirical Bayes ethnobotanical rates (<code>ethnobotanical_rate_eb</code>), and log-log species-richness compound residuals (<code>compounds_residual</code>).</li>
-<li><code>prepare_hierarchy()</code> performs an exact mass-conserving 3-level (<code>pathway -&gt; superclass -&gt; class</code>) rollup, preserving unclassified (<code>Other</code>) and multi-label compounds without tie-breaking loss.</li>
-<li><code>plot_trees()</code> highlights statistically enriched ethnobotanical clades with red diamond markers, computes subtree summaries in <span class="math inline">\(O(N)\)</span> postorder traversal, and scales tip sizes by <span class="math inline">\(\log_{10}\)</span> species counts matching the legend breaks.</li>
+<li>Exports <code>ethnobotafever_tree()</code> as the package’s main pipeline entry point.</li>
+<li>Bundles curated <em>Orchidaceae</em> datasets (<code>orchids_compounds</code>, <code>orchids_compound_classes</code>, <code>orchids_ethnobotanical</code>) as plain <code>data.frame</code> objects alongside precomputed tree caches (<code>trees_dec344ba7ea88a268b3feac0403844a3</code>, <code>trees_9f61da756dff1e09426c110eefce3824</code>) and iTOL v6 exports in <code>inst/extdata/itol/</code>.</li>
 </ul>
 </section>
-<section id="initial-release" class="level2">
-<h2 class="anchored" data-anchor-id="initial-release">Initial release</h2>
+<section id="fixes-and-improvements" class="level2">
+<h2 class="anchored" data-anchor-id="fixes-and-improvements">Fixes and improvements</h2>
 <ul>
-<li>Provides infrastructure for ethnobotanical and phytochemical data integration with Wikidata and the Open Tree of Life.</li>
-<li>Includes curated <em>Orchidaceae</em> datasets (3,055 compounds, 419 ethnobotanical uses, 1,574 compound classifications).</li>
-<li>Exports <code>ethnobotafever_tree()</code> as the main analysis pipeline function.</li>
-<li>Provides <code>get_npclassifier_taxonomy()</code> for compound classification via the NPClassifier API.</li>
-<li>Provides <code>normalize_ott_ids()</code> for OTT ID normalization.</li>
-<li>Built-in caching for phylogenetic tree construction via <code>get_trees_cached()</code>.</li>
+<li>Replaced permutation-MSE Blomberg’s <span class="math inline">\(K\)</span> heuristic and missing-tip zero imputation in internal <code>calculate_branches_values()</code> with exact analytical PIC/GLS Blomberg’s <span class="math inline">\(K\)</span> restricted to finite tips, preserving <code>.Random.seed</code> across permutation tests.</li>
+<li>Fixed internal postorder node ordering (<code>unique(..., fromLast = TRUE)</code>) in <code>calculate_branches_values()</code> and <code>plot_trees()</code>, and scaled Felsenstein pruning tip variance consistently.</li>
+<li>Fixed species-level <code>ethnobotafever_tree()</code> outputs so <code>Orchidaceae_phyto_species_itol_species_richness.txt</code> uses per-species richness (<code>1</code>) rather than parent-genus totals, <code>ethnobotany</code> uses per-species counts (<code>{0, 1}</code>), and non-medicinal phytochemical species are retained in species-level compound exports.</li>
+<li>Restricted <code>hill_by_genus</code> diversity calculations in <code>ethnobotafever_tree()</code> to valid NPClassifier superclasses, excluding blank strings.</li>
+<li>Switched NPClassifier SMILES query encoding in internal <code>get_npclassifier_taxonomy()</code> to <code>curl::curl_escape()</code>, recovering classifications for SMILES containing <code>%10</code>/<code>%11</code> ring closures and formal charges; repaired the 19 affected rows in <code>data-raw/</code> TSVs and updated tree caches and iTOL outputs.</li>
+<li>Hardened input path validation, SPARQL literal escaping in internal <code>taxon_name_to_qid()</code>, strict QID regex validation, edge guards around <code>lm()</code> compound-richness residuals, HTML title escaping in <code>plot_trees()</code>, and guarded <code>log10()</code> of zero ethnobotanical counts.</li>
+<li>Added automated offline test suites, <code>.lintr</code> configuration, <code>jarl</code> and coverage CI workflows, and synced citation/package metadata.</li>
 </ul>
 
 

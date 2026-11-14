@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Adriano Rutz">
-<meta name="dcterms.date" content="2026-11-11">
+<meta name="dcterms.date" content="2026-11-14">
 
 <title>Orchids – EthnoBotaPhyWR</title>
 <style>
@@ -128,10 +128,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <meta name="citation_title" content="Orchids">
 <meta name="citation_author" content="Adriano Rutz">
-<meta name="citation_publication_date" content="2026-11-11">
-<meta name="citation_cover_date" content="2026-11-11">
+<meta name="citation_publication_date" content="2026-11-14">
+<meta name="citation_cover_date" content="2026-11-14">
 <meta name="citation_year" content="2026">
-<meta name="citation_online_date" content="2026-11-11">
+<meta name="citation_online_date" content="2026-11-14">
 <meta name="citation_fulltext_html_url" content="https://adafede.github.io/EthnoBotaPhyWR/vignettes/articles/orchids.html">
 <meta name="citation_language" content="en">
 </head>
@@ -294,7 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 11, 2026</p>
+      <p class="date">November 14, 2026</p>
     </div>
   </div>
   
@@ -345,15 +345,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The <strong>orchids_compounds</strong> dataset links taxa to their reported chemical compounds, with SMILES strings and chemical classifiers.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(orchids_compounds, <span class="dv">3</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 3 × 10</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   taxon    taxon_name          compound compound_smiles_cano…¹ compound_inchikey</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;               &lt;chr&gt;    &lt;chr&gt;                  &lt;chr&gt;            </span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Q3055749 Epidendrum fulgens  Q100145… OC1CC2=CCC3C(CCC4(C)C… SGNBVLSWZMBQTH-S…</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Q3055749 Epidendrum fulgens  Q100145… OC1CC2=CCC3C(CCC4(C)C… SGNBVLSWZMBQTH-S…</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Q4987884 Bulbophyllum echin… Q100276… C(C(C(C(C(=O)O)O)O)O)O QXKAIJAYHKCRRA-U…</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ abbreviated name: ¹​compound_smiles_canonical</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 5 more variables: connectivity_layer &lt;chr&gt;, pathway &lt;chr&gt;,</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   superclass &lt;chr&gt;, class &lt;chr&gt;, glycoside &lt;lgl&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      taxon                taxon_name   compound</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Q3055749        Epidendrum fulgens Q100145898</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Q3055749        Epidendrum fulgens Q100145898</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Q4987884 Bulbophyllum echinolabium Q100276118</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                              compound_smiles_canonical</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 OC1CC2=CCC3C(CCC4(C)C(CCC34)C(C)CCC(C)C(C)C)C2(C)CC1</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 OC1CC2=CCC3C(CCC4(C)C(CCC34)C(C)CCC(C)C(C)C)C2(C)CC1</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3                               C(C(C(C(C(=O)O)O)O)O)O</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             compound_inchikey connectivity_layer       pathway  superclass</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 SGNBVLSWZMBQTH-SSKRYHHQSA-N     SGNBVLSWZMBQTH    Terpenoids    Steroids</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 SGNBVLSWZMBQTH-SSKRYHHQSA-N     SGNBVLSWZMBQTH    Terpenoids    Steroids</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 QXKAIJAYHKCRRA-UHFFFAOYSA-N     QXKAIJAYHKCRRA Carbohydrates Saccharides</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                 class glycoside</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Cholestane steroids     FALSE</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  Ergostane steroids     FALSE</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3     Monosaccharides     FALSE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="structure" class="level3">
 <h3 class="anchored" data-anchor-id="structure">Structure</h3>
@@ -400,17 +407,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  tidytable<span class="sc">::</span><span class="fu">distinct</span>(compound, pathway, superclass, class)</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Found"</span>, <span class="fu">nrow</span>(glycosides), <span class="st">"unique glycoside compounds</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Found 249 unique glycoside compounds</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Found 264 unique glycoside compounds</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(glycosides)</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 6 × 4</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   compound   pathway                           superclass                 class </span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;                             &lt;chr&gt;                      &lt;chr&gt; </span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Q103818207 "Carbohydrates"                   "Saccharides"              "Disa…</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Q104170422 "Shikimates and Phenylpropanoids" "Flavonoids"               "Flav…</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Q104375600 "Shikimates and Phenylpropanoids" "Phenylpropanoids (C6-C3)" "Cinn…</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 Q104376098 "Shikimates and Phenylpropanoids" ""                         ""    </span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 Q104392797 ""                                ""                         ""    </span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 Q104399732 "Shikimates and Phenylpropanoids" "Flavonoids"               "Flav…</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   compound   pathway                         superclass               class     </span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;                           &lt;chr&gt;                    &lt;chr&gt;     </span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Q103818207 Carbohydrates                   Saccharides              Disacchar…</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Q104170422 Shikimates and Phenylpropanoids Flavonoids               Flavones  </span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Q104375600 Shikimates and Phenylpropanoids Phenylpropanoids (C6-C3) Cinnamic …</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 Q104376098 Shikimates and Phenylpropanoids &lt;NA&gt;                     &lt;NA&gt;      </span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 Q104392797 &lt;NA&gt;                            &lt;NA&gt;                     &lt;NA&gt;      </span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 Q104399732 Shikimates and Phenylpropanoids Flavonoids               Flavonols</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>Explore chemical diversity:</strong></p>
 <div class="cell">
@@ -428,7 +435,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 Dendrobium nobile                     165                 8               41</span></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 Dendrobium officinale                 138                 8               49</span></span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 Vanilla planifolia                     97                 6               15</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 Bletilla striata                       95                 6               11</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 Bletilla striata                       95                 6               12</span></span>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 Gymnadenia conopsea                    85                 7               15</span></span>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 Arundina graminifolia                  68                 5               14</span></span>
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 Vanilla tahitensis                     67                 5                8</span></span>
@@ -443,12 +450,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The <strong>orchids_compound_classes</strong> dataset is a reference lookup for SMILES strings to their NPClassifier taxonomy.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(orchids_compound_classes, <span class="dv">3</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 3 × 5</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   query                                       pathway superclass class glycoside</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;                                       &lt;chr&gt;   &lt;chr&gt;      &lt;chr&gt; &lt;lgl&gt;    </span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 OC1CC2=CCC3C(CCC4(C)C(CCC34)C(C)CCC(C)C(C)… Terpen… Steroids   Chol… FALSE    </span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 OC1CC2=CCC3C(CCC4(C)C(CCC34)C(C)CCC(C)C(C)… Terpen… Steroids   Ergo… FALSE    </span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 C(C(C(C(C(=O)O)O)O)O)O                      Carboh… Saccharid… Mono… FALSE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                                                  query       pathway</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 OC1CC2=CCC3C(CCC4(C)C(CCC34)C(C)CCC(C)C(C)C)C2(C)CC1    Terpenoids</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 OC1CC2=CCC3C(CCC4(C)C(CCC34)C(C)CCC(C)C(C)C)C2(C)CC1    Terpenoids</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3                               C(C(C(C(C(=O)O)O)O)O)O Carbohydrates</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    superclass               class glycoside</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1    Steroids Cholestane steroids     FALSE</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2    Steroids  Ergostane steroids     FALSE</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Saccharides     Monosaccharides     FALSE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="structure-1" class="level3">
 <h3 class="anchored" data-anchor-id="structure-1">Structure</h3>
@@ -466,7 +475,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  tidytable<span class="sc">::</span><span class="fu">filter</span>(pathway <span class="sc">==</span> <span class="st">"Terpenoids"</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Found"</span>, <span class="fu">nrow</span>(terpenoids), <span class="st">"SMILES matching terpenoids</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Found 290 SMILES matching terpenoids</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Found 291 SMILES matching terpenoids</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>terpenoids <span class="sc">|&gt;</span></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  tidytable<span class="sc">::</span><span class="fu">summarize</span>(</span>
@@ -475,20 +484,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  tidytable<span class="sc">::</span><span class="fu">arrange</span>(<span class="sc">-</span>n)</span>
 <span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 12 × 2</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    superclass              n</span></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;               &lt;int&gt;</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 "Sesquiterpenoids"     95</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 "Steroids"             61</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 "Triterpenoids"        49</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 "Monoterpenoids"       43</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 ""                     14</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 "Diterpenoids"         13</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 "Pseudoalkaloids"       6</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 "Apocarotenoids"        5</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 "Carotenoids (C40)"     1</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 "Fatty acyls"           1</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 "Fatty esters"          1</span></span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 "Meroterpenoids"        1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    superclass            n</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;             &lt;int&gt;</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 Sesquiterpenoids     96</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 Steroids             61</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 Triterpenoids        49</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 Monoterpenoids       43</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 &lt;NA&gt;                 14</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 Diterpenoids         13</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 Pseudoalkaloids       6</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 Apocarotenoids        5</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 Carotenoids (C40)     1</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 Fatty acyls           1</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 Fatty esters          1</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 Meroterpenoids        1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 </section>
@@ -497,12 +506,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The <strong>orchids_ethnobotanical</strong> dataset links species with documented ethnobotanical uses to their Open Tree of Life taxonomy identifiers.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(orchids_ethnobotanical, <span class="dv">3</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tidytable: 3 × 3</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   taxon_name       taxon     taxon_id_ott</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;            &lt;chr&gt;     &lt;chr&gt;       </span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Acampe carinata  Q15500570 3975442     </span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Acampe papillosa Q24852981 649247      </span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Acampe praemorsa Q4671836  292057</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         taxon_name     taxon taxon_id_ott</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  Acampe carinata Q15500570      3975442</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 Acampe papillosa Q24852981       649247</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 Acampe praemorsa  Q4671836       292057</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="structure-2" class="level3">
 <h3 class="anchored" data-anchor-id="structure-2">Structure</h3>
@@ -562,7 +569,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Species with both compounds AND ethnobotanical uses:"</span>,</span>
 <span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(both), <span class="st">"/"</span>, <span class="fu">nrow</span>(spp_ethnobotany), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span></span>
 <span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Species with both compounds AND ethnobotanical uses: 102 / 419</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Species with both compounds AND ethnobotanical uses: 100 / 419</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="r-universe-multi-format-export" class="level2">
@@ -587,17 +594,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="reproducibility" class="level2">
 <h2 class="anchored" data-anchor-id="reproducibility">Reproducibility</h2>
-<p>The <code>data-raw/</code> scripts document how these datasets were prepared:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View processing script</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">file.show</span>(<span class="fu">system.file</span>(<span class="st">"data-raw"</span>, <span class="st">"orchids_compounds.R"</span>, <span class="at">package =</span> <span class="st">"EthnoBotaPhyWR"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>The <code>data-raw/</code> scripts in the <a href="https://github.com/adafede/EthnoBotaPhyWR/tree/main/data-raw">source repository</a> document how these datasets were prepared:</p>
+<ul>
+<li><code>data-raw/orchids_compounds.R</code></li>
+<li><code>data-raw/orchids_compound_classes.R</code></li>
+<li><code>data-raw/orchids_ethnobotanical.R</code></li>
+</ul>
 </section>
 <section id="further-reading" class="level2">
 <h2 class="anchored" data-anchor-id="further-reading">Further Reading</h2>
 <ul>
-<li>Main vignette: See <code>help(ethnobotafever_tree)</code> for the complete pipeline</li>
-<li>Tree building: <code>help(get_trees_cached)</code></li>
-<li>Plotting: <code>help(plot_trees)</code></li>
-<li>Compound classification: <code>help(get_npclassifier_taxonomy)</code></li>
+<li>Full pipeline tutorial: <a href="../../vignettes/articles/ethnobota_fever_tree.html">Using EthnoBotaPhyWR</a></li>
+<li>Pipeline reference: <code>help(ethnobotafever_tree)</code></li>
+<li>Dataset references: <code>help(orchids_compounds)</code>, <code>help(orchids_compound_classes)</code>, <code>help(orchids_ethnobotanical)</code></li>
 </ul>
 
 
@@ -607,12 +616,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><div class="code-copy-outer-scaffold"><pre class="sourceCode quarto-appendix-bibtex code-with-copy"><code class="sourceCode bibtex">@online{rutz2026,
   author = {Rutz, Adriano},
   title = {Orchids},
-  date = {2026-11-11},
+  date = {2026-11-14},
   url = {https://adafede.github.io/EthnoBotaPhyWR/vignettes/articles/orchids.html},
   langid = {en}
 }
 </code></pre><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-rutz2026" class="csl-entry quarto-appendix-citeas" role="listitem">
-Rutz, Adriano. 2026. <span>“Orchids.”</span> November 11. <a href="https://adafede.github.io/EthnoBotaPhyWR/vignettes/articles/orchids.html">https://adafede.github.io/EthnoBotaPhyWR/vignettes/articles/orchids.html</a>.
+Rutz, Adriano. 2026. <span>“Orchids.”</span> November 14. <a href="https://adafede.github.io/EthnoBotaPhyWR/vignettes/articles/orchids.html">https://adafede.github.io/EthnoBotaPhyWR/vignettes/articles/orchids.html</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {

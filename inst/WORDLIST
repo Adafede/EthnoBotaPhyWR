@@ -27,6 +27,7 @@ Ethnobotany
 Felsenstein
 Frerebeau
 Friedrich
+GLS
 Gergely
 Ggtree
 Gohel
@@ -106,7 +107,6 @@ clades
 colours
 congeneric
 deduplicated
-dr
 et
 ethnobotanical
 ethnobotany
@@ -134,11 +134,11 @@ microshades
 naturalproducts
 nd
 npclassifier
-objets
 opentreeoflife
 ott
 paraphyletic
 phylo
+phylogenies
 phytochemical
 phytochemistry
 polytomies
@@ -153,7 +153,7 @@ subtaxa
 testthat
 tidytable
 tidyverse
-tl
+uncached
 uncollapsed
 unrooted
 urlencoded

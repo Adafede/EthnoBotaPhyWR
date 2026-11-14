@@ -108,7 +108,7 @@ At the moment, this vignette supports adding your own data and combine them with
 the ones available on Wikidata to see the results. Ideally, you should share
 these precious data.
 
-### tl;dr
+### Pipeline overview
 
 The function you are looking for is `ethnobotafever_tree()`, whose parameters
 are described below:
@@ -192,7 +192,7 @@ local_cache <- cache_dir
 dir.create(log_dir, recursive = TRUE, showWarnings = FALSE)
 ```
 
-Change these parameters as required and you are ready for the fever!
+Adjust these parameters as needed before running the pipeline:
 
 ```{r}
 #| label: ethnobotafever_tree
@@ -221,7 +221,7 @@ results <- ethnobotafever_tree(
 
 ## Results {#sec-results}
 
-This will give you different objets
+This returns the following objects:
 
 First, tables containing different information:
 

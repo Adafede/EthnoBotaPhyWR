@@ -104,7 +104,13 @@ test_that("CITATION is valid and human docs are clean", {
 
   pkg_root <- testthat::test_path("../..")
   if (file.exists(file.path(pkg_root, "DESCRIPTION"))) {
-    for (rel in c("NEWS.md", "DESCRIPTION", "inst/CITATION")) {
+    for (rel in c(
+      "README.md",
+      "CONTRIBUTING.md",
+      "NEWS.md",
+      "DESCRIPTION",
+      "inst/CITATION"
+    )) {
       p <- file.path(pkg_root, rel)
       if (file.exists(p)) {
         txt <- readLines(p, warn = FALSE)
@@ -113,10 +119,6 @@ test_that("CITATION is valid and human docs are clean", {
           info = rel
         )
       }
-    }
-    if (file.exists(file.path(pkg_root, "README.md"))) {
-      readme_txt <- readLines(file.path(pkg_root, "README.md"), warn = FALSE)
-      expect_false(any(grepl("AGENTS\\.md|\\.agents", readme_txt)))
     }
   }
 })

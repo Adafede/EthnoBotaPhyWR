@@ -262,16 +262,14 @@ All datasets are curated from:
 
 ## Reproducibility
 
-The `data-raw/` scripts document how these datasets were prepared:
+The `data-raw/` scripts in the [source repository](https://github.com/adafede/EthnoBotaPhyWR/tree/main/data-raw) document how these datasets were prepared:
 
-```r
-# View processing script
-file.show(system.file("data-raw", "orchids_compounds.R", package = "EthnoBotaPhyWR"))
-```
+- `data-raw/orchids_compounds.R`
+- `data-raw/orchids_compound_classes.R`
+- `data-raw/orchids_ethnobotanical.R`
 
 ## Further Reading
 
-- Main vignette: See `help(ethnobotafever_tree)` for the complete pipeline
-- Tree building: `help(get_trees_cached)`
-- Plotting: `help(plot_trees)`
-- Compound classification: `help(get_npclassifier_taxonomy)`
+- Full pipeline tutorial: [Using EthnoBotaPhyWR](ethnobota_fever_tree.qmd)
+- Pipeline reference: `help(ethnobotafever_tree)`
+- Dataset references: `help(orchids_compounds)`, `help(orchids_compound_classes)`, `help(orchids_ethnobotanical)`

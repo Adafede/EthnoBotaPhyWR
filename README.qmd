@@ -1,7 +1,6 @@
 ---
 format:
   gfm: default
-  html: default
 bibliography: grateful-refs.bib
 ---
 
@@ -12,167 +11,115 @@ bibliography: grateful-refs.bib
 <!-- badges: start -->
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-[![No Maintenance
-Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 [![R-CMD-check](https://github.com/adafede/EthnoBotaPhyWR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/adafede/EthnoBotaPhyWR/actions/workflows/R-CMD-check.yaml)
 [![r-universe
 badge](https://adafede.r-universe.dev/EthnoBotaPhyWR/badges/version)](https://adafede.r-universe.dev/EthnoBotaPhyWR)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.TODO.svg)](https://doi.org/10.5281/zenodo.TODO)
 <!-- badges: end -->
 
-**EthnoBotaPhyWR** stands for *ethnobotany*, *phytochemistry*, *Wikidata* and
-*R*
-<span class="smallcaps">(maybe you can also find the
-*bot* of *robot*)</span> It
-should be pronounced "Ethnobota Fever".
+**EthnoBotaPhyWR** combines ethnobotanical use records and phytochemical occurrence data from Wikidata and LOTUS on Open Tree of Life phylogenies.
 
-## Requirements
+## Scope and exported API
 
-Here is what you *minimally* need:
+The package exports a single pipeline entry point alongside curated *Orchidaceae* datasets:
 
-- The scientific name of the taxonomic family you are interested in
+- `ethnobotafever_tree()` runs the end-to-end analysis for any plant family, querying Wikidata (via QLever), Open Tree of Life, and NPClassifier, computing diversity and phylogenetic metrics, and exporting trees, tables, and iTOL annotations.
+- `orchids_compounds` (3,055 rows), `orchids_compound_classes` (1,574 rows), and `orchids_ethnobotanical` (419 rows) are curated plain `data.frame` objects for *Orchidaceae*.
+- `trees_dec344ba7ea88a268b3feac0403844a3` and `trees_9f61da756dff1e09426c110eefce3824` store precomputed Open Tree of Life `phylo` caches for the bundled *Orchidaceae* run.
+- `system.file("extdata", "itol", package = "EthnoBotaPhyWR")` provides precomputed Newick trees (`.tre`) and iTOL v6 annotation files (`.txt`) for *Orchidaceae*.
 
-Additionally, you can provide:
-
-- Your own list of chemical compounds found in subtaxa of the family
-- Your own list of ethnobotanical uses of subtaxa of the family
-
-Or simply use the included orchids datasets for analysis.
-
-## Features
-
-**EthnoBotaPhyWR** provides:
-
-- **Built-in datasets** for *Orchidaceae* (3,055 compounds + 419 ethnobotanical
-  uses + pre-computed Open Tree of Life `phylo` caches)
-- **Bundled Newick & iTOL v6 files** (`inst/extdata/itol/`) for immediate
-  interactive exploration on [iTOL](https://itol.embl.de)
-- **Publication & interactive tree bundles**: every run exports vector `.svg`,
-  journal-ready vector `.pdf`, and self-contained interactive `.html` (`ggiraph`
-  with pan/zoom, hover tooltips, and a live taxon search bar), including both a
-  clade-collapsed rectangular overview (`▲` for unstudied sister clades) and an
-  uncollapsed circular (`fan`) supplementary overview
-- **Log-scaled compound bars & hierarchical legend**: bar widths scale by
-  $\log(1 + n)$ with exact compound counts printed at each bar tip and a
-  6-column hierarchical pathway/superclass legend (`[Pathway]` + 5 `microshades`
-  superclasses per row)
-- **Phylogenetic comparative methods**: batch Open Tree of Life subtree
-  resolution with exemplar species substitution for paraphyletic genera,
-  Grafen-calibrated Felsenstein pruning ML ancestral state reconstruction,
-  Blomberg's $K$ phylogenetic signal, and hypergeometric hot-clade enrichment
-  ($\text{FDR } q < 0.05$)
-- **Chemotaxonomic & diversity metrics**: NPClassifier superclass Hill diversity
-  ($^1D = \exp(H')$), Empirical Bayes Beta-Binomial ethnobotanical rates,
-  allometric species-richness compound residuals, and hypergeometric scaffold
-  enrichment against LOTUS
-- **Data federation** from Wikidata (QLever), LOTUS, and local tables
+All remaining helpers (tree caching, phylogenetic signal and ancestral state calculation, NPClassifier lookup, hierarchy rollup, and plotting) are internal to the package.
 
 ## Installation
 
-As the package is not (yet) available on CRAN, you will need to install with:
+Bioconductor packages `ggtree` and `ggtreeExtra` are required imports. Install from r-universe (with CRAN and Bioconductor repositories enabled):
 
 ```r
 install.packages(
   "EthnoBotaPhyWR",
   repos = c(
     "https://adafede.r-universe.dev",
-    "https://davidgohel.r-universe.dev", # required for ggiraph, required for ggtree
+    "https://davidgohel.r-universe.dev",
     "https://cran.r-universe.dev",
     "https://bioc.r-universe.dev"
   )
 )
 ```
 
-Once installed, you are ready to go through our
-[documentation](https://adafede.github.io/EthnoBotaPhyWR/articles), with the
-major steps detailed.
+Or install the development version from GitHub:
 
-## Quick Start
+```r
+remotes::install_github("adafede/EthnoBotaPhyWR")
+```
 
-### Load included datasets
+Documentation articles are published on the package site:
+[Full pipeline tutorial](https://adafede.github.io/EthnoBotaPhyWR/vignettes/articles/ethnobota_fever_tree.html) and [Orchids datasets](https://adafede.github.io/EthnoBotaPhyWR/vignettes/articles/orchids.html).
+
+## Quick start
+
+### Inspect bundled datasets and iTOL files (offline)
 
 ```r
 library(EthnoBotaPhyWR)
 
-# Phytochemical data with SMILES and classification
 data(orchids_compounds)
-head(orchids_compounds)
-
-# NPClassifier taxonomy lookup
 data(orchids_compound_classes)
-head(orchids_compound_classes)
-
-# Ethnobotanical uses linked to phylogenetics
 data(orchids_ethnobotanical)
-head(orchids_ethnobotanical)
 
-# Bundled Newick (.tre) and iTOL v6 annotation (.txt) files
+dim(orchids_compounds)
+dim(orchids_compound_classes)
+dim(orchids_ethnobotanical)
+
 itol_dir <- system.file("extdata", "itol", package = "EthnoBotaPhyWR")
 list.files(itol_dir)
 ```
 
-### Interactive Exploration on iTOL (Interactive Tree Of Life)
+### Interactive exploration on iTOL
 
-Both the pre-bundled *Orchidaceae* files
-(`system.file("extdata", "itol", package = "EthnoBotaPhyWR")`) and the files
-generated in `<dirname(export_table_counts)>/itol/` when running
-`ethnobotafever_tree()` on any plant family can be explored on
-[iTOL](https://itol.embl.de):
+To inspect either the bundled *Orchidaceae* outputs or files written to `<dirname(export_table_counts)>/itol/` by `ethnobotafever_tree()`:
 
-1. Open <https://itol.embl.de/upload.cgi> and upload one of the `.tre` Newick
-   files:
-   - `<Taxon>_full_genera_tree.tre` (all genera in the family)
-   - `<Taxon>_phyto_genera_tree.tre` (genera with reported compounds or uses)
-   - `<Taxon>_phyto_species_tree.tre` (species-level tree for major genera)
-2. Once the tree opens in the iTOL viewer, **drag and drop** the three companion
-   `.txt` annotation files directly onto the browser canvas:
-   - `*_itol_ethnobotany.txt` (`DATASET_GRADIENT`: $\log_{10}$ ethnobotanical
-     species count)
-   - `*_itol_species_richness.txt` (`DATASET_SIMPLEBAR`: known species count per
-     taxon)
-   - `*_itol_compounds_multibar.txt` (`DATASET_MULTIBAR`: stacked compound
-     superclass counts colored with the exact `cascade`/`microshades` palette)
-3. Use iTOL's built-in controls to search taxa, dynamically collapse or expand
-   clades, re-root, and switch between rectangular, circular, and unrooted
-   layouts.
+1. Upload one of the `.tre` files (`*_full_genera_tree.tre`, `*_phyto_genera_tree.tre`, or `*_phyto_species_tree.tre`) to <https://itol.embl.de/upload.cgi>.
+2. Drag and drop its three companion annotation files onto the tree canvas:
+   - `*_itol_ethnobotany.txt` (`DATASET_GRADIENT`: $\log_{10}$ ethnobotanical species count)
+   - `*_itol_species_richness.txt` (`DATASET_SIMPLEBAR`: known species count per taxon)
+   - `*_itol_compounds_multibar.txt` (`DATASET_MULTIBAR`: stacked compound superclass counts colored by pathway)
 
-### Analyze your own family
+### Analyze a plant family (requires network access)
 
 ```r
-# Get data for any plant family (requires Wikidata)
+out_dir <- file.path(tempdir(), "ethnobotaphywr_demo")
+dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+
 result <- ethnobotafever_tree(
   taxon_name = "Orchidaceae",
-  n_multiple_genera = 1,
-  n_ethnobotanical_count_min = 0,
-  n_compounds_count_min = 0,
+  n_multiple_genera = 10L,
+  n_ethnobotanical_count_min = 10L,
+  n_compounds_count_min = 50L,
   example_family_names = c("Solanaceae", "Fabaceae"),
-  path_molecules = NULL,  # or path to your own
-  path_classes = NULL,
-  path_ethnobotanical = NULL,
-  export_tree_full = "~/orchids_tree_full.pdf",
-  export_tree_phyto = "~/orchids_tree_phyto.pdf",
-  export_tree_phyto_sub = "~/orchids_tree_phyto_sub.pdf",
-  export_table_classified = "~/orchids_classified.tsv",
-  export_table_counts = "~/orchids_counts.tsv",
-  export_table_counts_sub = "~/orchids_counts_sub.tsv",
-  local_cache = "~/.ethnobotaphy_cache",
-  log_dir = "~/"
+  path_molecules = orchids_compounds,
+  path_classes = orchids_compound_classes,
+  path_ethnobotanical = orchids_ethnobotanical,
+  export_tree_full = file.path(out_dir, "orchids_tree_full.svg"),
+  export_tree_phyto = file.path(out_dir, "orchids_tree_phyto.svg"),
+  export_tree_phyto_sub = file.path(out_dir, "orchids_tree_phyto_sub.svg"),
+  export_table_classified = file.path(out_dir, "orchids_classified.tsv"),
+  export_table_counts = file.path(out_dir, "orchids_counts.tsv"),
+  export_table_counts_sub = file.path(out_dir, "orchids_counts_sub.tsv"),
+  local_cache = file.path(out_dir, "cache"),
+  log_dir = out_dir
 )
 ```
 
-## Main Citations
+## Limitations
 
-### LOTUS
+- **Source database bias and incompleteness**: Wikidata and LOTUS record only published and digitized occurrences; zero or low counts for a taxon reflect lack of curated records rather than true biological absence.
+- **Topological branch lengths**: Open Tree of Life synthetic subtrees do not provide calibrated divergence times. Phylogenetic ancestral state reconstruction (`method = "phylo"`) and Blomberg's $K$ use Grafen branch lengths as a topological approximation.
+- **External service dependency**: Running `ethnobotafever_tree()` without complete local tables and caches requires live HTTP access to QLever (Wikidata endpoint), the Open Tree of Life v3 API, and GNPS2 NPClassifier.
 
-<https://doi.org/10.7554/eLife.70780>
+## Main data source citations
 
-### Open Tree Taxonomy
-
-<https://doi.org/10.3897/BDJ.5.e12581>
-
-### NPClassifier
-
-<https://doi.org/10.1021/acs.jnatprod.1c00399>
+- LOTUS: <https://doi.org/10.7554/eLife.70780>
+- Open Tree Taxonomy: <https://doi.org/10.3897/BDJ.5.e12581>
+- NPClassifier: <https://doi.org/10.1021/acs.jnatprod.1c00399>
 
 ## Additional software credits
 
@@ -181,8 +128,6 @@ result <- ethnobotafever_tree(
 #| echo: false
 #| message: false
 
-# Check if DESCRIPTION is in current dir
-# Else `altdoc` will not find the dependencies
 desc_path <- if (file.exists("DESCRIPTION")) {
   "."
 } else {

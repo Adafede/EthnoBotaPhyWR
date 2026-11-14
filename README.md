@@ -306,7 +306,7 @@ Computing*. R Foundation for Statistical Computing.
 
 Rutz, Adriano. 2026. *EthnoBotaPhyWR: Infrastructure for Ethnobotanical
 and Phytochemical Data Integration with Wikidata*.
-<https://adafede.github.io/EthnoBotaPhyWR>.
+<https://adafede.github.io/EthnoBotaPhyWR/>.
 
 </div>
 

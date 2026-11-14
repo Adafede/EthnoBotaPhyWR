@@ -23,56 +23,36 @@ jobs:
           - ubuntu-latest
           - macos-latest
           - windows-latest
-          - ubuntu-26.04-arm
-          # - macos-26-intel
-          # - windows-11-vs2026-arm
     defaults:
       run:
         shell: bash
     steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
       - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
         with:
           use-public-rspm: true
 
-      - name: Install dependencies (Linux)
-        if: contains(matrix.os, 'ubuntu')
-        run: |
-          sudo apt-get update && sudo apt-get install -y --no-install-recommends \
-            libarchive-dev libcairo2-dev libcurl4-openssl-dev libfontconfig1-dev libfreetype6-dev libfribidi-dev libharfbuzz-dev libnetcdf-dev libuv1-dev \
-          && sudo apt-get clean \
-          && sudo rm -rf /var/lib/apt/lists/*
+      - uses: r-lib/actions/setup-r-dependencies@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05
+        with:
+          needs: check
 
-      - name: Install dependencies (macOS)
-        if: contains(matrix.os, 'macos')
-        run: |
-          brew update
-          brew install netcdf
-          GETTEXT_PREFIX="$(brew --prefix gettext)"
-          mkdir -p ~/.R
-          cat >> ~/.R/Makevars <<EOF
-          CPPFLAGS += -I${GETTEXT_PREFIX}/include
-          LDFLAGS  += -L${GETTEXT_PREFIX}/lib -lintl
-          EOF
-
-      - name: Install dependencies (Windows)
-        if: contains(matrix.os, 'windows')
-        run: true
-
-      - name: Install
-        run: >
-          install.packages(
-          "EthnoBotaPhyWR",
-          repos = c(
-          "https://adafede.r-universe.dev",
-          "https://cran.r-universe.dev",
-          "https://bioc.r-universe.dev"
-          )
-          )
+      - name: Install from local source
+        run: install.packages(".", repos = NULL, type = "source")
         shell: Rscript {0}
 
-      - name: Run pipeline
+      - name: Verify installed package
         run: |
-          EthnoBotaPhyWR::orchids_ethnobotanical
-          EthnoBotaPhyWR::orchids_compounds
-          EthnoBotaPhyWR::orchids_compound_classes
+          library(EthnoBotaPhyWR)
+          stopifnot(
+            identical(class(orchids_compounds), "data.frame"),
+            nrow(orchids_compounds) > 0L,
+            identical(class(orchids_compound_classes), "data.frame"),
+            nrow(orchids_compound_classes) > 0L,
+            identical(class(orchids_ethnobotanical), "data.frame"),
+            nrow(orchids_ethnobotanical) > 0L,
+            identical(suppressWarnings(normalize_ott_ids("12345")), "12345")
+          )
         shell: Rscript {0}

@@ -1,4 +1,5 @@
-AGENTS.md
+.agent-work/
+.DS_Store
 altdoc/freeze.rds
 _quarto/*
 !_quarto/_freeze/
@@ -12,5 +13,5 @@ docs/
 EthnoBotaPhyWR/
 vignettes/*.html
 vignettes/*.pdf
-vignettes/articles/*_files$
-vignettes/*_files$
+vignettes/articles/*_files/
+vignettes/*_files/

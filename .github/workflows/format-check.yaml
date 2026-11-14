@@ -23,3 +23,12 @@ jobs:
 
       - name: Check
         run: air format . --check
+
+      - name: Install jarl
+        run: |
+          curl -LsSf https://github.com/etiennebacher/jarl/releases/latest/download/jarl-installer.sh | sh
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          echo "$HOME/.cargo/bin" >> "$GITHUB_PATH"
+
+      - name: Lint (jarl)
+        run: jarl check .

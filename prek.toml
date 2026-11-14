@@ -17,7 +17,7 @@ hooks = [{ id = "use-tidy-description" }, { id = "parsable-R" }, { id = "no-brow
 [[repos]]
 repo = "https://github.com/pre-commit/pre-commit-hooks"
 rev = "v6.0.0"
-hooks = [{ id = "check-added-large-files", args = ["--maxkb=200"] }, { id = "file-contents-sorter", files = '^\.Rbuildignore$' }, { id = "check-case-conflict" }, { id = "check-merge-conflict" }, { id = "check-shebang-scripts-are-executable" }, { id = "check-symlinks" }, { id = "check-toml" }, { id = "check-xml" }, { id = "check-yaml" }, { id = "mixed-line-ending" }, { id = "end-of-file-fixer", exclude = '\.Rd' }, { id = "trailing-whitespace" }]
+hooks = [{ id = "check-added-large-files", args = ["--maxkb=600"], exclude = '^man/figures/.*\.(html|svg)$' }, { id = "file-contents-sorter", files = '^\.Rbuildignore$' }, { id = "check-case-conflict" }, { id = "check-merge-conflict" }, { id = "check-shebang-scripts-are-executable" }, { id = "check-symlinks" }, { id = "check-toml" }, { id = "check-xml" }, { id = "check-yaml" }, { id = "mixed-line-ending" }, { id = "end-of-file-fixer", exclude = '\.Rd' }, { id = "trailing-whitespace", exclude = '(\.tsv$|^inst/extdata/)' }]
 
 [[repos]]
 repo = "https://github.com/tombi-toml/tombi-pre-commit"

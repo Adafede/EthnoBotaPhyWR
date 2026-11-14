@@ -4,12 +4,14 @@
 ^AGENTS[.]md$
 ^CITATION\.cff$
 ^CLAUDE[.]md$
+^CONTRIBUTING\.md$
 ^GEMINI[.]md$
 ^LICENSE\.md$
 ^README\.Rmd$
 ^README\.qmd$
 ^[.]?air[.]toml$
 ^[.]agent-scratch
+^[.]agent-work$
 ^[.]agent[.]md$
 ^[.]agentignore$
 ^[.]cursor[.]md$
@@ -62,6 +64,7 @@
 ^renv\.lock$
 ^tests/testthat/_snaps$
 ^tests/testthat/_snaps/
+^vignettes$
 ^vignettes/\.quarto$
 ^vignettes/articles$
 ^vignettes/articles/*_files$

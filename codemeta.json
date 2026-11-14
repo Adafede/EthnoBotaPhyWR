@@ -2,7 +2,7 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "EthnoBotaPhyWR",
-  "description": "Infrastructure and curated ethnobotanical and phytochemical datasets for analyzing plant families, including phylogenetic integration and visualization tools. Includes vendored functions from the 'cascade' package (https://github.com/adafede/cascade) to minimize the dependency tree.",
+  "description": "Infrastructure and curated ethnobotanical and phytochemical datasets for analyzing plant families, including phylogenetic integration and visualization tools. Includes vendored functions from the 'cascade' package (<https://github.com/adafede/cascade>) to minimize the dependency tree.",
   "name": "EthnoBotaPhyWR: Infrastructure for Ethnobotanical and Phytochemical Data Integration with Wikidata",
   "relatedLink": "https://adafede.github.io/EthnoBotaPhyWR",
   "codeRepository": "https://github.com/adafede/EthnoBotaPhyWR",
@@ -14,7 +14,7 @@
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.6.1 (2026-06-24)",
+  "runtimePlatform": "R version 4.6.2 (2026-10-29)",
   "author": [
     {
       "@type": "Person",
@@ -61,6 +61,30 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "ggiraph",
+      "name": "ggiraph",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=ggiraph"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "grateful",
+      "name": "grateful",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=grateful"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "gt",
       "name": "gt",
       "version": ">= 1.3.0",
@@ -71,6 +95,30 @@
         "url": "https://cran.r-project.org"
       },
       "sameAs": "https://CRAN.R-project.org/package=gt"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "htmlwidgets",
+      "name": "htmlwidgets",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=htmlwidgets"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "knitr",
+      "name": "knitr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=knitr"
     },
     {
       "@type": "SoftwareApplication",
@@ -289,46 +337,8 @@
     },
     "SystemRequirements": null
   },
-  "keywords": [
-    "Ethnobotany",
-    "Phytochemistry",
-    "Taxonomy",
-    "Wikidata",
-    "naturalProducts",
-    "chemotaxonomy",
-    "phylogenetics",
-    "EDAM:topic_0780",
-    "EDAM:topic_0154",
-    "EDAM:topic_2258",
-    "EDAM:topic_3293",
-    "EDAM:topic_0637",
-    "EDAM:topic_3077",
-    "EDAM:operation_0224",
-    "EDAM:operation_2422",
-    "EDAM:operation_2990",
-    "EDAM:operation_0324",
-    "EDAM:operation_0567",
-    "EDAM:operation_0337",
-    "EDAM:operation_1812",
-    "EDAM:data_0872",
-    "EDAM:data_3272",
-    "EDAM:data_1872",
-    "EDAM:data_1868",
-    "EDAM:data_3028",
-    "EDAM:data_1463",
-    "EDAM:data_2301",
-    "EDAM:data_1086",
-    "EDAM:format_1196",
-    "EDAM:format_1199",
-    "EDAM:format_3475",
-    "EDAM:format_3508",
-    "EDAM:format_3604",
-    "ethnobotany",
-    "phytochemistry",
-    "r",
-    "wikidata"
-  ],
-  "fileSize": "4165.848KB",
+  "keywords": ["Ethnobotany", "Phytochemistry", "Taxonomy", "Wikidata", "naturalProducts", "chemotaxonomy", "phylogenetics", "EDAM:topic_0780", "EDAM:topic_0154", "EDAM:topic_2258", "EDAM:topic_3293", "EDAM:topic_0637", "EDAM:topic_3077", "EDAM:operation_0224", "EDAM:operation_2422", "EDAM:operation_2990", "EDAM:operation_0324", "EDAM:operation_0567", "EDAM:operation_0337", "EDAM:operation_1812", "EDAM:data_0872", "EDAM:data_3272", "EDAM:data_1872", "EDAM:data_1868", "EDAM:data_3028", "EDAM:data_1463", "EDAM:data_2301", "EDAM:data_1086", "EDAM:format_1196", "EDAM:format_1199", "EDAM:format_3475", "EDAM:format_3508", "EDAM:format_3604", "ethnobotany", "phytochemistry", "r", "wikidata"],
+  "fileSize": "2722.095KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -343,32 +353,12 @@
         }
       ],
       "name": "EthnoBotaPhyWR: Infrastructure for Ethnobotanical and Phytochemical Data Integration with Wikidata",
-      "identifier": "10.5281/zenodo.TODO",
       "url": "https://adafede.github.io/EthnoBotaPhyWR",
-      "description": "R package, version 0.0.0.9001",
-      "@id": "https://doi.org/10.5281/zenodo.TODO",
-      "sameAs": "https://doi.org/10.5281/zenodo.TODO"
+      "description": "R package, version 0.0.0.9001"
     }
   ],
   "releaseNotes": "https://github.com/adafede/EthnoBotaPhyWR/blob/main/NEWS.md",
   "readme": "https://github.com/Adafede/EthnoBotaPhyWR/blob/main/README.md",
   "contIntegration": "https://github.com/adafede/EthnoBotaPhyWR/actions/workflows/R-CMD-check.yaml",
-  "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental",
-  "applicationCategory": [
-    "https://edamontology.org/topic_0780",
-    "https://edamontology.org/topic_0154",
-    "https://edamontology.org/topic_2258",
-    "https://edamontology.org/topic_3293",
-    "https://edamontology.org/topic_0637",
-    "https://edamontology.org/topic_3077"
-  ],
-  "featureList": [
-    "https://edamontology.org/operation_0224",
-    "https://edamontology.org/operation_2422",
-    "https://edamontology.org/operation_2990",
-    "https://edamontology.org/operation_0324",
-    "https://edamontology.org/operation_0567",
-    "https://edamontology.org/operation_0337",
-    "https://edamontology.org/operation_1812"
-  ]
+  "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental"
 }

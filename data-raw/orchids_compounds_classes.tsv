@@ -199,7 +199,7 @@ O=C(OC)CC(O)(C(=O)OCC1CCN2CCCC21)CC=3C=CC=CC3	Alkaloids	Ornithine alkaloids	Pyrr
 O=C(C1=CC=C(OC)C=C1)CC2=CC(O)=C3C(OC(C)(C)CC3=O)=C2	Shikimates and Phenylpropanoids			FALSE
 OC=1C=CC=CC1C=CC=2C=C(OC)C=C3OC(C4=CC(O)=C(O)C(OC)=C4)C(C=5C=CC=CC5)C32	Shikimates and Phenylpropanoids	Stilbenoids	Oligomeric stibenes	FALSE
 OC1=C(OC)C(OC)=C2C3=CC=C(OC)C=C3CCC2=C1C=4C(O)=C(OC)C(OC)=C5C6=CC=C(OC)C=C6CCC45	Shikimates and Phenylpropanoids	Phenanthrenoids	Phenanthrenes	FALSE
-O=C(O)CC(=O)OCC1OC(OC=2C=C3C(O)=CC(=[O+]C4OC(COC(O)=CC=C5C=CC(=O)C=C5)C(O)C(O)C4O)C=C3OC2C=6C=CC(O)=C(OC7OC(COC(=O)C=CC8=CC=C(OC9OC(COC(=O)C=CC%10=CC=C(OC%11OC(CO)C(O)C(O)C%11O)C=C%10)C(O)C(O)C9O)C=C8)C(O)C(O)C7O)C6)C(O)C(O)C1O
+O=C(O)CC(=O)OCC1OC(OC=2C=C3C(O)=CC(=[O+]C4OC(COC(O)=CC=C5C=CC(=O)C=C5)C(O)C(O)C4O)C=C3OC2C=6C=CC(O)=C(OC7OC(COC(=O)C=CC8=CC=C(OC9OC(COC(=O)C=CC%10=CC=C(OC%11OC(CO)C(O)C(O)C%11O)C=C%10)C(O)C(O)C9O)C=C8)C(O)C(O)C7O)C6)C(O)C(O)C1O	Shikimates and Phenylpropanoids	Flavonoids	Anthocyanidins	TRUE
 OC=1C=C2C(OC=3C(O)=C(OC)C=C(C3C2CC=4C=CC=C(OC)C4)CCC=5C=CC=C(OC)C5)=C(OC)C1O	Shikimates and Phenylpropanoids	Stilbenoids	Stilbenolignans	FALSE
 OC=1C=C2C(OC=3C(O)=C(OC)C=C(C3C2CC=4C=CC=C(OC)C4)CCC=5C=CC=C(OC)C5)=C(OC)C1O	Shikimates and Phenylpropanoids	Lignans	Stilbenolignans	FALSE
 O=C1OC2=CC(O)=CC3=CC=C4C=C(O)C(OC)=C1C4=C23	Shikimates and Phenylpropanoids	Phenanthrenoids	Phenanthrenes	FALSE
@@ -231,7 +231,7 @@ O=C1CNC(=O)C(CSCc2ccc(O)cc2)N1	Alkaloids	Peptide alkaloids	Dipeptides	FALSE
 O=C1CNC(=O)C(CSCc2ccc(O)cc2)N1	Amino acids and Peptides	Small peptides	Simple diketopiperazine alkaloids	FALSE
 O=C1OC=2C=C(O)C=C3C=CC4=C(OC)C(O)=CC1=C4C23	Shikimates and Phenylpropanoids	Phenanthrenoids	Phenanthrenes	FALSE
 OCC1=CC2C(CC(O)C(O)(C)C2CC1)C(C)C	Terpenoids	Sesquiterpenoids	Cadinane sesquiterpenoids	FALSE
-O=C(O)CC(=O)OCC1OC(OC=2C=C3C(O)=CC(=[O+]C4OC(COC(O)=CC=C5C=CC(=O)C(O)=C5)C(O)C(O)C4O)C=C3OC2C=6C=CC(O)=C(OC7OC(COC(=O)C=CC8=CC=C(OC9OC(COC(=O)C=CC%10=CC=C(OC%11OC(CO)C(O)C(O)C%11O)C(O)=C%10)C(O)C(O)C9O)C(O)=C8)C(O)C(O)C7O)C6)C(O)C(O)C1O
+O=C(O)CC(=O)OCC1OC(OC=2C=C3C(O)=CC(=[O+]C4OC(COC(O)=CC=C5C=CC(=O)C(O)=C5)C(O)C(O)C4O)C=C3OC2C=6C=CC(O)=C(OC7OC(COC(=O)C=CC8=CC=C(OC9OC(COC(=O)C=CC%10=CC=C(OC%11OC(CO)C(O)C(O)C%11O)C(O)=C%10)C(O)C(O)C9O)C(O)=C8)C(O)C(O)C7O)C6)C(O)C(O)C1O	Shikimates and Phenylpropanoids	Flavonoids	Anthocyanidins	TRUE
 OC=1C=C(OC)C=C(C=CC=2C=CC=C(O)C2O)C1	Shikimates and Phenylpropanoids	Stilbenoids	Monomeric stilbenes	FALSE
 O=C(OCCCCCCCCCCCCCCCCCCCCCCCC)C=CC1=CC=C(O)C=C1				FALSE
 OC=1C=C(OC)C2=C(C1)CC(O)C=3C=CC=C(O)C32	Shikimates and Phenylpropanoids	Phenanthrenoids	Phenanthrenes	FALSE
@@ -244,7 +244,7 @@ O=C(OC1CCC23CC43CCC5(C)C(CCC5(C)C4CCC2C1(C)C)C(C)CCC(C(=C)C)CC)C=CC6=CC=C(O)C=C6
 O=C1OC2C3OC(=O)C4(O)CCC(C1C2(O)C(C)C)C34C	Terpenoids	Sesquiterpenoids	Picrotoxane sesquiterpenoids	FALSE
 O(C1=CC(OC)=C2C(C=CC3=CC(OC)=C(OC)C=C32)=C1)C	Shikimates and Phenylpropanoids	Phenanthrenoids	Phenanthrenes	FALSE
 OC=1C=CC2=C(C1)CCC3=CC(O)=CC(O)=C23	Shikimates and Phenylpropanoids	Phenanthrenoids	Phenanthrenes	FALSE
-O=C1OC2C3OC(C4CCC(C1C2C(C)C)C34C)[N+](C)(C)CCO
+O=C1OC2C3OC(C4CCC(C1C2C(C)C)C34C)[N+](C)(C)CCO	Terpenoids	Sesquiterpenoids	Picrotoxane sesquiterpenoids	FALSE
 OC1=CC=C2C(C=CC=3C2=C(O)C=C(OC)C3C=4C=C5C(=CC4O)CCC6=CC(OC)=CC(O)=C56)=C1	Shikimates and Phenylpropanoids	Phenanthrenoids	Phenanthrenes	FALSE
 OC1=CC=C(C=C1)CC2=C(O)C=CC=3C2=CC=C4C3C(OC)=CC(O)=C4CC5=CC=C(O)C=C5	Shikimates and Phenylpropanoids	Phenanthrenoids	Phenanthrenes	FALSE
 O=C(OCCCC)CC(OC1OC(CO)C(O)C(O)C1O)CO	Fatty acids	Fatty acyl glycosides	Fatty acyl glycosides of mono- and disaccharides	TRUE
@@ -464,7 +464,7 @@ OCC1OC(N2C=NC=3C(=NC=NC32)N)C(O)C1O	Carbohydrates	Nucleosides	Purine nucleos(t)i
 OC1CCC23CC43CCC5(C)C(CCC5(C)C4CCC2C1C)C(C)CCC(C)C(C)C	Terpenoids	Triterpenoids	Cycloartane triterpenoids	FALSE
 O=C(OCC(OC(=O)CC(OC(=O)C)CCC(OC(=O)C)CCCCCCCCCCCCCC)CO)C	Fatty acids			FALSE
 O=CC1=CC=C(OC2OC(CO)C(O)C(O)C2O)C=C1	Shikimates and Phenylpropanoids	Phenolic acids (C6-C1)	Simple phenolic acids	TRUE
-OC=1C=C(O)C=2C=C(OC3OC(COC4OC(C)C(O)C(O)C4O)C(O)C(O)C3O)C(=[O+]C2C1)C=5C=CC(O)=C(OC)C5
+OC=1C=C(O)C=2C=C(OC3OC(COC4OC(C)C(O)C(O)C4O)C(O)C(O)C3O)C(=[O+]C2C1)C=5C=CC(O)=C(OC)C5	Shikimates and Phenylpropanoids	Flavonoids	Anthocyanidins	TRUE
 OC1=CC=C2C(C=CC3=C(OC4=CC=C5C(C=CC6=CC(O)=CC(OC)=C65)=C4)C(O)=CC(OC)=C23)=C1	Shikimates and Phenylpropanoids	Phenanthrenoids	Phenanthrenes	FALSE
 O=C1C=C(OC)C(=O)C2=C1C=3C=CC(O)=C(C3CC2)CC=C(C)C	Shikimates and Phenylpropanoids			FALSE
 OC=1C=C2C(OC=3C(O)=C(OC)C=C(C3C2CC4=CC=C(OC)C=C4)CCC5=CC=C(OC)C=C5)=C(OC)C1O	Shikimates and Phenylpropanoids	Stilbenoids	Stilbenolignans	FALSE
@@ -545,7 +545,7 @@ O=C(O)C(O)C(O)(C(=O)OCC1=CC=C(OC2OC(CO)C(O)C(O)C2O)C=C1)CC(C)C	Terpenoids			TRUE
 O=C1C=C(OCC)C(=O)C=2C1=CC=C3C=C(OC)C=C(O)C32	Polyketides	Naphthalenes	Naphthoquinones	FALSE
 OC1=CC=CC(=C1)CCC=2C=C(OC)C=C3OC(C4=CC=C(O)C(OC)=C4)C(O)CC32	Shikimates and Phenylpropanoids	Stilbenoids	Flavan-3-ols	FALSE
 OC1=CC=CC(=C1)CCC=2C=C(OC)C=C3OC(C4=CC=C(O)C(OC)=C4)C(O)CC32	Shikimates and Phenylpropanoids	Flavonoids	Monomeric stilbenes	FALSE
-O=C(O)CC(=O)OCC1OC(OC2=CC=3C(O)=CC(O)=CC3[O+]=C2C=4C=CC(O)=C(O)C4)C(O)C(O)C1O
+O=C(O)CC(=O)OCC1OC(OC2=CC=3C(O)=CC(O)=CC3[O+]=C2C=4C=CC(O)=C(O)C4)C(O)C(O)C1O	Shikimates and Phenylpropanoids	Flavonoids	Anthocyanidins	TRUE
 OC1=CC=C(C=C1)CC2=C(O)C=C(OC)C(=C2CCC3=CC=C(O)C(OC)=C3)CC4=CC=C(O)C=C4	Shikimates and Phenylpropanoids	Stilbenoids	Monomeric stilbenes	FALSE
 O=C1OC2C(O)C3(C)C(CO)CCC3C1C2(O)C(C)C	Terpenoids	Sesquiterpenoids	Picrotoxane sesquiterpenoids	FALSE
 OCC1OC(OC2=C(SC3OC(CO)C(O)C(O)C3O)NC=4C=CC=CC24)C(O)C(O)C1O				TRUE
@@ -614,7 +614,7 @@ O=C(O)CC(O)(C(=O)OCC1=CC=C(OC2OC(CO)C(O)C(O)C2O)C=C1)CC(=O)OCC3=CC=C(OC4OC(CO)C(
 OC=1C=C(OC)C=2C3=CC4=C(OCC(C5=CC(OC)=C(O)C(OC)=C5)C4O)C=C3CCC2C1	Shikimates and Phenylpropanoids	Flavonoids	Flavan-3-ols	FALSE
 OC1=CC=C(C=C1)COCC2=CC=C(OC3OC(CO)C(O)C(O)C3O)C=C2	Shikimates and Phenylpropanoids			TRUE
 OCC1OC(OC=2C=CC=3C(=CC=C4C=C(OC5OC(CO)C(O)C(O)C5O)C=C(OC)C43)C2)C(O)C(O)C1O	Shikimates and Phenylpropanoids	Phenanthrenoids	Phenanthrenes	TRUE
-OC=1C=C(O)C=2C=C(OC3OC(COC4OC(C)C(O)C(O)C4O)C(O)C(O)C3O)C(=[O+]C2C1)C=5C=CC(O)=C(O)C5
+OC=1C=C(O)C=2C=C(OC3OC(COC4OC(C)C(O)C(O)C4O)C(O)C(O)C3O)C(=[O+]C2C1)C=5C=CC(O)=C(O)C5	Shikimates and Phenylpropanoids	Flavonoids	Anthocyanidins	TRUE
 O=C(OCC1CCN2CCCC21)C=3C=C(C(OC4OCC(O)C(O)C4OC5OC(CO)C(O)C(O)C5O)=C(C3)CC=C(C)C)CC=C(C)C	Alkaloids	Ornithine alkaloids	Pyrrolizidine alkaloids	TRUE
 OC1=CC=CC2=C1C=3C(OC)=C(OC)C(O)=CC3CC2	Shikimates and Phenylpropanoids	Phenanthrenoids	Phenanthrenes	FALSE
 O=C1C=C(OC)C(=O)C=2C1=CC=C3C(=O)C=C(OC)C(=O)C32	Polyketides			FALSE
@@ -794,11 +794,11 @@ OC1=CC=C(C=C1)CC2=CC=C(O)C=C2CCC=3C(=C(O)C(=C(OC)C3CC4=CC=C(O)C=C4)CC5=CC=C(O)C=
 OC1=CC=C(C=C1)C2C3=CC=C(O)C=C3CCC4=CC(O)=C(OC)C=C42	Shikimates and Phenylpropanoids	Stilbenoids	Oligomeric stibenes	FALSE
 COC1=CC(=CC(=C1O)OC)C2C3COC(C3CO2)C4=CC(=C(C(=C4)OC)O)OC	Shikimates and Phenylpropanoids	Lignans	Furofuranoid lignans	FALSE
 O=C(OCC=CCCCC)C	Fatty acids	Fatty esters	Wax monoesters	FALSE
-O=C(C=CC1=CC=C(O)C=C1)C2=C(O)C(=[O+]C=3C=C(O)C=C(O)C32)C=4C=CC(O)=C(O)C4
-O=C(C=CC1=CC=C(O)C(OC)=C1)C2=C(O)C(=[O+]C=3C=C(O)C=C(O)C32)C=4C=CC(O)=C(O)C4
-O=C(OCC1OC(OC=2C=C(O)C=3C=C(OC4OC(CO)C(O)C(O)C4O)C(=[O+]C3C2)C=5C=CC(O)=C(OC6OC(CO)C(O)C(O)C6O)C5)C(O)C(O)C1O)C=CC7=CC=C(O)C(O)=C7
-O=C(O)CC(=O)OCC1OC(OC2=CC=3C(O)=CC(OC4OC(COC(=O)C=CC5=CC=C(O)C(O)=C5)C(O)C(O)C4O)=CC3[O+]=C2C=6C=CC(O)=C(OC7OC(CO)C(O)C(O)C7O)C6)C(O)C(O)C1O
-O=C(O)CC(=O)OCC1OC(OC2=CC=3C(O)=CC(OC4OC(COC(=O)C=CC5=CC=C(O)C(OC)=C5)C(O)C(O)C4O)=CC3[O+]=C2C=6C=CC(O)=C(OC7OC(CO)C(O)C(O)C7O)C6)C(O)C(O)C1O
+O=C(C=CC1=CC=C(O)C=C1)C2=C(O)C(=[O+]C=3C=C(O)C=C(O)C32)C=4C=CC(O)=C(O)C4	Shikimates and Phenylpropanoids	Flavonoids	Anthocyanidins	FALSE
+O=C(C=CC1=CC=C(O)C(OC)=C1)C2=C(O)C(=[O+]C=3C=C(O)C=C(O)C32)C=4C=CC(O)=C(O)C4	Shikimates and Phenylpropanoids	Flavonoids	Anthocyanidins	FALSE
+O=C(OCC1OC(OC=2C=C(O)C=3C=C(OC4OC(CO)C(O)C(O)C4O)C(=[O+]C3C2)C=5C=CC(O)=C(OC6OC(CO)C(O)C(O)C6O)C5)C(O)C(O)C1O)C=CC7=CC=C(O)C(O)=C7	Shikimates and Phenylpropanoids	Flavonoids	Anthocyanidins	TRUE
+O=C(O)CC(=O)OCC1OC(OC2=CC=3C(O)=CC(OC4OC(COC(=O)C=CC5=CC=C(O)C(O)=C5)C(O)C(O)C4O)=CC3[O+]=C2C=6C=CC(O)=C(OC7OC(CO)C(O)C(O)C7O)C6)C(O)C(O)C1O	Shikimates and Phenylpropanoids	Flavonoids	Anthocyanidins	TRUE
+O=C(O)CC(=O)OCC1OC(OC2=CC=3C(O)=CC(OC4OC(COC(=O)C=CC5=CC=C(O)C(OC)=C5)C(O)C(O)C4O)=CC3[O+]=C2C=6C=CC(O)=C(OC7OC(CO)C(O)C(O)C7O)C6)C(O)C(O)C1O	Shikimates and Phenylpropanoids	Flavonoids	Anthocyanidins	TRUE
 O=C(OCC1CCN2CCCC21)C=3C=C(C(OC4OC(CO)C(O)C(O)C4O)=C(C3)CC=C(C)C)CC=C(C)C	Alkaloids	Ornithine alkaloids	Pyrrolizidine alkaloids	TRUE
 O=C(C)CC1N2CCCC2CC(C)C1(O)C=3C=CC=CC3	Alkaloids	Lysine alkaloids	Indolizidine alkaloids	FALSE
 O=C(C)CC1N2CCCC2CC(C)C1(O)C=3C=CC=CC3	Terpenoids	Pseudoalkaloids	Terpenoid alkaloids	FALSE
@@ -840,11 +840,11 @@ O=C(OCC1=NC(=CN=C1C)C)CC(C)C	Alkaloids	Tetramate alkaloids	Pyrazine and Piperazi
 O=C(OCC1=NC(=CN=C1C)C)CC(C)C	Amino acids and Peptides	Peptide alkaloids	Pyrazine and Piperazine alkaloids	FALSE
 N=1C(=C(N=C(C1C)CCC(C)C)C)C	Alkaloids	Tetramate alkaloids	Pyrazine and Piperazine alkaloids	FALSE
 N=1C(=C(N=C(C1C)CCC(C)C)C)C	Amino acids and Peptides	Peptide alkaloids	Pyrazine and Piperazine alkaloids	FALSE
-O=C1C=C(O)C=C2OC(=C(OC3OC(COC4OC(C)C(O)C(O)C4O)C(O)C(O)C3[O+]=C(O)C5=CC(O)=C(O)C(O)=C5)C=C12)C=6C=CC(O)=C(O)C6
-O=C(OCC1OC(OC=2C=C(C=CC2O)C=3OC4=CC(OC5OC(C[O+]=C(O)C=CC6=CC(OC)=C(O)C(OC)=C6)C(O)C(O)C5O)=CC(=O)C4=CC3OC7OC(CO)C(O)C(O)C7O)C(O)C(O)C1O)C=CC8=CC(OC)=C(O)C(OC)=C8
-O=C(O)CC(=O)OCC1OC(OC=2C=C3C(=O)C=C(OC4OC(C[O+]=C(O)C=CC5=CC=C(O)C(OC)=C5)C(O)C(O)C4O)C=C3OC2C=6C=CC(O)=C(OC7OC(COC(=O)C=CC8=CC=C(O)C(OC)=C8)C(O)C(O)C7O)C6)C(O)C(O)C1O
-O=C(O)CC(=O)OCC1OC(OC=2C=C3C(=O)C=C(OC4OC(C[O+]=C(O)C=CC5=CC(OC)=C(O)C(OC)=C5)C(O)C(O)C4O)C=C3OC2C=6C=C(O)C(O)=C(OC7OC(COC(=O)C=CC8=CC(OC)=C(O)C(OC)=C8)C(O)C(O)C7O)C6)C(O)C(O)C1O
-O=C(OCC1OC(OC=2C=C(C=C(O)C2O)C=3OC4=CC(OC5OC(C[O+]=C(O)C=CC6=CC(OC)=C(O)C(OC)=C6)C(O)C(O)C5O)=CC(=O)C4=CC3OC7OC(CO)C(O)C(O)C7O)C(O)C(O)C1O)C=CC8=CC(OC)=C(O)C(OC)=C8
+O=C1C=C(O)C=C2OC(=C(OC3OC(COC4OC(C)C(O)C(O)C4O)C(O)C(O)C3[O+]=C(O)C5=CC(O)=C(O)C(O)=C5)C=C12)C=6C=CC(O)=C(O)C6	Shikimates and Phenylpropanoids	Flavonoids	Anthocyanidins	TRUE
+O=C(OCC1OC(OC=2C=C(C=CC2O)C=3OC4=CC(OC5OC(C[O+]=C(O)C=CC6=CC(OC)=C(O)C(OC)=C6)C(O)C(O)C5O)=CC(=O)C4=CC3OC7OC(CO)C(O)C(O)C7O)C(O)C(O)C1O)C=CC8=CC(OC)=C(O)C(OC)=C8	Shikimates and Phenylpropanoids	Flavonoids	Anthocyanidins	TRUE
+O=C(O)CC(=O)OCC1OC(OC=2C=C3C(=O)C=C(OC4OC(C[O+]=C(O)C=CC5=CC=C(O)C(OC)=C5)C(O)C(O)C4O)C=C3OC2C=6C=CC(O)=C(OC7OC(COC(=O)C=CC8=CC=C(O)C(OC)=C8)C(O)C(O)C7O)C6)C(O)C(O)C1O	Shikimates and Phenylpropanoids	Flavonoids	Anthocyanidins	TRUE
+O=C(O)CC(=O)OCC1OC(OC=2C=C3C(=O)C=C(OC4OC(C[O+]=C(O)C=CC5=CC(OC)=C(O)C(OC)=C5)C(O)C(O)C4O)C=C3OC2C=6C=C(O)C(O)=C(OC7OC(COC(=O)C=CC8=CC(OC)=C(O)C(OC)=C8)C(O)C(O)C7O)C6)C(O)C(O)C1O	Shikimates and Phenylpropanoids	Flavonoids	Anthocyanidins	TRUE
+O=C(OCC1OC(OC=2C=C(C=C(O)C2O)C=3OC4=CC(OC5OC(C[O+]=C(O)C=CC6=CC(OC)=C(O)C(OC)=C6)C(O)C(O)C5O)=CC(=O)C4=CC3OC7OC(CO)C(O)C(O)C7O)C(O)C(O)C1O)C=CC8=CC(OC)=C(O)C(OC)=C8	Shikimates and Phenylpropanoids	Flavonoids	Anthocyanidins	TRUE
 C1=CC=C(C=C1)O	Shikimates and Phenylpropanoids			FALSE
 COC1=CC=CC=C1OC	Shikimates and Phenylpropanoids	Phenylpropanoids (C6-C3)		FALSE
 OCC(C)C1CCC2(C(=C)C3C(O)C1C2C3O)C	Terpenoids	Sesquiterpenoids	Sativane sesquiterpenoids	FALSE
@@ -929,7 +929,7 @@ OC1=CC=C(C=C1)CCC2=CC(OC)=C3OC(CO)C(OC3=C2)C4=CC(OC)=C(O)C(OC)=C4	Shikimates and
 OC=1C=CC=2C3=C(O)C=C4OC5=C(OC)C(O)=C(O)C=C5C(C4=C3CCC2C1)CC6=CC=C(O)C(OC)=C6	Shikimates and Phenylpropanoids	Phenanthrenoids	Phenanthrenes	FALSE
 O=C(OCCCC1=CC=C(O)C(OC)=C1)CCC2=CC=C(O)C(OC)=C2	Shikimates and Phenylpropanoids	Diarylheptanoids	Linear diarylheptanoids	FALSE
 OC1=CC=CC2=C1C=3C(OC)=CC(OC4OC(CO)C(O)C(O)C4O)=CC3CC2O	Shikimates and Phenylpropanoids	Phenanthrenoids	Phenanthrenes	TRUE
-OC1=C(OC)C=C(C=C1OC)C2C3=C(OC2CO)C(O)=C(OC)C=C3CCC4=CC=C(OC)C=C4
+OC1=C(OC)C=C(C=C1OC)C2C3=C(OC2CO)C(O)=C(OC)C=C3CCC4=CC=C(OC)C=C4	Shikimates and Phenylpropanoids	Stilbenoids	Monomeric stilbenes	FALSE
 OC=1C=C(C=2OC3=C(O)C(OC)=C(O)C=C3C(C2C1OC)CC4=CC=C(OC)C=C4)CCC5=CC=C(OC)C=C5	Shikimates and Phenylpropanoids	Stilbenoids	Monomeric stilbenes	FALSE
 OC1=CC=C(C=C1)CCC2=CC(O)=CC3=C2OC4=C(O)C(OC)=C(O)C=C4C3CC5=CC=C(OC)C=C5	Shikimates and Phenylpropanoids	Stilbenoids	Monomeric stilbenes	FALSE
 OC1=CC=C(C=C1)CCC2=CC(O)=CC3=C2OC4=C(O)C(OC)=C(O)C=C4C3CC5=CC=C(OC)C=C5	Shikimates and Phenylpropanoids	Stilbenoids	Oligomeric stibenes	FALSE
@@ -1153,7 +1153,7 @@ CC1C(C(C(C(O1)OCC2C(C(C(C(O2)OC3=C(OC4=CC(=CC(=C4C3=O)O)O)C5=CC=C(C=C5)O)O)O)O)O
 C1=CC(=C(C=C1C2=C(C(=O)C3=C(C=C(C=C3O2)OC4C(C(C(C(O4)CO)O)O)O)O)O)O)O	Shikimates and Phenylpropanoids	Flavonoids	Flavonols	TRUE
 CC1C(C(C(C(O1)OCC2C(C(C(C(O2)OC3=C(OC4=CC(=CC(=C4C3=O)O)O)C5=CC(=C(C=C5)O)OC)O)O)O)O)O)O	Shikimates and Phenylpropanoids	Flavonoids	Flavonols	TRUE
 CC(=O)CC1CCCN1C	Alkaloids	Ornithine alkaloids	Pyrrolidine alkaloids	FALSE
-C(C1C(C(C(C(O1)O)O)O)O)O
+C(C1C(C(C(C(O1)O)O)O)O)O	Carbohydrates	Saccharides	Disaccharides	TRUE
 CCCCCCCCCCCCCCCCCCC=C	Fatty acids	Fatty acyls	Hydrocarbons	FALSE
 CCCCCC=CC=O	Fatty acids	Fatty acyls	Fatty aldehydes	FALSE
 COC1=C(C=C2C(=C1)C=CC(=O)O2)O	Shikimates and Phenylpropanoids	Coumarins	Simple coumarins	FALSE
@@ -1222,7 +1222,7 @@ C1=CC(=C(C=C1O)O)C=O	Shikimates and Phenylpropanoids	Phenolic acids (C6-C1)	Simp
 C1C(OC2=CC(=CC(=C2C1=O)O)O)C3=CC=C(C=C3)O	Shikimates and Phenylpropanoids	Flavonoids	Flavanones	FALSE
 CC(CCC=C(C)C)CCO	Terpenoids	Monoterpenoids	Acyclic monoterpenoids	FALSE
 CC(=O)C(=O)OC	Fatty acids	Fatty esters	Wax monoesters	FALSE
-C1=CC(=C(C=C1C2=C(C=C3C(=CC(=CC3=[O+]2)O)O)OC4(C(C(C(C(CO)(O4)[H])(O)[H])(O)[H])(O)[H])[H])[O-])O
+C1=CC(=C(C=C1C2=C(C=C3C(=CC(=CC3=[O+]2)O)O)OC4(C(C(C(C(CO)(O4)[H])(O)[H])(O)[H])(O)[H])[H])[O-])O	Shikimates and Phenylpropanoids	Flavonoids	Anthocyanidins	TRUE
 CC1=CC=C(C=C1)C(C)CCC=C(C)C	Terpenoids	Sesquiterpenoids	Bisabolane sesquiterpenoids	FALSE
 CC1(CCCC2(C1CCC3=CC(CCC32)(C)C=C)C)C	Terpenoids	Diterpenoids	Pimarane and Isopimarane diterpenoids	FALSE
 CCCCCCCCCCCCCCCC(=O)OCC(CO)O	Fatty acids	Glycerolipids	Monoacylglycerols	FALSE

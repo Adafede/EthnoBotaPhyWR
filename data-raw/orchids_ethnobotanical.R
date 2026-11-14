@@ -1,10 +1,15 @@
 ethnobotanical_tsv <- "data-raw/Species_medicinal_output_with_ott_id.tsv"
 
 # Read the raw ethnobotanical data
-orchids_ethnobotanical <- tidytable::fread(ethnobotanical_tsv)
+orchids_ethnobotanical <- data.table::fread(
+  ethnobotanical_tsv,
+  fill = TRUE,
+  na.strings = c("", "NA")
+)
 
-# Convert to data.frame for processing
+# Convert to plain data.frame for processing
 orchids_ethnobotanical <- as.data.frame(orchids_ethnobotanical)
+class(orchids_ethnobotanical) <- "data.frame"
 
 # Remove empty/NA-only columns
 orchids_ethnobotanical <- orchids_ethnobotanical[,
@@ -28,11 +33,13 @@ orchids_ethnobotanical <- orchids_ethnobotanical[
 
 # Remove duplicates
 orchids_ethnobotanical <- unique(orchids_ethnobotanical)
+rownames(orchids_ethnobotanical) <- NULL
 
 # Store for distribution
 save(
   orchids_ethnobotanical,
-  file = "data/orchids_ethnobotanical.rda"
+  file = "data/orchids_ethnobotanical.rda",
+  compress = "xz"
 )
 
 cat("✓ orchids_ethnobotanical dataset prepared\n")

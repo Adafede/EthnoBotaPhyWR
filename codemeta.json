@@ -4,7 +4,7 @@
   "identifier": "EthnoBotaPhyWR",
   "description": "Infrastructure and curated ethnobotanical and phytochemical datasets for analyzing plant families, including phylogenetic integration and visualization tools. Includes vendored functions from the 'cascade' package (<https://github.com/adafede/cascade>) to minimize the dependency tree.",
   "name": "EthnoBotaPhyWR: Infrastructure for Ethnobotanical and Phytochemical Data Integration with Wikidata",
-  "relatedLink": "https://adafede.github.io/EthnoBotaPhyWR",
+  "relatedLink": "https://adafede.github.io/EthnoBotaPhyWR/",
   "codeRepository": "https://github.com/adafede/EthnoBotaPhyWR",
   "issueTracker": "https://github.com/adafede/EthnoBotaPhyWR/issues",
   "license": "https://spdx.org/licenses/AGPL-3.0",
@@ -338,7 +338,7 @@
     "SystemRequirements": null
   },
   "keywords": ["Ethnobotany", "Phytochemistry", "Taxonomy", "Wikidata", "naturalProducts", "chemotaxonomy", "phylogenetics", "EDAM:topic_0780", "EDAM:topic_0154", "EDAM:topic_2258", "EDAM:topic_3293", "EDAM:topic_0637", "EDAM:topic_3077", "EDAM:operation_0224", "EDAM:operation_2422", "EDAM:operation_2990", "EDAM:operation_0324", "EDAM:operation_0567", "EDAM:operation_0337", "EDAM:operation_1812", "EDAM:data_0872", "EDAM:data_3272", "EDAM:data_1872", "EDAM:data_1868", "EDAM:data_3028", "EDAM:data_1463", "EDAM:data_2301", "EDAM:data_1086", "EDAM:format_1196", "EDAM:format_1199", "EDAM:format_3475", "EDAM:format_3508", "EDAM:format_3604", "ethnobotany", "phytochemistry", "r", "wikidata"],
-  "fileSize": "2722.095KB",
+  "fileSize": "2719.823KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -353,7 +353,7 @@
         }
       ],
       "name": "EthnoBotaPhyWR: Infrastructure for Ethnobotanical and Phytochemical Data Integration with Wikidata",
-      "url": "https://adafede.github.io/EthnoBotaPhyWR",
+      "url": "https://adafede.github.io/EthnoBotaPhyWR/",
       "description": "R package, version 0.0.0.9001"
     }
   ],

@@ -63,6 +63,7 @@ utils::globalVariables(c(
   "plot_label",
   "pw",
   "q_val",
+  "query",
   "rnk",
   "sc",
   "sc_id",

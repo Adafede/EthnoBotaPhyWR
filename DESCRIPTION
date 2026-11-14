@@ -17,7 +17,7 @@ Description: Infrastructure and curated ethnobotanical and phytochemical
     from the 'cascade' package (<https://github.com/adafede/cascade>)
     to minimize the dependency tree.
 License: AGPL (>= 3)
-URL: https://github.com/adafede/EthnoBotaPhyWR, https://adafede.github.io/EthnoBotaPhyWR
+URL: https://github.com/adafede/EthnoBotaPhyWR, https://adafede.github.io/EthnoBotaPhyWR/
 BugReports: https://github.com/adafede/EthnoBotaPhyWR/issues
 Depends:
     R (>= 4.5.0)

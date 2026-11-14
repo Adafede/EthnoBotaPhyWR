@@ -7,5 +7,5 @@ bibentry(
                    role = c("aut", "cre"), comment = c(ORCID = "0000-0003-0443-9902")),
   year = "2026",
   note = "R package, version 0.0.0.9001",
-  url = "https://adafede.github.io/EthnoBotaPhyWR"
+  url = "https://adafede.github.io/EthnoBotaPhyWR/"
 )

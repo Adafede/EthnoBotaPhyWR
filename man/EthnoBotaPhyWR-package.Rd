@@ -8,13 +8,13 @@
 \description{
 \if{html}{\figure{logo.svg}{options: style='float: right' alt='logo' width='120'}}
 
-Infrastructure and curated ethnobotanical and phytochemical datasets for analyzing plant families, including phylogenetic integration and visualization tools. Includes vendored functions from the 'cascade' package (https://github.com/adafede/cascade) to minimize the dependency tree.
+Infrastructure and curated ethnobotanical and phytochemical datasets for analyzing plant families, including phylogenetic integration and visualization tools. Includes vendored functions from the 'cascade' package (\url{https://github.com/adafede/cascade}) to minimize the dependency tree.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/adafede/EthnoBotaPhyWR}
-  \item \url{https://adafede.github.io/EthnoBotaPhyWR}
+  \item \url{https://adafede.github.io/EthnoBotaPhyWR/}
   \item Report bugs at \url{https://github.com/adafede/EthnoBotaPhyWR/issues}
 }
 

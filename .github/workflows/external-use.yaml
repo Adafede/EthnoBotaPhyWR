@@ -47,12 +47,13 @@ jobs:
         run: |
           library(EthnoBotaPhyWR)
           stopifnot(
+            is.function(ethnobotafever_tree),
             identical(class(orchids_compounds), "data.frame"),
             nrow(orchids_compounds) > 0L,
             identical(class(orchids_compound_classes), "data.frame"),
             nrow(orchids_compound_classes) > 0L,
             identical(class(orchids_ethnobotanical), "data.frame"),
             nrow(orchids_ethnobotanical) > 0L,
-            identical(suppressWarnings(normalize_ott_ids("12345")), "12345")
+            nzchar(system.file("extdata", "itol", "Orchidaceae_phyto_species_tree.tre", package = "EthnoBotaPhyWR"))
           )
         shell: Rscript {0}

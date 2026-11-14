@@ -8,7 +8,7 @@ query_wikidata(
   sparql_query,
   remove_url = TRUE,
   endpoint = "https://query.wikidata.org/sparql",
-  agent = "https://github.com/bearloga/WikidataQueryServiceR",
+  agent = "EthnoBotaPhyWR (https://github.com/adafede/EthnoBotaPhyWR)",
   timeout = 3600L,
   fallback = TRUE,
   headers = NULL,
@@ -35,9 +35,9 @@ backward compatibility with older versions. If set,
 this value is used as preferred response format.}
 
 \item{post}{Logical. If TRUE, send the SPARQL query as an HTTP POST
-request body (application/x-www-form-urlencoded) rather
-than as a GET query parameter. Required for endpoints
-such as QLever that do not accept GET requests.}
+request body (\code{application/x-www-form-urlencoded}) rather
+than as a GET query parameter. Useful for long queries
+or endpoints that prefer POST requests.}
 }
 \value{
 A \code{data.table}.

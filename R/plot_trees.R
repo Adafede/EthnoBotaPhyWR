@@ -73,6 +73,8 @@ plot_trees <- function(
     parse(text = paste0("10^", x))
   }
 
+  # ggtreeExtra:::ggplot_add.fruit_plot resolves `geom` by name via do.call
+  # inside namespace:ggtreeExtra without importing geom_col / geom_col_interactive.
   with_fruit_geom <- function(expr, interactive = FALSE) {
     env <- globalenv()
     geom_fn <- if (interactive) {
@@ -1595,7 +1597,11 @@ plot_trees <- function(
         mapping = ggplot2::aes(
           x = layout_full$orphan_point_x,
           size = tip_size,
-          color = log10(ethnobotanical_species_count)
+          color = ifelse(
+            ethnobotanical_species_count > 0,
+            log10(ethnobotanical_species_count),
+            NA_real_
+          )
         ),
         shape = 16
       ) +
@@ -1624,7 +1630,11 @@ plot_trees <- function(
           x = layout_full$orphan_text_x,
           y = plot_label,
           label = plot_label,
-          color = log10(ethnobotanical_species_count)
+          color = ifelse(
+            ethnobotanical_species_count > 0,
+            log10(ethnobotanical_species_count),
+            NA_real_
+          )
         ),
         fontface = "italic",
         hjust = 0
@@ -1931,13 +1941,21 @@ export_itol_files <- function(
   invisible(written)
 }
 
-#' @keywords internal
+#' @noRd
 inject_tree_search_bar <- function(html_path, title = "Phylogenetic Tree") {
   lines <- readLines(html_path, warn = FALSE, encoding = "UTF-8")
   body_idx <- grep("<body[^>]*>", lines)
   end_idx <- grep("</body>", lines)
   if (length(body_idx) == 0L || length(end_idx) == 0L) {
     return(invisible(FALSE))
+  }
+
+  escape_html <- function(x) {
+    x <- gsub("&", "&amp;", as.character(x), fixed = TRUE)
+    x <- gsub("<", "&lt;", x, fixed = TRUE)
+    x <- gsub(">", "&gt;", x, fixed = TRUE)
+    x <- gsub("\"", "&quot;", x, fixed = TRUE)
+    gsub("'", "&#39;", x, fixed = TRUE)
   }
 
   toolbar_html <- sprintf(
@@ -1962,7 +1980,7 @@ inject_tree_search_bar <- function(html_path, title = "Phylogenetic Tree") {
       "Hover tips/bars for details; scroll/drag inside tree to zoom/pan.",
       "</span></div>"
     ),
-    title
+    escape_html(title)
   )
 
   search_js <- paste0(

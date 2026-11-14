@@ -40,7 +40,8 @@ comparison.}
 table.}
 
 \item{path_classes}{Character, data.frame, or NULL. Local classes file or
-seed data.}
+seed data. When a file path is provided and uncached SMILES are classified,
+the updated lookup table is written back to this file.}
 
 \item{path_ethnobotanical}{Character, data.frame, or NULL. Local
 ethnobotanical file or table.}
@@ -59,8 +60,8 @@ export.}
 \item{export_table_counts}{Character. Path for the genus-level summary table
 export.}
 
-\item{export_table_counts_sub}{Character or NULL. Path for the filtered
-species-level counts export.}
+\item{export_table_counts_sub}{Character. Path for the filtered species-level
+counts export.}
 
 \item{local_cache}{Character. Directory containing \code{.rda} tree cache datasets
 (for example \code{data-raw}).}

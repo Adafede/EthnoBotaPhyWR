@@ -40,9 +40,19 @@ get_npclassifier_taxonomy <- function(smiles, timeout = 30) {
   }
 
   lapply(smiles, function(x) {
+    if (length(x) != 1L || is.na(x) || !nzchar(trimws(as.character(x)))) {
+      return(data.frame(
+        query = if (length(x) == 1L) as.character(x) else NA_character_,
+        pathway = NA_character_,
+        superclass = NA_character_,
+        class = NA_character_,
+        glycoside = NA,
+        stringsAsFactors = FALSE
+      ))
+    }
     tryCatch(
       {
-        url_id <- paste0(base_url, utils::URLencode(x, reserved = TRUE))
+        url_id <- paste0(base_url, curl::curl_escape(as.character(x)))
         resp <- curl::curl_fetch_memory(url_id, handle = handle)
         if (resp$status_code >= 400L) {
           stop("HTTP error ", resp$status_code)

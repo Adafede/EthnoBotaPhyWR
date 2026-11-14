@@ -48,9 +48,15 @@ query_wikidata_with_retry <- function(..., max_retries = 5L, base_delay = 2) {
   stop("Wikidata query failed after retries")
 }
 
+#' @noRd
 validate_taxon_qid <- function(taxon_qid) {
-  if (!is.character(taxon_qid) || length(taxon_qid) != 1L) {
-    stop("taxon_qid must be a single character string (Wikidata QID)")
+  if (
+    !is.character(taxon_qid) ||
+      length(taxon_qid) != 1L ||
+      is.na(taxon_qid) ||
+      !grepl("^Q[1-9][0-9]*$", taxon_qid)
+  ) {
+    stop("taxon_qid must be a single Wikidata QID (e.g. 'Q133080')")
   }
 }
 

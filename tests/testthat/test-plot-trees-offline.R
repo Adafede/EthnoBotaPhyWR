@@ -130,3 +130,62 @@ test_that("export_itol_files and export_tree_bundle write valid offline outputs"
   data_ids <- vapply(strsplit(data_rows, "\t"), `[`, character(1L), 1L)
   expect_true(all(data_ids %in% tr_written$tip.label))
 })
+
+test_that("inject_tree_search_bar escapes HTML title and orphan plot handles zero counts", {
+  skip_if_not_installed("ggtree")
+  skip_if_not_installed("ggtreeExtra")
+
+  ns <- asNamespace("EthnoBotaPhyWR")
+  inj <- get("inject_tree_search_bar", envir = ns, inherits = FALSE)
+  plot_tr <- get("plot_trees", envir = ns, inherits = FALSE)
+  prep_h <- get("prepare_hierarchy", envir = ns, inherits = FALSE)
+  prep_p <- get("prepare_plot", envir = ns, inherits = FALSE)
+
+  tmp_html <- tempfile(fileext = ".html")
+  on.exit(unlink(tmp_html), add = TRUE)
+  writeLines("<html><body><div>ok</div></body></html>", tmp_html)
+  inj(tmp_html, title = 'Tree <script>alert("xss")</script>')
+  html_out <- paste(readLines(tmp_html), collapse = "\n")
+  expect_false(grepl("<script>alert", html_out, fixed = TRUE))
+  expect_true(grepl(
+    "&lt;script&gt;alert(&quot;xss&quot;)",
+    html_out,
+    fixed = TRUE
+  ))
+
+  tr <- ape::read.tree(text = "(GenA:1,GenB:1);")
+  df_cnt <- data.frame(
+    taxon = c("Q1", "Q2", "Q3"),
+    taxon_name = c("GenA", "GenB", "GenOrphan"),
+    taxon_id_ott = c("1", "2", "3"),
+    compounds_count = c(2L, 0L, 1L),
+    species_count = c(5L, 2L, 3L),
+    ethnobotanical_count = c(1L, 0L, 0L),
+    stringsAsFactors = FALSE
+  )
+  df_cls <- data.frame(
+    organism = c("GenA", "GenOrphan"),
+    species = c("GenA", "GenOrphan"),
+    sample = c("GenA", "GenOrphan"),
+    best_candidate_1 = c("Terpenoids", "Alkaloids"),
+    best_candidate_2 = c("Monoterpenoids", "Indoles"),
+    best_candidate_3 = c("Iridoids", "Simple"),
+    stringsAsFactors = FALSE
+  ) |>
+    prep_h(type = "literature") |>
+    prep_p() |>
+    tidytable::rename(taxon_name = species)
+
+  orphan_df <- df_cnt[3L, , drop = FALSE]
+  names(orphan_df)[names(orphan_df) == "ethnobotanical_count"] <-
+    "ethnobotanical_species_count"
+
+  res <- plot_tr(
+    taxa_not_in_tree = orphan_df,
+    tree_taxa_full = tr,
+    tree_taxa_phyto = tr,
+    df_counted = df_cnt,
+    df_classes = df_cls
+  )
+  expect_s3_class(res$plot_orphan_taxa, "gg")
+})

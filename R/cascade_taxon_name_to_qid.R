@@ -33,11 +33,12 @@ taxon_name_to_qid <- function(taxon_name) {
     stop("taxon_name must be a single non-empty character string")
   }
 
+  safe_name <- gsub("([\"\\\\])", "\\\\\\1", taxon_name)
   query <- paste0(
     "PREFIX wdt: <http://www.wikidata.org/prop/direct/>\n",
     "SELECT DISTINCT ?taxon WHERE {\n",
     "  ?taxon wdt:P225 \"",
-    taxon_name,
+    safe_name,
     "\".\n",
     "}\n"
   )

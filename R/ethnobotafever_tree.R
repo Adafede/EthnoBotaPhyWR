@@ -22,7 +22,8 @@
 #' @param path_molecules Character, data.frame, or NULL. Local molecules file or
 #' table.
 #' @param path_classes Character, data.frame, or NULL. Local classes file or
-#' seed data.
+#' seed data. When a file path is provided and uncached SMILES are classified,
+#' the updated lookup table is written back to this file.
 #' @param path_ethnobotanical Character, data.frame, or NULL. Local
 #' ethnobotanical file or table.
 #' @param export_tree_full Character. Path for the main full-tree PDF figure.
@@ -34,8 +35,8 @@
 #' export.
 #' @param export_table_counts Character. Path for the genus-level summary table
 #' export.
-#' @param export_table_counts_sub Character or NULL. Path for the filtered
-#' species-level counts export.
+#' @param export_table_counts_sub Character. Path for the filtered species-level
+#' counts export.
 #' @param local_cache Character. Directory containing `.rda` tree cache datasets
 #' (for example `data-raw`).
 #' @param log_dir Character. Directory for log files.
@@ -116,10 +117,7 @@ ethnobotafever_tree <- function(
   if (
     !is.character(taxon_name) || length(taxon_name) != 1L || !nzchar(taxon_name)
   ) {
-    stop(
-      "taxon_name must be a single non-empty character string",
-      taxon_name = taxon_name
-    )
+    stop("taxon_name must be a single non-empty character string")
   }
   for (arg in c(
     "n_multiple_genera",
@@ -143,6 +141,29 @@ ethnobotafever_tree <- function(
     is.character(example_family_names) && is.null(names(example_family_names))
   ) {
     names(example_family_names) <- example_family_names
+  }
+  for (arg in c(
+    "export_tree_full",
+    "export_tree_phyto",
+    "export_tree_phyto_sub",
+    "export_table_classified",
+    "export_table_counts",
+    "export_table_counts_sub",
+    "log_dir"
+  )) {
+    val <- get(arg, envir = environment())
+    if (!is.character(val) || length(val) != 1L || is.na(val) || !nzchar(val)) {
+      stop(sprintf("%s must be a single non-empty character path", arg))
+    }
+  }
+  if (
+    !is.null(local_cache) &&
+      (!is.character(local_cache) ||
+        length(local_cache) != 1L ||
+        is.na(local_cache) ||
+        !nzchar(local_cache))
+  ) {
+    stop("local_cache must be a single non-empty character path or NULL")
   }
 
   dir.create(log_dir, recursive = TRUE, showWarnings = FALSE)
@@ -175,7 +196,10 @@ ethnobotafever_tree <- function(
       return(as.data.frame(x, stringsAsFactors = FALSE))
     }
     if (is.character(x) && length(x) == 1L && file.exists(x)) {
-      return(tidytable::fread(x))
+      return(as.data.frame(
+        data.table::fread(x, fill = TRUE),
+        stringsAsFactors = FALSE
+      ))
     }
     stop(label, " must be a data.frame, an existing file path, or NULL")
   }
@@ -196,6 +220,12 @@ ethnobotafever_tree <- function(
       tidytable::distinct(taxon, connectivity_layer, .keep_all = TRUE)
   }
 
+  blank_to_na <- function(v) {
+    v <- trimws(as.character(v))
+    v[!nzchar(v)] <- NA_character_
+    v
+  }
+
   build_compound_classes <- function(df_taxon_smiles, classes_df) {
     df_taxon_smiles |>
       tidytable::distinct(taxon_name, compound_smiles_canonical) |>
@@ -213,6 +243,9 @@ ethnobotafever_tree <- function(
       tidytable::mutate(
         sample = organism,
         species = organism,
+        best_candidate_1 = blank_to_na(best_candidate_1),
+        best_candidate_2 = blank_to_na(best_candidate_2),
+        best_candidate_3 = blank_to_na(best_candidate_3),
         best_candidate_1 = tidytable::if_else(
           condition = is.na(best_candidate_1),
           true = "Other",
@@ -228,8 +261,28 @@ ethnobotafever_tree <- function(
       )
   }
 
-  taxon_qid <- taxon_name_to_qid(taxon_name)
-  example_family_qids <- lapply(example_family_names, taxon_name_to_qid)
+  resolve_single_taxon_qid <- function(name) {
+    qids <- taxon_name_to_qid(name)
+    qids <- qids[!is.na(qids) & nzchar(qids)]
+    if (length(qids) == 0L) {
+      stop(
+        sprintf("Could not resolve Wikidata QID for '%s'", name),
+        call. = FALSE
+      )
+    }
+    if (length(qids) > 1L) {
+      logger::log_warn(
+        "Multiple Wikidata QIDs matched '",
+        name,
+        "'; using ",
+        qids[1L]
+      )
+    }
+    qids[1L]
+  }
+
+  taxon_qid <- resolve_single_taxon_qid(taxon_name)
+  example_family_qids <- lapply(example_family_names, resolve_single_taxon_qid)
 
   taxa_wd <- get_subtaxa_wd(taxon_qid)
   example_family_taxa_wd <- lapply(example_family_qids, get_subtaxa_wd)
@@ -415,11 +468,6 @@ ethnobotafever_tree <- function(
       )
     )
   } else {
-    if (!is.null(path_molecules)) {
-      logger::log_warn(
-        "Local molecules table not available; using Wikidata-only compounds."
-      )
-    }
     taxa_compounds_tot <- taxa_compounds_wd
   }
 
@@ -773,18 +821,26 @@ ethnobotafever_tree <- function(
   )
 
   taxa_known_sub <- taxa_known |>
-    tidytable::filter(!is.na(compound_inchikey) | ethnobotanical) |>
-    tidytable::select(
+    tidytable::filter(
+      !is.na(compound_inchikey) | (!is.na(ethnobotanical) & ethnobotanical)
+    ) |>
+    tidytable::summarize(
+      compounds_count = max(0L, as.integer(compounds_count), na.rm = TRUE),
+      species_count = 1L,
+      ethnobotanical_count = as.integer(any(
+        !is.na(ethnobotanical) & ethnobotanical
+      )),
+      .by = c(taxon.y, taxon_id_ott.y)
+    ) |>
+    tidytable::rename(
       taxon = taxon.y,
-      taxon_id_ott = taxon_id_ott.y,
-      compounds_count,
-      species_count,
-      ethnobotanical_count
+      taxon_id_ott = taxon_id_ott.y
     ) |>
     tidytable::inner_join(
       taxa_wd |>
         tidytable::select(taxon, taxon_name) |>
-        tidytable::distinct()
+        tidytable::distinct(),
+      by = "taxon"
     ) |>
     tidytable::relocate(taxon_name, .after = taxon) |>
     tidytable::distinct()
@@ -801,15 +857,19 @@ ethnobotafever_tree <- function(
   smiles <- taxa_compounds |>
     tidytable::distinct(compound_smiles_canonical) |>
     tidytable::pull()
+  smiles <- smiles[!is.na(smiles) & nzchar(trimws(as.character(smiles)))]
   classes_known <- resolve_input_table(path_classes, "path_classes")
+  smiles_unknown <- character(0)
   if (!is.null(classes_known)) {
     classes_known <- tidytable::distinct(classes_known)
-    smiles_unknown <- smiles[!smiles %in% classes_known$query]
+    cached_valid <- classes_known$query[!is.na(classes_known$glycoside)]
+    smiles_unknown <- smiles[!smiles %in% cached_valid]
     if (length(smiles_unknown) > 0L) {
       classes <- smiles_unknown |>
         get_npclassifier_taxonomy() |>
         tidytable::bind_rows() |>
-        tidytable::bind_rows(classes_known)
+        tidytable::bind_rows(classes_known) |>
+        tidytable::distinct(query, .keep_all = TRUE)
     } else {
       classes <- classes_known
     }
@@ -818,7 +878,11 @@ ethnobotafever_tree <- function(
       get_npclassifier_taxonomy() |>
       tidytable::bind_rows()
   }
-  if (is.character(path_classes) && length(path_classes) == 1L) {
+  if (
+    is.character(path_classes) &&
+      length(path_classes) == 1L &&
+      (is.null(classes_known) || length(smiles_unknown) > 0L)
+  ) {
     classes |>
       tidytable::fwrite(file = path_classes, sep = "\t")
   }
@@ -841,10 +905,17 @@ ethnobotafever_tree <- function(
     build_compound_classes(classes)
 
   taxa_compounds_classes_sub <- taxa_known |>
-    tidytable::filter(!is.na(compound_inchikey)) |>
-    tidytable::distinct(taxon, compound_smiles_canonical) |>
+    tidytable::filter(
+      !is.na(compound_inchikey) & !is.na(compound_smiles_canonical)
+    ) |>
+    tidytable::select(
+      taxon = taxon.y,
+      compound_smiles_canonical
+    ) |>
+    tidytable::distinct() |>
     tidytable::inner_join(
-      tidytable::distinct(taxa_known_sub, taxon, taxon_name)
+      tidytable::distinct(taxa_known_sub, taxon, taxon_name),
+      by = "taxon"
     ) |>
     build_compound_classes(classes)
 
@@ -869,19 +940,15 @@ ethnobotafever_tree <- function(
     tidytable::relocate(taxon_name, .before = ids) |>
     tidytable::distinct(taxon_name, values, ids, color, .keep_all = TRUE)
 
-  # Compute genus-level Hill chemical diversity (^1D), EB shrunk medicinal rate,
-  # allometric compound residuals, and exemplar species OTT IDs for OTL resolution
+  # Compute genus-level superclass Hill diversity (^1D), EB shrunk medicinal
+  # rate, allometric compound residuals, and exemplar OTT IDs for OTL
   hill_by_genus <- taxa_compounds_classes |>
-    tidytable::mutate(
-      cls_key = ifelse(
-        is.na(best_candidate_3) | !nzchar(as.character(best_candidate_3)),
-        ifelse(
-          is.na(best_candidate_2) | !nzchar(as.character(best_candidate_2)),
-          as.character(best_candidate_1),
-          as.character(best_candidate_2)
-        ),
-        as.character(best_candidate_3)
-      )
+    tidytable::mutate(cls_key = trimws(as.character(best_candidate_2))) |>
+    tidytable::filter(
+      !is.na(cls_key) &
+        nzchar(cls_key) &
+        cls_key != "Other" &
+        !grepl("^not", cls_key, ignore.case = TRUE)
     ) |>
     tidytable::summarize(n_cls = tidytable::n(), .by = c(organism, cls_key)) |>
     tidytable::mutate(p_cls = n_cls / sum(n_cls), .by = organism) |>
@@ -975,10 +1042,19 @@ ethnobotafever_tree <- function(
   }
   alpha_eb <- m_eb * conc_eb
   beta_eb <- (1 - m_eb) * conc_eb
-  fit_allom <- stats::lm(
-    log10(taxa_ethno_counted$compounds_count + 1) ~
-      log10(taxa_ethno_counted$species_count + 1)
-  )
+  sp_log <- log10(taxa_ethno_counted$species_count + 1)
+  allom_resid <- if (
+    nrow(taxa_ethno_counted) >= 2L &&
+      is.finite(stats::sd(sp_log)) &&
+      stats::sd(sp_log) > 0
+  ) {
+    fit_allom <- stats::lm(
+      log10(taxa_ethno_counted$compounds_count + 1) ~ sp_log
+    )
+    round(as.numeric(stats::residuals(fit_allom)), 4L)
+  } else {
+    rep(0, nrow(taxa_ethno_counted))
+  }
 
   taxa_ethno_counted <- taxa_ethno_counted |>
     tidytable::left_join(hill_by_genus, by = c("taxon_name" = "organism")) |>
@@ -988,7 +1064,7 @@ ethnobotafever_tree <- function(
         (k_eb + alpha_eb) / (n_eb + alpha_eb + beta_eb),
         5L
       ),
-      compounds_residual = round(as.numeric(stats::residuals(fit_allom)), 4L),
+      compounds_residual = allom_resid,
       shannon_diversity = tidytable::replace_na(shannon_diversity, 0),
       hill_q1 = tidytable::replace_na(hill_q1, 0)
     )

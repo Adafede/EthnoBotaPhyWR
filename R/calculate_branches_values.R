@@ -23,7 +23,9 @@
 #'
 #' @return A `data.frame` with `parent`, `node`, `label`, `count`, `phylo_asr`,
 #' `eb_rate`, `hot_node_pval`, `hot_node_qval`, `is_hot_node`, `is_tip`,
-#' `parent_count`, and the calculated branch value (named by `name`).
+#' `parent_count`, and the calculated branch value (named by `name`), with
+#' attribute `phylo_signal` containing `K` (Blomberg's K), `p_val` (tip-shuffle
+#' permutation p-value), and `n_contrasts`.
 #'
 #' @section EDAM:
 #' - Topic: `http://edamontology.org/topic_3293` (Phylogenetics)
@@ -109,7 +111,6 @@ calculate_branches_values <- function(
   n_tips <- ape::Ntip(tree)
   n_nodes <- ape::Nnode(tree)
   total_nodes <- n_tips + n_nodes
-  internal_nodes <- seq.int(n_tips + 1L, length.out = n_nodes)
 
   # Empirical Bayes Beta-Binomial shrinkage on tip proportions (k_i / N_i)
   tip_val_vec <- rep(NA_real_, n_tips)
@@ -244,17 +245,17 @@ calculate_branches_values <- function(
     mu_down <- rep(NA_real_, total_nodes)
     var_down <- rep(0, total_nodes)
     mu_down[seq_len(n_tips)] <- tip_x
-    var_down[seq_len(n_tips)] <- 1 / pmax(1, tip_w) - 1
 
-    # Upward postorder pass
-    p_seq <- unique(edges[, 1L])
+    # Upward postorder pass; fromLast = TRUE guarantees child internal nodes precede parent u
+    p_seq <- unique(edges[, 1L], fromLast = TRUE)
     for (u in p_seq) {
       e_idx <- which(edges[, 1L] == u)
       ch <- edges[e_idx, 2L]
       b_ch <- elen[e_idx]
+      b_eff <- ifelse(ch <= n_tips, b_ch / pmax(1, tip_w[ch]), b_ch)
       ok <- is.finite(mu_down[ch])
       if (any(ok)) {
-        prec <- 1 / pmax(1e-6, b_ch[ok] + var_down[ch[ok]])
+        prec <- 1 / pmax(1e-8, b_eff[ok] + var_down[ch[ok]])
         sum_prec <- sum(prec)
         mu_down[u] <- sum(prec * mu_down[ch[ok]]) / sum_prec
         var_down[u] <- 1 / sum_prec
@@ -278,14 +279,15 @@ calculate_branches_values <- function(
           is.finite(mu_down[u])
       ) {
         b_pu <- elen[i]
-        prec_u_to_p <- 1 / pmax(1e-6, b_pu + var_down[u])
+        prec_u_to_p <- 1 / pmax(1e-8, b_pu + var_down[u])
         prec_comp <- prec_full[p] - prec_u_to_p
         if (is.finite(prec_comp) && prec_comp > 1e-8) {
           mu_comp <- (prec_full[p] * mu_full[p] - prec_u_to_p * mu_down[u]) /
             prec_comp
           prec_p_to_u <- 1 / (b_pu + (1 / prec_comp))
-          prec_full[u] <- (1 / var_down[u]) + prec_p_to_u
-          mu_full[u] <- ((1 / var_down[u]) *
+          prec_u_down <- 1 / max(1e-8, var_down[u])
+          prec_full[u] <- prec_u_down + prec_p_to_u
+          mu_full[u] <- (prec_u_down *
             mu_down[u] +
             prec_p_to_u * mu_comp) /
             prec_full[u]
@@ -298,12 +300,13 @@ calculate_branches_values <- function(
   asr_vals <- felsenstein_asr(tree, tip_val_vec, tip_w_vec)
   eb_asr_vals <- felsenstein_asr(tree, tip_eb_vec, tip_w_vec)
 
-  # Blomberg's K phylogenetic signal via independent contrasts on Grafen tree
+  # Exact Blomberg et al. (2003) K via independent contrasts and postorder GLS
   phylo_signal <- list(K = NA_real_, p_val = NA_real_, n_contrasts = 0L)
+  fin_idx <- which(is.finite(tip_val_vec))
   if (
     n_tips >= 4L &&
-      sum(is.finite(tip_val_vec)) >= 4L &&
-      stats::sd(tip_val_vec, na.rm = TRUE) > 0
+      length(fin_idx) >= 4L &&
+      stats::sd(log1p(pmax(0, tip_val_vec[fin_idx]))) > 0
   ) {
     phylo_signal <- tryCatch(
       {
@@ -311,35 +314,90 @@ calculate_branches_values <- function(
         if (is.null(tr_sig$edge.length)) {
           tr_sig <- ape::compute.brlen(tr_sig, method = "Grafen", power = 1)
         }
+        if (length(fin_idx) < n_tips) {
+          tr_sig <- ape::keep.tip(tr_sig, fin_idx)
+        }
+        tr_sig$edge.length <- pmax(1e-8, as.numeric(tr_sig$edge.length))
+        # Clamp existing branch lengths before multi2di so resolved polytomy edges stay 0
         tr_bin <- ape::multi2di(tr_sig, random = FALSE)
-        tr_bin$edge.length <- pmax(1e-5, tr_bin$edge.length)
-        x_sig <- log1p(pmax(0, ifelse(is.finite(tip_val_vec), tip_val_vec, 0)))
-        names(x_sig) <- tr_bin$tip.label
+        tip_idx_orig <- match(tr_bin$tip.label, tree$tip.label)
+        x_sig <- stats::setNames(
+          log1p(pmax(0, tip_val_vec[tip_idx_orig])),
+          tr_bin$tip.label
+        )
+        n_s <- length(x_sig)
         pic_obs <- ape::pic(x_sig, tr_bin)
-        mse_obs <- mean(pic_obs^2, na.rm = TRUE)
-        var_x <- stats::var(x_sig, na.rm = TRUE)
-        k_ratio <- if (is.finite(mse_obs) && mse_obs > 0) {
-          var_x / mse_obs
+        mse_obs <- mean(pic_obs^2)
+
+        tr_p <- ape::reorder.phylo(tr_bin, "postorder")
+        e_mat <- tr_p$edge
+        mu_d <- c(unname(x_sig), rep(NA_real_, tr_p$Nnode))
+        var_d <- numeric(length(mu_d))
+        for (u in unique(e_mat[, 1L], fromLast = TRUE)) {
+          e_idx <- which(e_mat[, 1L] == u)
+          ch <- e_mat[e_idx, 2L]
+          v_ch <- tr_p$edge.length[e_idx] + var_d[ch]
+          z <- v_ch <= 1e-12
+          if (any(z)) {
+            mu_d[u] <- mean(mu_d[ch[z]])
+            var_d[u] <- 0
+          } else {
+            w_ch <- 1 / v_ch
+            mu_d[u] <- sum(w_ch * mu_d[ch]) / sum(w_ch)
+            var_d[u] <- 1 / sum(w_ch)
+          }
+        }
+        root_id <- n_s + 1L
+        a_hat <- mu_d[root_id]
+        one_cinv_one <- 1 / var_d[root_id]
+        tr_c <- sum(ape::node.depth.edgelength(tr_bin)[seq_len(n_s)])
+        mse0 <- sum((x_sig - a_hat)^2) / (n_s - 1L)
+        s_factor <- (tr_c - n_s / one_cinv_one) / (n_s - 1L)
+        k_stat <- if (
+          is.finite(mse_obs) &&
+            mse_obs > 0 &&
+            is.finite(s_factor) &&
+            s_factor > 0
+        ) {
+          (mse0 / mse_obs) / s_factor
         } else {
           NA_real_
         }
+
+        has_seed <- exists(
+          ".Random.seed",
+          envir = globalenv(),
+          inherits = FALSE
+        )
+        old_seed <- if (has_seed) {
+          get(".Random.seed", envir = globalenv(), inherits = FALSE)
+        } else {
+          NULL
+        }
+        on.exit(
+          {
+            if (has_seed) {
+              assign(".Random.seed", old_seed, envir = globalenv())
+            } else if (
+              exists(".Random.seed", envir = globalenv(), inherits = FALSE)
+            ) {
+              rm(".Random.seed", envir = globalenv())
+            }
+          },
+          add = TRUE
+        )
+        set.seed(42L)
         n_perm <- 199L
         mse_perm <- replicate(n_perm, {
           x_p <- sample(x_sig)
           names(x_p) <- tr_bin$tip.label
           mean(ape::pic(x_p, tr_bin)^2, na.rm = TRUE)
         })
-        k_stat <- if (is.finite(mse_obs) && mse_obs > 0) {
-          stats::median(mse_perm, na.rm = TRUE) / mse_obs
-        } else {
-          NA_real_
-        }
         p_sig <- (sum(mse_perm <= mse_obs, na.rm = TRUE) + 1) / (n_perm + 1)
         list(
           K = as.numeric(k_stat),
           p_val = as.numeric(p_sig),
-          n_contrasts = length(pic_obs),
-          raw_ratio = as.numeric(k_ratio)
+          n_contrasts = length(pic_obs)
         )
       },
       error = function(e) phylo_signal

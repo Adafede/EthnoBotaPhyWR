@@ -29,7 +29,9 @@ ML ancestral state reconstruction on Grafen branch lengths).}
 \value{
 A \code{data.frame} with \code{parent}, \code{node}, \code{label}, \code{count}, \code{phylo_asr},
 \code{eb_rate}, \code{hot_node_pval}, \code{hot_node_qval}, \code{is_hot_node}, \code{is_tip},
-\code{parent_count}, and the calculated branch value (named by \code{name}).
+\code{parent_count}, and the calculated branch value (named by \code{name}), with
+attribute \code{phylo_signal} containing \code{K} (Blomberg's K), \code{p_val} (tip-shuffle
+permutation p-value), and \code{n_contrasts}.
 }
 \description{
 Calculates values for each branch (node) in a phylogenetic tree. Assigns tip

@@ -381,7 +381,8 @@ plot_trees <- function(
         desc_list[[k]] <- k
       }
       e_mat <- tr_p$edge
-      for (u in unique(e_mat[, 1L])) {
+      # fromLast = TRUE guarantees child internal clades complete before parent u
+      for (u in unique(e_mat[, 1L], fromLast = TRUE)) {
         ch <- e_mat[e_mat[, 1L] == u, 2L]
         desc_list[[u]] <- unlist(desc_list[ch], use.names = FALSE)
       }

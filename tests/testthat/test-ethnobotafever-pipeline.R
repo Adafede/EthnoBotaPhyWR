@@ -202,6 +202,7 @@ test_that("ethnobotafever_tree produces species-level counts, superclass Hill di
 
   expect_true(file.exists(file.path(out_dir, "full.svg")))
   expect_true(file.exists(file.path(out_dir, "full.pdf")))
+  expect_gt(file.info(file.path(out_dir, "full.pdf"))$size, 0)
   expect_true(file.exists(file.path(out_dir, "counts.tsv")))
   expect_true(file.exists(file.path(out_dir, "counts_sub.tsv")))
   expect_true(file.exists(res$log_file))

@@ -1766,11 +1766,13 @@ export_tree_bundle <- function(
   base_no_ext <- sub("\\.[A-Za-z0-9]+$", "", file_path)
   pdf_path <- paste0(base_no_ext, ".pdf")
   if (!identical(pdf_path, file_path)) {
-    pdf_dev <- if (capabilities("cairo")) grDevices::cairo_pdf else "pdf"
+    # Use grDevices::pdf (ggsave "pdf") rather than cairo_pdf: CRAN macOS R
+    # reports capabilities("cairo") == TRUE without XQuartz (/opt/X11), where
+    # cairo_pdf() warns and exits without creating the output file.
     ggplot2::ggsave(
       filename = pdf_path,
       plot = plot_obj,
-      device = pdf_dev,
+      device = "pdf",
       width = w,
       height = h,
       limitsize = FALSE,

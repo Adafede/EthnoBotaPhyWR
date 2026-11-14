@@ -129,6 +129,29 @@ test_that("export_itol_files and export_tree_bundle write valid offline outputs"
   ]
   data_ids <- vapply(strsplit(data_rows, "\t"), `[`, character(1L), 1L)
   expect_true(all(data_ids %in% tr_written$tip.label))
+
+  if (requireNamespace("svglite", quietly = TRUE)) {
+    exp_bundle <- get("export_tree_bundle", envir = ns, inherits = FALSE)
+    p_min <- ggplot2::ggplot(
+      data.frame(x = 1, y = 1),
+      ggplot2::aes(x = x, y = y)
+    ) +
+      ggplot2::geom_point()
+    svg_out <- file.path(out_dir, "bundle.svg")
+    pdf_out <- file.path(out_dir, "bundle.pdf")
+    bundle_written <- expect_no_warning(
+      exp_bundle(
+        plot_obj = p_min,
+        girafe_obj = NULL,
+        layout_cfg = list(export_width = 6, export_height = 4),
+        file_path = svg_out
+      )
+    )
+    expect_true(all(c(svg_out, pdf_out) %in% bundle_written))
+    expect_true(file.exists(svg_out))
+    expect_true(file.exists(pdf_out))
+    expect_gt(file.info(pdf_out)$size, 0)
+  }
 })
 
 test_that("inject_tree_search_bar escapes HTML title and orphan plot handles zero counts", {

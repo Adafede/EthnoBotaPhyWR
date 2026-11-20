@@ -1,9 +1,5 @@
 test_that("query_wikidata parses CSV responses and strips Wikidata entity IRIs", {
-  q_wd <- get(
-    "query_wikidata",
-    envir = asNamespace("EthnoBotaPhyWR"),
-    inherits = FALSE
-  )
+  q_wd <- pkg_internal("query_wikidata")
 
   testthat::local_mocked_bindings(
     curl_download = function(url, destfile, handle = NULL, quiet = TRUE) {
@@ -30,11 +26,7 @@ test_that("query_wikidata parses CSV responses and strips Wikidata entity IRIs",
 })
 
 test_that("query_wikidata_with_retry retries transient HTTP 429 errors", {
-  q_retry <- get(
-    "query_wikidata_with_retry",
-    envir = asNamespace("EthnoBotaPhyWR"),
-    inherits = FALSE
-  )
+  q_retry <- pkg_internal("query_wikidata_with_retry")
 
   state <- new.env(parent = emptyenv())
   state$attempts <- 0L
@@ -80,11 +72,7 @@ test_that("query_wikidata_with_retry retries transient HTTP 429 errors", {
 })
 
 test_that("get_npclassifier_taxonomy parses valid payloads and returns NA on failure", {
-  npc <- get(
-    "get_npclassifier_taxonomy",
-    envir = asNamespace("EthnoBotaPhyWR"),
-    inherits = FALSE
-  )
+  npc <- pkg_internal("get_npclassifier_taxonomy")
 
   state <- new.env(parent = emptyenv())
   state$urls <- character(0)
@@ -122,9 +110,8 @@ test_that("get_npclassifier_taxonomy parses valid payloads and returns NA on fai
 })
 
 test_that("validate_taxon_qid enforces QID format and taxon_name_to_qid escapes literals", {
-  ns <- asNamespace("EthnoBotaPhyWR")
-  val_qid <- get("validate_taxon_qid", envir = ns, inherits = FALSE)
-  t_qid <- get("taxon_name_to_qid", envir = ns, inherits = FALSE)
+  val_qid <- pkg_internal("validate_taxon_qid")
+  t_qid <- pkg_internal("taxon_name_to_qid")
 
   expect_silent(val_qid("Q133080"))
   expect_error(val_qid("not-a-qid"), "QID")

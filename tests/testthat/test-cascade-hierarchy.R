@@ -1,9 +1,5 @@
 test_that("prepare_hierarchy conserves mass across all 3 levels and maps Other", {
-  prep_h <- get(
-    "prepare_hierarchy",
-    envir = asNamespace("EthnoBotaPhyWR"),
-    inherits = FALSE
-  )
+  prep_h <- pkg_internal("prepare_hierarchy")
 
   df <- data.frame(
     organism = c("SpA", "SpA", "SpA", "SpB", "SpB", "SpC"),
@@ -53,11 +49,7 @@ test_that("prepare_hierarchy conserves mass across all 3 levels and maps Other",
 })
 
 test_that("prepare_hierarchy folds superclasses beyond top 4 per pathway and handles empty df", {
-  prep_h <- get(
-    "prepare_hierarchy",
-    envir = asNamespace("EthnoBotaPhyWR"),
-    inherits = FALSE
-  )
+  prep_h <- pkg_internal("prepare_hierarchy")
 
   empty_df <- data.frame(
     organism = character(0),
@@ -91,16 +83,8 @@ test_that("prepare_hierarchy folds superclasses beyond top 4 per pathway and han
 })
 
 test_that("prepare_plot assigns valid hex colors and expected ordering", {
-  prep_h <- get(
-    "prepare_hierarchy",
-    envir = asNamespace("EthnoBotaPhyWR"),
-    inherits = FALSE
-  )
-  prep_p <- get(
-    "prepare_plot",
-    envir = asNamespace("EthnoBotaPhyWR"),
-    inherits = FALSE
-  )
+  prep_h <- pkg_internal("prepare_hierarchy")
+  prep_p <- pkg_internal("prepare_plot")
 
   df <- data.frame(
     organism = c("SpA", "SpA", "SpB", "SpC"),

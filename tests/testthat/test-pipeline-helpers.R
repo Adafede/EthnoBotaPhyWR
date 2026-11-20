@@ -1,9 +1,6 @@
 test_that("prepare_hierarchy, prepare_plot, and plot_trees work offline", {
-  ns <- asNamespace("EthnoBotaPhyWR")
-  prep_h <- get("prepare_hierarchy", envir = ns, inherits = FALSE)
-  prep_p <- get("prepare_plot", envir = ns, inherits = FALSE)
-  plot_tr <- get("plot_trees", envir = ns, inherits = FALSE)
-  get_tr <- get("get_trees", envir = ns, inherits = FALSE)
+  plot_tr <- pkg_internal("plot_trees")
+  get_tr <- pkg_internal("get_trees")
 
   df_counted <- data.frame(
     taxon = c("Q1", "Q2", "Q3"),
@@ -34,9 +31,7 @@ test_that("prepare_hierarchy, prepare_plot, and plot_trees work offline", {
     stringsAsFactors = FALSE
   )
 
-  hierarchy <- prep_h(df_compounds, type = "literature")
-  plotted_classes <- prep_p(hierarchy) |>
-    tidytable::rename(taxon_name = species)
+  plotted_classes <- make_plotted_classes(df_compounds)
 
   expect_true(all(
     c("taxon_name", "ids", "values", "color") %in% names(plotted_classes)
@@ -67,11 +62,10 @@ test_that("prepare_hierarchy, prepare_plot, and plot_trees work offline", {
 })
 
 test_that("Wikidata and NPClassifier helpers validate inputs", {
-  ns <- asNamespace("EthnoBotaPhyWR")
-  q_wd <- get("query_wikidata", envir = ns, inherits = FALSE)
-  t_qid <- get("taxon_name_to_qid", envir = ns, inherits = FALSE)
-  sub_wd <- get("get_subtaxa_wd", envir = ns, inherits = FALSE)
-  npc <- get("get_npclassifier_taxonomy", envir = ns, inherits = FALSE)
+  q_wd <- pkg_internal("query_wikidata")
+  t_qid <- pkg_internal("taxon_name_to_qid")
+  sub_wd <- pkg_internal("get_subtaxa_wd")
+  npc <- pkg_internal("get_npclassifier_taxonomy")
 
   expect_error(q_wd(123), "sparql_query")
   expect_error(q_wd("SELECT *", timeout = -1), "timeout")

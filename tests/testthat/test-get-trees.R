@@ -1,9 +1,5 @@
 test_that("get_trees_cache_key normalizes integer/character OTT IDs and ignores row order", {
-  key_fn <- get(
-    "get_trees_cache_key",
-    envir = asNamespace("EthnoBotaPhyWR"),
-    inherits = FALSE
-  )
+  key_fn <- pkg_internal("get_trees_cache_key")
 
   df1 <- data.frame(
     taxon_name = c("GenusB", "GenusA"),
@@ -26,11 +22,7 @@ test_that("get_trees_cache_key normalizes integer/character OTT IDs and ignores 
 })
 
 test_that("get_trees_cached uses cache hit and writes missing cache offline", {
-  cached_fn <- get(
-    "get_trees_cached",
-    envir = asNamespace("EthnoBotaPhyWR"),
-    inherits = FALSE
-  )
+  cached_fn <- pkg_internal("get_trees_cached")
 
   cache_dir <- tempfile("tree_cache_")
   dir.create(cache_dir, recursive = TRUE)
@@ -70,11 +62,7 @@ test_that("get_trees_cached uses cache hit and writes missing cache offline", {
 })
 
 test_that("get_trees validates inputs and maps mocked OTL subtrees with exemplar swaps", {
-  get_tr <- get(
-    "get_trees",
-    envir = asNamespace("EthnoBotaPhyWR"),
-    inherits = FALSE
-  )
+  get_tr <- pkg_internal("get_trees")
 
   df <- data.frame(
     taxon_name = c("GenusA", "GenusB", "GenusC"),

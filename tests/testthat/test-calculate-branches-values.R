@@ -1,9 +1,5 @@
 test_that("calculate_branches_values computes tip and internal node values", {
-  calc <- get(
-    "calculate_branches_values",
-    envir = asNamespace("EthnoBotaPhyWR"),
-    inherits = FALSE
-  )
+  calc <- pkg_internal("calculate_branches_values")
   tree <- ape::read.tree(text = "(A,(B,C));")
   df <- data.frame(
     taxon_name = c("A", "B", "C"),
@@ -24,11 +20,7 @@ test_that("calculate_branches_values computes tip and internal node values", {
 })
 
 test_that("calculate_branches_values rejects invalid inputs", {
-  calc <- get(
-    "calculate_branches_values",
-    envir = asNamespace("EthnoBotaPhyWR"),
-    inherits = FALSE
-  )
+  calc <- pkg_internal("calculate_branches_values")
   tree <- ape::read.tree(text = "(A,(B,C));")
   df <- data.frame(
     taxon_name = c("A", "B", "C"),
@@ -41,11 +33,7 @@ test_that("calculate_branches_values rejects invalid inputs", {
 })
 
 test_that("calculate_branches_values phylo method and EB shrinkage respect topology", {
-  calc <- get(
-    "calculate_branches_values",
-    envir = asNamespace("EthnoBotaPhyWR"),
-    inherits = FALSE
-  )
+  calc <- pkg_internal("calculate_branches_values")
   # Asymmetric tree: A is sister to clade (B, C, D)
   tree <- ape::read.tree(text = "(A:1,((B:1,C:1):1,D:1):1);")
   df <- data.frame(
@@ -68,11 +56,7 @@ test_that("calculate_branches_values phylo method and EB shrinkage respect topol
 })
 
 test_that("felsenstein_asr respects postorder leaf-before-clade order and tip weights", {
-  calc <- get(
-    "calculate_branches_values",
-    envir = asNamespace("EthnoBotaPhyWR"),
-    inherits = FALSE
-  )
+  calc <- pkg_internal("calculate_branches_values")
 
   # ape::reorder.phylo(tr, "postorder") emits root's leaf edge first here
   tr_leaf_first <- ape::read.tree(text = "(A:1,(B:1,C:1):1);")
@@ -104,11 +88,7 @@ test_that("felsenstein_asr respects postorder leaf-before-clade order and tip we
 })
 
 test_that("Blomberg K matches exact vcv GLS formula, ignores NAs, and preserves RNG", {
-  calc <- get(
-    "calculate_branches_values",
-    envir = asNamespace("EthnoBotaPhyWR"),
-    inherits = FALSE
-  )
+  calc <- pkg_internal("calculate_branches_values")
 
   ref_blomberg_k <- function(tr, x_raw) {
     keep <- which(is.finite(x_raw))

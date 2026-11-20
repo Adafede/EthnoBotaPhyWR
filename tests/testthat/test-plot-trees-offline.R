@@ -2,10 +2,7 @@ test_that("plot_trees handles empty orphans, >60-tip clade collapsing, and fan l
   skip_if_not_installed("ggtree")
   skip_if_not_installed("ggtreeExtra")
 
-  ns <- asNamespace("EthnoBotaPhyWR")
-  prep_h <- get("prepare_hierarchy", envir = ns, inherits = FALSE)
-  prep_p <- get("prepare_plot", envir = ns, inherits = FALSE)
-  plot_tr <- get("plot_trees", envir = ns, inherits = FALSE)
+  plot_tr <- pkg_internal("plot_trees")
 
   set.seed(123)
   n_tips <- 65L
@@ -44,13 +41,9 @@ test_that("plot_trees handles empty orphans, >60-tip clade collapsing, and fan l
     best_candidate_3 = c("Iridoids", "Simple", "Abietanes", NA, "Iridoids"),
     stringsAsFactors = FALSE
   )
-  df_classes <- prep_h(df_comp, type = "literature") |>
-    prep_p() |>
-    tidytable::rename(taxon_name = species)
+  df_classes <- make_plotted_classes(df_comp)
 
-  orphan_df <- df_counted[0, , drop = FALSE]
-  names(orphan_df)[names(orphan_df) == "ethnobotanical_count"] <-
-    "ethnobotanical_species_count"
+  orphan_df <- make_orphan_df(df_counted)
 
   plots <- plot_tr(
     taxa_not_in_tree = orphan_df,
@@ -75,10 +68,7 @@ test_that("export_itol_files and export_tree_bundle write valid offline outputs"
   skip_if_not_installed("ggtree")
   skip_if_not_installed("ggtreeExtra")
 
-  ns <- asNamespace("EthnoBotaPhyWR")
-  prep_h <- get("prepare_hierarchy", envir = ns, inherits = FALSE)
-  prep_p <- get("prepare_plot", envir = ns, inherits = FALSE)
-  exp_itol <- get("export_itol_files", envir = ns, inherits = FALSE)
+  exp_itol <- pkg_internal("export_itol_files")
 
   tr <- ape::read.tree(text = "(Alpha_ott1:1,(Beta_ott2:1,Gamma_ott3:1):1);")
   df_cnt <- data.frame(
@@ -97,9 +87,7 @@ test_that("export_itol_files and export_tree_bundle write valid offline outputs"
     best_candidate_3 = c("Iridoids", "Simple"),
     stringsAsFactors = FALSE
   ) |>
-    prep_h(type = "literature") |>
-    prep_p() |>
-    tidytable::rename(taxon_name = species)
+    make_plotted_classes()
 
   out_dir <- tempfile("itol_test_")
   on.exit(unlink(out_dir, recursive = TRUE), add = TRUE)
@@ -131,7 +119,7 @@ test_that("export_itol_files and export_tree_bundle write valid offline outputs"
   expect_true(all(data_ids %in% tr_written$tip.label))
 
   if (requireNamespace("svglite", quietly = TRUE)) {
-    exp_bundle <- get("export_tree_bundle", envir = ns, inherits = FALSE)
+    exp_bundle <- pkg_internal("export_tree_bundle")
     p_min <- ggplot2::ggplot(
       data.frame(x = 1, y = 1),
       ggplot2::aes(x = x, y = y)
@@ -158,11 +146,8 @@ test_that("inject_tree_search_bar escapes HTML title and orphan plot handles zer
   skip_if_not_installed("ggtree")
   skip_if_not_installed("ggtreeExtra")
 
-  ns <- asNamespace("EthnoBotaPhyWR")
-  inj <- get("inject_tree_search_bar", envir = ns, inherits = FALSE)
-  plot_tr <- get("plot_trees", envir = ns, inherits = FALSE)
-  prep_h <- get("prepare_hierarchy", envir = ns, inherits = FALSE)
-  prep_p <- get("prepare_plot", envir = ns, inherits = FALSE)
+  inj <- pkg_internal("inject_tree_search_bar")
+  plot_tr <- pkg_internal("plot_trees")
 
   tmp_html <- tempfile(fileext = ".html")
   on.exit(unlink(tmp_html), add = TRUE)
@@ -195,13 +180,9 @@ test_that("inject_tree_search_bar escapes HTML title and orphan plot handles zer
     best_candidate_3 = c("Iridoids", "Simple"),
     stringsAsFactors = FALSE
   ) |>
-    prep_h(type = "literature") |>
-    prep_p() |>
-    tidytable::rename(taxon_name = species)
+    make_plotted_classes()
 
-  orphan_df <- df_cnt[3L, , drop = FALSE]
-  names(orphan_df)[names(orphan_df) == "ethnobotanical_count"] <-
-    "ethnobotanical_species_count"
+  orphan_df <- make_orphan_df(df_cnt, 3L)
 
   res <- plot_tr(
     taxa_not_in_tree = orphan_df,

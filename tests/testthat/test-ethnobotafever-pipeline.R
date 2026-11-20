@@ -128,11 +128,8 @@ test_that("ethnobotafever_tree produces species-level counts, superclass Hill di
       tr$tip.label <- tips
       tr$tip_id_ott <- df_counted$taxon_id_ott
       tr$edge.length <- rep(1, nrow(tr$edge))
-      orphan <- df_counted[0, , drop = FALSE]
-      names(orphan)[names(orphan) == "ethnobotanical_count"] <-
-        "ethnobotanical_species_count"
       list(
-        taxa_not_in_tree = orphan,
+        taxa_not_in_tree = make_orphan_df(df_counted),
         tree_taxa_full = tr,
         tree_taxa_phyto = tr
       )

@@ -303,8 +303,7 @@ plot_trees <- function(
   collapse_unstudied_clades <- function(
     tree,
     df_cnt,
-    df_cls,
-    genus_mode = TRUE
+    df_cls
   ) {
     n_orig <- length(tree$tip.label)
     if (n_orig <= 60L) {
@@ -606,8 +605,7 @@ plot_trees <- function(
     collapsed_res <- collapse_unstudied_clades(
       tree = tree_taxa_full,
       df_cnt = df_counted_plot,
-      df_cls = df_classes_plot,
-      genus_mode = genus
+      df_cls = df_classes_plot
     )
     tree_taxa_full <- collapsed_res$tree
     df_counted_full <- collapsed_res$df_counted

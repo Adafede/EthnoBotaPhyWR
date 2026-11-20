@@ -348,8 +348,7 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
 
   build_tree <- function(
     ott_ids_subset,
-    fallback_labels = NULL,
-    append_unplaced = TRUE
+    fallback_labels = NULL
   ) {
     ott_ids_subset <- normalize_ott_ids(ott_ids_subset)
     ott_ids_subset <- unique(
@@ -411,63 +410,12 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
       }
     }
 
-    append_missing_labels <- function(tree, labels) {
-      if (!inherits(tree, "phylo") || length(labels) == 0L) {
-        return(tree)
-      }
-      existing_labels <- tree$tip.label[
-        !is.na(tree$tip.label) & nzchar(tree$tip.label)
-      ]
-      missing_labels <- labels[!labels %in% existing_labels]
-      if (length(missing_labels) == 0L) {
-        return(tree)
-      }
-
-      prior_tip_ids <- if (is.null(tree$tip_id_ott)) {
-        rep(NA_character_, length(tree$tip.label))
-      } else {
-        as.character(tree$tip_id_ott)
-      }
-      new_tip_ids <- df_lookup$taxon_id_ott[
-        match(missing_labels, df_lookup$taxon_name)
-      ]
-
-      for (i in seq_along(missing_labels)) {
-        label <- missing_labels[i]
-        safe_lbl <- gsub(" ", "_", label, fixed = TRUE)
-        tip_tree <- ape::read.tree(text = paste0("(", safe_lbl, ");"))
-        tip_tree$tip.label <- label
-        gen_prefix <- sub("[ _].*", "", label)
-        congeneric <- which(
-          sub("[ _].*", "", tree$tip.label) == gen_prefix &
-            tree$tip.label != label
-        )
-        where_node <- if (length(congeneric) >= 2L) {
-          mrca_nd <- ape::getMRCA(tree, congeneric)
-          if (!is.null(mrca_nd) && !is.na(mrca_nd)) mrca_nd else "root"
-        } else if (length(congeneric) == 1L) {
-          parent_nd <- tree$edge[tree$edge[, 2L] == congeneric[1L], 1L]
-          if (length(parent_nd) == 1L) parent_nd else "root"
-        } else {
-          "root"
-        }
-        tree <- ape::bind.tree(tree, tip_tree, where = where_node)
-      }
-
-      tree$tip_id_ott <- c(prior_tip_ids, new_tip_ids)
-      tree
-    }
-
     if (is.null(res1) || !inherits(res1$tree, "phylo")) {
       logger::log_warn(
         "Failed to build tree from OTT IDs; ",
         "falling back to a star tree containing all requested IDs."
       )
-      placeholder_tree <- build_placeholder_tree(ott_ids_subset, df_counted)
-      if (append_unplaced) {
-        return(append_missing_labels(placeholder_tree, fallback_labels))
-      }
-      return(placeholder_tree)
+      return(build_placeholder_tree(ott_ids_subset, df_counted))
     }
 
     tree_result <- res1$tree
@@ -495,10 +443,6 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
 
     tree_result$tip.label <- as.character(matched_names)
     tree_result$tip_id_ott <- as.character(matched_orig_otts)
-
-    if (append_unplaced) {
-      tree_result <- append_missing_labels(tree_result, fallback_labels)
-    }
     tree_result
   }
 
@@ -514,18 +458,14 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
     ])
   )
 
-  # Only append unplaced active (phytochemical/ethnobotanical) taxa to full tree
-  # so pruned hybrid/empty names do not create a synthetic root comb
   tree_taxa_full <- build_tree(
     tree_query_ids,
-    fallback_labels = phyto_labels,
-    append_unplaced = FALSE
+    fallback_labels = phyto_labels
   )
 
   tree_taxa_phyto <- build_tree(
     tree_query_ids[tree_query_ids %in% phyto_taxa_ids],
-    fallback_labels = phyto_labels,
-    append_unplaced = FALSE
+    fallback_labels = phyto_labels
   )
 
   tree_tip_labels_full <- unique(as.character(

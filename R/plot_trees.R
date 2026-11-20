@@ -774,7 +774,6 @@ plot_trees <- function(
           NA_real_
         ),
         is_hot_node = !is_tip &
-          !is.na(hot_node_qval) &
           is.finite(hot_node_qval) &
           hot_node_qval < 0.05,
         tooltip_text = ifelse(
@@ -1462,23 +1461,22 @@ plot_trees <- function(
       taxa_not_in_tree,
       stringsAsFactors = FALSE
     ) |>
+      tidytable::select(
+        -tidytable::any_of(c("ids", "values", "values_plot", "color"))
+      ) |>
       tidytable::left_join(
         df_classes_plot |>
           tidytable::select(
             taxon_name_original,
-            ids_class = ids,
-            values_class = values,
-            values_plot_class = values_plot,
-            color_class = color
+            ids,
+            values,
+            values_plot,
+            color
           ) |>
           tidytable::distinct(),
         by = c("taxon_name" = "taxon_name_original")
       ) |>
       tidytable::mutate(
-        ids = ids_class,
-        values = values_class,
-        values_plot = values_plot_class,
-        color = color_class,
         plot_label = format_tip_labels(taxon_name, genus),
         species_count = sanitize_count(species_count, 1),
         tip_size = compute_tip_size(species_count),
@@ -1486,7 +1484,6 @@ plot_trees <- function(
           ethnobotanical_species_count,
           0
         ),
-        values = suppressWarnings(as.numeric(values)),
         values = ifelse(is.finite(values), values, 0),
         values_plot = ifelse(is.finite(values_plot), values_plot, 0)
       )

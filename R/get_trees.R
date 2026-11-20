@@ -33,7 +33,7 @@
 get_trees_cache_key <- function(ott_ids, df_counted, taxon_name) {
   cache_version <- "tree-v2"
   ott_ids <- normalize_ott_ids(ott_ids)
-  ott_ids <- unique(ott_ids[!is.na(ott_ids) & nzchar(ott_ids)])
+  ott_ids <- unique(ott_ids[!is.na(ott_ids)])
   ott_ids <- sort(ott_ids)
 
   cols <- intersect(
@@ -67,7 +67,7 @@ get_trees_cache_key <- function(ott_ids, df_counted, taxon_name) {
   }
 
   df_frame <- df_frame[
-    !is.na(df_frame$taxon_id_ott) & nzchar(df_frame$taxon_id_ott),
+    !is.na(df_frame$taxon_id_ott),
     ,
     drop = FALSE
   ]
@@ -242,9 +242,7 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
 
   build_placeholder_tree <- function(ott_ids_subset, df_frame = df_counted) {
     ott_ids_subset <- normalize_ott_ids(ott_ids_subset)
-    ott_ids_subset <- unique(
-      ott_ids_subset[!is.na(ott_ids_subset) & nzchar(ott_ids_subset)]
-    )
+    ott_ids_subset <- unique(ott_ids_subset[!is.na(ott_ids_subset)])
     if (length(ott_ids_subset) == 0L) {
       return(ape::read.tree(text = "(A);"))
     }
@@ -271,10 +269,8 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
   }
 
   ott_ids_normalized <- normalize_ott_ids(ott_ids)
-  ott_ids_integer <- suppressWarnings(as.integer(ott_ids_normalized))
-  ott_ids_integer <- ott_ids_integer[!is.na(ott_ids_integer)]
 
-  if (length(ott_ids_integer) == 0L) {
+  if (all(is.na(ott_ids_normalized))) {
     tree_taxa_full <- build_placeholder_tree(character(), df_counted)
     tree_taxa_phyto <- build_placeholder_tree(character(), df_counted)
     taxa_not_in_tree <- format_orphan_taxa(
@@ -356,7 +352,7 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
     drop = FALSE
   ]
   df_lookup <- df_lookup[!duplicated(df_lookup$taxon_name), , drop = FALSE]
-  has_ott_id <- !is.na(df_lookup$taxon_id_ott) & nzchar(df_lookup$taxon_id_ott)
+  has_ott_id <- !is.na(df_lookup$taxon_id_ott)
   df_lookup <- df_lookup[
     !has_ott_id | !duplicated(df_lookup$taxon_id_ott),
     ,
@@ -368,9 +364,7 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
     fallback_labels = NULL
   ) {
     ott_ids_subset <- normalize_ott_ids(ott_ids_subset)
-    ott_ids_subset <- unique(
-      ott_ids_subset[!is.na(ott_ids_subset) & nzchar(ott_ids_subset)]
-    )
+    ott_ids_subset <- unique(ott_ids_subset[!is.na(ott_ids_subset)])
     fallback_labels <- unique(
       as.character(fallback_labels[
         !is.na(fallback_labels) & nzchar(fallback_labels)
@@ -397,10 +391,10 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
       )
     }
     sub_map$query_ott <- sub_map$taxon_id_ott
-    no_ott <- is.na(sub_map$query_ott) | !nzchar(sub_map$query_ott)
+    no_ott <- is.na(sub_map$query_ott)
     sub_map$query_ott[no_ott] <- sub_map$exemplar_ott_id[no_ott]
 
-    q_int <- suppressWarnings(as.integer(sub_map$query_ott))
+    q_int <- as.integer(sub_map$query_ott)
     res1 <- query_otl_induced(q_int[!is.na(q_int)])
 
     for (iter in 1:2) {
@@ -412,13 +406,12 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
         (sub_map$query_ott %in% res1$broken)
       can_swap <- missing_in_tr &
         !is.na(sub_map$exemplar_ott_id) &
-        nzchar(sub_map$exemplar_ott_id) &
         sub_map$exemplar_ott_id != sub_map$query_ott
       if (!any(can_swap)) {
         break
       }
       sub_map$query_ott[can_swap] <- sub_map$exemplar_ott_id[can_swap]
-      q_int2 <- suppressWarnings(as.integer(sub_map$query_ott))
+      q_int2 <- as.integer(sub_map$query_ott)
       res2 <- query_otl_induced(q_int2[!is.na(q_int2)])
       if (!is.null(res2) && inherits(res2$tree, "phylo")) {
         res1 <- res2

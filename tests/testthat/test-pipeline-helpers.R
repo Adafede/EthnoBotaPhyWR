@@ -37,15 +37,7 @@ test_that("prepare_hierarchy, prepare_plot, and plot_trees work offline", {
     c("taxon_name", "ids", "values", "color") %in% names(plotted_classes)
   ))
 
-  if (
-    tryCatch(
-      {
-        loadNamespace("ggtree")
-        TRUE
-      },
-      error = function(e) FALSE
-    )
-  ) {
+  if (requireNamespace("ggtree", quietly = TRUE)) {
     tree_multi <- ape::read.tree(text = "(GenusA:1,(GenusB:1,GenusC:1):1);")
     plots <- plot_tr(
       taxa_not_in_tree = trees$taxa_not_in_tree,

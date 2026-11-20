@@ -659,8 +659,7 @@ ethnobotafever_tree <- function(
       species_count = tidytable::replace_na(species_count, 0L)
     ) |>
     tidytable::relocate(taxon_name, .before = taxon_id_ott) |>
-    tidytable::distinct() |>
-    data.frame()
+    tidytable::distinct()
 
   taxa_ethno <- taxa_spe_ott_cpd |>
     tidytable::select(-compound) |>
@@ -916,7 +915,7 @@ ethnobotafever_tree <- function(
 
   resolve_exemplar_otts <- function(spe_df) {
     cand <- data.table::as.data.table(spe_df)[
-      !is.na(taxon_id_ott) & nzchar(taxon_id_ott),
+      !is.na(taxon_id_ott),
       utils::head(.SD, 4L),
       by = generic_epithet
     ]
@@ -927,7 +926,7 @@ ethnobotafever_tree <- function(
         stringsAsFactors = FALSE
       ))
     }
-    ids_u <- unique(suppressWarnings(as.integer(cand$taxon_id_ott)))
+    ids_u <- unique(as.integer(cand$taxon_id_ott))
     ids_u <- ids_u[!is.na(ids_u)]
     good_ids <- tryCatch(
       {
@@ -991,10 +990,7 @@ ethnobotafever_tree <- function(
   taxa_ott_wd_ids_sub <- unique(taxa_known_sub$taxon_id_ott)
 
   logger::log_trace("Retrieving Open Tree Taxonomy now... taking some time!")
-  cache_dir <- local_cache
-  if (is.null(cache_dir) || length(cache_dir) != 1L || !nzchar(cache_dir)) {
-    cache_dir <- file.path("data")
-  }
+  cache_dir <- local_cache %||% file.path("data")
   dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
   trees_gen <- get_trees_cached(
     ott_ids = taxa_ott_wd_ids,

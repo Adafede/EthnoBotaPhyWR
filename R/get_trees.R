@@ -145,8 +145,10 @@ get_trees_cached <- function(ott_ids, df_counted, taxon_name, cache_dir) {
     df_counted = df_counted,
     taxon_name = taxon_name
   )
-  cache_env <- list2env(list(), parent = emptyenv())
-  assign(cache_object_name, result, envir = cache_env)
+  cache_env <- list2env(
+    stats::setNames(list(result), cache_object_name),
+    parent = emptyenv()
+  )
   save(list = cache_object_name, file = cache_file, envir = cache_env)
   result
 }

@@ -208,7 +208,10 @@ ethnobotafever_tree <- function(
     logger::log_info(
       "We found ",
       df |> tidytable::distinct(taxon) |> nrow(),
-      paste0(" ", taxon_name, " ", label)
+      " ",
+      taxon_name,
+      " ",
+      label
     )
   }
 
@@ -225,14 +228,12 @@ ethnobotafever_tree <- function(
     logger::log_info(
       "... of which ",
       non_wd,
-      paste0(
-        " are not on Wikidata yet. ",
-        ifelse(
-          test = non_wd > 0,
-          yes = "These should definitely be shared!",
-          no = "Good job!"
-        )
-      )
+      " are not on Wikidata yet. ",
+      if (non_wd > 0) {
+        "These should definitely be shared!"
+      } else {
+        "Good job!"
+      }
     )
     merged <- wd_df |>
       tidytable::bind_rows(to_upload)
@@ -350,7 +351,9 @@ ethnobotafever_tree <- function(
   logger::log_info(
     "We found ",
     nrow(taxa_wd),
-    paste0(" ", taxon_name, " subtaxa in Wikidata")
+    " ",
+    taxon_name,
+    " subtaxa in Wikidata"
   )
   taxa_gen <- taxa_wd |>
     tidytable::filter(taxon_rank == "Q34740") |>
@@ -384,7 +387,9 @@ ethnobotafever_tree <- function(
   logger::log_info(
     "We found ",
     nrow(taxa_ott_wd),
-    paste0(" ", taxon_name, " subtaxa with an Open Tree of Life ID in Wikidata")
+    " ",
+    taxon_name,
+    " subtaxa with an Open Tree of Life ID in Wikidata"
   )
   join_ott_ids <- function(df, distinct_col) {
     df |>
@@ -684,11 +689,9 @@ ethnobotafever_tree <- function(
   logger::log_info(
     "Among the ",
     count_distinct_genera(taxa_ethno_counted),
-    paste0(
-      " ",
-      taxon_name,
-      " genera and their subtaxa with an Open Tree of Life ID in Wikidata ..."
-    )
+    " ",
+    taxon_name,
+    " genera and their subtaxa with an Open Tree of Life ID in Wikidata ..."
   )
   logger::log_info(
     "... ",
@@ -1033,10 +1036,9 @@ ethnobotafever_tree <- function(
   log_phylo_signal(plots_gen$phylo_signal_phyto, "active phyto genus tree")
   if (!is.null(plots_gen$tree_data_phyto)) {
     hot_df <- plots_gen$tree_data_phyto
-    hot_nodes <- hot_df[!hot_df$is_tip & hot_df$is_hot_node, , drop = FALSE]
     logger::log_info(
       "Clade-level hypergeometric hot-node analysis identified ",
-      nrow(hot_nodes),
+      sum(!hot_df$is_tip & hot_df$is_hot_node, na.rm = TRUE),
       " statistically significant ethnobotanical clades (FDR q < 0.05)"
     )
   }

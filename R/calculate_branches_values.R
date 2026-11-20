@@ -428,14 +428,9 @@ calculate_branches_values <- function(
     tree_data$hot_node_qval < 0.05
 
   tree_data$is_tip <- tree_data$node <= n_tips
-  tree_data$parent_count <- tree_data$count[match(
-    tree_data$parent,
-    tree_data$node
-  )]
-  parent_asr <- tree_data$phylo_asr[match(
-    tree_data$parent,
-    tree_data$node
-  )]
+  p_idx <- match(tree_data$parent, tree_data$node)
+  tree_data$parent_count <- tree_data$count[p_idx]
+  parent_asr <- tree_data$phylo_asr[p_idx]
 
   branch_val <- if (identical(method, "phylo")) {
     ifelse(

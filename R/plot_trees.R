@@ -246,15 +246,6 @@ plot_trees <- function(
     ]
     uniq <- uniq[order(uniq$grp_int, uniq$subgrp_int), , drop = FALSE]
 
-    limits <- character(0)
-    values <- character(0)
-    labels <- character(0)
-
-    clean_pathway_title <- function(pw) {
-      pw <- gsub(" and ", " & ", pw, fixed = TRUE)
-      paste0(toupper(pw), " :")
-    }
-
     clean_sub_label <- function(id_str, pw_raw) {
       short <- sub("^[^-]+-", "", id_str)
       if (!nzchar(short)) {
@@ -270,34 +261,46 @@ plot_trees <- function(
       short
     }
 
-    for (g in unique(uniq$grp_int)) {
+    blocks <- lapply(unique(uniq$grp_int), function(g) {
       rows_g <- uniq[uniq$grp_int == g, , drop = FALSE]
       if (nrow(rows_g) > 5L) {
         rows_g <- rows_g[1:5, , drop = FALSE]
       }
       pw_raw <- rows_g$pathway_chr[1L]
-      hdr_id <- paste0("__hdr_", g)
-      limits <- c(limits, hdr_id)
-      values <- c(values, NA_character_)
-      labels <- c(labels, clean_pathway_title(pw_raw))
-
-      for (j in seq_len(nrow(rows_g))) {
-        id_j <- rows_g$id_chr[j]
-        limits <- c(limits, id_j)
-        values <- c(values, rows_g$col_chr[j])
-        labels <- c(labels, clean_sub_label(id_j, rows_g$pathway_chr[j]))
-      }
-
+      hdr_lbl <- paste0(
+        toupper(gsub(" and ", " & ", pw_raw, fixed = TRUE)),
+        " :"
+      )
+      sub_lbls <- vapply(
+        seq_len(nrow(rows_g)),
+        function(j) clean_sub_label(rows_g$id_chr[j], rows_g$pathway_chr[j]),
+        character(1L)
+      )
       n_pad <- 5L - nrow(rows_g)
-      if (n_pad > 0L) {
-        for (k in seq_len(n_pad)) {
-          pad_id <- paste0("__pad_", g, "_", k)
-          limits <- c(limits, pad_id)
-          values <- c(values, NA_character_)
-          labels <- c(labels, "")
-        }
+      pad_ids <- if (n_pad > 0L) {
+        paste0("__pad_", g, "_", seq_len(n_pad))
+      } else {
+        character(0)
       }
-    }
+      list(
+        limits = c(paste0("__hdr_", g), rows_g$id_chr, pad_ids),
+        values = c(NA_character_, rows_g$col_chr, rep(NA_character_, n_pad)),
+        labels = c(hdr_lbl, sub_lbls, rep("", n_pad))
+      )
+    })
+
+    limits <- as.character(unlist(
+      lapply(blocks, `[[`, "limits"),
+      use.names = FALSE
+    ))
+    values <- as.character(unlist(
+      lapply(blocks, `[[`, "values"),
+      use.names = FALSE
+    ))
+    labels <- as.character(unlist(
+      lapply(blocks, `[[`, "labels"),
+      use.names = FALSE
+    ))
 
     names(values) <- limits
     names(labels) <- limits
@@ -518,11 +521,10 @@ plot_trees <- function(
           } else if (length(m) <= 10L) {
             paste(m, collapse = ", ")
           } else {
-            paste0(
+            sprintf(
+              "%s, ... (+%d more)",
               paste(m[1:10], collapse = ", "),
-              ", ... (+",
-              length(m) - 10L,
-              " more)"
+              length(m) - 10L
             )
           }
         },
@@ -742,7 +744,7 @@ plot_trees <- function(
       ),
       names(df_cnt)
     )
-    res <- tree_df |>
+    tree_df |>
       tidytable::left_join(
         as.data.frame(df_cnt)[, meta_cols, drop = FALSE] |>
           tidytable::distinct(label, .keep_all = TRUE),
@@ -810,7 +812,6 @@ plot_trees <- function(
           )
         )
       )
-    res
   }
 
   compute_enriched_tree <- function(tree, df_cnt) {
@@ -1164,7 +1165,7 @@ plot_trees <- function(
       )
     }
 
-    p_out <- with_fruit_geom(
+    with_fruit_geom(
       p_base +
         ggplot2::geom_segment(
           data = leader_df,
@@ -1321,7 +1322,6 @@ plot_trees <- function(
         ggplot2::coord_cartesian(clip = "off"),
       interactive = use_ggiraph
     )
-    p_out
   }
 
   build_circular_si_plot <- function(tree, tr_data) {
@@ -1798,13 +1798,15 @@ export_itol_files <- function(
       ncol = length(field_ids),
       dimnames = list(taxa_ids, field_ids)
     )
-    for (i in seq_len(nrow(cls))) {
-      r <- cls$id[i]
-      c_nm <- cls$id_chr[i]
-      v <- suppressWarnings(as.numeric(cls$values[i]))
-      if (is.finite(v) && v > 0) {
-        mat[r, c_nm] <- mat[r, c_nm] + v
-      }
+    v <- suppressWarnings(as.numeric(cls$values))
+    ok <- is.finite(v) & v > 0
+    if (any(ok)) {
+      agg <- stats::aggregate(
+        v[ok],
+        by = list(r = cls$id[ok], c = cls$id_chr[ok]),
+        FUN = sum
+      )
+      mat[cbind(agg$r, agg$c)] <- agg$x
     }
 
     row_lines <- vapply(

@@ -70,11 +70,11 @@ calculate_branches_values <- function(
     weights
   }
 
+  matched_nodes <- match(df$taxon_name, tree$tip.label)
   if (!is.null(tree$tip_id_ott) && "taxon_id_ott" %in% names(df)) {
     df_ids <- normalize_ott_ids(df$taxon_id_ott)
     if (!all(is.na(df_ids))) {
-      tip_ids <- normalize_ott_ids(tree$tip_id_ott)
-      matched_nodes <- match(df_ids, tip_ids)
+      matched_nodes <- match(df_ids, normalize_ott_ids(tree$tip_id_ott))
       missing_idx <- is.na(matched_nodes)
       if (any(missing_idx)) {
         matched_nodes[missing_idx] <- match(
@@ -82,29 +82,14 @@ calculate_branches_values <- function(
           tree$tip.label
         )
       }
-      valid_match <- !is.na(matched_nodes)
-      node_values <- data.frame(
-        node = matched_nodes[valid_match],
-        count = values[valid_match],
-        weight = weights[valid_match],
-        sp_count = sp_counts[valid_match]
-      )
-    } else {
-      node_values <- data.frame(
-        node = match(df$taxon_name, tree$tip.label),
-        count = values,
-        weight = weights,
-        sp_count = sp_counts
-      )
     }
-  } else {
-    node_values <- data.frame(
-      node = match(df$taxon_name, tree$tip.label),
-      count = values,
-      weight = weights,
-      sp_count = sp_counts
-    )
   }
+  node_values <- data.frame(
+    node = matched_nodes,
+    count = values,
+    weight = weights,
+    sp_count = sp_counts
+  )
   node_values <- node_values[!is.na(node_values$node), , drop = FALSE]
   node_values <- node_values[!duplicated(node_values$node), , drop = FALSE]
 
@@ -420,26 +405,19 @@ calculate_branches_values <- function(
   }
   labels <- c(as.character(tree$tip.label), node_labels)
 
+  tree_data <- data.frame(
+    parent = as.integer(parent),
+    node = as.integer(all_nodes),
+    stringsAsFactors = FALSE
+  )
   if (!is.null(tree$edge.length)) {
     branch_length <- tree$edge.length[edge_idx]
     if (!is.null(tree$root.edge)) {
       branch_length[parent == all_nodes] <- tree$root.edge
     }
-    tree_data <- data.frame(
-      parent = as.integer(parent),
-      node = as.integer(all_nodes),
-      branch.length = as.numeric(branch_length),
-      label = labels,
-      stringsAsFactors = FALSE
-    )
-  } else {
-    tree_data <- data.frame(
-      parent = as.integer(parent),
-      node = as.integer(all_nodes),
-      label = labels,
-      stringsAsFactors = FALSE
-    )
+    tree_data$branch.length <- as.numeric(branch_length)
   }
+  tree_data$label <- labels
 
   tree_data$count <- ifelse(is.finite(all_counts), all_counts, NA_real_)
   tree_data$phylo_asr <- ifelse(is.finite(asr_vals), asr_vals, NA_real_)

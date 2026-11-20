@@ -1,3 +1,14 @@
+#' @noRd
+format_tip_labels <- function(labels, genus_mode) {
+  labels <- as.character(labels)
+  if (genus_mode) {
+    sub("_.*", "", labels)
+  } else {
+    labels <- sub("_ott.*", "", labels)
+    gsub("_", " ", labels, fixed = TRUE)
+  }
+}
+
 #' @title Plot trees
 #'
 #' @description
@@ -98,14 +109,14 @@ plot_trees <- function(
     force(expr)
   }
 
-  format_tip_labels <- function(labels, genus_mode) {
-    labels <- as.character(labels)
-    if (genus_mode) {
-      sub("_.*", "", labels)
-    } else {
-      labels <- sub("_ott.*", "", labels)
-      gsub("_", " ", labels, fixed = TRUE)
-    }
+  sanitize_count <- function(x, min_val = 0) {
+    v <- suppressWarnings(as.numeric(x))
+    v[!is.finite(v) | v < min_val] <- min_val
+    v
+  }
+
+  compute_tip_size <- function(sp_count) {
+    if (genus) scale_tip_sizes(sp_count) else rep(0.4, length(sp_count))
   }
 
   drop_tree_tips <- function(tree, tips) {
@@ -333,10 +344,15 @@ plot_trees <- function(
     )]
     sp_match[!is.finite(sp_match) | sp_match < 1] <- 1
 
-    tip_weight <- stats::setNames(rep(1L, n_orig), tree$tip.label)
-    tip_species <- stats::setNames(as.numeric(sp_match), tree$tip.label)
-    tip_base <- stats::setNames(tree$tip.label, tree$tip.label)
-    tip_members <- stats::setNames(as.list(tree$tip.label), tree$tip.label)
+    state <- new.env(parent = emptyenv())
+    state$tree <- tree
+    state$tip_weight <- stats::setNames(rep(1L, n_orig), tree$tip.label)
+    state$tip_species <- stats::setNames(as.numeric(sp_match), tree$tip.label)
+    state$tip_base <- stats::setNames(tree$tip.label, tree$tip.label)
+    state$tip_members <- stats::setNames(
+      as.list(tree$tip.label),
+      tree$tip.label
+    )
 
     clean_node_label <- function(lbl) {
       if (is.null(lbl) || is.na(lbl) || !nzchar(lbl) || grepl("^mrca", lbl)) {
@@ -390,15 +406,50 @@ plot_trees <- function(
       desc_list[(n_t + 1L):(n_t + n_i)]
     }
 
+    collapse_tip_group <- function(idx, node_lbl = NA_character_) {
+      lbls <- state$tree$tip.label[idx]
+      best_local <- which.max(state$tip_species[lbls])
+      rep_idx <- idx[best_local]
+      rep_lbl <- lbls[best_local]
+      total_w <- sum(state$tip_weight[lbls])
+      total_sp <- sum(state$tip_species[lbls])
+      members <- unique(unlist(state$tip_members[lbls], use.names = FALSE))
+      base_nm <- if (
+        !is.na(node_lbl) &&
+          !(node_lbl %in% state$tip_base[state$tree$tip.label])
+      ) {
+        node_lbl
+      } else {
+        state$tip_base[rep_lbl]
+      }
+      new_lbl <- format_collapsed_name(
+        base_nm,
+        total_w,
+        state$tree$tip.label[-rep_idx]
+      )
+      state$tree$tip.label[rep_idx] <- new_lbl
+      if (
+        !is.null(state$tree$tip_id_ott) &&
+          length(state$tree$tip_id_ott) >= rep_idx
+      ) {
+        state$tree$tip_id_ott[rep_idx] <- NA_character_
+      }
+      state$tip_weight[[new_lbl]] <- total_w
+      state$tip_species[[new_lbl]] <- total_sp
+      state$tip_base[[new_lbl]] <- base_nm
+      state$tip_members[[new_lbl]] <- members
+      idx[-best_local]
+    }
+
     repeat {
-      n_before <- length(tree$tip.label)
+      n_before <- length(state$tree$tip.label)
       if (n_before <= 3L) {
         break
       }
 
-      parts <- postorder_subtrees(tree)
-      n_tips <- length(tree$tip.label)
-      is_act <- tip_base[tree$tip.label] %in% active_set
+      parts <- postorder_subtrees(state$tree)
+      n_tips <- length(state$tree$tip.label)
+      is_act <- state$tip_base[state$tree$tip.label] %in% active_set
       inact_clade <- vapply(
         parts,
         function(idx) !any(is_act[idx]) && length(idx) > 1L,
@@ -407,115 +458,61 @@ plot_trees <- function(
 
       if (any(inact_clade)) {
         inodes <- n_tips + which(inact_clade)
-        p_of <- tree$edge[match(inodes, tree$edge[, 2L]), 1L]
+        p_of <- state$tree$edge[match(inodes, state$tree$edge[, 2L]), 1L]
         max_inodes <- inodes[!(p_of %in% inodes)]
-        to_drop <- integer(0)
-
-        for (nd in max_inodes) {
-          desc <- parts[[nd - n_tips]]
-          lbls <- tree$tip.label[desc]
-          best_local <- which.max(tip_species[lbls])
-          rep_idx <- desc[best_local]
-          rep_lbl <- lbls[best_local]
-          total_w <- sum(tip_weight[lbls])
-          total_sp <- sum(tip_species[lbls])
-          members <- unique(unlist(tip_members[lbls], use.names = FALSE))
-          nl <- if (!is.null(tree$node.label)) {
-            clean_node_label(tree$node.label[nd - n_tips])
-          } else {
-            NA_character_
-          }
-          base_nm <- if (!is.na(nl) && !(nl %in% tip_base[tree$tip.label])) {
-            nl
-          } else {
-            tip_base[rep_lbl]
-          }
-          new_lbl <- format_collapsed_name(
-            base_nm,
-            total_w,
-            tree$tip.label[-rep_idx]
-          )
-          tree$tip.label[rep_idx] <- new_lbl
-          if (
-            !is.null(tree$tip_id_ott) &&
-              length(tree$tip_id_ott) >= rep_idx
-          ) {
-            tree$tip_id_ott[rep_idx] <- NA_character_
-          }
-          tip_weight[[new_lbl]] <- total_w
-          tip_species[[new_lbl]] <- total_sp
-          tip_base[[new_lbl]] <- base_nm
-          tip_members[[new_lbl]] <- members
-          to_drop <- c(to_drop, desc[-best_local])
-        }
-        tree <- drop_tree_tips(tree, to_drop)
+        to_drop <- unlist(
+          lapply(max_inodes, function(nd) {
+            nl <- if (!is.null(state$tree$node.label)) {
+              clean_node_label(state$tree$node.label[nd - n_tips])
+            } else {
+              NA_character_
+            }
+            collapse_tip_group(parts[[nd - n_tips]], nl)
+          }),
+          use.names = FALSE
+        )
+        state$tree <- drop_tree_tips(state$tree, to_drop)
       }
 
-      n_tips <- length(tree$tip.label)
-      is_act <- tip_base[tree$tip.label] %in% active_set
-      edges <- tree$edge
+      n_tips <- length(state$tree$tip.label)
+      is_act <- state$tip_base[state$tree$tip.label] %in% active_set
+      edges <- state$tree$edge
       dir_inact <- edges[
         edges[, 2L] <= n_tips & !is_act[edges[, 2L]],
         ,
         drop = FALSE
       ]
       by_p <- split(dir_inact[, 2L], dir_inact[, 1L])
-      to_drop2 <- integer(0)
-
-      for (sibs in by_p) {
-        if (length(sibs) > 1L) {
-          lbls <- tree$tip.label[sibs]
-          best_local <- which.max(tip_species[lbls])
-          rep_idx <- sibs[best_local]
-          rep_lbl <- lbls[best_local]
-          total_w <- sum(tip_weight[lbls])
-          total_sp <- sum(tip_species[lbls])
-          members <- unique(unlist(tip_members[lbls], use.names = FALSE))
-          base_nm <- tip_base[rep_lbl]
-          new_lbl <- format_collapsed_name(
-            base_nm,
-            total_w,
-            tree$tip.label[-rep_idx]
-          )
-          tree$tip.label[rep_idx] <- new_lbl
-          if (
-            !is.null(tree$tip_id_ott) &&
-              length(tree$tip_id_ott) >= rep_idx
-          ) {
-            tree$tip_id_ott[rep_idx] <- NA_character_
-          }
-          tip_weight[[new_lbl]] <- total_w
-          tip_species[[new_lbl]] <- total_sp
-          tip_base[[new_lbl]] <- base_nm
-          tip_members[[new_lbl]] <- members
-          to_drop2 <- c(to_drop2, sibs[-best_local])
-        }
-      }
+      multi_sibs <- by_p[lengths(by_p) > 1L]
+      to_drop2 <- unlist(
+        lapply(multi_sibs, collapse_tip_group),
+        use.names = FALSE
+      )
       if (length(to_drop2) > 0L) {
-        tree <- drop_tree_tips(tree, to_drop2)
+        state$tree <- drop_tree_tips(state$tree, to_drop2)
       }
-      if (length(tree$tip.label) == n_before) {
+      if (length(state$tree$tip.label) == n_before) {
         break
       }
     }
 
-    kept_labels <- tree$tip.label
+    kept_labels <- state$tree$tip.label
     collapsed_summary <- data.frame(
       taxon_name = kept_labels,
       plot_label = kept_labels,
       label = kept_labels,
-      species_count = as.numeric(tip_species[kept_labels]),
+      species_count = as.numeric(state$tip_species[kept_labels]),
       ethnobotanical_count = ifelse(
         kept_labels %in% df_cnt$taxon_name,
         df_cnt$ethnobotanical_count[match(kept_labels, df_cnt$taxon_name)],
         0
       ),
-      tip_weight = as.numeric(tip_weight[kept_labels]),
-      is_collapsed = as.integer(tip_weight[kept_labels]) > 1L,
+      tip_weight = as.numeric(state$tip_weight[kept_labels]),
+      is_collapsed = as.integer(state$tip_weight[kept_labels]) > 1L,
       collapsed_members = vapply(
         kept_labels,
         function(k) {
-          m <- tip_members[[k]]
+          m <- state$tip_members[[k]]
           if (length(m) <= 1L) {
             ""
           } else if (length(m) <= 10L) {
@@ -534,7 +531,7 @@ plot_trees <- function(
       stringsAsFactors = FALSE
     )
 
-    list(tree = tree, df_counted = collapsed_summary)
+    list(tree = state$tree, df_counted = collapsed_summary)
   }
 
   tree_taxa_full$tip.label <- format_tip_labels(tree_taxa_full$tip.label, genus)
@@ -549,18 +546,8 @@ plot_trees <- function(
       plot_label = format_tip_labels(taxon_name, genus),
       label = plot_label,
       taxon_name = plot_label,
-      species_count = pmax(1, as.numeric(species_count), na.rm = TRUE),
-      species_count = ifelse(is.finite(species_count), species_count, 1),
-      ethnobotanical_count = pmax(
-        0,
-        as.numeric(ethnobotanical_count),
-        na.rm = TRUE
-      ),
-      ethnobotanical_count = ifelse(
-        is.finite(ethnobotanical_count),
-        ethnobotanical_count,
-        0
-      ),
+      species_count = sanitize_count(species_count, 1),
+      ethnobotanical_count = sanitize_count(ethnobotanical_count, 0),
       tip_weight = 1,
       is_collapsed = FALSE,
       collapsed_members = ""
@@ -764,13 +751,8 @@ plot_trees <- function(
       tidytable::left_join(compound_summary_by_label, by = "label") |>
       tidytable::distinct(node, .keep_all = TRUE) |>
       tidytable::mutate(
-        species_count = pmax(1, as.numeric(species_count), na.rm = TRUE),
-        species_count = ifelse(is.finite(species_count), species_count, 1),
-        ethnobotanical_count = ifelse(
-          is.finite(ethnobotanical_count),
-          ethnobotanical_count,
-          0
-        ),
+        species_count = sanitize_count(species_count, 1),
+        ethnobotanical_count = sanitize_count(ethnobotanical_count, 0),
         tip_bar_frac = ifelse(
           is.finite(tip_bar_frac) & tip_bar_frac > 0,
           tip_bar_frac,
@@ -784,11 +766,7 @@ plot_trees <- function(
         is_collapsed = ifelse(is.na(is_collapsed), FALSE, is_collapsed),
         tip_shape = ifelse(is_collapsed, 17L, 16L),
         label_face = ifelse(is_collapsed, "plain", "italic"),
-        tip_size = if (genus) {
-          scale_tip_sizes(species_count)
-        } else {
-          rep(0.4, length(species_count))
-        },
+        tip_size = compute_tip_size(species_count),
         ethnobotanical_species_average = ifelse(
           is.finite(ethnobotanical_species_average) &
             ethnobotanical_species_average > 0,
@@ -836,37 +814,32 @@ plot_trees <- function(
     res
   }
 
+  compute_enriched_tree <- function(tree, df_cnt) {
+    raw_bv <- calculate_branches_values(
+      tree = tree,
+      df = df_cnt,
+      variable = "ethnobotanical_count",
+      name = "ethnobotanical_species_average",
+      method = "phylo"
+    )
+    list(
+      data = enrich_tree_data(raw_bv, df_cnt),
+      phylo_signal = attr(raw_bv, "phylo_signal")
+    )
+  }
+
   logger::log_trace(
     "Calculating ethnobotanical use at different levels of the tree..."
   )
-  raw_bv_full <- calculate_branches_values(
-    tree = tree_taxa_full,
-    df = df_counted_full,
-    variable = "ethnobotanical_count",
-    name = "ethnobotanical_species_average",
-    method = "phylo"
-  )
-  tree_data <- enrich_tree_data(raw_bv_full, df_counted_full)
+  tree_data <- compute_enriched_tree(tree_taxa_full, df_counted_full)$data
 
-  raw_bv_uncollapsed <- calculate_branches_values(
-    tree = tree_taxa_full_raw,
-    df = df_counted_plot,
-    variable = "ethnobotanical_count",
-    name = "ethnobotanical_species_average",
-    method = "phylo"
-  )
-  phylo_signal_full <- attr(raw_bv_uncollapsed, "phylo_signal")
-  tree_data_raw <- enrich_tree_data(raw_bv_uncollapsed, df_counted_plot)
+  uncollapsed_res <- compute_enriched_tree(tree_taxa_full_raw, df_counted_plot)
+  phylo_signal_full <- uncollapsed_res$phylo_signal
+  tree_data_raw <- uncollapsed_res$data
 
-  raw_bv_phyto <- calculate_branches_values(
-    tree = tree_taxa_phyto,
-    df = df_counted_plot,
-    variable = "ethnobotanical_count",
-    name = "ethnobotanical_species_average",
-    method = "phylo"
-  )
-  phylo_signal_phyto <- attr(raw_bv_phyto, "phylo_signal")
-  tree_data_phyto <- enrich_tree_data(raw_bv_phyto, df_counted_plot)
+  phyto_res <- compute_enriched_tree(tree_taxa_phyto, df_counted_plot)
+  phylo_signal_phyto <- phyto_res$phylo_signal
+  tree_data_phyto <- phyto_res$data
 
   layout_full <- estimate_layout(tree_taxa_full, offset, genus_mode = genus)
   layout_phyto <- estimate_layout(tree_taxa_phyto, offset, genus_mode = genus)
@@ -902,6 +875,87 @@ plot_trees <- function(
     text = ggplot2::element_text(color = "#1e293b")
   )
 
+  prepare_fruit_layer_data <- function(tip_labels) {
+    leg_spec <- build_hierarchical_legend_spec(df_classes_plot, tip_labels)
+    df_cls_sub <- df_classes_plot
+    if (length(leg_spec$limits) > 0L) {
+      df_cls_sub$ids <- factor(
+        as.character(df_cls_sub$ids),
+        levels = leg_spec$limits
+      )
+    }
+    fruit_mapping <- if (use_ggiraph) {
+      ggplot2::aes(
+        y = label,
+        x = values_plot,
+        fill = ids,
+        tooltip = bar_tooltip,
+        data_id = label
+      )
+    } else {
+      ggplot2::aes(y = label, x = values_plot, fill = ids)
+    }
+    list(
+      leg_spec = leg_spec,
+      df_cls_sub = df_cls_sub,
+      fruit_mapping = fruit_mapping
+    )
+  }
+
+  scale_ethno_color <- function(na_value = "#64748b") {
+    khroma::scale_color_batlow(
+      name = "Known ethnobotanical species",
+      range = c(0, 0.80),
+      na.value = na_value,
+      labels = label_math_10
+    )
+  }
+
+  scale_compound_fill <- function(leg_spec) {
+    ggplot2::scale_fill_manual(
+      name = "Compound pathway & superclass (5 shades per pathway row)",
+      values = leg_spec$values,
+      labels = leg_spec$labels,
+      limits = leg_spec$limits,
+      drop = FALSE,
+      na.value = "transparent"
+    )
+  }
+
+  build_tree_guides <- function(leg_spec, shape_guide = NULL) {
+    args <- list(
+      fill = ggplot2::guide_legend(
+        ncol = 6L,
+        byrow = TRUE,
+        title.position = "top",
+        order = 1L,
+        override.aes = list(
+          alpha = leg_spec$alphas,
+          tooltip = NULL,
+          data_id = NULL
+        )
+      ),
+      colour = ggplot2::guide_colorbar(
+        title.position = "top",
+        title.hjust = 0.5,
+        barwidth = grid::unit(5.5, "cm"),
+        barheight = grid::unit(0.32, "cm"),
+        order = 2L
+      ),
+      size = ggplot2::guide_legend(
+        title.position = "top",
+        title.hjust = 0.5,
+        nrow = 1L,
+        override.aes = list(shape = 16L, colour = "#334155"),
+        order = 3L
+      )
+    )
+    if (!is.null(shape_guide)) {
+      args$shape <- shape_guide
+    }
+    do.call(ggplot2::guides, args)
+  }
+
   build_tree_bars_plot <- function(tree, tr_data, layout_cfg) {
     max_x <- layout_cfg$tree_span
     label_x <- max_x + layout_cfg$tip_label_offset
@@ -914,12 +968,7 @@ plot_trees <- function(
       mapping = ggplot2::aes(color = log10(ethnobotanical_species_average))
     ) |>
       ggtree::`%<+%`(tr_data) +
-      khroma::scale_color_batlow(
-        name = "Known ethnobotanical species",
-        range = c(0, 0.80),
-        na.value = "#64748b",
-        labels = label_math_10
-      ) +
+      scale_ethno_color() +
       ggplot2::geom_segment(
         data = function(d) d[d$isTip & d$x < max_x, , drop = FALSE],
         mapping = ggplot2::aes(
@@ -1017,26 +1066,10 @@ plot_trees <- function(
       ) +
       base_tree_theme
 
-    leg_spec <- build_hierarchical_legend_spec(df_classes_plot, tree$tip.label)
-    df_cls_sub <- df_classes_plot
-    if (length(leg_spec$limits) > 0L) {
-      df_cls_sub$ids <- factor(
-        as.character(df_cls_sub$ids),
-        levels = leg_spec$limits
-      )
-    }
-
-    fruit_mapping <- if (use_ggiraph) {
-      ggplot2::aes(
-        y = label,
-        x = values_plot,
-        fill = ids,
-        tooltip = bar_tooltip,
-        data_id = label
-      )
-    } else {
-      ggplot2::aes(y = label, x = values_plot, fill = ids)
-    }
+    fruit_data <- prepare_fruit_layer_data(tree$tip.label)
+    leg_spec <- fruit_data$leg_spec
+    df_cls_sub <- fruit_data$df_cls_sub
+    fruit_mapping <- fruit_data$fruit_mapping
 
     bar_x0 <- max_x * (1 + layout_cfg$fruit_offset)
     bar_span <- max_x * layout_cfg$fruit_width
@@ -1116,6 +1149,20 @@ plot_trees <- function(
       "Genus"
     } else {
       "Species / Taxon"
+    }
+
+    header_annot <- function(x, label, hjust = 0.5) {
+      ggplot2::annotate(
+        "text",
+        x = x,
+        y = n_tips_tree + 2.45,
+        label = label,
+        size = layout_cfg$label_size * 0.86,
+        fontface = "bold",
+        color = "#1e293b",
+        hjust = hjust,
+        vjust = 0
+      )
     }
 
     p_out <- with_fruit_geom(
@@ -1216,7 +1263,7 @@ plot_trees <- function(
           linewidth = 0.35
         ) +
         ggplot2::geom_segment(
-          data = tick_df,
+          data = rbind(tick_df, tick_bottom_df),
           mapping = ggplot2::aes(
             x = tick_x,
             xend = tick_x,
@@ -1239,18 +1286,6 @@ plot_trees <- function(
           vjust = 0,
           inherit.aes = FALSE
         ) +
-        ggplot2::geom_segment(
-          data = tick_bottom_df,
-          mapping = ggplot2::aes(
-            x = tick_x,
-            xend = tick_x,
-            y = tick_y - 0.22,
-            yend = tick_y + 0.22
-          ),
-          color = "#64748b",
-          linewidth = 0.35,
-          inherit.aes = FALSE
-        ) +
         ggplot2::geom_text(
           data = tick_bottom_df,
           mapping = ggplot2::aes(
@@ -1263,72 +1298,16 @@ plot_trees <- function(
           vjust = 1,
           inherit.aes = FALSE
         ) +
-        ggplot2::annotate(
-          "text",
-          x = max_x * 0.48,
-          y = n_tips_tree + 2.45,
-          label = "Phylogenetic topology (Open Tree of Life)",
-          size = layout_cfg$label_size * 0.86,
-          fontface = "bold",
-          color = "#1e293b",
-          vjust = 0
+        header_annot(
+          max_x * 0.48,
+          "Phylogenetic topology (Open Tree of Life)"
         ) +
-        ggplot2::annotate(
-          "text",
-          x = label_x,
-          y = n_tips_tree + 2.45,
-          label = taxon_hdr_label,
-          size = layout_cfg$label_size * 0.86,
-          fontface = "bold",
-          color = "#1e293b",
-          hjust = 0,
-          vjust = 0
-        ) +
-        ggplot2::annotate(
-          "text",
-          x = bar_x0 + bar_span / 2,
-          y = n_tips_tree + 2.45,
-          label = "Reported compounds (log scale)",
-          size = layout_cfg$label_size * 0.86,
-          fontface = "bold",
-          color = "#1e293b",
-          vjust = 0
-        ) +
-        ggplot2::scale_fill_manual(
-          name = "Compound pathway & superclass (5 shades per pathway row)",
-          values = leg_spec$values,
-          labels = leg_spec$labels,
-          limits = leg_spec$limits,
-          drop = FALSE,
-          na.value = "transparent"
-        ) +
-        ggplot2::guides(
-          fill = ggplot2::guide_legend(
-            ncol = 6L,
-            byrow = TRUE,
-            title.position = "top",
-            order = 1L,
-            override.aes = list(
-              alpha = leg_spec$alphas,
-              tooltip = NULL,
-              data_id = NULL
-            )
-          ),
-          colour = ggplot2::guide_colorbar(
-            title.position = "top",
-            title.hjust = 0.5,
-            barwidth = grid::unit(5.5, "cm"),
-            barheight = grid::unit(0.32, "cm"),
-            order = 2L
-          ),
-          size = ggplot2::guide_legend(
-            title.position = "top",
-            title.hjust = 0.5,
-            nrow = 1L,
-            override.aes = list(shape = 16L, colour = "#334155"),
-            order = 3L
-          ),
-          shape = if (has_collapsed) {
+        header_annot(label_x, taxon_hdr_label, hjust = 0) +
+        header_annot(bar_x0 + bar_span / 2, "Reported compounds (log scale)") +
+        scale_compound_fill(leg_spec) +
+        build_tree_guides(
+          leg_spec,
+          shape_guide = if (has_collapsed) {
             ggplot2::guide_legend(
               title.position = "top",
               title.hjust = 0.5,
@@ -1367,12 +1346,7 @@ plot_trees <- function(
       ) |>
         ggtree::`%<+%`(tr_data)
     ) +
-      khroma::scale_color_batlow(
-        name = "Known ethnobotanical species",
-        range = c(0, 0.80),
-        na.value = "#64748b",
-        labels = label_math_10
-      )
+      scale_ethno_color()
 
     if (use_ggiraph) {
       p_circ <- p_circ +
@@ -1410,26 +1384,10 @@ plot_trees <- function(
       ) +
       base_tree_theme
 
-    leg_spec <- build_hierarchical_legend_spec(df_classes_plot, tree$tip.label)
-    df_cls_sub <- df_classes_plot
-    if (length(leg_spec$limits) > 0L) {
-      df_cls_sub$ids <- factor(
-        as.character(df_cls_sub$ids),
-        levels = leg_spec$limits
-      )
-    }
-
-    fruit_mapping <- if (use_ggiraph) {
-      ggplot2::aes(
-        y = label,
-        x = values_plot,
-        fill = ids,
-        tooltip = bar_tooltip,
-        data_id = label
-      )
-    } else {
-      ggplot2::aes(y = label, x = values_plot, fill = ids)
-    }
+    fruit_data <- prepare_fruit_layer_data(tree$tip.label)
+    leg_spec <- fruit_data$leg_spec
+    df_cls_sub <- fruit_data$df_cls_sub
+    fruit_mapping <- fruit_data$fruit_mapping
 
     max_r <- max(p_circ$data$x, na.rm = TRUE)
     circ_bar_r0 <- max_r * (1 + 0.026)
@@ -1475,41 +1433,8 @@ plot_trees <- function(
               na.rm = TRUE,
               inherit.aes = FALSE
             ) +
-            ggplot2::scale_fill_manual(
-              name = "Compound pathway & superclass (5 shades per pathway row)",
-              values = leg_spec$values,
-              labels = leg_spec$labels,
-              limits = leg_spec$limits,
-              drop = FALSE,
-              na.value = "transparent"
-            ) +
-            ggplot2::guides(
-              fill = ggplot2::guide_legend(
-                ncol = 6L,
-                byrow = TRUE,
-                title.position = "top",
-                order = 1L,
-                override.aes = list(
-                  alpha = leg_spec$alphas,
-                  tooltip = NULL,
-                  data_id = NULL
-                )
-              ),
-              colour = ggplot2::guide_colorbar(
-                title.position = "top",
-                title.hjust = 0.5,
-                barwidth = grid::unit(5.5, "cm"),
-                barheight = grid::unit(0.32, "cm"),
-                order = 2L
-              ),
-              size = ggplot2::guide_legend(
-                title.position = "top",
-                title.hjust = 0.5,
-                nrow = 1L,
-                override.aes = list(shape = 16L, colour = "#334155"),
-                order = 3L
-              )
-            ),
+            scale_compound_fill(leg_spec) +
+            build_tree_guides(leg_spec),
           interactive = use_ggiraph
         )
       )
@@ -1555,20 +1480,9 @@ plot_trees <- function(
         values_plot = values_plot_class,
         color = color_class,
         plot_label = format_tip_labels(taxon_name, genus),
-        species_count = pmax(1, as.numeric(species_count), na.rm = TRUE),
-        species_count = ifelse(is.finite(species_count), species_count, 1),
-        tip_size = if (genus) {
-          scale_tip_sizes(species_count)
-        } else {
-          rep(0.4, length(species_count))
-        },
-        ethnobotanical_species_count = pmax(
-          0,
-          as.numeric(ethnobotanical_species_count),
-          na.rm = TRUE
-        ),
-        ethnobotanical_species_count = ifelse(
-          is.finite(ethnobotanical_species_count),
+        species_count = sanitize_count(species_count, 1),
+        tip_size = compute_tip_size(species_count),
+        ethnobotanical_species_count = sanitize_count(
           ethnobotanical_species_count,
           0
         ),
@@ -1615,14 +1529,7 @@ plot_trees <- function(
         inherit.aes = FALSE,
         show.legend = c(fill = TRUE, size = FALSE, colour = FALSE)
       ) +
-      ggplot2::scale_fill_manual(
-        name = "Compound pathway & superclass (5 shades per pathway row)",
-        values = orphan_leg$values,
-        labels = orphan_leg$labels,
-        limits = orphan_leg$limits,
-        drop = FALSE,
-        na.value = "transparent"
-      ) +
+      scale_compound_fill(orphan_leg) +
       ggplot2::geom_text(
         mapping = ggplot2::aes(
           x = layout_full$orphan_text_x,
@@ -1637,12 +1544,7 @@ plot_trees <- function(
         fontface = "italic",
         hjust = 0
       ) +
-      khroma::scale_color_batlow(
-        name = "Known ethnobotanical species",
-        range = c(0, 0.80),
-        na.value = "#4a4a4a",
-        labels = label_math_10
-      ) +
+      scale_ethno_color(na_value = "#4a4a4a") +
       ggplot2::scale_x_continuous(n.breaks = 4L) +
       ggplot2::scale_y_discrete(limits = rev) +
       ggplot2::theme_minimal() +
@@ -1829,9 +1731,7 @@ export_itol_files <- function(
 ) {
   dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
   clean_id <- function(x) {
-    x <- as.character(x)
-    x <- if (genus) sub("_.*", "", x) else gsub("_", " ", sub("_ott.*", "", x))
-    gsub(" ", "_", x, fixed = TRUE)
+    gsub(" ", "_", format_tip_labels(x, genus), fixed = TRUE)
   }
 
   tree_itol <- tree

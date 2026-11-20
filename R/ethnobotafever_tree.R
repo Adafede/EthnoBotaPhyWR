@@ -212,6 +212,34 @@ ethnobotafever_tree <- function(
     )
   }
 
+  merge_local_with_wd <- function(local_df, wd_df, local_label, total_label) {
+    if (is.null(local_df)) {
+      return(wd_df)
+    }
+    log_unique_taxa(local_df, local_label)
+    to_upload <- local_df |>
+      tidytable::anti_join(wd_df)
+    non_wd <- to_upload |>
+      tidytable::distinct(taxon) |>
+      nrow()
+    logger::log_info(
+      "... of which ",
+      non_wd,
+      paste0(
+        " are not on Wikidata yet. ",
+        ifelse(
+          test = non_wd > 0,
+          yes = "These should definitely be shared!",
+          no = "Good job!"
+        )
+      )
+    )
+    merged <- wd_df |>
+      tidytable::bind_rows(to_upload)
+    log_unique_taxa(merged, total_label)
+    merged
+  }
+
   add_connectivity <- function(df) {
     df |>
       tidytable::mutate(
@@ -311,36 +339,13 @@ ethnobotafever_tree <- function(
     table_ethnobotanical_local <- tidytable::distinct(
       table_ethnobotanical_local
     )
-    log_unique_taxa(
-      table_ethnobotanical_local,
-      "subtaxa with ethnobotanical use reported locally"
-    )
-    table_ethnobotanical_to_upload <- table_ethnobotanical_local |>
-      tidytable::anti_join(table_ethnobotanical_wd)
-    ethnobotanical_non_wd <- table_ethnobotanical_to_upload |>
-      tidytable::distinct(taxon) |>
-      nrow()
-    logger::log_info(
-      "... of which ",
-      ethnobotanical_non_wd,
-      paste0(
-        " are not on Wikidata yet. ",
-        ifelse(
-          test = ethnobotanical_non_wd > 0,
-          yes = "These should definitely be shared!",
-          no = "Good job!"
-        )
-      )
-    )
-    table_ethnobotanical <- table_ethnobotanical_wd |>
-      tidytable::bind_rows(table_ethnobotanical_to_upload)
-    log_unique_taxa(
-      table_ethnobotanical,
-      "subtaxa with ethnobotanical use reported in total"
-    )
-  } else {
-    table_ethnobotanical <- table_ethnobotanical_wd
   }
+  table_ethnobotanical <- merge_local_with_wd(
+    table_ethnobotanical_local,
+    table_ethnobotanical_wd,
+    "subtaxa with ethnobotanical use reported locally",
+    "subtaxa with ethnobotanical use reported in total"
+  )
 
   logger::log_info(
     "We found ",
@@ -352,20 +357,16 @@ ethnobotafever_tree <- function(
     tidytable::distinct(taxon, taxon_name)
   logger::log_info("... ", nrow(taxa_gen), " unique genera")
 
-  taxa_spe <- taxa_wd |>
-    tidytable::filter(taxon_rank == "Q7432") |>
-    tidytable::mutate(
-      generic_epithet = sub(" .*", "", taxon_name)
-    ) |>
-    tidytable::distinct(taxon, generic_epithet)
+  extract_subrank <- function(rank_qid) {
+    taxa_wd |>
+      tidytable::filter(taxon_rank == rank_qid) |>
+      tidytable::mutate(generic_epithet = sub(" .*", "", taxon_name)) |>
+      tidytable::distinct(taxon, generic_epithet)
+  }
+  taxa_spe <- extract_subrank("Q7432")
   logger::log_info("... ", nrow(taxa_spe), " unique species")
 
-  taxa_var <- taxa_wd |>
-    tidytable::filter(taxon_rank == "Q767728") |>
-    tidytable::mutate(
-      generic_epithet = sub(" .*", "", taxon_name)
-    ) |>
-    tidytable::distinct(taxon, generic_epithet)
+  taxa_var <- extract_subrank("Q767728")
   logger::log_info("... and ", nrow(taxa_var), " unique varieties")
 
   for (fam_name in names(example_family_taxa_wd)) {
@@ -385,38 +386,28 @@ ethnobotafever_tree <- function(
     nrow(taxa_ott_wd),
     paste0(" ", taxon_name, " subtaxa with an Open Tree of Life ID in Wikidata")
   )
-  taxa_gen_ott <- taxa_gen |>
-    tidytable::inner_join(taxa_ott_wd) |>
-    tidytable::mutate(taxon_id_ott = normalize_ott_ids(taxon_id_ott)) |>
-    tidytable::filter(!is.na(taxon_id_ott)) |>
-    tidytable::distinct(taxon_name, .keep_all = TRUE)
+  join_ott_ids <- function(df, distinct_col) {
+    df |>
+      tidytable::inner_join(taxa_ott_wd) |>
+      tidytable::mutate(taxon_id_ott = normalize_ott_ids(taxon_id_ott)) |>
+      tidytable::filter(!is.na(taxon_id_ott)) |>
+      tidytable::distinct(tidytable::all_of(distinct_col), .keep_all = TRUE)
+  }
+  taxa_gen_ott <- join_ott_ids(taxa_gen, "taxon_name")
   logger::log_info("... ", nrow(taxa_gen_ott), " unique genera")
 
-  taxa_spe_ott <- taxa_spe |>
-    tidytable::inner_join(taxa_ott_wd) |>
-    tidytable::mutate(taxon_id_ott = normalize_ott_ids(taxon_id_ott)) |>
-    tidytable::filter(!is.na(taxon_id_ott)) |>
-    tidytable::distinct(taxon, .keep_all = TRUE)
+  taxa_spe_ott <- join_ott_ids(taxa_spe, "taxon")
   logger::log_info("... ", nrow(taxa_spe_ott), " unique species")
 
-  taxa_var_ott <- taxa_var |>
-    tidytable::inner_join(taxa_ott_wd) |>
-    tidytable::mutate(taxon_id_ott = normalize_ott_ids(taxon_id_ott)) |>
-    tidytable::filter(!is.na(taxon_id_ott)) |>
-    tidytable::distinct(taxon, .keep_all = TRUE)
+  taxa_var_ott <- join_ott_ids(taxa_var, "taxon")
   logger::log_info("... ", nrow(taxa_var_ott), " unique varieties")
 
   example_family_compounds_wd <- lapply(example_family_qids, get_compounds_wd)
   taxa_compounds_wd <- get_compounds_wd(taxon_qid)
 
-  logger::log_info(
-    "We found ",
-    taxa_compounds_wd |> tidytable::distinct(taxon) |> nrow(),
-    paste0(
-      " ",
-      taxon_name,
-      " subtaxa with at least one chemical compound reported in Wikidata"
-    )
+  log_unique_taxa(
+    taxa_compounds_wd,
+    "subtaxa with at least one chemical compound reported in Wikidata"
   )
   taxa_compounds_local <- resolve_input_table(
     path_molecules,
@@ -430,46 +421,13 @@ ethnobotafever_tree <- function(
       compound_inchikey,
       taxon
     )
-    logger::log_info(
-      "We found ",
-      taxa_compounds_local |> tidytable::distinct(taxon) |> nrow(),
-      paste0(
-        " ",
-        taxon_name,
-        " subtaxa with at least one chemical compound reported locally"
-      )
-    )
-    taxa_compounds_to_upload <- taxa_compounds_local |>
-      tidytable::anti_join(taxa_compounds_wd)
-    compounds_non_wd <- taxa_compounds_to_upload |>
-      tidytable::distinct(taxon) |>
-      nrow()
-    logger::log_info(
-      "... of which ",
-      compounds_non_wd,
-      paste0(
-        " are not on Wikidata yet. ",
-        ifelse(
-          test = compounds_non_wd > 0,
-          yes = "These should definitely be shared!",
-          no = "Good job!"
-        )
-      )
-    )
-    taxa_compounds_tot <- taxa_compounds_wd |>
-      tidytable::bind_rows(taxa_compounds_to_upload)
-    logger::log_info(
-      "We found ",
-      taxa_compounds_tot |> tidytable::distinct(taxon) |> nrow(),
-      paste0(
-        " ",
-        taxon_name,
-        " subtaxa with chemical compounds reported in total"
-      )
-    )
-  } else {
-    taxa_compounds_tot <- taxa_compounds_wd
   }
+  taxa_compounds_tot <- merge_local_with_wd(
+    taxa_compounds_local,
+    taxa_compounds_wd,
+    "subtaxa with at least one chemical compound reported locally",
+    "subtaxa with chemical compounds reported in total"
+  )
 
   logger::log_info(
     "... ",
@@ -539,15 +497,16 @@ ethnobotafever_tree <- function(
       nrow(),
     " were specific to the family ..."
   )
-  taxa_compounds_specific_genus <- taxa_compounds_specific |>
-    tidytable::inner_join(taxa_gen) |>
-    tidytable::rename(generic_epithet = taxon_name) |>
-    tidytable::bind_rows(
-      taxa_compounds_specific |> tidytable::inner_join(taxa_spe)
-    ) |>
-    tidytable::bind_rows(
-      taxa_compounds_specific |> tidytable::inner_join(taxa_var)
-    ) |>
+  map_compounds_to_genera <- function(df) {
+    df |>
+      tidytable::inner_join(taxa_gen) |>
+      tidytable::rename(generic_epithet = taxon_name) |>
+      tidytable::bind_rows(df |> tidytable::inner_join(taxa_spe)) |>
+      tidytable::bind_rows(df |> tidytable::inner_join(taxa_var))
+  }
+  taxa_compounds_specific_genus <- map_compounds_to_genera(
+    taxa_compounds_specific
+  ) |>
     tidytable::distinct(connectivity_layer, generic_epithet) |>
     tidytable::group_by(connectivity_layer) |>
     tidytable::count(sort = TRUE)
@@ -585,11 +544,7 @@ ethnobotafever_tree <- function(
     tidytable::anti_join(taxa_compounds, by = c("taxon" = "taxon"))
   n_fam_taxa <- length(unique(taxa_compounds$taxon))
   n_out_taxa <- max(1L, length(unique(lotus_outside$taxon)))
-  fam_conn_genera <- taxa_compounds |>
-    tidytable::inner_join(taxa_gen) |>
-    tidytable::rename(generic_epithet = taxon_name) |>
-    tidytable::bind_rows(taxa_compounds |> tidytable::inner_join(taxa_spe)) |>
-    tidytable::bind_rows(taxa_compounds |> tidytable::inner_join(taxa_var)) |>
+  fam_conn_genera <- map_compounds_to_genera(taxa_compounds) |>
     tidytable::summarize(
       n_genera = tidytable::n_distinct(generic_epithet),
       a_taxa = tidytable::n_distinct(taxon),
@@ -722,11 +677,14 @@ ethnobotafever_tree <- function(
       ethnobotanical_count = tidytable::replace_na(ethnobotanical_count, 0L)
     )
 
+  count_distinct_genera <- function(df) {
+    df |>
+      tidytable::distinct(taxon_name, taxon, taxon_id_ott) |>
+      nrow()
+  }
   logger::log_info(
     "Among the ",
-    taxa_ethno_counted |>
-      tidytable::distinct(taxon_name, taxon, taxon_id_ott) |>
-      nrow(),
+    count_distinct_genera(taxa_ethno_counted),
     paste0(
       " ",
       taxon_name,
@@ -735,26 +693,26 @@ ethnobotafever_tree <- function(
   )
   logger::log_info(
     "... ",
-    taxa_ethno_counted |>
-      tidytable::filter(ethnobotanical_count >= 1L) |>
-      tidytable::distinct(taxon_name, taxon, taxon_id_ott) |>
-      nrow(),
+    count_distinct_genera(
+      tidytable::filter(taxa_ethno_counted, ethnobotanical_count >= 1L)
+    ),
     " had an ethnobotanical use reported"
   )
   logger::log_info(
     "... ",
-    taxa_ethno_counted |>
-      tidytable::filter(compounds_count >= 1L) |>
-      tidytable::distinct(taxon_name, taxon, taxon_id_ott) |>
-      nrow(),
+    count_distinct_genera(
+      tidytable::filter(taxa_ethno_counted, compounds_count >= 1L)
+    ),
     " had at least one chemical compound reported in Wikidata"
   )
   logger::log_info(
     "... ",
-    taxa_ethno_counted |>
-      tidytable::filter(ethnobotanical_count >= 1L & compounds_count >= 1L) |>
-      tidytable::distinct(taxon_name, taxon, taxon_id_ott) |>
-      nrow(),
+    count_distinct_genera(
+      tidytable::filter(
+        taxa_ethno_counted,
+        ethnobotanical_count >= 1L & compounds_count >= 1L
+      )
+    ),
     " had both"
   )
 
@@ -919,26 +877,24 @@ ethnobotafever_tree <- function(
     ) |>
     build_compound_classes(classes)
 
-  compounds_hierarchy <- taxa_compounds_classes |>
-    prepare_hierarchy(type = "literature") |>
-    prepare_plot() |>
-    tidytable::rename(taxon_name = species)
-  compounds_hierarchy_sub <- taxa_compounds_classes_sub |>
-    prepare_hierarchy(type = "literature") |>
-    prepare_plot() |>
-    tidytable::rename(taxon_name = species)
+  prepare_taxa_classes <- function(df_cls, names_df) {
+    hierarchy <- df_cls |>
+      prepare_hierarchy(type = "literature") |>
+      prepare_plot() |>
+      tidytable::rename(taxon_name = species)
+    names_df |>
+      tidytable::inner_join(hierarchy) |>
+      tidytable::relocate(taxon_name, .before = ids) |>
+      tidytable::distinct(taxon_name, values, ids, color, .keep_all = TRUE)
+  }
 
-  taxa_classes <- gen_names |>
-    tidytable::inner_join(compounds_hierarchy) |>
-    tidytable::relocate(taxon_name, .before = ids) |>
-    tidytable::distinct(taxon_name, values, ids, color, .keep_all = TRUE)
-
-  taxa_classes_sub <- taxa_compounds_classes_sub |>
-    tidytable::rename(taxon_name = organism) |>
-    tidytable::distinct(taxon_name) |>
-    tidytable::inner_join(compounds_hierarchy_sub) |>
-    tidytable::relocate(taxon_name, .before = ids) |>
-    tidytable::distinct(taxon_name, values, ids, color, .keep_all = TRUE)
+  taxa_classes <- prepare_taxa_classes(taxa_compounds_classes, gen_names)
+  taxa_classes_sub <- prepare_taxa_classes(
+    taxa_compounds_classes_sub,
+    taxa_compounds_classes_sub |>
+      tidytable::rename(taxon_name = organism) |>
+      tidytable::distinct(taxon_name)
+  )
 
   # Compute genus-level superclass Hill diversity (^1D), EB shrunk medicinal
   # rate, allometric compound residuals, and exemplar OTT IDs for OTL
@@ -975,46 +931,8 @@ ethnobotafever_tree <- function(
     ids_u <- ids_u[!is.na(ids_u)]
     good_ids <- tryCatch(
       {
-        h <- curl::new_handle(timeout = 25L, followlocation = 1L)
-        curl::handle_setheaders(h, "Content-Type" = "application/json")
-        curl::handle_setopt(
-          h,
-          postfields = jsonlite::toJSON(
-            list(ott_ids = ids_u),
-            auto_unbox = TRUE
-          )
-        )
-        r1 <- curl::curl_fetch_memory(
-          "https://api.opentreeoflife.org/v3/tree_of_life/induced_subtree",
-          handle = h
-        )
-        b1 <- jsonlite::fromJSON(rawToChar(r1$content))
-        unk <- if (r1$status_code == 400L && !is.null(b1$unknown)) {
-          as.integer(sub("^ott", "", names(b1$unknown)))
-        } else {
-          integer(0)
-        }
-        ids_2 <- setdiff(ids_u, unk)
-        if (length(ids_2) >= 2L && r1$status_code == 400L) {
-          curl::handle_setopt(
-            h,
-            postfields = jsonlite::toJSON(
-              list(ott_ids = ids_2),
-              auto_unbox = TRUE
-            )
-          )
-          r2 <- curl::curl_fetch_memory(
-            "https://api.opentreeoflife.org/v3/tree_of_life/induced_subtree",
-            handle = h
-          )
-          b1 <- jsonlite::fromJSON(rawToChar(r2$content))
-        }
-        brk <- if (length(b1$broken) > 0L) {
-          as.integer(sub("^ott", "", names(b1$broken)))
-        } else {
-          integer(0)
-        }
-        setdiff(ids_2, brk)
+        res <- fetch_otl_induced_subtree(ids_u, timeout = 25L)
+        setdiff(res$ids_clean, as.integer(res$broken))
       },
       error = function(e) ids_u
     )
@@ -1099,34 +1017,24 @@ ethnobotafever_tree <- function(
     df_classes = taxa_classes
   )
 
-  sig_full <- plots_gen$phylo_signal_full
-  if (!is.null(sig_full) && is.finite(sig_full$K)) {
-    logger::log_info(
-      sprintf(
-        paste0(
-          "Phylogenetic signal across full genus tree (Blomberg's K): ",
-          "K = %.3f (permutation p = %.3f across %d contrasts)"
-        ),
-        sig_full$K,
-        sig_full$p_val,
-        sig_full$n_contrasts
+  log_phylo_signal <- function(sig, label) {
+    if (!is.null(sig) && is.finite(sig$K)) {
+      logger::log_info(
+        sprintf(
+          paste0(
+            "Phylogenetic signal across %s (Blomberg's K): ",
+            "K = %.3f (permutation p = %.3f across %d contrasts)"
+          ),
+          label,
+          sig$K,
+          sig$p_val,
+          sig$n_contrasts
+        )
       )
-    )
+    }
   }
-  sig_phyto <- plots_gen$phylo_signal_phyto
-  if (!is.null(sig_phyto) && is.finite(sig_phyto$K)) {
-    logger::log_info(
-      sprintf(
-        paste0(
-          "Phylogenetic signal across active phyto genus tree (Blomberg's K): ",
-          "K = %.3f (permutation p = %.3f across %d contrasts)"
-        ),
-        sig_phyto$K,
-        sig_phyto$p_val,
-        sig_phyto$n_contrasts
-      )
-    )
-  }
+  log_phylo_signal(plots_gen$phylo_signal_full, "full genus tree")
+  log_phylo_signal(plots_gen$phylo_signal_phyto, "active phyto genus tree")
   if (!is.null(plots_gen$tree_data_phyto)) {
     hot_df <- plots_gen$tree_data_phyto
     hot_nodes <- hot_df[!hot_df$is_tip & hot_df$is_hot_node, , drop = FALSE]

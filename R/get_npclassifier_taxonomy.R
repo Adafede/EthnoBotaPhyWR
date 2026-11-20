@@ -39,16 +39,20 @@ get_npclassifier_taxonomy <- function(smiles, timeout = 30) {
     if (length(x) > 0L) x[[1L]] else NA
   }
 
+  na_row <- function(q) {
+    data.frame(
+      query = q,
+      pathway = NA_character_,
+      superclass = NA_character_,
+      class = NA_character_,
+      glycoside = NA,
+      stringsAsFactors = FALSE
+    )
+  }
+
   lapply(smiles, function(x) {
     if (length(x) != 1L || is.na(x) || !nzchar(trimws(as.character(x)))) {
-      return(data.frame(
-        query = if (length(x) == 1L) as.character(x) else NA_character_,
-        pathway = NA_character_,
-        superclass = NA_character_,
-        class = NA_character_,
-        glycoside = NA,
-        stringsAsFactors = FALSE
-      ))
+      return(na_row(if (length(x) == 1L) as.character(x) else NA_character_))
     }
     tryCatch(
       {
@@ -67,16 +71,7 @@ get_npclassifier_taxonomy <- function(smiles, timeout = 30) {
           stringsAsFactors = FALSE
         )
       },
-      error = function(e) {
-        data.frame(
-          query = as.character(x),
-          pathway = NA_character_,
-          superclass = NA_character_,
-          class = NA_character_,
-          glycoside = NA,
-          stringsAsFactors = FALSE
-        )
-      }
+      error = function(e) na_row(as.character(x))
     )
   })
 }

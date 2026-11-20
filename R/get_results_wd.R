@@ -60,6 +60,17 @@ validate_taxon_qid <- function(taxon_qid) {
   }
 }
 
+#' @noRd
+query_qlever_wd <- function(sparql_query, taxon_qid = NULL) {
+  if (!is.null(taxon_qid)) {
+    validate_taxon_qid(taxon_qid)
+  }
+  query_wikidata_with_retry(
+    endpoint = "https://qlever.dev/api/wikidata",
+    sparql_query = sparql_query
+  )
+}
+
 #' @title Get subtaxa from Wikidata
 #'
 #' @description
@@ -76,9 +87,7 @@ validate_taxon_qid <- function(taxon_qid) {
 #'
 #' @keywords internal
 get_subtaxa_wd <- function(taxon_qid) {
-  validate_taxon_qid(taxon_qid)
-  query_wikidata_with_retry(
-    endpoint = "https://qlever.dev/api/wikidata",
+  query_qlever_wd(
     sparql_query = paste0(
       "PREFIX wd: <http://www.wikidata.org/entity/>\n",
       "PREFIX wdt: <http://www.wikidata.org/prop/direct/>\n",
@@ -89,7 +98,8 @@ get_subtaxa_wd <- function(taxon_qid) {
       "  ?taxon wdt:P105 ?taxon_rank.\n",
       "  ?taxon wdt:P225 ?taxon_name.\n",
       "}\n"
-    )
+    ),
+    taxon_qid = taxon_qid
   )
 }
 
@@ -110,9 +120,7 @@ get_subtaxa_wd <- function(taxon_qid) {
 #'
 #' @keywords internal
 get_ott_ids_wd <- function(taxon_qid) {
-  validate_taxon_qid(taxon_qid)
-  query_wikidata_with_retry(
-    endpoint = "https://qlever.dev/api/wikidata",
+  query_qlever_wd(
     sparql_query = paste0(
       "PREFIX wd: <http://www.wikidata.org/entity/>\n",
       "PREFIX wdt: <http://www.wikidata.org/prop/direct/>\n",
@@ -122,7 +130,8 @@ get_ott_ids_wd <- function(taxon_qid) {
       ".\n",
       "  ?taxon wdt:P9157 ?taxon_id_ott.\n",
       "}\n"
-    )
+    ),
+    taxon_qid = taxon_qid
   )
 }
 
@@ -144,9 +153,7 @@ get_ott_ids_wd <- function(taxon_qid) {
 #'
 #' @keywords internal
 get_compounds_wd <- function(taxon_qid) {
-  validate_taxon_qid(taxon_qid)
-  query_wikidata_with_retry(
-    endpoint = "https://qlever.dev/api/wikidata",
+  query_qlever_wd(
     sparql_query = paste0(
       "PREFIX wd: <http://www.wikidata.org/entity/>\n",
       "PREFIX wdt: <http://www.wikidata.org/prop/direct/>\n",
@@ -160,7 +167,8 @@ get_compounds_wd <- function(taxon_qid) {
       "  ?compound wdt:P233 ?compound_smiles_canonical.\n",
       "  ?compound wdt:P235 ?compound_inchikey.\n",
       "}\n"
-    )
+    ),
+    taxon_qid = taxon_qid
   )
 }
 
@@ -179,9 +187,7 @@ get_compounds_wd <- function(taxon_qid) {
 #'
 #' @keywords internal
 get_uses_wd <- function(taxon_qid) {
-  validate_taxon_qid(taxon_qid)
-  query_wikidata_with_retry(
-    endpoint = "https://qlever.dev/api/wikidata",
+  query_qlever_wd(
     sparql_query = paste0(
       "PREFIX p: <http://www.wikidata.org/prop/>\n",
       "PREFIX ps: <http://www.wikidata.org/prop/statement/>\n",
@@ -198,7 +204,8 @@ get_uses_wd <- function(taxon_qid) {
       "  ?use_statement ps:P366 ?taxon_use;\n",
       "  prov:wasDerivedFrom/pr:P248 ?ref.\n",
       "}\n"
-    )
+    ),
+    taxon_qid = taxon_qid
   )
 }
 
@@ -216,8 +223,7 @@ get_uses_wd <- function(taxon_qid) {
 #'
 #' @keywords internal
 get_lotus_wd <- function() {
-  query_wikidata_with_retry(
-    endpoint = "https://qlever.dev/api/wikidata",
+  query_qlever_wd(
     sparql_query = paste0(
       "PREFIX wdt: <http://www.wikidata.org/prop/direct/>\n",
       "SELECT DISTINCT ?compound ?compound_smiles_canonical ",

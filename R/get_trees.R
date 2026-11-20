@@ -151,6 +151,50 @@ get_trees_cached <- function(ott_ids, df_counted, taxon_name, cache_dir) {
   result
 }
 
+#' @noRd
+fetch_otl_induced_subtree <- function(ids_int, timeout = 30L) {
+  h <- curl::new_handle(timeout = as.integer(timeout), followlocation = 1L)
+  curl::handle_setheaders(h, "Content-Type" = "application/json")
+  url <- "https://api.opentreeoflife.org/v3/tree_of_life/induced_subtree"
+  post_ids <- function(ids) {
+    curl::handle_setopt(
+      h,
+      postfields = jsonlite::toJSON(list(ott_ids = ids), auto_unbox = TRUE)
+    )
+    resp <- curl::curl_fetch_memory(url, handle = h)
+    list(
+      status_code = resp$status_code,
+      body = jsonlite::fromJSON(rawToChar(resp$content))
+    )
+  }
+  res <- post_ids(ids_int)
+  ids_clean <- ids_int
+  if (res$status_code == 400L && !is.null(res$body$unknown)) {
+    bad_ids <- as.integer(sub("^ott", "", names(res$body$unknown)))
+    ids_clean <- setdiff(ids_int, bad_ids)
+    if (length(ids_clean) < 2L) {
+      return(list(
+        status_code = res$status_code,
+        body = res$body,
+        ids_clean = ids_clean,
+        broken = character()
+      ))
+    }
+    res <- post_ids(ids_clean)
+  }
+  broken <- if (length(res$body$broken) > 0L) {
+    sub("^ott", "", names(res$body$broken))
+  } else {
+    character()
+  }
+  list(
+    status_code = res$status_code,
+    body = res$body,
+    ids_clean = ids_clean,
+    broken = broken
+  )
+}
+
 #' @title Build trees from OTT IDs
 #'
 #' @description
@@ -218,6 +262,14 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
     tree
   }
 
+  format_orphan_taxa <- function(mask) {
+    out <- df_counted[mask, , drop = FALSE]
+    names(out)[
+      names(out) == "ethnobotanical_count"
+    ] <- "ethnobotanical_species_count"
+    out
+  }
+
   ott_ids_normalized <- normalize_ott_ids(ott_ids)
   ott_ids_integer <- suppressWarnings(as.integer(ott_ids_normalized))
   ott_ids_integer <- ott_ids_integer[!is.na(ott_ids_integer)]
@@ -225,15 +277,9 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
   if (length(ott_ids_integer) == 0L) {
     tree_taxa_full <- build_placeholder_tree(character(), df_counted)
     tree_taxa_phyto <- build_placeholder_tree(character(), df_counted)
-    taxa_not_in_tree <- df_counted[
-      df_counted$compounds_count > 0L |
-        df_counted$ethnobotanical_count > 0L,
-      ,
-      drop = FALSE
-    ]
-    names(taxa_not_in_tree)[
-      names(taxa_not_in_tree) == "ethnobotanical_count"
-    ] <- "ethnobotanical_species_count"
+    taxa_not_in_tree <- format_orphan_taxa(
+      df_counted$compounds_count > 0L | df_counted$ethnobotanical_count > 0L
+    )
     return(list(
       taxa_not_in_tree = taxa_not_in_tree,
       tree_taxa_full = tree_taxa_full,
@@ -249,48 +295,19 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
     }
     tryCatch(
       {
-        h <- curl::new_handle(timeout = 30L, followlocation = 1L)
-        curl::handle_setheaders(h, "Content-Type" = "application/json")
-        payload <- jsonlite::toJSON(
-          list(ott_ids = ids_int),
-          auto_unbox = TRUE
-        )
-        curl::handle_setopt(h, postfields = payload)
-        resp <- curl::curl_fetch_memory(
-          "https://api.opentreeoflife.org/v3/tree_of_life/induced_subtree",
-          handle = h
-        )
-        body <- jsonlite::fromJSON(rawToChar(resp$content))
-        if (resp$status_code == 400L && !is.null(body$unknown)) {
-          bad_ids <- as.integer(sub("^ott", "", names(body$unknown)))
-          ids_clean <- setdiff(ids_int, bad_ids)
-          if (length(ids_clean) < 2L) {
-            return(NULL)
-          }
-          payload2 <- jsonlite::toJSON(
-            list(ott_ids = ids_clean),
-            auto_unbox = TRUE
-          )
-          curl::handle_setopt(h, postfields = payload2)
-          resp <- curl::curl_fetch_memory(
-            "https://api.opentreeoflife.org/v3/tree_of_life/induced_subtree",
-            handle = h
-          )
-          body <- jsonlite::fromJSON(rawToChar(resp$content))
-        }
-        if (resp$status_code >= 400L || is.null(body$newick)) {
+        res <- fetch_otl_induced_subtree(ids_int, timeout = 30L)
+        if (
+          length(res$ids_clean) < 2L ||
+            res$status_code >= 400L ||
+            is.null(res$body$newick)
+        ) {
           return(NULL)
         }
-        tr <- ape::read.tree(text = body$newick)
+        tr <- ape::read.tree(text = res$body$newick)
         if (inherits(tr, "phylo")) {
           tr <- ape::collapse.singles(tr)
         }
-        broken_ids <- if (length(body$broken) > 0L) {
-          as.character(sub("^ott", "", names(body$broken)))
-        } else {
-          character()
-        }
-        list(tree = tr, broken = broken_ids)
+        list(tree = tr, broken = res$broken)
       },
       error = function(e) {
         tr <- tryCatch(
@@ -476,10 +493,7 @@ get_trees <- function(ott_ids, df_counted, taxon_name, batch_delay = 0.2) {
 
   in_tree_tips <- as.character(df_counted$taxon_name) %in%
     tree_tip_labels_full
-  taxa_not_in_tree <- df_counted[!in_tree_tips & phyto_mask, , drop = FALSE]
-  names(taxa_not_in_tree)[
-    names(taxa_not_in_tree) == "ethnobotanical_count"
-  ] <- "ethnobotanical_species_count"
+  taxa_not_in_tree <- format_orphan_taxa(!in_tree_tips & phyto_mask)
 
   list(
     taxa_not_in_tree = taxa_not_in_tree,

@@ -46,7 +46,6 @@ export_table_counts_sub <- file.path(
   "orchids_table_counts_sub.tsv"
 )
 
-local_cache <- cache_dir
 dir.create(log_dir, recursive = TRUE, showWarnings = FALSE)
 
 results <- ethnobotafever_tree(
@@ -64,7 +63,7 @@ results <- ethnobotafever_tree(
   export_table_classified = export_table_classified,
   export_table_counts = export_table_counts,
   export_table_counts_sub = export_table_counts_sub,
-  local_cache = local_cache,
+  local_cache = cache_dir,
   log_dir = log_dir
 )
 

@@ -71,23 +71,6 @@ vignette: >
 pronounced "Ethnobota Fever".
 
 ```{r}
-#| label: install
-#| eval: false
-#| include: false
-
-install.packages(
-  "EthnoBotaPhyWR",
-  repos = c(
-    "https://adafede.r-universe.dev",
-    # required for ggiraph, required for ggtree
-    "https://davidgohel.r-universe.dev",
-    "https://cran.r-universe.dev",
-    "https://bioc.r-universe.dev"
-  )
-)
-```
-
-```{r}
 #| label: imports
 #| include: false
 
@@ -188,7 +171,6 @@ export_table_counts_sub <- file.path(
   "orchids_table_counts_sub.tsv"
 )
 
-local_cache <- cache_dir
 dir.create(log_dir, recursive = TRUE, showWarnings = FALSE)
 ```
 
@@ -214,7 +196,7 @@ results <- ethnobotafever_tree(
   export_table_classified = export_table_classified,
   export_table_counts = export_table_counts,
   export_table_counts_sub = export_table_counts_sub,
-  local_cache = local_cache,
+  local_cache = cache_dir,
   log_dir = log_dir
 )
 ```
@@ -240,7 +222,6 @@ First, tables containing different information:
 #| tbl-cap: "Overview of the phytochemistry of the family"
 
 results$df_taxa_full |>
-  data.frame() |>
   gt::gt() |>
   gt::opt_interactive()
 ```
@@ -253,7 +234,6 @@ results$df_taxa_full |>
 #|   within the family
 
 results$df_taxa_ethno_counted |>
-  data.frame() |>
   gt::gt() |>
   gt::opt_interactive()
 ```
@@ -266,7 +246,6 @@ results$df_taxa_ethno_counted |>
 #|   compounds or uses have been reported
 
 results$df_taxa_known_sub |>
-  data.frame() |>
   gt::gt() |>
   gt::opt_interactive()
 ```

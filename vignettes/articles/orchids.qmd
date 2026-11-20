@@ -61,7 +61,6 @@ Load the package and available datasets:
 #| label: datasets_all
 
 library(EthnoBotaPhyWR)
-library(tidytable)
 
 # Load all three datasets
 data(orchids_compounds)
@@ -262,7 +261,9 @@ All datasets are curated from:
 
 ## Reproducibility
 
-The `data-raw/` scripts in the [source repository](https://github.com/adafede/EthnoBotaPhyWR/tree/main/data-raw) document how these datasets were prepared:
+The `data-raw/` scripts in the [source
+repository](https://github.com/adafede/EthnoBotaPhyWR/tree/main/data-raw)
+document how these datasets were prepared:
 
 - `data-raw/orchids_compounds.R`
 - `data-raw/orchids_compound_classes.R`
@@ -272,4 +273,5 @@ The `data-raw/` scripts in the [source repository](https://github.com/adafede/Et
 
 - Full pipeline tutorial: [Using EthnoBotaPhyWR](ethnobota_fever_tree.qmd)
 - Pipeline reference: `help(ethnobotafever_tree)`
-- Dataset references: `help(orchids_compounds)`, `help(orchids_compound_classes)`, `help(orchids_ethnobotanical)`
+- Dataset references: `help(orchids_compounds)`,
+  `help(orchids_compound_classes)`, `help(orchids_ethnobotanical)`
